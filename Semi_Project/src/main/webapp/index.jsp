@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ include file="/views/common/menubar.jsp" %>
 	<h2>ㅎㅇ</h2>
 </body>
 </html>
