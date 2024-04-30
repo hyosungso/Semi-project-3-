@@ -1,7 +1,7 @@
 package com.kh.common;
 
-public class 안녕 {
-	새로ㅓ만들었
-	ㅏㅏㅏㅏㅏ
-	
+public class 안녕2 {
+//	새로ㅓ만들었
+//	ㅏㅏㅏㅏㅏ
+//	
 }
