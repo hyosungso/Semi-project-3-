@@ -18,12 +18,11 @@ public class MemberDao {
 	private Properties prop = new Properties();
 	
 	
-	// ★★★★수정 필요! 
 	
 	public MemberDao() {
 		
 		String filePath = MemberDao.class
-				.getResource("/resources/***/member-mapper.xml").getPath();
+				.getResource("/resources/sql/member-mapper.xml").getPath();
 		
 		
 		try {

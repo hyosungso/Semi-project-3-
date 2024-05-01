@@ -55,6 +55,14 @@ public class MemberInsertController extends HttpServlet {
 		
 		
 		System.out.println(userId);
+		System.out.println(userPwd);
+		System.out.println(userName);
+		System.out.println(email);
+		System.out.println(phone);
+		System.out.println(postNumber);
+		System.out.println(address);
+		System.out.println(birth);
+		System.out.println(gender);
 		
 		
 		//요청받은 데이터를 서비스에 전달하기위해 객체에 담아주기

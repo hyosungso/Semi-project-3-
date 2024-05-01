@@ -27,7 +27,7 @@ public class MemberService {
 		return result;
 		
 		
-		
+		//흠
 		
 		
 	}

@@ -9,13 +9,13 @@
 <body>
 	
 	
-	
+	<%@ include file="/views/common/menubar.jsp"%>
 	<div>
 		<br>
 		
 		<h2 align="center">회원가입</h2>
 		
-		<form action="insert.me" method="post">
+		<form action="<%=contextPath %>/insert.me" method="post">
 		
 		
 					<!-- 아이디,비밀번호,이름,전화번호,주소,취미,이메일 -->
