@@ -41,5 +41,5 @@ public class MemberEnrollController extends HttpServlet {
 		
 		
 	}
-
+	//ㅎ
 }
