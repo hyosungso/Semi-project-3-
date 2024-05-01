@@ -114,7 +114,7 @@ height:50px;
         </div>
 
         <div class="menu">
-            <a href="${contextPath}/board.bo?currentPage=1">일반게시판</a>
+            <a href="${contextPath}/board.bo?currentPage=1&category=0">일반게시판</a>
         </div>
         <div class="menu">
             <a href="">사진게시판</a>
