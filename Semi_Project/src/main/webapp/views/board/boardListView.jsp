@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 <style>
 	#categoryList{
-	width:50%;
+	width:100%;
 	height:60px;
-	align:left;
 	text-align:center;
 	}
 	#categoryList input{
@@ -17,7 +16,7 @@
 	height:35px;
 	}
 	#categoryList button{
-	width:75px;
+	width:75%;
 	height:35px;
 	}
 	.ctSelected{
@@ -44,13 +43,13 @@
 		<td><button name="category" value="0">전체</button></td>
 		<!-- 나중에 c:forEach를 통해 카테고리를 가져와서 배치 -->
 		<td><button name="category" value="10">일반</button></td>
-		<td><button name="category" value="20">정보</button></td>
-		<td><button name="category" value="30">질문</button></td>
+		<td><button name="category" value="20">홈트</button></td>
+		<td><button name="category" value="30">헬스</button></td>
 		<td><button name="category" value="40">식단</button></td>
 	</tr>
 	</table>
 	</div>
-	<br>
+	<br><br>
 	<table border="1" class="board-area">
 	<thead>
 	<tr>
@@ -63,28 +62,34 @@
 		<th width="100px">작성일</th>
 	</tr>
 	</thead>
-	<tbody>
-	<c:forEach items="${bList}" var="b">
-	<tr>
-		<td>${b.boardNo }</td>
-		<td>${b.category }</td>
-		<td>${b.boardTitle }</td>
-		<td>${b.boardWriter }</td>
-		<td>${b.count }</td>
-		<td>${b.recommend }</td>
-		<td>${b.uploadDate }</td>
-	</tr>
-	</c:forEach>
-	</tbody>
+	<tbody></tbody>
 	</table>
 	
 	<script>
+	function searchboard(){
+		//선택한 카테고리중 제목에 검색단어가 포함되어있는 글만 정렬(10개?)
+		$.ajax({
+			url : "search.bo",
+			data : {
+				
+			},
+			type : "post",
+			success : function(){
+				
+			},
+			error : function(){
+				console.log($("input[name=keyword]").val());
+				console.log("아직 안만들었으니 없지");
+			}
+		});
+	}
 	$(function(){
 		$("button[name=category]").click(function(){
-			var category=$(this).val();
-			location.href="${contextPath}/board.bo?currentPage=1&category="+category;
+			$("button[name=category]").each(function(){
+				$(this).removeClass("ctSelected");
+			})
+			$(this).addClass("ctSelected");
 		});
-		
 	});
 	</script>
 	

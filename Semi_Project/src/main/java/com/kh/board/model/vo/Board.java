@@ -19,13 +19,13 @@ public class Board {
 	
 	
 	
-	public Board(int boardNo, String category, String boardTitle, String boardWriter, int count, int recommend, Date uploadDate
+	public Board(int boardNo, String category, String boardWriter, String boardTitle, int count, int recommend, Date uploadDate
 			) {
 		super();
 		this.boardNo = boardNo;
 		this.category = category;
-		this.boardTitle = boardTitle;
 		this.boardWriter = boardWriter;
+		this.boardTitle = boardTitle;
 		this.count = count;
 		this.recommend = recommend;
 		this.uploadDate = uploadDate;
