@@ -27,7 +27,6 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 	<script>
@@ -117,9 +116,7 @@
         </div>
     </div>
 	
+	<!-- 확인완료! -->
 
-=======
-	
->>>>>>> refs/remotes/origin/main
 </body>
 </html>
