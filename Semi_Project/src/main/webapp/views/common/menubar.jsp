@@ -140,14 +140,14 @@
        
         <div class="header-inner">
             <div class="logo">
-                <a href="${contextPath }"><img src="resources/temp.png"></a>
+                <a href="${contextPath }"><img src="${contextPath}/resources/temp.png"></a>
             </div>
 
 
             </div>
             <div class="util"><ul>
                 <li><a href="login.me">로그인</a></li>
-                <li>| <a href="insert.me">회원가입</a></li>
+                <li>| <a href="enrollForm.me">회원가입</a></li>
             </ul>
             </div>
         </div>

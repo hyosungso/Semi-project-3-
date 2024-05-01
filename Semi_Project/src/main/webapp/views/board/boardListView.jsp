@@ -7,13 +7,10 @@
 <title>Insert title here</title>
 <style>
 	#categoryList{
-	width:100%;
+	width:50%;
 	height:60px;
+	align:left;
 	text-align:center;
-	}
-	#categoryList input{
-	width:100%;
-	height:35px;
 	}
 	#categoryList button{
 	width:75%;
@@ -36,7 +33,7 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	
+	<br>
 	<div class="search-area">
 	<table id="categoryList" border="1">
 	<tr>
@@ -49,7 +46,7 @@
 	</tr>
 	</table>
 	</div>
-	<br><br>
+	<br>
 	<table border="1" class="board-area">
 	<thead>
 	<tr>
@@ -62,7 +59,19 @@
 		<th width="100px">작성일</th>
 	</tr>
 	</thead>
-	<tbody></tbody>
+	<tbody>
+	<c:forEach items="${bList}" var="b">
+	<tr>
+		<td>${b.boardNo}</td>
+		<td>${b.category}</td>
+		<td>${b.boardTitle}</td>
+		<td>${b.boardWriter}</td>
+		<td>${b.count}</td>
+		<td>${b.recommend}</td>
+		<td>${b.uploadDate}</td>
+	</tr>
+	</c:forEach>
+	</tbody>
 	</table>
 	
 	<script>
