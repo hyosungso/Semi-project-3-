@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Properties;
@@ -47,13 +48,11 @@ public class MemberDao {
 			pstmt.setString(1, m.getUserId());
 			pstmt.setString(2, m.getUserPwd());
 			pstmt.setString(3, m.getUserName());
+			pstmt.setString(3, m.getGender());
 			pstmt.setString(4, m.getNickName());
 			pstmt.setString(5, m.getEmail());
 			pstmt.setString(6, m.getPhone());
-			pstmt.setString(7, m.getPostNumber());
-			pstmt.setString(8, m.getAddress());
-			pstmt.setInt(9, m.getBirth());
-			pstmt.setString(10, m.getGender());
+			pstmt.setString(7, m.getGender());
 			
 			result = pstmt.executeUpdate();
 			
@@ -74,9 +73,40 @@ public class MemberDao {
 		
 	}
 
+	//아이디 중복확인 메소드
+	public Boolean checkId(Connection conn, String inputId) {
+		
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("checkId");
+		
+		boolean flag = false;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, inputId);
+			
+			rset = pstmt.executeQuery();
+			
+			flag = rset.next();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return flag;
+	}
+
 	
 		
-		
+	//ㅎ
 
 
 	
