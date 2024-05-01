@@ -17,110 +17,160 @@
 %>  
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<style>
-.menu{
-display:inline-block;
-width:150px;
-height:50px;
-}
-</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .header{
+            position: relative;
+            width: 100%;
+            z-index: 20;
+            background-color: #fff;
+        }
+        .header-inner{
+            
+        position: relative;
+        max-width: 1100px;
+        min-height: 120px;
+        margin: 0 auto;
+
+        }
+        .util{
+            position: absolute;
+            width: 30%;
+            top: 10px;
+            right: 50px;
+        }
+        .util>ul{
+          
+            float: right;
+            list-style: none;
+            overflow: hidden;
+        }
+        .util>ul>li{
+            display: inline;
+            font-size: 13px;
+            
+        }
+        .util a{
+            text-decoration: none;
+            color: gray;
+        }
+            .logo{
+            display: block;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .logo img{
+            width: 300px;
+           float: left;
+          
+        }
+        .logo a{
+            width: 300px;
+           float: left;
+          
+        }
+
+        .nav-area{
+            background-color: black;
+        }
+        .menu{
+            display: flex;
+            height: 50px;
+            margin: auto;
+            width: 1100px;
+        }
+        .menu div{
+            width: 100%;
+            margin: auto
+        }
+        .menu a {
+            text-decoration: none;
+            color:white;
+            font-size: 20px;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+            height: 100%;
+            line-height: 50px;
+        }
+        .menu a:hover{
+            background-color: rgb(144, 142, 142);
+        }
+        
+        .board ul{
+            margin: auto;
+        }
+        
+        #navi>li>ul{
+            list-style-type: none;
+            background-color: black;
+            padding: 0px;  /*padding 0 처리*/
+            display: none; /*안보이게 처리하기*/
+        }
+        #navi>li>a:hover+ul{
+            /*안보이는 ul 보여주기*/
+            
+            display: block;
+        }
+        #navi>li>ul:hover{
+            display: block;
+        }
+       .board-category a{
+        font-size: 15px
+       }
+
+    </style>
+
 </head>
 <body>
 
+
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-	<script>
-		//알림메세지 띄워주기 
-		//로그인성공 또는 null - 값 자체로 반환되기때문에 문자열 " "처리 해야함
-		var msg = "<%=alertMsg%>";
-		
-		if(msg!="null"){ //null이 아니면 알림메세지 띄워라
-			alert(msg); 
-			//알림 띄워주고 해당 메세지 지워주기
-			<%session.removeAttribute("alertMsg");%>
-		}
-	</script>
-	
-	<!-- 로그인 영역 -->
-    <div class="login-area">
-        <!--로그인 전 후 화면 나누기-->    
+    <div class="header">
+       
+        <div class="header-inner">
+            <div class="logo">
+                <a href="${contextPath }"><img src="resources/temp.png"></a>
+            </div>
 
-        <!--로그인 전 : 아이디 비밀번호 입력 input과 로그인 버튼 (회원가입/id/pwd 찾기)-->
-		<%if(loginUser == null) {%>
-        <form id="login-form" action="<%=contextPath%>/login.me" method="post">
-            <table>
-                <!-- tr>(th+td)*2 -->
-                <tr>
-                    <th>아이디</th>
-                    <td><input type="text" name="userId" required></td>
-                </tr>
-                <tr>
-                    <th>비밀번호</th>
-                    <td><input type="password" name="userPwd" required></td>
-                </tr>
-                <tr>
-                    <th colspan="2">
-                        <button type="submit">로그인</button>
-                        <button type="button" onclick="enrollForm();">회원가입</button>
-                    </th>
-                </tr>
-            </table>
-        </form>
-        
-        <script>
-        	function enrollForm(){
-        		//회원가입 페이지로 이동시키는 함수 
-        		//location.href = "이동시킬 경로"
-        		//단순 페이지 이동 요청을 보내면 url에 프로젝트 디렉토리 구조가 노출되기 때문에 보안상 문제가 있을 수 있다.
-        		//때문에 단순 페이지 이동요청도 servlet을 거쳐서 요청처리 해야한다.
-        		//location.href = "<%=contextPath%>/views/member/memberEnrollForm.jsp";
-        		
-        		location.href = "<%=contextPath%>/enrollForm.me";
-        		
-        		
-        	}
-        
-        </script>
-        
-        
-        
-	<%}else{ %>
-        <!--로그인 후(loginUser가 null이 아닐때)-->
-        <div id="user-info">
-            <b><%=loginUser.getUserName()%>님 환영합니다.</b>
-            <div align="center">
-                <a href="<%=contextPath%>/myPage.me">마이페이지</a> 
-                <a href="<%=contextPath %>/logout.me">로그아웃</a>
+
+            </div>
+            <div class="util"><ul>
+                <li><a href="login.me">로그인</a></li>
+                <li>| <a href="insert.me">회원가입</a></li>
+            </ul>
             </div>
         </div>
-    </div>
-    <%} %>
-  	<!--float 해제하기-->
-    <br clear="both">
+  
 
-
-    <!-- 메뉴바 -->
     <div class="nav-area" align="center">
         <div class="menu">
-            <a href="<%=contextPath%>">HOME</a>
-        </div>
-        <div class="menu">
-            <a href="<%=contextPath%>/list.no">공지사항</a>
+            <div class="board">
+                <ul id="navi">
+                    <li><a href="">게시판</a>
+                        <ul class="board-category">
+                            <li><a href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
+                            <li><a href="">정보게시판</a></li>
+                        </ul></li>
+                </ul>
+               
+                </div>
+            <div><a href="">운동법</a></div>
+            <div><a href="">매장(후순위)</a></div>
+            <div><a href="">개인기록(후순위)</a></div>
         </div>
 
-        <div class="menu">
-            <a href="${contextPath}/board.bo?currentPage=1">일반게시판</a>
-        </div>
-        <div class="menu">
-            <a href="">사진게시판</a>
-        </div>
     </div>
-	
 
 </body>
 </html>
