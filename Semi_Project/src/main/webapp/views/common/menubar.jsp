@@ -39,9 +39,8 @@
         }
         .util{
             position: absolute;
-            width: 30%;
             top: 10px;
-            right: 50px;
+            right: 100px;
         }
         .util>ul{
           
@@ -125,6 +124,14 @@
        .board-category a{
         font-size: 15px
        }
+       	.outer{
+            background-color: black;
+            color: white;
+            width: 1000px;
+            margin: auto; /*가운데 자동정렬*/
+            margin-top: 50px; /*위로부터 50px 여백*/
+
+        }
 
     </style>
 </head>
@@ -133,7 +140,7 @@
        
         <div class="header-inner">
             <div class="logo">
-                <a href="${contextPath }"><img src="resources/temp.png"></a>
+                <a href="${contextPath }"><img src="resources/logo/temp.png"></a>
             </div>
 
             </div>
@@ -158,7 +165,7 @@
                
                 </div>
             <div><a href="">운동법</a></div>
-            <div><a href="">매장(후순위)</a></div>
+            <div><a href="list.mk">매장(후순위)</a></div>
             <div><a href="">개인기록(후순위)</a></div>
         </div>
        
