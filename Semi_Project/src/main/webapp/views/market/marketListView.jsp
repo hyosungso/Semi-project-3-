@@ -14,7 +14,7 @@
 		<div class="list-area">
 			<div class="itemImg" align="center" onclick="location.href='${contextPath }/detail.mk?tno=${it.itemNo }'">
 			
-			<img src="${contextPath }resources/marketing/${it.itemNo}" width="200px" height="150px">
+			<img src="<%=contextPath%>resources/marketing/${it.itemNo}" width="200px" height="150px">
 		<p>
 			${it.itemName } ${it.category } <br>
 			${it.price }
