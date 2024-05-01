@@ -26,6 +26,7 @@
 		<td>작성자</td>
 		<td>조회수</td>
 		<td>추천수</td>
+		<td>작성일</td>
 	</tr>
 	</thead>
 	<tbody></tbody>
