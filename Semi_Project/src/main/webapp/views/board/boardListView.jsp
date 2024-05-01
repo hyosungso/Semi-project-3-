@@ -16,10 +16,6 @@
 	width:75%;
 	height:35px;
 	}
-	.ctSelected{
-	background-color:blue;
-	color:white;
-	}
 	button[name=category]:hover{
 	background-color:lightblue;
 	}
@@ -94,10 +90,8 @@
 	}
 	$(function(){
 		$("button[name=category]").click(function(){
-			$("button[name=category]").each(function(){
-				$(this).removeClass("ctSelected");
-			})
-			$(this).addClass("ctSelected");
+			var category=$(this).val();
+			location.href="board.bo?currentPage=1&category="+category;
 		});
 	});
 	</script>
