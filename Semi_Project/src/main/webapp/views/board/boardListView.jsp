@@ -10,6 +10,15 @@
 	<%@ include file="/views/common/menubar.jsp" %>
 	
 	<div class="search-area">
+	<table id="categoryList">
+	<tr>
+		<td><button>전체</button></td>
+		<td><button>일반</button></td>
+		<td><button>홈트</button></td>
+		<td><button>헬스</button></td>
+		<td><button>식단</button></td>
+	</tr>
+	</table>
 	<input type="radio" name="category" value="10" id="normal" checked><label for="normal" >일반</label>
 	<input type="radio" name="category" value="20" id="training"><label for="training">홈트</label>
 	<input type="radio" name="category" value="30" id="gym"><label for="gym">헬스</label>
@@ -51,6 +60,9 @@
 			}
 		});
 	}
+	$(function(){
+		$("#categoryList")
+	});
 	</script>
 	
 </body>
