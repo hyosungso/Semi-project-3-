@@ -27,8 +27,20 @@ public class MemberService {
 		return result;
 		
 		
-		//흠
 		
+		
+	}
+
+	// 아이디 중복 체크 메소드
+	public Boolean checkId(String inputId) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Boolean flag = new MemberDao().checkId(conn,inputId);
+		
+		JDBCTemplate.close(conn);
+		
+		return flag;
 		
 	}
 
