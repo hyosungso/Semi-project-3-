@@ -23,11 +23,15 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
-
+.menu{
+display:inline-block;
+width:150px;
+height:50px;
+}
 </style>
 </head>
 <body>
-<<<<<<< HEAD
+
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 	<script>
@@ -110,7 +114,7 @@
         </div>
 
         <div class="menu">
-            <a href="<%=contextPath%>/list.bo?currentPage=1">일반게시판</a>
+            <a href="${contextPath}/board.bo?currentPage=1">일반게시판</a>
         </div>
         <div class="menu">
             <a href="">사진게시판</a>
@@ -118,8 +122,5 @@
     </div>
 	
 
-=======
-	
->>>>>>> refs/remotes/origin/main
 </body>
 </html>
