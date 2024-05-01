@@ -17,6 +17,23 @@ public class Board {
 		super();
 	}
 	
+	
+	
+	public Board(int boardNo, String category, String  boardTitle, String boardWriter, int count, int recommend, Date uploadDate
+			) {
+		super();
+		this.boardNo = boardNo;
+		this.category = category;
+		this.boardTitle = boardTitle;
+		this.boardWriter = boardWriter;
+		this.count = count;
+		this.recommend = recommend;
+		this.uploadDate = uploadDate;
+		
+	}
+
+
+
 	public Board(int boardNo, String boardWriter, String boardTitle, String boardContent, int count, int recommend,
 			Date uploadDate, Date reviseDate, String category) {
 		super();

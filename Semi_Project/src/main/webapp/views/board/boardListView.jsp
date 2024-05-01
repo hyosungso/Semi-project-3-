@@ -5,31 +5,69 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	#categoryList{
+	width:50%;
+	height:60px;
+	align:left;
+	text-align:center;
+	}
+	#categoryList button{
+	width:75%;
+	height:35px;
+	}
+	button[name=category]:hover{
+	background-color:lightblue;
+	}
+	.board-area{
+	width:100%;
+	}
+	.board-area th{
+	text-align:center;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	
+	<br>
 	<div class="search-area">
-	<input type="radio" name="category" value="10" id="normal" checked><label for="normal" >일반</label>
-	<input type="radio" name="category" value="20" id="training"><label for="training">홈트</label>
-	<input type="radio" name="category" value="30" id="gym"><label for="gym">헬스</label>
-	<input type="radio" name="category" value="40" id="food"><label for="food">식단</label>
-	<input type="text" name="keyword">
-	<button onclick="searchboard();">검색</button>
+	<table id="categoryList" border="1">
+	<tr>
+		<td><button name="category" value="0">전체</button></td>
+		<!-- 나중에 c:forEach를 통해 카테고리를 가져와서 배치 -->
+		<td><button name="category" value="10">일반</button></td>
+		<td><button name="category" value="20">홈트</button></td>
+		<td><button name="category" value="30">헬스</button></td>
+		<td><button name="category" value="40">식단</button></td>
+	</tr>
+	</table>
 	</div>
-	<table border="1">
+	<br>
+	<table border="1" class="board-area">
 	<thead>
 	<tr>
-		<td>글번호</td>
-		<td>카테고리</td>
-		<td>제목</td>
-		<td>작성자</td>
-		<td>조회수</td>
-		<td>추천수</td>
-		<td>작성일</td>
+		<th width="50px">글번호</th>
+		<th width="50px">카테고리</th>
+		<th width="300px">제목</th>
+		<th width="100px">작성자</th>
+		<th width="50px">조회수</th>
+		<th width="50px">추천수</th>
+		<th width="100px">작성일</th>
 	</tr>
 	</thead>
-	<tbody></tbody>
+	<tbody>
+	<c:forEach items="${bList}" var="b">
+	<tr>
+		<td>${b.boardNo}</td>
+		<td>${b.category}</td>
+		<td>${b.boardTitle}</td>
+		<td>${b.boardWriter}</td>
+		<td>${b.count}</td>
+		<td>${b.recommend}</td>
+		<td>${b.uploadDate}</td>
+	</tr>
+	</c:forEach>
+	</tbody>
 	</table>
 	
 	<script>
@@ -38,8 +76,7 @@
 		$.ajax({
 			url : "search.bo",
 			data : {
-				category:$("input[name=category]:checked").val(),
-				keyword:$("input[name=keyword]").val()
+				
 			},
 			type : "post",
 			success : function(){
@@ -51,6 +88,12 @@
 			}
 		});
 	}
+	$(function(){
+		$("button[name=category]").click(function(){
+			var category=$(this).val();
+			location.href="board.bo?currentPage=1&category="+category;
+		});
+	});
 	</script>
 	
 </body>

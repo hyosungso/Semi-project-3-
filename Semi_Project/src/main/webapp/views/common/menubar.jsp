@@ -19,9 +19,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         .header{
             position: relative;
@@ -127,19 +129,25 @@
        }
 
     </style>
+
 </head>
 <body>
+
+
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
     <div class="header">
        
         <div class="header-inner">
             <div class="logo">
-                <a href="${contextPath }"><img src="resources/temp.png"></a>
+                <a href="${contextPath }"><img src="${contextPath}/resources/temp.png"></a>
             </div>
+
 
             </div>
             <div class="util"><ul>
                 <li><a href="login.me">로그인</a></li>
-                <li>| <a href="insert.me">회원가입</a></li>
+                <li>| <a href="enrollForm.me">회원가입</a></li>
             </ul>
             </div>
         </div>
@@ -151,7 +159,7 @@
                 <ul id="navi">
                     <li><a href="">게시판</a>
                         <ul class="board-category">
-                            <li><a href="">자유게시판</a></li>
+                            <li><a href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
                             <li><a href="">정보게시판</a></li>
                         </ul></li>
                 </ul>
@@ -161,7 +169,8 @@
             <div><a href="">매장(후순위)</a></div>
             <div><a href="">개인기록(후순위)</a></div>
         </div>
-       
+
     </div>
+
 </body>
 </html>
