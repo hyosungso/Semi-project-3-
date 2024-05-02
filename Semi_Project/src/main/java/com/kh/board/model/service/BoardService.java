@@ -62,4 +62,36 @@ public class BoardService {
 		return b;
 	}
 
+	public int increaseCount(int bno) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().increaseCount(conn,bno);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int increaseRecommend(int uno,int bno) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().increaseRecommend(conn,uno,bno);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public String checkRecommend(int uno, int bno) {
+		Connection conn=JDBCTemplate.getConnection();
+		String result=new BoardDao().checkRecommend(conn,uno,bno);
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

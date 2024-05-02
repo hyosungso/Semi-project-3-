@@ -41,10 +41,31 @@ width:90%;
 	<td colspan="7"><p>${b.boardContent}</p></td>
 	</tr>
 	<tr>
-	<td colspan="7" style="text-align:center"><button>추천</button></td>
+	<td colspan="7" style="text-align:center"><button onclick="increaseRC();">추천</button></td>
 	</tr>
 	</tbody>
 	</table>
 	</div>
+	<script>
+	function increaseRC(){
+		if(${empty loginUser.userNo}) {
+			alert("해당 기능은 로그인 이후에 사용가능합니다.");
+		} else {
+		$.ajax({
+			url : "recommend.bo",
+			data : {
+				bno : ${b.boardNo},
+				uno : "${loginUser.userNo}"
+			},
+			success : function(Message){
+				alert(Message);
+			},
+			error : function(){
+				alert("추천에 실패했습니다.");	
+			}
+		});
+		}
+	}
+	</script>
 </body>
 </html>
