@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 	#categoryList{
-	width:50%;
+	width:540px;
 	height:60px;
 	align:left;
 	text-align:center;
@@ -20,36 +20,48 @@
 	background-color:lightblue;
 	}
 	.board-area{
-	width:100%;
+	width:1200px;
 	}
 	.board-area th{
 	text-align:center;
 	}
+	.board-area>tbody tr:hover{
+	background-color:lightgrey;
+	cursor:pointer;
+	}
+	.board{
+	height:400px;
+	}
+	.ctSelected{
+	background-color:blue;
+	color:white;
+	}
+
 </style>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	<br>
-	<div class="search-area">
-	<table id="categoryList" border="1">
-	<tr>
-		<td><button name="category" value="0">전체</button></td>
-		<!-- 나중에 c:forEach를 통해 카테고리를 가져와서 배치 -->
-		<td><button name="category" value="10">일반</button></td>
-		<td><button name="category" value="20">홈트</button></td>
-		<td><button name="category" value="30">헬스</button></td>
-		<td><button name="category" value="40">식단</button></td>
-	</tr>
-	</table>
-	</div>
-	<br>
-	<table border="1" class="board-area">
+	<div class="board">
+	<table border="1" class="board-area" align="center">
 	<thead>
+	<tr>
+		<th colspan="7">
+		<table id="categoryList">
+		<tr>
+		<td><button name="category" value="0">전체</button></td>
+		<c:forEach items="${ctList}" var="ct">
+		<td><button name="category" value="${ct.categoryNo}">${ct.categoryName }</button></td>
+		</c:forEach>
+		</tr>
+		</table>
+		</th>
+	</tr>
 	<tr>
 		<th width="50px">글번호</th>
 		<th width="50px">카테고리</th>
 		<th width="300px">제목</th>
-		<th width="100px">작성자</th>
+		<th width="80px">작성자</th>
 		<th width="50px">조회수</th>
 		<th width="50px">추천수</th>
 		<th width="100px">작성일</th>
@@ -69,7 +81,7 @@
 	</c:forEach>
 	</tbody>
 	</table>
-	
+	</div>
 	<script>
 	function searchboard(){
 		//선택한 카테고리중 제목에 검색단어가 포함되어있는 글만 정렬(10개?)
@@ -89,12 +101,27 @@
 		});
 	}
 	$(function(){
+		$("button[name=category]").each(function(){
+			if($(this).val()==${category}){
+				$(this).attr("disabled",true);
+				$(this).addClass("ctSelected");
+			}
+		});
 		$("button[name=category]").click(function(){
 			var category=$(this).val();
 			location.href="board.bo?currentPage=1&category="+category;
 		});
+		$(".board-area>tbody tr").click(function(){
+			var bno=$(this).children().eq(0).text();
+			location.href="detail.bo?bno="+bno;
+		});
 	});
 	</script>
-	
+	<!-- 검색창도 이 구역에서 만들예정 -->
+	<div class="paging" align="center">
+	<button>이전</button>
+	<button>1</button>
+	<button>다음</button>
+	</div>
 </body>
 </html>
