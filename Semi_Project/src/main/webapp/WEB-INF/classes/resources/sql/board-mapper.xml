@@ -34,7 +34,7 @@
 		SELECT * FROM CATEGORY
 	</entry>
 	<!-- 닉네임이 있으면 작성자에 닉네임 표기,없으면 USER_ID그대로 표기 -->
-	<entry key="selectNickName">
+	<entry key="selectNickname">
 		SELECT NICKNAME FROM MEMBER
 		WHERE USER_ID=?
 	</entry>

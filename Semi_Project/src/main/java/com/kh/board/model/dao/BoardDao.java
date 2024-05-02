@@ -125,7 +125,7 @@ public class BoardDao {
 		
 		
 		String sql=prop.getProperty("selectListByCategory");
-		String sql2=prop.getProperty("selectNickName");
+		String sql2=prop.getProperty("selectNickname");
 		ArrayList<Board> bList=new ArrayList<>();
 		
 		int startRow=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1; 
@@ -211,6 +211,7 @@ public class BoardDao {
 							rset.getInt("RECOMMEND"),
 							rset.getDate("REVISE_DATE"));
 				b.setBoardNo(rset.getInt("BOARD_NO"));
+				
 			}
 			
 			pstmt=conn.prepareStatement(sql2);
