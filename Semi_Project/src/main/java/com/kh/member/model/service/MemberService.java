@@ -9,6 +9,18 @@ import com.kh.member.model.vo.Member;
 
 public class MemberService {
 
+	public Member loginMember(String userId, String userPwd) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member m = new MemberDao().loginMember(conn,userId,userPwd);
+
+		JDBCTemplate.close(conn);
+		
+		return m;
+	}
+	
+	
 	public int insertMember(Member m) {
 		
 		Connection conn = JDBCTemplate.getConnection();
