@@ -82,7 +82,7 @@
 
         .nav-area{
         	margin:auto;
-        	width:1300PX;
+        	width:80%;
             background-color: black;
         }
         .menu{
@@ -133,7 +133,7 @@
        	.outer{
             background-color: black;
             color: white;
-            width: 1300px;
+            width: 1000px;
             margin: auto; /*가운데 자동정렬*/
             margin-top: 50px; /*위로부터 50px 여백*/
 
