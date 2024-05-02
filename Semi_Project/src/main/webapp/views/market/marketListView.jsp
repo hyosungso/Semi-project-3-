@@ -26,11 +26,12 @@
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
+		<br>
 		<h2 align="center">판매 상품</h2>
-		
+		<br>
 		<div class="list-area">
 		<c:forEach var="it" items="${list }">
-			<div class="itemImg" align="center" onclick="location.href='${contextPath }/detail.mk?tno=${it.itemCode }'">
+			<div class="itemImg" align="center" onclick="location.href='${contextPath }/detail.mk?itno=${it.itemCode }'">
 			<img src="<%=contextPath%>/resources/marketImg/${it.itemCode}.jpg" width="200px" height="150px">
 		<p>
 			${it.itemName } ${it.categoryName } <br>
