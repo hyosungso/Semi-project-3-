@@ -33,7 +33,7 @@ public class MarketDetailController extends HttpServlet {
 		int itemNo=Integer.parseInt(request.getParameter("itno"));
 		
 		Item t= new MarketService().selectItem(itemNo);
-		System.out.println(t.toString());
+		
 		request.setAttribute("item", t );
 		
 		request.getRequestDispatcher("views/market/marketDetailView.jsp").forward(request, response);
