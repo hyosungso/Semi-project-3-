@@ -34,9 +34,7 @@ public class MarketListController extends HttpServlet {
 		
 		ArrayList<Item> list = new MarketService().selectItemList();
 		
-		System.out.println(list);
-		
-		request.setAttribute("list", list.toString());
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/market/marketListView.jsp").forward(request, response);
 	}
