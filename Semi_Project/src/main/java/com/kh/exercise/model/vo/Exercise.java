@@ -1,4 +1,4 @@
-package com.kh.common;
+package com.kh.exercise.model.vo;
 
 public class Exercise {
 	private int exerNo;				//운동고유번호 	: 게시글 고유 번호

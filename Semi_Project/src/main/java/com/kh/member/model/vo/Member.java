@@ -8,13 +8,10 @@ public class Member {
 	private String userId;
 	private String userPwd;
 	private String userName;
+	private String gender;
 	private String nickName;
 	private String email;
 	private String phone;
-	private String postNumber;
-	private String address;
-	private int birth;
-	private String gender;
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status;
@@ -22,22 +19,36 @@ public class Member {
 	public Member() {
 		super();
 	}
+	
+	
+	
 
-	public Member(int userNo, String userId, String userPwd, String userName, String nickName, String email,
-			String phone, String postNumber, String address, int birth, String gender, Date enrollDate, Date modifyDate,
-			String status) {
+	public Member(String userId, String userPwd, String userName, String gender, String nickName, String email,
+			String phone) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.gender = gender;
+		this.nickName = nickName;
+		this.email = email;
+		this.phone = phone;
+	}
+
+
+
+
+	public Member(int userNo, String userId, String userPwd, String userName, String gender, String nickName,
+			String email, String phone, Date enrollDate, Date modifyDate, String status) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
+		this.gender = gender;
 		this.nickName = nickName;
 		this.email = email;
 		this.phone = phone;
-		this.postNumber = postNumber;
-		this.address = address;
-		this.birth = birth;
-		this.gender = gender;
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;
@@ -75,6 +86,14 @@ public class Member {
 		this.userName = userName;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public String getNickName() {
 		return nickName;
 	}
@@ -97,38 +116,6 @@ public class Member {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public String getPostNumber() {
-		return postNumber;
-	}
-
-	public void setPostNumber(String postNumber) {
-		this.postNumber = postNumber;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public int getBirth() {
-		return birth;
-	}
-
-	public void setBirth(int birth) {
-		this.birth = birth;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 
 	public Date getEnrollDate() {
@@ -158,11 +145,12 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
-				+ ", nickName=" + nickName + ", email=" + email + ", phone=" + phone + ", postNumber=" + postNumber
-				+ ", address=" + address + ", birth=" + birth + ", gender=" + gender + ", enrollDate=" + enrollDate
-				+ ", modifyDate=" + modifyDate + ", status=" + status + "]";
+				+ ", gender=" + gender + ", nickName=" + nickName + ", email=" + email + ", phone=" + phone
+				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", status=" + status + "]";
 	}
 	
+	
+	//ㅎ
 	
 	
 	
