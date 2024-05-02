@@ -13,4 +13,16 @@
 	ORDER BY SALES_VOL DESC
 		   
 	</entry>
+	
+	<entry key="selectItem">
+		SELECT ITEM_NAME,
+			   CATEGORY_NAME,
+			   PRICE,
+			   ITEM_DETAIL,
+			   ITEM_CODE
+		FROM ITEM
+		JOIN ITEM_CATEGORY USING (CATEGORY_NO)
+		WHERE STATUS='Y'
+		AND ITEM_CODE=?
+	</entry>
 </properties>

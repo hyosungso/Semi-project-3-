@@ -9,7 +9,7 @@ public class Item {
 	private String itemDetail;
 	private String itemName;
 	
-	private String categoryName;
+	private String categoryName; //카테고리 네임 join 구문으로 가져오는 용도
 	
 	
 	public Item() {
@@ -38,6 +38,14 @@ public class Item {
 	
 	
 	
+	public Item(String categoryName, int price, String itemName, String itemDetail,int itemCode) {
+		super();
+		this.categoryName = categoryName;
+		this.price = price;
+		this.itemName = itemName;
+		this.itemDetail = itemDetail;
+		this.itemCode = itemCode;
+	}
 	public String getCategoryName() {
 		return categoryName;
 	}

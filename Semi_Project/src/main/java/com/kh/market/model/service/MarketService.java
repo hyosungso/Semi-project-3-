@@ -19,4 +19,13 @@ public class MarketService {
 		return list;
 	}
 
+	public Item selectItem(int itemNo) {
+		Connection conn=JDBCTemplate.getConnection();
+		Item itme= new MarketDao().selectItem(itemNo, conn);
+		
+		JDBCTemplate.close(conn);
+				
+		return itme;
+	}
+
 }
