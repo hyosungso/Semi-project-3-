@@ -3,6 +3,7 @@ package com.kh.market.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,6 +57,37 @@ public class MarketDao {
 		
 		
 		return list;
+	}
+
+	public Item selectItem(int itemNo, Connection conn) {
+		ResultSet rset= null;
+		PreparedStatement pstmt=null;
+		Item i=null;
+		String sql=prop.getProperty("selectItem");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				i=(new Item(
+						rset.getString("CATEGORY_NAME"),
+						rset.getInt("PRICE"),
+						rset.getString("ITEM_NAME"),
+						rset.getString("ITEM_DETAIL"),
+						rset.getInt("ITEM_CODE")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return i;
 	}
 
 }
