@@ -33,12 +33,14 @@
 	<entry key="selectCategory">
 		SELECT * FROM CATEGORY
 	</entry>
+	<!-- 닉네임이 있으면 작성자에 닉네임 표기,없으면 USER_ID그대로 표기 -->
 	<entry key="selectNickName">
 		SELECT NICKNAME FROM MEMBER
 		WHERE USER_ID=?
 	</entry>
 	<entry key="selectBoard">
-		SELECT * FROM BOARD
+		SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,COUNT,RECOMMEND,REVISE_DATE FROM BOARD
+		JOIN MEMBER ON(BOARD_WRITER=USER_NO)
 		WHERE BOARD_NO=?
 	</entry>
 </properties>
