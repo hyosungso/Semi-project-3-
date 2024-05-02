@@ -1,28 +1,25 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberInsertController
+ * Servlet implementation class MemberCheckController
  */
-@WebServlet("/enrollForm.me")
-public class MemberEnrollController extends HttpServlet {
+@WebServlet("/checkId.me")
+public class MemberCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberEnrollController() {
+    public MemberCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +28,29 @@ public class MemberEnrollController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/member/memberEnrollForm.jsp").forward(request, response);
+		
+		String inputId = request.getParameter("inputId");
+		
+		Boolean flag =new MemberService().checkId(inputId);
+		
+		String responseStr = "";
+		
+		if(flag) {
+			responseStr = "NNNNN";
+		}else {
+			responseStr = "NNNNY";
+		}
+		
+		response.getWriter().print(responseStr);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 	//ㅎ
 }

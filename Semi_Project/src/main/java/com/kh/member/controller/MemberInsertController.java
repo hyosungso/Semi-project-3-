@@ -32,7 +32,7 @@ public class MemberInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: 엥?").append(request.getContextPath());
 	}
 
 	/**
@@ -45,29 +45,17 @@ public class MemberInsertController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
-		String nickname = request.getParameter("nickname");
+		String gender = request.getParameter("gender");
+		String nickName = request.getParameter("nickName");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		String postNumber = request.getParameter("postNumber");
-		String address = request.getParameter("address");
-		int birth = Integer.parseInt(request.getParameter("birth"));
-		String gender = request.getParameter("gender");
+	
 		
-		
-		System.out.println(userId);
-		System.out.println(userPwd);
-		System.out.println(userName);
-		System.out.println(email);
-		System.out.println(phone);
-		System.out.println(postNumber);
-		System.out.println(address);
-		System.out.println(birth);
-		System.out.println(gender);
 		
 		
 		//요청받은 데이터를 서비스에 전달하기위해 객체에 담아주기
 		//매개변수 생성자를 이용해서 Member객체 생성하기
-		Member m = new Member(userId,userPwd,userName,nickname,email,phone,postNumber,address,birth,gender);
+		Member m = new Member(userId,userPwd,userName,gender,nickName,email,phone);
 		
 		//서비스에 전달하며 회원가입 요청하여 반환값 받기 
 		int result = new MemberService().insertMember(m);
@@ -91,7 +79,7 @@ public class MemberInsertController extends HttpServlet {
 			
 		}
 		
-		
+		//ㅎ
 		
 	}
 
