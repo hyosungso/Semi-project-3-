@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Board;
 
 /**
- * Servlet implementation class BoardDetailController
+ * Servlet implementation class BoardRecommendController
  */
-@WebServlet("/detail.bo")
-public class BoardDetailController extends HttpServlet {
+@WebServlet("/recommend.bo")
+public class BoardRecommendController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardDetailController() {
+    public BoardRecommendController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +29,29 @@ public class BoardDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int uno=Integer.parseInt(request.getParameter("uno"));
 		int bno=Integer.parseInt(request.getParameter("bno"));
 		
-		int result=new BoardService().increaseCount(bno);
-		if(result>0) {
-		Board b=new BoardService().selectBoard(bno);
+		String message="";
 		
-		request.setAttribute("b", b);
-		} else {
-			request.getSession().setAttribute("alertMsg", "게시판 접근에 실패했습니다.");
-			response.sendRedirect("/");
+		switch(new BoardService().checkRecommend(uno,bno)) {
+		case "RCYYY": //추천기록이 없는경우
+			int result=new BoardService().increaseRecommend(uno,bno);
+			if(result>0) {
+				message="이 글을 추천했습니다.";
+			} else {
+				message="추천에 실패했습니다.";
+			}
+			break;
+		case "RCNNN": //추천기록이 있는경우
+			message="이미 이 글을 추천했습니다.";
+			break;
 		}
 		
-		request.getRequestDispatcher("/views/board/boardDetailView.jsp").forward(request, response);
 		
+		
+		response.setContentType("text/html;charset=UTF-8");
+		response.getWriter().print(message);
 	}
 
 	/**
