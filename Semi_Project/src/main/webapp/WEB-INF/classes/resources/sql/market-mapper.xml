@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectItemList">
+	SELECT ITEM_CODE,
+		   CATEGORY_NAME,
+		   PRICE,
+		   ITEM_NAME
+	FROM ITEM I
+	JOIN CATEGORY USING (CATEGORY_NO)
+	WHERE STATUS='Y'
+	ORDER BY SALES_VOL DESC
+		   
+	</entry>
+</properties>
