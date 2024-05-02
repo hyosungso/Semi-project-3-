@@ -8,9 +8,7 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	<h2>ㅎㅇ</h2>
 	
-	<a ></a>
 	
 	
 </body>
