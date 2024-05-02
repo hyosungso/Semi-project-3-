@@ -27,6 +27,7 @@
 	}
 	.board-area>tbody tr:hover{
 	background-color:lightgrey;
+	cursor:pointer;
 	}
 	.board{
 	height:400px;
@@ -116,6 +117,7 @@
 		});
 	});
 	</script>
+	<!-- 검색창도 이 구역에서 만들예정 -->
 	<div class="paging" align="center">
 	<button>이전</button>
 	<button>1</button>

@@ -54,4 +54,12 @@ public class BoardService {
 		return ctList;
 	}
 
+	public Board selectBoard(int bno) {
+		Connection conn=JDBCTemplate.getConnection();
+		Board b=new BoardDao().selectBoard(conn,bno);
+		
+		JDBCTemplate.close(conn);
+		return b;
+	}
+
 }

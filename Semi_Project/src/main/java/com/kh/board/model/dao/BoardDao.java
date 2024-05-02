@@ -116,6 +116,7 @@ public class BoardDao {
 		
 		
 		String sql=prop.getProperty("selectListByCategory");
+		String sql2=prop.getProperty("selectNickName");
 		ArrayList<Board> bList=new ArrayList<>();
 		
 		int startRow=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1; 
@@ -133,11 +134,19 @@ public class BoardDao {
 				bList.add(new Board(rset.getInt("BOARD_NO"),
 									rset.getString("CATEGORY_NAME"),
 									rset.getString("BOARD_TITLE"),
-									rset.getString("USER_ID"),
+									rset.getString("USER_ID"), //boardWriter
 									rset.getInt("COUNT"),
 									rset.getInt("RECOMMEND"),
 									rset.getDate("UPLOAD_DATE")));
 			}
+			for(Board b : bList) {
+				pstmt=conn.prepareStatement(sql2);
+				pstmt.setString(1, b.getBoardWriter());
+			}
+			
+			
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -171,6 +180,29 @@ public class BoardDao {
 		}
 		
 		return ctList;
+	}
+
+	public Board selectBoard(Connection conn, int bno) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("selectBoard");
+		Board b=null;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				b=new Board();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return b;
 	}
 	
 	
