@@ -210,6 +210,7 @@ public class BoardDao {
 							rset.getInt("COUNT"),
 							rset.getInt("RECOMMEND"),
 							rset.getDate("REVISE_DATE"));
+				b.setBoardNo(rset.getInt("BOARD_NO"));
 			}
 			
 			pstmt=conn.prepareStatement(sql2);
@@ -227,6 +228,84 @@ public class BoardDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return b;
+	}
+
+	public int increaseCount(Connection conn, int bno) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("increaseCount");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int increaseRecommend(Connection conn,int uno, int bno) {
+		int result=0;
+		int result2=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("increaseRecommend");
+		String sql2=prop.getProperty("saveRecommend");
+		try {
+			//해당 게시글의 추천수 늘리기
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result=pstmt.executeUpdate();
+			
+			//해당 유저가 이 게시글을 추천했다는 기록 입력
+			pstmt=conn.prepareStatement(sql2);
+			pstmt.setInt(1, uno);
+			pstmt.setInt(2, bno);
+			result2=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result*result2;
+	}
+
+	public String checkRecommend(Connection conn, int uno, int bno) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("checkRecommend");
+		String result="RC";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, uno);
+			pstmt.setInt(2, bno);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				//추천 기록이 있는경우
+				result +="NNN";
+			} else {
+				//추천 기록이 없는경우
+				result +="YYY";
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 	
 	

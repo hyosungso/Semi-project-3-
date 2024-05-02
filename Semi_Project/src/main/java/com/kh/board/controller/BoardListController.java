@@ -60,7 +60,7 @@ public class BoardListController extends HttpServlet {
 		//페이지 하단에 보여질 페이징바 최대개수
 		pageLimit=10;
 		//한페이지에서 보여줄 게시글 개수
-		boardLimit=10;
+		boardLimit=20;
 		
 		maxPage=(int)(Math.ceil((double)listCount/boardLimit));
 		//listCount,boardLimit 둘다 int이기 때문에 소수점을 살리기 위해서는 둘중 하나에 double형변환을 건다.

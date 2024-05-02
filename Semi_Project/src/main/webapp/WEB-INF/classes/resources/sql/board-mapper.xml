@@ -38,10 +38,32 @@
 		SELECT NICKNAME FROM MEMBER
 		WHERE USER_ID=?
 	</entry>
+	<entry key="increaseCount">
+		UPDATE BOARD
+		SET COUNT=COUNT+1
+		WHERE BOARD_NO=?
+	</entry>
 	<entry key="selectBoard">
-		SELECT USER_ID,BOARD_TITLE,BOARD_CONTENT,COUNT,RECOMMEND,REVISE_DATE FROM BOARD
+		SELECT BOARD_NO,USER_ID,BOARD_TITLE,BOARD_CONTENT,COUNT,RECOMMEND,REVISE_DATE FROM BOARD
 		JOIN MEMBER ON(BOARD_WRITER=USER_NO)
 		WHERE BOARD_NO=?
+	</entry>
+	<!-- 로그인유저 아이디와 글번호를 받아 해당 유저가 이 글에 추천을 했는지 알아오는sql문 -->
+	<entry key="checkRecommend">
+		SELECT USER_NO,BOARD_NO,STATUS FROM RECOMMEND
+		WHERE USER_NO=?
+		AND BOARD_NO=?
+	</entry>
+	<!-- 해당 글의 추천수 증가 -->
+	<entry key="increaseRecommend">
+		UPDATE BOARD
+		SET RECOMMEND=RECOMMEND+1
+		WHERE BOARD_NO=?
+	</entry>
+	<!-- 추천기록 남기기(중복추천 방지용) -->
+	<entry key="saveRecommend">
+		INSERT INTO RECOMMEND(USER_NO,BOARD_NO)
+		VALUES(?,?)
 	</entry>
 </properties>
 
