@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <% //로그인 정보 추출하기 
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	
@@ -22,13 +24,17 @@
 	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.net.URL" %>
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.io.BufferedReader" %>
+<%@ page import="java.io.InputStreamReader" %>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Login Views</title>
 
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -40,21 +46,43 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-/* body {
-        margin: 0;
-        padding: 0;
-    }
+.header{
+            position: relative;
+            width: 80%;
+            margin : auto;
+            z-index: 20;
+            background-color: black;
+             text-align: center;
+        }
+        .header-inner{
+            
+        position: relative;
+        max-width: 1300px;
+        min-height: 130px;
+        margin: 0 auto;
 
-    .login-area {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center; 
-        align-items: center; 
-        background: pink;
-    }
-*/
-   
+        }
+            .logo{
+            display: block;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        .logo img{
+            width: 60%;
+             max-width: 80%;
+             height: 60%;
+           /* float: right; */
+          
+        }
+        .logo a{
+            width: 60%;
+             max-width: 80%;
+             height: 60%;
+          
+        }
     
     body {
         margin: 0;
@@ -66,7 +94,7 @@
     form {
         max-width: 400px;
         margin: auto; 
-        background-color: white; 
+        background-color: red; 
         border-radius: 8px; 
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
         padding: 40px; 
@@ -110,6 +138,25 @@
 </style>
 </head>
 <body>
+ <%
+    String clientId = "FutmSJFgSoacokH2aZwQ";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8888/HealthLife/views/member/callback.jsp", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+         + "&client_id=" + clientId
+         + "&redirect_uri=" + redirectURI
+         + "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+	<div class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="${contextPath }"><img src="${contextPath}/resources/logo/temp.png"></a>
+            </div>
+            </div>
+        </div><br><br><br>
 	<div class="login-area">
 	
 		<form id="login-form" action="<%=contextPath%>/login.me" method="post">
@@ -131,8 +178,8 @@
 				<tr>
 					<th colspan="3">
 						<button type="submit">로그인</button>
-						<button type="button" class="btn-secondary" onclick="">회원가입</button>
-						<button id="naver_id_login" name="naver_id_login">네이버</button>
+						<button type="button" class="btn-secondary" onclick="location.href='${contextPath }/views/member/memberEnrollForm.jsp'">회원가입</button>
+						<a href="<%=apiURL%>"><img height="50" width="50%" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 					</th>
 				</tr>
 				
@@ -140,10 +187,12 @@
 			
 			</table>
 		</form>
+		
 		 <script>
         	$(function(){
         		
         		var saveId = "${cookie.userId.value}";
+        		console("saveId")
 				if(saveId!=""){
 					$("#saveId").attr("checked",true);
 					$("#loginId").val(saveId);
@@ -151,39 +200,10 @@
         		
         	});
         
-        
-        	function enrollForm(){
-        		
-        		
-        		
-        	}
-        
         </script>
 
 	</div>
-	 <script type="text/javascript">
-  	var naver_id_login = new naver_id_login("FutmSJFgSoacokH2aZwQ", "http://localhost:8888/HealthLife");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
-  	naver_id_login.setDomain("EFlrfDUSeQ");
-  	naver_id_login.setState(state);
-  	naver_id_login.setPopup();
-  	naver_id_login.init_naver_id_login();
-  </script>
-  
-	<script type="text/javascript">
-  var naver_id_login = new naver_id_login("FutmSJFgSoacokH2aZwQ", "http://localhost:8888/HealthLife");
-  // 접근 토큰 값 출력
-  alert(naver_id_login.oauthParams.access_token);
-  // 네이버 사용자 프로필 조회
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-  function naverSignInCallback() {
-    alert(naver_id_login.getProfileData('email'));
-    alert(naver_id_login.getProfileData('nickname'));
-    alert(naver_id_login.getProfileData('age'));
-  }
-</script>
+	 
 	
 </body>
 </html>
