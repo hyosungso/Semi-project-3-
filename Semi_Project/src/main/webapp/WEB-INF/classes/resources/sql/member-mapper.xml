@@ -12,25 +12,26 @@
 
 
 
-<entry key="insertMember">
-	INSERT INTO MEMBER(USER_NO
-						,USER_ID
-						,USER_PWD
-						,USER_NAME
-						,GENDER
-						,NICKNAME
-						,EMAIL
-						,PHONE
-						)
-						VALUES(SEQ_UNO.NEXTVAL
-						,?
-						,?
-						,?
-						,?
-						,?
-						,?
-						,?)
+	<entry key="insertMember">
+		INSERT INTO MEMBER(USER_NO
+							,USER_ID
+							,USER_PWD
+							,USER_NAME
+							,GENDER
+							,NICKNAME
+							,EMAIL
+							,PHONE
+							)
+							VALUES(SEQ_UNO.NEXTVAL
+							,?
+							,?
+							,?
+							,?
+							,?
+							,?
+							,?)
 	</entry>
+	
 	<entry key="checkId">
 		SELECT *
 		FROM MEMBER

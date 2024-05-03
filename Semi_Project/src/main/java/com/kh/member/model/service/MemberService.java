@@ -57,6 +57,6 @@ public Member loginMember(String userId, String userPwd) {
 		
 	}
 
-	//ㅎ
+	
 	
 }
