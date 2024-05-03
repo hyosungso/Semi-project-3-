@@ -137,6 +137,7 @@ width:100%;
 				bno : ${b.boardNo}
 			},
 			success : function(list){
+				//기존에있던 댓글을 지우고 다시 조회
 				$(".reply-list tbody").children().remove();
 				var tr="";
 				for(var i in list) {
