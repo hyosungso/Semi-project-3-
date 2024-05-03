@@ -15,6 +15,7 @@ public class Member {
 	private Date enrollDate;
 	private Date modifyDate;
 	private String status;
+	private String authCode;
 	
 	public Member() {
 		super();
@@ -39,7 +40,7 @@ public class Member {
 
 
 	public Member(int userNo, String userId, String userPwd, String userName, String gender, String nickName,
-			String email, String phone, Date enrollDate, Date modifyDate, String status) {
+			String email, String phone, Date enrollDate, Date modifyDate, String status, String authCode) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -52,6 +53,15 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.status = status;
+		this.authCode = authCode;
+	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
 	}
 
 	public int getUserNo() {
