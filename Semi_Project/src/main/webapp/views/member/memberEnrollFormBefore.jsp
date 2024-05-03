@@ -100,9 +100,9 @@
             <p>...</p>
             <p>...</p>
         </div>
-        <div class="checkbox">
+        <div class="checkbox" >
             <label for="agree">
-                <input type="checkbox" id="agree" name="agree">
+                <input type="checkbox" id="agree" name="agree" required>
                 위 이용약관에 동의합니다.
             </label>
         </div>
