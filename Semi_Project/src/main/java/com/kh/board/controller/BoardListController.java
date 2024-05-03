@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Category;
 import com.kh.common.model.vo.PageInfo;
 
 /**
@@ -46,11 +47,10 @@ public class BoardListController extends HttpServlet {
 		//카테고리 선택에 따라 현재 게시글 개수 조회하기(0이면 구분없이,0이 아니면 해당하는 카테고리만)
 		if(category.equals("0")) {
 			listCount=new BoardService().listCount();
-
 		} else {
 			listCount=new BoardService().listCount(category);
-
 		}
+		
 		
 		//currentPage 현재페이지 정보
 		currentPage=Integer.parseInt(request.getParameter("currentPage"));
@@ -60,7 +60,7 @@ public class BoardListController extends HttpServlet {
 		//페이지 하단에 보여질 페이징바 최대개수
 		pageLimit=10;
 		//한페이지에서 보여줄 게시글 개수
-		boardLimit=10;
+		boardLimit=20;
 		
 		maxPage=(int)(Math.ceil((double)listCount/boardLimit));
 		//listCount,boardLimit 둘다 int이기 때문에 소수점을 살리기 위해서는 둘중 하나에 double형변환을 건다.
@@ -86,12 +86,14 @@ public class BoardListController extends HttpServlet {
 		} else {
 			bList=new BoardService().selectList(pi,category);
 		}
-		for(Board b : bList) {
-			System.out.println(b);
-		}
+		
+		ArrayList<Category> ctList=new BoardService().selectCategory();
+
 
 		//자유게시판으로 넘기기
 		request.setAttribute("bList", bList);
+		request.setAttribute("ctList", ctList);
+		request.setAttribute("category", category);
 		request.getRequestDispatcher("/views/board/boardListView.jsp").forward(request, response);
 	}
 

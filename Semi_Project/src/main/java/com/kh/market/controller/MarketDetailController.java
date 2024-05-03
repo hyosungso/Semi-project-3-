@@ -1,7 +1,6 @@
 package com.kh.market.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.kh.market.model.service.MarketService;
 import com.kh.market.model.vo.Item;
 
 /**
- * Servlet implementation class MarketListController
+ * Servlet implementation class MarketDetailController
  */
-@WebServlet("/list.mk")
-public class MarketListController extends HttpServlet {
+@WebServlet("/detail.mk")
+public class MarketDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MarketListController() {
+    public MarketDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +30,14 @@ public class MarketListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int itemNo=Integer.parseInt(request.getParameter("itno"));
 		
-		ArrayList<Item> list = new MarketService().selectItemList();
+		Item t= new MarketService().selectItem(itemNo);
 		
-		request.setAttribute("list", list);
+		request.setAttribute("item", t );
 		
-		request.getRequestDispatcher("views/market/marketListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/market/marketDetailView.jsp").forward(request, response);
+	
 	}
 
 	/**

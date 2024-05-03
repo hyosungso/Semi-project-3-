@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	//로그인 정보 추출하기 
@@ -27,22 +28,23 @@
     <style>
         .header{
             position: relative;
-            width: 100%;
+            width: 80%;
+            margin : auto;
             z-index: 20;
             background-color: #fff;
         }
         .header-inner{
             
         position: relative;
-        max-width: 1100px;
-        min-height: 120px;
+        max-width: 1300px;
+        min-height: 130px;
         margin: 0 auto;
 
         }
         .util{
             position: absolute;
-            top: 10px;
-            right: 100px;
+            top: 0px;
+           	right: 5%;
         }
         .util>ul{
           
@@ -79,6 +81,8 @@
         }
 
         .nav-area{
+        	margin:auto;
+        	width:1300PX;
             background-color: black;
         }
         .menu{
@@ -129,7 +133,7 @@
        	.outer{
             background-color: black;
             color: white;
-            width: 1000px;
+            width: 1300px;
             margin: auto; /*가운데 자동정렬*/
             margin-top: 50px; /*위로부터 50px 여백*/
 
@@ -147,14 +151,18 @@
        
         <div class="header-inner">
             <div class="logo">
-                <a href="${contextPath }"><img src="${contextPath}/resources/temp.png"></a>
+                <a href="${contextPath }"><img src="${contextPath}/resources/logo/temp.png"></a>
             </div>
 
 
             </div>
             <div class="util"><ul>
-                <li><a href="login.me">로그인</a></li>
-                <li><a href="enrollFormBefore.me">회원가입</a></li>
+
+             
+
+             <li><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
+             <li><a href="enrollFormBefore.me">회원가입</a></li>
+
             </ul>
             </div>
         </div>
