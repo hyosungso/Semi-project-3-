@@ -69,7 +69,8 @@ public class MemberDao {
 							  ,rset.getString("PHONE")
 							  ,rset.getDate("ENROLL_DATE")
 							  ,rset.getDate("MODIFY_DATE")
-							  ,rset.getString("STATUS"));
+							  ,rset.getString("STATUS")
+							  ,rset.getString("AUTH_CODE"));
 			}
 			
 			

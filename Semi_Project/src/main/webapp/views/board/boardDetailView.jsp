@@ -67,5 +67,17 @@ width:90%;
 		}
 	}
 	</script>
+	<br>
+	<div class="reply-area">
+	<table border="1">
+	<thead>
+		<tr>
+		<th>작성자</th>
+		<th>댓글내용</th>
+		</tr>
+	</thead>
+	<tbody></tbody>
+	</table>
+	</div>
 </body>
 </html>

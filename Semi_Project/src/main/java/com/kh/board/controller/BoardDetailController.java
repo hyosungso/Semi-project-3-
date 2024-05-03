@@ -39,7 +39,7 @@ public class BoardDetailController extends HttpServlet {
 		request.setAttribute("b", b);
 		} else {
 			request.getSession().setAttribute("alertMsg", "게시판 접근에 실패했습니다.");
-			response.sendRedirect("/");
+			response.sendRedirect(request.getHeader("referer"));
 		}
 		
 		request.getRequestDispatcher("/views/board/boardDetailView.jsp").forward(request, response);
