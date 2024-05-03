@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.model.vo.Category;
 import com.kh.common.JDBCTemplate;
 import com.kh.market.model.vo.Item;
 
@@ -88,6 +89,55 @@ public class MarketDao {
 		
 		
 		return i;
+	}
+
+	public int newItemCode(Connection conn) {
+		ResultSet rset=null;
+		Statement stmt=null;
+		int result=0;
+		String sql=prop.getProperty("newItemCode");
+		
+	   try {
+		stmt=conn.createStatement();
+		rset=stmt.executeQuery(sql);
+		
+		if(rset!=null) {
+			result=rset.getInt("NITEM_CODE");
+		}
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		JDBCTemplate.close(rset);
+		JDBCTemplate.close(stmt);
+	}
+		
+		return result;
+	}
+
+	public ArrayList<Category> selectCategory(Connection conn) {
+		ResultSet rset=null;
+		Statement stmt=null;
+		ArrayList<Category> cList=new ArrayList<>();
+		String sql = prop.getProperty("selectCategory");
+		
+		try {
+			stmt=conn.createStatement();
+			rset=stmt.executeQuery(sql);
+			while(rset.next()) {
+				cList.add(
+						new Category(
+								rset.getInt("CATEGORY_NO")
+								,rset.getString("CATEGORY_NAME")));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return cList;
 	}
 
 }
