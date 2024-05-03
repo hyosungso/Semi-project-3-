@@ -197,7 +197,7 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		
 		String sql=prop.getProperty("selectBoard");
-		String sql2=prop.getProperty("selectNickname");
+		String sql2=prop.getProperty("selectNickName");
 		Board b=null;
 		try {
 			pstmt=conn.prepareStatement(sql);

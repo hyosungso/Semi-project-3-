@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.detail-area{
+.detail-area,.reply-area{
 width:80%;
 height:600px;
 margin:auto;
