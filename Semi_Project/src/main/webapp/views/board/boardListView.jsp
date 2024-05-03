@@ -29,9 +29,7 @@
 	background-color:lightgrey;
 	cursor:pointer;
 	}
-	.board{
-	height:400px;
-	}
+
 	.ctSelected{
 	background-color:blue;
 	color:white;
@@ -118,10 +116,27 @@
 	});
 	</script>
 	<!-- 검색창도 이 구역에서 만들예정 -->
+	<br>
 	<div class="paging" align="center">
-	<button>이전</button>
-	<button>1</button>
-	<button>다음</button>
+	<c:choose>
+		<c:when test="${pi.currentPage eq 1}">
+			<button disabled>이전</button>
+		</c:when>
+		<c:otherwise>
+			<button onclick="location.href='board.bo?currentPage=${pi.currentPage-1}&category=${category}'">이전</button>
+		</c:otherwise>
+	</c:choose>
+		<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
+			<button onclick="location.href='board.bo?currentPage=${i}&category=${category}'">${i}</button>
+		</c:forEach>
+	<c:choose>
+		<c:when test="${pi.currentPage eq pi.maxPage}">
+			<button disabled>다음</button>
+		</c:when>
+		<c:otherwise>
+			<button onclick="location.href='board.bo?currentPage=${pi.currentPage+1}&category=${category}'">다음</button>
+		</c:otherwise>
+	</c:choose>
 	</div>
 </body>
 </html>
