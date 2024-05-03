@@ -157,7 +157,7 @@
 
             </div>
             <div class="util"><ul>
-                <li><a href="login.me">로그인</a></li>
+                <li><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
                 <li>| <a href="enrollForm.me">회원가입</a></li>
             </ul>
             </div>
