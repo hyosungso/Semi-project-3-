@@ -88,8 +88,9 @@
 				
 				$.ajax({
 					url : "idCheck.me",
+					type : "post",
 					data : {
-						inputId : inputId
+						inputId : $("#userId").val()
 					},
 					success : function(result){
 						//result가 NNNNN 또는 NNNNY로 반환됨 
