@@ -3,6 +3,7 @@ package com.kh.market.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.board.model.vo.Category;
 import com.kh.common.JDBCTemplate;
 import com.kh.market.model.dao.MarketDao;
 import com.kh.market.model.vo.Item;
@@ -26,6 +27,22 @@ public class MarketService {
 		JDBCTemplate.close(conn);
 				
 		return itme;
+	}
+
+	public int newItemCode() {
+		Connection conn=JDBCTemplate.getConnection();
+		int itemCode= new MarketDao().newItemCode(conn);
+		
+		JDBCTemplate.commit(conn);
+		return itemCode;
+	}
+
+	public ArrayList<Category> selectCategory() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Category> cLsit=new MarketDao().selectCategory(conn);
+		
+		JDBCTemplate.close(conn);
+		return cLsit;
 	}
 
 }
