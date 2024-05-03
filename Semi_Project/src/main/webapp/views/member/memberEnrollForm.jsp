@@ -46,11 +46,8 @@
 				</tr>
 
 				<tr>
-					<td>성별</td>
-					<td>
-						<input type="checkbox" name="gender">남   
-						<input type="checkbox" name="gender">여
-					</td>
+					<td>성별 (F/M) </td>
+					<td><input type="text" name="gender" required></td>
 				</tr>
 
 				<tr>
@@ -60,7 +57,7 @@
 
 				<tr>
 					<td>이메일</td>
-					<td><input type="text" name="email"></td>
+					<td><input type="email" name="email"></td>
 				</tr>
 
 				<tr>

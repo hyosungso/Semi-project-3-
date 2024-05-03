@@ -30,6 +30,13 @@
 		<h2 align="center">판매 상품</h2>
 		<br>
 		<div class="list-area">
+<%-- 		<c:if test="${not empty loginUser && loginUser.status eq 'admin' }"> --%>
+		<div align="center">
+			<button class='btn btn-info' onclick="location.href='${contextPath}/insert.mk'">상품등록</button>
+		</div>
+<%-- 		</c:if> --%>
+		
+		
 		<c:forEach var="it" items="${list }">
 			<div class="itemImg" align="center" onclick="location.href='${contextPath }/detail.mk?itno=${it.itemCode }'">
 			<img src="<%=contextPath%>/resources/marketImg/${it.itemCode}.jpg" width="200px" height="150px">
