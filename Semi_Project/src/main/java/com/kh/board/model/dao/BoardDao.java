@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Category;
+import com.kh.board.model.vo.Reply;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 
@@ -307,6 +308,67 @@ public class BoardDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public int insertReply(Connection conn, Reply re) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("insertReply");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, re.getRefBno());
+			pstmt.setInt(2, Integer.parseInt(re.getReplyWriter()));
+			pstmt.setString(3, re.getReplyContent());
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Reply> selectReply(Connection conn, int bno) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("selectReply");
+		String sql2=prop.getProperty("selectNickName");
+		ArrayList<Reply> rList=new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				//REPLY_NO,USER_ID,REPLY_CONTENT,CREATE_DATE
+				rList.add(new Reply(rset.getInt("REPLY_NO"),
+									rset.getString("USER_ID"),
+									rset.getString("REPLY_CONTENT"),
+									rset.getDate("CREATE_DATE")));
+			}
+			//닉네임이 있으면 아이디 대신 닉네임 출력
+			for(Reply r : rList) {
+				pstmt=conn.prepareStatement(sql2);
+				pstmt.setString(1, r.getReplyWriter());
+				rset=pstmt.executeQuery();
+				if(rset.next()) {
+					r.setReplyWriter(rset.getString("NICKNAME"));
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return rList;
 	}
 	
 	
