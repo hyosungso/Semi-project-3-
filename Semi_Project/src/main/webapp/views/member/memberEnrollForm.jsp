@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
-<%
-	
-String contextPath = request.getContextPath();
 
-%>
 
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,15 +61,6 @@ String contextPath = request.getContextPath();
 				<tr>
 					<td>이메일</td>
 					<td><input type="text" name="email"></td>
-					<td><select>
-							<option>gmail.com</option>
-							<option>naver.com</option>
-							<option>daum.net</option>
-							<option>hanmail.com</option>
-							<option>hotmail.com</option>
-							<option>nate.com</option>
-						</select>
-					</td>
 				</tr>
 
 				<tr>
@@ -91,7 +75,7 @@ String contextPath = request.getContextPath();
 			<br> <br>
 
 			<div align="center">
-				<button type="submit" >회원가입</button>
+				<button type="submit">회원가입</button>
 				<button type="reset">초기화</button>
 			</div>
 		</form>
@@ -103,26 +87,29 @@ String contextPath = request.getContextPath();
 				
 				
 				$.ajax({
-					  url: "checkId.me",
-					  data: {
-						 	inputId : inputId
-					  },
-					  success: function(result) {
-					    if (result == "NNNNN") {
-					      alert("다른 아이디를 사용해주세요.");
-					    } else {
-					      if (confirm("정말 사용하시겠습니까?")) {
-					        $("#enroll-form:submit").removeAttr("disabled"); // 비동기 방식으로 submit 이벤트 발생
-					      	$("#userId").attr("readonly",true);
-					      } else {
-					        $("#userId").focus();
-					      }
-					    }
-					  },
-					  error: function() {
-					    console.log("통신실패");
-					  }
-					});
+					url : "idCheck.me",
+					data : {
+						inputId : inputId
+					},
+					success : function(result){
+						//result가 NNNNN 또는 NNNNY로 반환됨 
+						if(result=="NNNNN"){ //사용불가
+							alert("이미 존재하는 아이디입니다.");
+						}else{ //사용가능
+							if(confirm("정말 사용하시겠습니까?")){ //사용
+								$("#enroll-form :submit").removeAttr("disabled"); //비활성화제거
+								$("#userId").attr("readonly",true); //아이디 수정못하도록 변경
+								
+							}else{ //사용안함 
+								//다시 입력유도
+								$("#userId").focus();
+							}
+						}
+					},
+					error : function(){
+						console.log("통신실패");
+					}
+				});
 				
 				
 				

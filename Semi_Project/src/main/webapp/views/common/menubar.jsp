@@ -154,7 +154,7 @@
             </div>
             <div class="util"><ul>
                 <li><a href="login.me">로그인</a></li>
-                <li>| <a href="enrollForm.me">회원가입</a></li>
+                <li><a href="enrollFormBefore.me">회원가입</a></li>
             </ul>
             </div>
         </div>
