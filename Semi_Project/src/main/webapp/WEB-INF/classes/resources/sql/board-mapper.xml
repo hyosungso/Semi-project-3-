@@ -4,10 +4,12 @@
 	<!-- ByCategory : 없으면 board테이블 전체,있으면 해당 카테고리에 대해서만 select 실행 -->
 	<entry key="listCount">
 		SELECT COUNT(*) COUNT FROM BOARD
+		WHERE STATUS='Y'
 	</entry>
 	<entry key="listCountByCategory">
 		SELECT COUNT(*) COUNT FROM BOARD
 		WHERE CATEGORY_NO=?
+		AND STATUS='Y'
 	</entry>
 	<entry key="selectList">
 		SELECT * FROM (
@@ -16,6 +18,7 @@
 		FROM BOARD
 		JOIN CATEGORY USING(CATEGORY_NO)
 		JOIN MEMBER ON(BOARD_WRITER=USER_NO)
+		WHERE BOARD.STATUS='Y'
 		ORDER BY UPLOAD_DATE DESC) S)
 		WHERE "ROWNUM" BETWEEN ? AND ?
 	</entry>
@@ -27,6 +30,7 @@
 		JOIN CATEGORY USING(CATEGORY_NO)
 		JOIN MEMBER ON(BOARD_WRITER=USER_NO)
 		WHERE CATEGORY_NO=?
+		AND BOARD.STATUS='Y'
 		ORDER BY UPLOAD_DATE DESC) S)
 		WHERE "ROWNUM" BETWEEN ? AND ?
 	</entry>
@@ -90,6 +94,12 @@
 		SET BOARD_TITLE=?,
 			BOARD_CONTENT=?,
 			CATEGORY_NO=?,
+			REVISE_DATE=SYSDATE
+		WHERE BOARD_NO=?
+	</entry>
+	<entry key="deleteBoard">
+		UPDATE BOARD
+		SET STATUS='N',
 			REVISE_DATE=SYSDATE
 		WHERE BOARD_NO=?
 	</entry>

@@ -140,4 +140,16 @@ public class BoardService {
 		return result;
 	}
 
+	public int deleteBoard(int bno) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().deleteBoard(conn,bno);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

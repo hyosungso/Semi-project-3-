@@ -50,7 +50,9 @@
 	</div>
 	<script>
 	function deleteBoard(){
-		confirm("정말로 삭제하시겠습니까?");
+		if(confirm("정말로 삭제하시겠습니까?")){
+			location.href="${contextPath}/delete.bo?bno=${b.boardNo}";
+		}
 	}
 	</script>
 </body>
