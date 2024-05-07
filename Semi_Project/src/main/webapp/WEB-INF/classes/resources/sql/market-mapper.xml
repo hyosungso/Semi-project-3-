@@ -50,7 +50,7 @@
 									?,
 									?,
 									?,0,'Y',
-									?);
+									?)
 	</entry>
 	<entry key="insertItemAttachment">
 	INSERT INTO ITEM_ATTACHMENT(FILE_CODE,

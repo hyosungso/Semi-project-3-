@@ -102,7 +102,7 @@ public class MarketDao {
 		stmt=conn.createStatement();
 		rset=stmt.executeQuery(sql);
 		
-		if(rset!=null) {
+		if(rset.next()) {
 			result=rset.getInt("NITEM_CODE");
 		}
 		
@@ -171,8 +171,8 @@ public class MarketDao {
 		PreparedStatement pstmt=null;
 		String sql=prop.getProperty("insertItemAttachment");
 		try {
-		for(ItemAttachment it : itList) {
-			
+		
+			for(ItemAttachment it : itList) {
 				pstmt=conn.prepareStatement(sql);
 				pstmt.setInt(1, itemCode);
 				pstmt.setString(2, it.getOriginName());

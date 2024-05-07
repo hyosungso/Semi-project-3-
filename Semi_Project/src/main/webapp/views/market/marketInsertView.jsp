@@ -65,7 +65,7 @@
 				<th>상품명 : <input type=text name="productName" required></input></th>
 			</tr>
 			<tr>
-				<th> 카테고리 : <select>
+				<th> 카테고리 : <select name="category">
 					<c:forEach items="${cList }" var="cList">
 					<option value="${cList.categoryNo}">${cList.categoryName}</option>
 					</c:forEach>

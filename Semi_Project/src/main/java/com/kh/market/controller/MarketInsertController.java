@@ -57,7 +57,7 @@ public class MarketInsertController extends HttpServlet {
 			int maxSize=10*1024*1024;
 			String savePath= request.getSession()
 									.getServletContext()
-									.getRealPath("resources/marketing/");
+									.getRealPath("resources/marketImg/");
 			MultipartRequest multiRequest =new MultipartRequest(request,
 																savePath,
 																maxSize,
