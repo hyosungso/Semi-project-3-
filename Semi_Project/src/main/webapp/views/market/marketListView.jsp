@@ -39,7 +39,7 @@
 		
 		<c:forEach var="it" items="${list }">
 			<div class="itemImg" align="center" onclick="location.href='${contextPath }/detail.mk?itno=${it.itemCode }'">
-			<img src="<%=contextPath%>/resources/marketImg/${it.itemCode}.jpg" width="200px" height="150px">
+			<img src="<%=contextPath%>${it.thumbnailImg}" width="200px" height="150px">
 		<p>
 			${it.itemName } ${it.categoryName } <br>
 			<fmt:formatNumber type="number" maxFractionDigits="3" value="${it.price }" />원

@@ -6,10 +6,13 @@
 	SELECT ITEM_CODE,
 		   CATEGORY_NAME,
 		   PRICE,
-		   ITEM_NAME
+		   ITEM_NAME,
+		   FILE_PATH || CHANGE_NAME THUMBNAIL
 	FROM ITEM I
 	JOIN ITEM_CATEGORY USING (CATEGORY_NO)
-	WHERE STATUS='Y'
+	JOIN ITEM_ATTACHMENT ON (ITEM_CODE = REF_CODE)
+	WHERE I.STATUS='Y'
+	AND FILE_LEVEL=1
 	ORDER BY SALES_VOL DESC
 		   
 	</entry>
@@ -46,7 +49,7 @@
 									SALES_VOL,
 									STATUS,
 									ITEM_DETAIL) 
-							values (?,
+							values (SEQ_INO.NEXTVAL,
 									?,
 									?,
 									?,0,'Y',

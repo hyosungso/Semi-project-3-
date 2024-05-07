@@ -53,6 +53,8 @@ public class MarketService {
 		
 		int result2= new MarketDao().insertItemAttachment(conn,itList,itemCode);
 		
+		
+		
 		if(result*result2>0) {
 			JDBCTemplate.commit(conn);
 		}else {

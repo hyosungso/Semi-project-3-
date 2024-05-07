@@ -57,7 +57,7 @@ public class MarketInsertController extends HttpServlet {
 			int maxSize=10*1024*1024;
 			String savePath= request.getSession()
 									.getServletContext()
-									.getRealPath("resources/marketImg/");
+									.getRealPath("/resources/marketImg/");
 			MultipartRequest multiRequest =new MultipartRequest(request,
 																savePath,
 																maxSize,
@@ -68,9 +68,9 @@ public class MarketInsertController extends HttpServlet {
 			int category=Integer.parseInt(multiRequest.getParameter("category"));
 			int price=Integer.parseInt(multiRequest.getParameter("price"));
 			String itemDetail=multiRequest.getParameter("itemDetail");
-			int salseVol =0;
+		
 			
-			int fileCount = Integer.parseInt(multiRequest.getParameter("count"));
+			int fileCount = Integer.parseInt(multiRequest.getParameter("count"))-1;
 			
 			Item i= new Item();
 			i.setItemCode(itemCode);
@@ -79,17 +79,18 @@ public class MarketInsertController extends HttpServlet {
 			i.setCategory(category);
 			i.setPrice(price);
 			i.setItemDetail(itemDetail);
-			i.setSalesVol(salseVol);
+			
 			
 			ArrayList<ItemAttachment> itList=new ArrayList<>();
 			
 			for(int j=1; j<=fileCount; j++) {
-				String key="file"+j;
+				String key="itemImg"+j;
 				if(multiRequest.getOriginalFileName(key)!=null) {
 					ItemAttachment it=new ItemAttachment();
 					it.setOriginName(multiRequest.getOriginalFileName(key));
 					it.setChangeName(multiRequest.getFilesystemName(key));
 					it.setFilePath("/resources/marketImg/");
+					
 					
 					if(j==1) {
 						it.setFileLev(1);
@@ -98,6 +99,7 @@ public class MarketInsertController extends HttpServlet {
 					}
 					
 					itList.add(it);
+					
 				}
 			}
 			

@@ -43,7 +43,8 @@ public class MarketDao {
 				list.add(new Item(rset.getInt("ITEM_CODE"),
 						rset.getString("CATEGORY_NAME"),
 						rset.getInt("PRICE"),
-						rset.getString("ITEM_NAME")
+						rset.getString("ITEM_NAME"),
+						rset.getString("THUMBNAIL")
 						));
 				
 			}
@@ -148,11 +149,10 @@ public class MarketDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, i.getItemCode());
-			pstmt.setInt(2, i.getCategory());
-			pstmt.setString(3, i.getItemName());
-			pstmt.setInt(4, i.getPrice());
-			pstmt.setString(5, i.getItemDetail());
+			pstmt.setInt(1, i.getCategory());
+			pstmt.setString(2, i.getItemName());
+			pstmt.setInt(3, i.getPrice());
+			pstmt.setString(4, i.getItemDetail());
 			
 			result= pstmt.executeUpdate();
 			
@@ -180,7 +180,9 @@ public class MarketDao {
 				pstmt.setString(4, it.getFilePath());
 				pstmt.setInt(5, it.getFileLev());
 				
+				
 				result *=pstmt.executeUpdate();
+				
 			
 		}
 		} catch (SQLException e) {
