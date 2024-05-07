@@ -80,11 +80,13 @@ public class BoardListController extends HttpServlet {
 		//페이지 관련 데이터들을 객체에 담기
 		PageInfo pi=new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
 		
+		String sort=request.getParameter("sort");
+		
 		ArrayList<Board> bList=new ArrayList<>();
 		if(category.equals("0")) {
-			bList=new BoardService().selectList(pi);
+			bList=new BoardService().selectList(pi,sort);
 		} else {
-			bList=new BoardService().selectList(pi,category);
+			bList=new BoardService().selectList(pi,category,sort);
 		}
 		
 		ArrayList<Category> ctList=new BoardService().selectCategory();
@@ -94,6 +96,7 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("bList", bList);
 		request.setAttribute("ctList", ctList);
 		request.setAttribute("category", category);
+		request.setAttribute("sort", sort);
 		request.setAttribute("pi", pi);
 		request.getRequestDispatcher("/views/board/boardListView.jsp").forward(request, response);
 	}

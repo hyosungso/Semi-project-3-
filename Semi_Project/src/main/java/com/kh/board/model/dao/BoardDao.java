@@ -77,11 +77,23 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi, String sort) {
 		ResultSet rset=null;
 		PreparedStatement pstmt=null;
 		
-		String sql=prop.getProperty("selectList");
+		String sql="";
+		switch(sort) {
+		case "latest":
+			sql=prop.getProperty("selectList");
+			break;
+		case "view":
+			sql=prop.getProperty("selectListSortbyView");
+			break;
+		case "recommend":
+			sql=prop.getProperty("selectListSortbyRecommend");
+			break;
+		}
+		
 		String sql2=prop.getProperty("selectNickName");
 		ArrayList<Board> bList=new ArrayList<>();
 		
@@ -123,12 +135,22 @@ public class BoardDao {
 		return bList;
 	}
 
-	public ArrayList<Board> selectList(Connection conn, PageInfo pi, String category) {
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi, String category, String sort) {
 		ResultSet rset=null;
 		PreparedStatement pstmt=null;
 		
-		
-		String sql=prop.getProperty("selectListByCategory");
+		String sql="";
+		switch(sort) {
+		case "latest":
+			sql=prop.getProperty("selectListByCategory");
+			break;
+		case "view":
+			sql=prop.getProperty("selectListByCategorySortbyView");
+			break;
+		case "recommend":
+			sql=prop.getProperty("selectListByCategorySortbyRecommend");
+			break;
+		}
 		String sql2=prop.getProperty("selectNickName");
 		ArrayList<Board> bList=new ArrayList<>();
 		

@@ -30,18 +30,18 @@ public class BoardService {
 	}
 	
 	//게시판 출력
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Board> selectList(PageInfo pi, String sort) {
 		Connection conn=JDBCTemplate.getConnection();
-		ArrayList<Board> bList=new BoardDao().selectList(conn,pi);
+		ArrayList<Board> bList=new BoardDao().selectList(conn,pi,sort);
 		
 		JDBCTemplate.close(conn);
 		return bList;
 	}
 
 	//카테고리별 게시판 출력
-	public ArrayList<Board> selectList(PageInfo pi, String category) {
+	public ArrayList<Board> selectList(PageInfo pi, String category, String sort) {
 		Connection conn=JDBCTemplate.getConnection();
-		ArrayList<Board> bList=new BoardDao().selectList(conn,pi,category);
+		ArrayList<Board> bList=new BoardDao().selectList(conn,pi,category,sort);
 		
 		JDBCTemplate.close(conn);
 		return bList;
