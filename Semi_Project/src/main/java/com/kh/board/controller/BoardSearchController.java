@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Reply;
+import com.kh.board.model.vo.Board;
 
 /**
- * Servlet implementation class ReplyListController
+ * Servlet implementation class BoardSearchController
  */
-@WebServlet("/reply.bo")
-public class ReplyListController extends HttpServlet {
+@WebServlet("/search.bo")
+public class BoardSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReplyListController() {
+    public BoardSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +31,29 @@ public class ReplyListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno=Integer.parseInt(request.getParameter("bno"));
+		String keyword=request.getParameter("search");
+		String category=request.getParameter("searchCategory");
 		
-		ArrayList<Reply> rList=new BoardService().selectReply(bno);
+		ArrayList<Board> bList=new ArrayList<>();
+		BoardService bs=new BoardService();
+		/*switch(category) {
+		case "title":
+			bList=bs.searchBoardByTitle(keyword);
+			break;
+		case "content":
+			bList=bs.searchBoardByContent(keyword);
+			break;
+		case "writer":
+			bList=bs.searchBoardByWriter(keyword);
+			break;
+		}*/
+		bList=bs.searchBoard(keyword,category);
+		request.setAttribute("bList", bList);
+		request.setAttribute("keyword", keyword);
 		
+
 		
-		response.setContentType("json/application;charset=UTF-8");
-		//GSON으로 댓글 리스트 넘겨주기
-		new Gson().toJson(rList, response.getWriter());
+		request.getRequestDispatcher("/views/board/boardSearchView.jsp").forward(request, response);
 		
 	}
 

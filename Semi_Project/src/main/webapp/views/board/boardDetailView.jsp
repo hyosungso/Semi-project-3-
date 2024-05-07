@@ -33,23 +33,31 @@ width:100%;
 	<tr>
 		<th width="10%">작성자</th>
 		<th width="15%">${b.boardWriter}</th>
-		<th width="45%" style="text-align:center">${b.reviseDate }</th>
+		<th width="15%">최종수정일</th>
+		<th width="30%" style="text-align:center">${b.reviseDate }</th>
 		<th width="10%">조회수</th>
 		<th width="5%">${b.count }</th>
 		<th width="10%">추천수</th>
 		<th width="5%">${b.recommend }</th>
 	</tr>
 	<tr>
-		<th colspan="7" style="text-align:left">${b.boardTitle }</th>
+		<th colspan="8" style="text-align:left">${b.boardTitle }</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr>
-	<td colspan="7"><p>${b.boardContent}</p></td>
+	<td colspan="8"><p>${b.boardContent}</p></td>
 	</tr>
 	<tr>
-	<td colspan="7" style="text-align:center"><button onclick="increaseRC();">추천</button></td>
+	<td colspan="8" style="text-align:center"><button onclick="increaseRC();">추천</button></td>
 	</tr>
+	<!-- 로그인 상태 확인 and 로그인유저 아이디/닉네임이 글작성자와 동일 또는 권한코드가 'ADMIN'인경우 -->
+	<c:if test="${!empty loginUser and (loginUser.userId eq b.boardWriter or loginUser.nickName eq b.boardWriter or loginUser.authCode eq 'ADMIN') }">
+	<tr>
+	<td colspan="6"></td>
+	<td colspan="2" style="text-align:center" onclick="location.href='update.bo?bno=${b.boardNo}'"><button>글 수정하기</button></td>
+	</tr>
+	</c:if>
 	</tbody>
 	</table>
 	</div>
@@ -81,7 +89,7 @@ width:100%;
 		<tr>
 		<th width="75px">작성자</th>
 		<th>댓글내용</th>
-		<th width="100px">작성일</th>
+		<th width="120px">작성일</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -141,6 +149,7 @@ width:100%;
 				$(".reply-list tbody").children().remove();
 				var tr="";
 				for(var i in list) {
+					
 					tr +="<tr>"
 						+"<td>"+list[i].replyWriter+"</td>"
 						+"<td>"+list[i].replyContent+"</td>"

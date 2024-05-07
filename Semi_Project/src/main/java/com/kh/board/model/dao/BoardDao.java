@@ -3,6 +3,7 @@ package com.kh.board.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,11 +77,23 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Board> selectList(Connection conn, PageInfo pi) {
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi, String sort) {
 		ResultSet rset=null;
 		PreparedStatement pstmt=null;
 		
-		String sql=prop.getProperty("selectList");
+		String sql="";
+		switch(sort) {
+		case "latest":
+			sql=prop.getProperty("selectList");
+			break;
+		case "view":
+			sql=prop.getProperty("selectListSortbyView");
+			break;
+		case "recommend":
+			sql=prop.getProperty("selectListSortbyRecommend");
+			break;
+		}
+		
 		String sql2=prop.getProperty("selectNickName");
 		ArrayList<Board> bList=new ArrayList<>();
 		
@@ -106,7 +119,9 @@ public class BoardDao {
 				pstmt.setString(1, b.getBoardWriter());
 				rset=pstmt.executeQuery();
 				if(rset.next()) {
+					if(rset.getString("NICKNAME")!=null) {
 					b.setBoardWriter(rset.getString("NICKNAME"));
+					}
 				}
 			}	
 		} catch (SQLException e) {
@@ -120,13 +135,23 @@ public class BoardDao {
 		return bList;
 	}
 
-	public ArrayList<Board> selectList(Connection conn, PageInfo pi, String category) {
+	public ArrayList<Board> selectList(Connection conn, PageInfo pi, String category, String sort) {
 		ResultSet rset=null;
 		PreparedStatement pstmt=null;
 		
-		
-		String sql=prop.getProperty("selectListByCategory");
-		String sql2=prop.getProperty("selectNickname");
+		String sql="";
+		switch(sort) {
+		case "latest":
+			sql=prop.getProperty("selectListByCategory");
+			break;
+		case "view":
+			sql=prop.getProperty("selectListByCategorySortbyView");
+			break;
+		case "recommend":
+			sql=prop.getProperty("selectListByCategorySortbyRecommend");
+			break;
+		}
+		String sql2=prop.getProperty("selectNickName");
 		ArrayList<Board> bList=new ArrayList<>();
 		
 		int startRow=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1; 
@@ -154,7 +179,9 @@ public class BoardDao {
 				pstmt.setString(1, b.getBoardWriter());
 				rset=pstmt.executeQuery();
 				if(rset.next()) {
+					if(rset.getString("NICKNAME")!=null) {
 					b.setBoardWriter(rset.getString("NICKNAME"));
+					}
 				}
 			}	
 			
@@ -205,13 +232,14 @@ public class BoardDao {
 			pstmt.setInt(1, bno);
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
-				b=new Board(rset.getString("USER_ID"),
+				b=new Board(rset.getInt("BOARD_NO"),
+							rset.getString("USER_ID"),
 							rset.getString("BOARD_TITLE"),
 							rset.getString("BOARD_CONTENT"),
 							rset.getInt("COUNT"),
 							rset.getInt("RECOMMEND"),
-							rset.getDate("REVISE_DATE"));
-				b.setBoardNo(rset.getInt("BOARD_NO"));
+							rset.getDate("REVISE_DATE"),
+							rset.getString("CATEGORY_NAME"));
 				
 			}
 			
@@ -219,7 +247,9 @@ public class BoardDao {
 			pstmt.setString(1, b.getBoardWriter());
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
+				if(rset.getString("NICKNAME")!=null) {
 				b.setBoardWriter(rset.getString("NICKNAME"));
+				}
 			}
 				
 		} catch (SQLException e) {
@@ -356,7 +386,9 @@ public class BoardDao {
 				pstmt.setString(1, r.getReplyWriter());
 				rset=pstmt.executeQuery();
 				if(rset.next()) {
+					if(rset.getString("NICKNAME")!=null) {
 					r.setReplyWriter(rset.getString("NICKNAME"));
+					}
 				}
 			}
 			
@@ -369,6 +401,117 @@ public class BoardDao {
 		}
 		
 		return rList;
+	}
+
+	public int insertBoard(Connection conn, Board b) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("insertBoard");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBoardWriter());
+			pstmt.setString(2, b.getBoardTitle());
+			pstmt.setString(3, b.getBoardContent());
+			pstmt.setString(4, b.getCategory());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateBoard(Connection conn, Board b) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("updateBoard");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setString(3, b.getCategory());
+			pstmt.setInt(4, b.getBoardNo());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteBoard(Connection conn, int bno) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("deleteBoard");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Board> searchBoard(Connection conn, String keyword, String category) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		String sql=null;
+		
+		switch(category) {
+		case "title":
+			sql=prop.getProperty("searchBoardByTitle");
+			break;
+		case "content":
+			sql=prop.getProperty("searchBoardByContent");
+			break;
+		}
+		
+		ArrayList<Board> bList=new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				//BOARD_NO,USER_ID,BOARD_TITLE,BOARD_CONTENT,COUNT,RECOMMEND,REVISE_DATE,CATEGORY_NAME
+				bList.add(new Board(rset.getInt("BOARD_NO"),
+									rset.getString("CATEGORY_NAME"), 
+									rset.getString("BOARD_TITLE"), 
+									rset.getString("USER_ID"), 
+									rset.getInt("COUNT"), 
+									rset.getInt("RECOMMEND"), 
+									rset.getDate("REVISE_DATE")));
+			}
+			String sql2=prop.getProperty("selectNickName");
+			for(Board b : bList) {
+				pstmt=conn.prepareStatement(sql2);
+				pstmt.setString(1, b.getBoardWriter());
+				rset=pstmt.executeQuery();
+				if(rset.next()) {
+					if(rset.getString("NICKNAME")!=null) {
+					b.setBoardWriter(rset.getString("NICKNAME"));
+					}
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return bList;
 	}
 	
 	

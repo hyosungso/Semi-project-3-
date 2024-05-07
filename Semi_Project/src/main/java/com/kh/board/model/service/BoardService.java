@@ -30,18 +30,18 @@ public class BoardService {
 	}
 	
 	//게시판 출력
-	public ArrayList<Board> selectList(PageInfo pi) {
+	public ArrayList<Board> selectList(PageInfo pi, String sort) {
 		Connection conn=JDBCTemplate.getConnection();
-		ArrayList<Board> bList=new BoardDao().selectList(conn,pi);
+		ArrayList<Board> bList=new BoardDao().selectList(conn,pi,sort);
 		
 		JDBCTemplate.close(conn);
 		return bList;
 	}
 
 	//카테고리별 게시판 출력
-	public ArrayList<Board> selectList(PageInfo pi, String category) {
+	public ArrayList<Board> selectList(PageInfo pi, String category, String sort) {
 		Connection conn=JDBCTemplate.getConnection();
-		ArrayList<Board> bList=new BoardDao().selectList(conn,pi,category);
+		ArrayList<Board> bList=new BoardDao().selectList(conn,pi,category,sort);
 		
 		JDBCTemplate.close(conn);
 		return bList;
@@ -114,6 +114,50 @@ public class BoardService {
 		
 		JDBCTemplate.close(conn);
 		return rList;
+	}
+
+	public int insertBoard(Board b) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().insertBoard(conn,b);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateBoard(Board b) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().updateBoard(conn,b);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteBoard(int bno) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().deleteBoard(conn,bno);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Board> searchBoard(String keyword, String category) {
+		Connection conn=JDBCTemplate.getConnection();
+		ArrayList<Board> bList=new BoardDao().searchBoard(conn,keyword,category);
+		
+		JDBCTemplate.close(conn);
+		return bList;
 	}
 
 }
