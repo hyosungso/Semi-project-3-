@@ -10,8 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script> <!-- 슬라이드 지원 -->
+
 
 
 <style>
@@ -19,9 +18,22 @@
 		margin : auto;
 		width : 700px;
 	}
-	
-</style>
+	.container{
+		width: 900px;
+		height : 500px;
+		transition : transform 0.5s;
+	}
+	.inner{
+		width: 450px;
+		height : 500px;
+		float : left;
+	}
+	.inner img{
+			width: 100%;
+			height : 100%;
+	}
 
+</style>
 </head>
 <body>
 	
@@ -34,8 +46,21 @@
 		<form action="${contextPath }/insert.mk" method="post" enctype="multipart/form-data" id="insert-form"> 
 		<table align="center" border="1">
 			<tr>
-				<td rowspan=4>
-				 <img id="productImg" width="450px" height="500px">
+				<td rowspan='4'>
+				
+			<div style="width : 450px; height : 500px; overflow : hidden">
+				<div class="container" id="imgContainer">
+					<div class="inner">
+						<img id="productImg1">
+					</div>
+					
+				</div>
+			</div>
+			<div id="pagination">
+			<button type="button" class="버튼1" onclick="movePage(1)">1</button>
+			</div>
+			
+			 
 				</td>
 				<th>상품명 : <input type=text name="productName" required></input></th>
 			</tr>
@@ -74,14 +99,27 @@
 	</form>
 	</div>
 	<script>
-		
-	
-		$(function(){
-			$("#productImg").click(function(){
-				$("#itemImg").click();
+		function movePage(num){
+			var pageLocation=450;
+			var pageNo=num-1;
+			document.querySelector(".버튼"+num).addEventListener('click',function(){
+				document.querySelector('.container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 				
+			$('.container').css("width",num*pageLocation+"px");
+			})
+		}
+			
+		
+		$(function(){
+			$("#productImg1").click(function(){
+				$("#itemImg1").click();
 			});
 		});
+		
+		function inputImg(num){
+			$("#itemImg"+num).click();
+		}
+		
 		
 		function loadImg(inputFile,num){
 			if(inputFile.files.length==1){
@@ -90,16 +128,22 @@
 				reader.readAsDataURL(inputFile.files[0]);
 				
 				reader.onload =function(e){
-						$("#productImg").attr("src",e.target.result);
+						$("#productImg"+num).attr("src",e.target.result);
 					}
 				}else{
-					$("#productImg").attr("src",null);
+					$("#productImg"+num).attr("src",null);
 			}
 		}
 		function addImg(){
 			var count=document.getElementById("count");
+			$("#pagination")
+			.append("<button type='button' class='버튼"+count.value+"' onclick='movePage("+count.value+")'>"+count.value+"</button>");
+			
 			$("#img-area")
 			.append("<label for='itemImg"+count.value+"'>상품이미지</label> <input type=file id='itemImg"+count.value+"' name='itemImg"+count.value+"' onchange='loadImg(this,"+count.value+");'><br>");
+			
+			$("#imgContainer")
+			.append("<div class='inner'><img id='productImg"+count.value+"' onclick='inputImg("+count.value+");'></div>");
 			count.value++;
 		}
 	</script>

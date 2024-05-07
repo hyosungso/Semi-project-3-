@@ -13,6 +13,7 @@ import java.util.Properties;
 import com.kh.board.model.vo.Category;
 import com.kh.common.JDBCTemplate;
 import com.kh.market.model.vo.Item;
+import com.kh.market.model.vo.ItemAttachment;
 
 public class MarketDao {
 
@@ -138,6 +139,58 @@ public class MarketDao {
 		}
 		
 		return cList;
+	}
+
+	public int insertItem(Item i, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql = prop.getProperty("insertItem");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, i.getItemCode());
+			pstmt.setInt(2, i.getCategory());
+			pstmt.setString(3, i.getItemName());
+			pstmt.setInt(4, i.getPrice());
+			pstmt.setString(5, i.getItemDetail());
+			
+			result= pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertItemAttachment(Connection conn, ArrayList<ItemAttachment> itList, int itemCode) {
+		int result=1;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("insertItemAttachment");
+		try {
+		for(ItemAttachment it : itList) {
+			
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, itemCode);
+				pstmt.setString(2, it.getOriginName());
+				pstmt.setString(3, it.getChangeName());
+				pstmt.setString(4, it.getFilePath());
+				pstmt.setInt(5, it.getFileLev());
+				
+				result *=pstmt.executeUpdate();
+			
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

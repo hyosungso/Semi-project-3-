@@ -37,4 +37,33 @@
 		SELECT *
 		FROM ITEM_CATEGORY
 	</entry>
+	
+	<entry key="insertItem">
+		Insert into HEALTHLIFE.ITEM (ITEM_CODE,
+									CATEGORY_NO,
+									ITEM_NAME,
+									PRICE,
+									SALES_VOL,
+									STATUS,
+									ITEM_DETAIL) 
+							values (?,
+									?,
+									?,
+									?,0,'Y',
+									?);
+	</entry>
+	<entry key="insertItemAttachment">
+	INSERT INTO ITEM_ATTACHMENT(FILE_CODE,
+								REF_CODE,
+								ORIGIN_NAME,
+								CHANGE_NAME,
+								FILE_PATH,
+								FILE_LEVEL)
+					VALUES(SEQ_FNO.NEXTVAL,
+						   ?,
+						   ?,
+						   ?,
+						   ?,
+						   ?)
+	</entry>
 </properties>

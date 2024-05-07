@@ -8,13 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.board.model.vo.Category;
-import com.kh.market.MarketFileNamePolicy;
+import com.kh.common.MyFileRenamePolicy;
 import com.kh.market.model.service.MarketService;
 import com.kh.market.model.vo.Item;
+import com.kh.market.model.vo.ItemAttachment;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -60,26 +62,62 @@ public class MarketInsertController extends HttpServlet {
 																savePath,
 																maxSize,
 																"UTF-8",
-																new MarketFileNamePolicy());
-			
+																new MyFileRenamePolicy());
+			int itemCode=new MarketService().newItemCode();
 			String productName=multiRequest.getParameter("productName");
 			int category=Integer.parseInt(multiRequest.getParameter("category"));
 			int price=Integer.parseInt(multiRequest.getParameter("price"));
 			String itemDetail=multiRequest.getParameter("itemDetail");
 			int salseVol =0;
+			
 			int fileCount = Integer.parseInt(multiRequest.getParameter("count"));
 			
-			Item i= new Item(
-					);
+			Item i= new Item();
+			i.setItemCode(itemCode);
+			i.setItemCode(new MarketService().newItemCode());
+			i.setItemName(productName);
+			i.setCategory(category);
+			i.setPrice(price);
+			i.setItemDetail(itemDetail);
+			i.setSalesVol(salseVol);
+			
+			ArrayList<ItemAttachment> itList=new ArrayList<>();
+			
+			for(int j=1; j<=fileCount; j++) {
+				String key="file"+j;
+				if(multiRequest.getOriginalFileName(key)!=null) {
+					ItemAttachment it=new ItemAttachment();
+					it.setOriginName(multiRequest.getOriginalFileName(key));
+					it.setChangeName(multiRequest.getFilesystemName(key));
+					it.setFilePath("/resources/marketImg/");
+					
+					if(j==1) {
+						it.setFileLev(1);
+					}else {
+						it.setFileLev(2);
+					}
+					
+					itList.add(it);
+				}
+			}
 			
 			
-//			int result=new MarketService().insertItem(i);
+			int result=new MarketService().insertItem(i,itList);
 			
+			HttpSession session=request.getSession();
+			String msg="";
+			if(result>0) {
+				msg="신상품등록완료";
+			}else {
+				msg="상품등록실패";
+			}
 			
-			
+			session.setAttribute("alertMsg", msg);
+			response.sendRedirect(request.getContextPath()+"/list.mk");
 		}
 		
-		doGet(request, response);
+		
+	
 	}
 
 }

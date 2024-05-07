@@ -7,6 +7,7 @@ import com.kh.board.model.vo.Category;
 import com.kh.common.JDBCTemplate;
 import com.kh.market.model.dao.MarketDao;
 import com.kh.market.model.vo.Item;
+import com.kh.market.model.vo.ItemAttachment;
 
 public class MarketService {
 
@@ -33,7 +34,7 @@ public class MarketService {
 		Connection conn=JDBCTemplate.getConnection();
 		int itemCode= new MarketDao().newItemCode(conn);
 		
-		JDBCTemplate.commit(conn);
+		JDBCTemplate.close(conn);
 		return itemCode;
 	}
 
@@ -43,6 +44,23 @@ public class MarketService {
 		
 		JDBCTemplate.close(conn);
 		return cLsit;
+	}
+
+	public int insertItem(Item i, ArrayList<ItemAttachment> itList) {
+		Connection conn = JDBCTemplate.getConnection();
+		int itemCode= i.getItemCode();
+		int result = new MarketDao().insertItem(i,conn);
+		
+		int result2= new MarketDao().insertItemAttachment(conn,itList,itemCode);
+		
+		if(result*result2>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result*result2;
 	}
 
 }
