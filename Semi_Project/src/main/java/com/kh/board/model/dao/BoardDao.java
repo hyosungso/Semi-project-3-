@@ -107,7 +107,9 @@ public class BoardDao {
 				pstmt.setString(1, b.getBoardWriter());
 				rset=pstmt.executeQuery();
 				if(rset.next()) {
+					if(rset.getString("NICKNAME")!=null) {
 					b.setBoardWriter(rset.getString("NICKNAME"));
+					}
 				}
 			}	
 		} catch (SQLException e) {
@@ -127,7 +129,7 @@ public class BoardDao {
 		
 		
 		String sql=prop.getProperty("selectListByCategory");
-		String sql2=prop.getProperty("selectNickname");
+		String sql2=prop.getProperty("selectNickName");
 		ArrayList<Board> bList=new ArrayList<>();
 		
 		int startRow=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1; 
@@ -155,7 +157,9 @@ public class BoardDao {
 				pstmt.setString(1, b.getBoardWriter());
 				rset=pstmt.executeQuery();
 				if(rset.next()) {
+					if(rset.getString("NICKNAME")!=null) {
 					b.setBoardWriter(rset.getString("NICKNAME"));
+					}
 				}
 			}	
 			
@@ -221,7 +225,9 @@ public class BoardDao {
 			pstmt.setString(1, b.getBoardWriter());
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
+				if(rset.getString("NICKNAME")!=null) {
 				b.setBoardWriter(rset.getString("NICKNAME"));
+				}
 			}
 				
 		} catch (SQLException e) {
@@ -358,7 +364,9 @@ public class BoardDao {
 				pstmt.setString(1, r.getReplyWriter());
 				rset=pstmt.executeQuery();
 				if(rset.next()) {
+					if(rset.getString("NICKNAME")!=null) {
 					r.setReplyWriter(rset.getString("NICKNAME"));
+					}
 				}
 			}
 			
@@ -462,12 +470,15 @@ public class BoardDao {
 									rset.getInt("RECOMMEND"), 
 									rset.getDate("REVISE_DATE")));
 			}
-			sql=prop.getProperty("selectNickName");
+			String sql2=prop.getProperty("selectNickName");
 			for(Board b : bList) {
-				pstmt=conn.prepareStatement(sql);
+				pstmt=conn.prepareStatement(sql2);
 				pstmt.setString(1, b.getBoardWriter());
+				rset=pstmt.executeQuery();
 				if(rset.next()) {
-					b.setBoardWriter("NICKNAME");
+					if(rset.getString("NICKNAME")!=null) {
+					b.setBoardWriter(rset.getString("NICKNAME"));
+					}
 				}
 			}
 		} catch (SQLException e) {

@@ -42,7 +42,7 @@
 	</tr>
 	</c:when>
 	<c:otherwise>
-	<c:forEach items="${bList}" var="b" end="9">
+	<c:forEach items="${bList}" var="b" end="19">
 	<tr class="info">
 		<td>${b.boardNo}</td>
 		<td>${b.category}</td>
@@ -68,7 +68,7 @@
 	<br>
 	</div>
 	<div align="center">
-	<h4 align="center">검색결과가 너무 많을경우 상위 10개까지만 표시됩니다.</h4>
+	<h4 align="center">검색결과가 너무 많을경우 최신글 기준 20개까지만 표시됩니다.</h4>
 	<form action="search.bo">
 	<select name="searchCategory">
 	<option value="title">글제목</option>
