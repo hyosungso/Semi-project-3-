@@ -18,16 +18,26 @@ public class Board {
 	}
 	
 	
-	
-	public Board(String boardWriter, String boardTitle, String boardContent, int count, int recommend,
-			Date reviseDate) {
+	public Board(String boardWriter, String boardTitle, String boardContent, String category) {
 		super();
+		this.boardWriter = boardWriter;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.category = category;
+	}
+
+
+	public Board(int boardNo, String boardWriter, String boardTitle, String boardContent, int count, int recommend,
+			Date reviseDate, String category) {
+		super();
+		this.boardNo=boardNo;
 		this.boardWriter = boardWriter;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.count = count;
 		this.recommend = recommend;
 		this.reviseDate = reviseDate;
+		this.category=category;
 	}
 
 

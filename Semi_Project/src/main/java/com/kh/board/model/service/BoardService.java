@@ -116,4 +116,28 @@ public class BoardService {
 		return rList;
 	}
 
+	public int insertBoard(Board b) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().insertBoard(conn,b);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateBoard(Board b) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().updateBoard(conn,b);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

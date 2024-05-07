@@ -205,13 +205,14 @@ public class BoardDao {
 			pstmt.setInt(1, bno);
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
-				b=new Board(rset.getString("USER_ID"),
+				b=new Board(rset.getInt("BOARD_NO"),
+							rset.getString("USER_ID"),
 							rset.getString("BOARD_TITLE"),
 							rset.getString("BOARD_CONTENT"),
 							rset.getInt("COUNT"),
 							rset.getInt("RECOMMEND"),
-							rset.getDate("REVISE_DATE"));
-				b.setBoardNo(rset.getInt("BOARD_NO"));
+							rset.getDate("REVISE_DATE"),
+							rset.getString("CATEGORY_NAME"));
 				
 			}
 			
@@ -369,6 +370,48 @@ public class BoardDao {
 		}
 		
 		return rList;
+	}
+
+	public int insertBoard(Connection conn, Board b) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("insertBoard");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBoardWriter());
+			pstmt.setString(2, b.getBoardTitle());
+			pstmt.setString(3, b.getBoardContent());
+			pstmt.setString(4, b.getCategory());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateBoard(Connection conn, Board b) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("updateBoard");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, b.getBoardTitle());
+			pstmt.setString(2, b.getBoardContent());
+			pstmt.setString(3, b.getCategory());
+			pstmt.setInt(4, b.getBoardNo());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 	
 	

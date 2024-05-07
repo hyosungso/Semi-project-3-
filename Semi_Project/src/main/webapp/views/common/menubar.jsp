@@ -187,6 +187,14 @@
         </div>
 
     </div>
-
+	<script>
+    //로그인성공/null-값 자체로 반환되기 때문에 문자열""로 감싸줘야함
+    var msg="<%=alertMsg%>";
+    if(msg!="null") {//alert값이 없으면 null 자체가 문자로 반환
+    	alert(msg);
+    //알림을 띄운후에 해당 메시지 지우기
+    <%session.removeAttribute("alertMsg");%>
+    }
+    </script>
 </body>
 </html>

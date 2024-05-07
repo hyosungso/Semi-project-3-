@@ -44,7 +44,7 @@
 	<table border="1" class="board-area" align="center">
 	<thead>
 	<tr>
-		<th colspan="7">
+		<th colspan="6">
 		<table id="categoryList">
 		<tr>
 		<td><button name="category" value="0">전체</button></td>
@@ -53,6 +53,11 @@
 		</c:forEach>
 		</tr>
 		</table>
+		</th>
+		<th>
+		<c:if test="${!empty loginUser }">
+		<button onclick="location.href='insert.bo'">글작성</button>
+		</c:if>
 		</th>
 	</tr>
 	<tr>

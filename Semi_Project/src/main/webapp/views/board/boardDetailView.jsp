@@ -50,6 +50,13 @@ width:100%;
 	<tr>
 	<td colspan="7" style="text-align:center"><button onclick="increaseRC();">추천</button></td>
 	</tr>
+	<!-- 로그인 상태 확인 and 로그인유저 아이디/닉네임이 글작성자와 동일 또는 권한코드가 'ADMIN'인경우 -->
+	<c:if test="${!empty loginUser and (loginUser.userId eq b.boardWriter or loginUser.nickName eq b.boardWriter or loginUser.authCode eq 'ADMIN') }">
+	<tr>
+	<td colspan="5"></td>
+	<td colspan="2" style="text-align:center" onclick="location.href='update.bo?bno=${b.boardNo}'"><button>글 수정하기</button></td>
+	</tr>
+	</c:if>
 	</tbody>
 	</table>
 	</div>
@@ -81,7 +88,7 @@ width:100%;
 		<tr>
 		<th width="75px">작성자</th>
 		<th>댓글내용</th>
-		<th width="100px">작성일</th>
+		<th width="120px">작성일</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -141,6 +148,7 @@ width:100%;
 				$(".reply-list tbody").children().remove();
 				var tr="";
 				for(var i in list) {
+					
 					tr +="<tr>"
 						+"<td>"+list[i].replyWriter+"</td>"
 						+"<td>"+list[i].replyContent+"</td>"

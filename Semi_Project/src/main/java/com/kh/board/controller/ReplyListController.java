@@ -36,6 +36,7 @@ public class ReplyListController extends HttpServlet {
 		
 		ArrayList<Reply> rList=new BoardService().selectReply(bno);
 		
+		
 		response.setContentType("json/application;charset=UTF-8");
 		//GSON으로 댓글 리스트 넘겨주기
 		new Gson().toJson(rList, response.getWriter());
