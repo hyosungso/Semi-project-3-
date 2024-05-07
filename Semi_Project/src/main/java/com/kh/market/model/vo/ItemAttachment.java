@@ -27,6 +27,18 @@ public class ItemAttachment {
 		this.fileLev = fileLev;
 		this.status = status;
 	}
+	
+	
+	
+	
+	public ItemAttachment(int fileCode, String originName, String changeName, String filePath) {
+		super();
+		this.fileCode = fileCode;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+	}
+	
 	public int getFileCode() {
 		return fileCode;
 	}

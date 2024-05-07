@@ -195,4 +195,35 @@ public class MarketDao {
 		return result;
 	}
 
+	public ArrayList<ItemAttachment> selectAttachmentList(Connection conn, int itemNo) {
+		ResultSet rset=null; 
+		PreparedStatement pstmt=null;
+		ArrayList<ItemAttachment> itList = new ArrayList<>();
+		String sql = prop.getProperty("selectAttachmentList");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				itList.add(new ItemAttachment(rset.getInt("FILE_CODE"),
+											  rset.getString("ORIGIN_NAME"),
+											  rset.getString("CHANGE_NAME"),
+											  rset.getString("FILE_PATH")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return itList;
+	}
+
 }

@@ -65,4 +65,13 @@ public class MarketService {
 		return result*result2;
 	}
 
+	public ArrayList<ItemAttachment> selectAttachmentList(int itemNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<ItemAttachment> itList=new MarketDao().selectAttachmentList(conn,itemNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return itList;
+	}
+
 }
