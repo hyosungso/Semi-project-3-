@@ -86,23 +86,7 @@
 	</table>
 	</div>
 	<script>
-	function searchboard(){
-		//선택한 카테고리중 제목에 검색단어가 포함되어있는 글만 정렬(10개?)
-		$.ajax({
-			url : "search.bo",
-			data : {
-				
-			},
-			type : "post",
-			success : function(){
-				
-			},
-			error : function(){
-				console.log($("input[name=keyword]").val());
-				console.log("아직 안만들었으니 없지");
-			}
-		});
-	}
+	
 	$(function(){
 		$("button[name=category]").each(function(){
 			if($(this).val()==${category}){
@@ -142,6 +126,16 @@
 			<button onclick="location.href='board.bo?currentPage=${pi.currentPage+1}&category=${category}'">다음</button>
 		</c:otherwise>
 	</c:choose>
+	<br>
+	<form action="search.bo">
+	<select name="searchCategory">
+	<option value="title">글제목</option>
+	<option value="content">글내용</option>
+	<!-- <option value="writer">작성자</option> -->
+	</select>
+	<input type="text" name="search" style="width:350px">
+	<button type="submit">검색</button>
+	</form>
 	</div>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.kh.board.model.dao;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -430,6 +431,54 @@ public class BoardDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<Board> searchBoard(Connection conn, String keyword, String category) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		String sql=null;
+		
+		switch(category) {
+		case "title":
+			sql=prop.getProperty("searchBoardByTitle");
+			break;
+		case "content":
+			sql=prop.getProperty("searchBoardByContent");
+			break;
+		}
+		
+		ArrayList<Board> bList=new ArrayList<>();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				//BOARD_NO,USER_ID,BOARD_TITLE,BOARD_CONTENT,COUNT,RECOMMEND,REVISE_DATE,CATEGORY_NAME
+				bList.add(new Board(rset.getInt("BOARD_NO"),
+									rset.getString("CATEGORY_NAME"), 
+									rset.getString("BOARD_TITLE"), 
+									rset.getString("USER_ID"), 
+									rset.getInt("COUNT"), 
+									rset.getInt("RECOMMEND"), 
+									rset.getDate("REVISE_DATE")));
+			}
+			sql=prop.getProperty("selectNickName");
+			for(Board b : bList) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, b.getBoardWriter());
+				if(rset.next()) {
+					b.setBoardWriter("NICKNAME");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return bList;
 	}
 	
 	
