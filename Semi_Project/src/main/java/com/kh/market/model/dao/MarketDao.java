@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.kh.board.model.vo.Category;
 import com.kh.common.JDBCTemplate;
+import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
 
@@ -93,30 +94,9 @@ public class MarketDao {
 		return i;
 	}
 
-	public int newItemCode(Connection conn) {
-		ResultSet rset=null;
-		Statement stmt=null;
-		int result=0;
-		String sql=prop.getProperty("newItemCode");
+	
 		
-	   try {
-		stmt=conn.createStatement();
-		rset=stmt.executeQuery(sql);
-		
-		if(rset.next()) {
-			result=rset.getInt("NITEM_CODE");
-		}
-		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}finally {
-		JDBCTemplate.close(rset);
-		JDBCTemplate.close(stmt);
-	}
-		
-		return result;
-	}
+
 
 	public ArrayList<Category> selectCategory(Connection conn) {
 		ResultSet rset=null;
@@ -180,7 +160,7 @@ public class MarketDao {
 				pstmt.setInt(4, it.getFileLev());
 				
 				
-				result *=pstmt.executeUpdate();
+				result*=pstmt.executeUpdate();
 				
 			
 		}
@@ -223,6 +203,73 @@ public class MarketDao {
 		
 		
 		return itList;
+	}
+
+	public int insertComponent(int category, Connection conn, Component c) {
+		int result = 0;
+		PreparedStatement pstmt = null; 
+		String sql = prop.getProperty("insertComponent");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, category);
+			pstmt.setDouble(2, c.getCalorie());
+			pstmt.setDouble(3, c.getProtin());
+			pstmt.setDouble(4, c.getSalt());
+			pstmt.setDouble(5, c.getCarbo());
+			pstmt.setDouble(6, c.getFat());
+			pstmt.setDouble(7, c.getTransFat());
+			pstmt.setDouble(8, c.getSaturatedFat());
+			pstmt.setDouble(9, c.getChol());
+			pstmt.setDouble(10, c.getSugar());
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public Component selectComponent(Connection conn, int itemNo) {
+		ResultSet rset=null;
+		PreparedStatement pstmt =null;
+		Component c=null;
+		String sql = prop.getProperty("selectComponent");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c=new Component(
+						rset.getInt("ITEM_CODE"),
+						rset.getInt("CATEGORY_NO"),
+						rset.getDouble("PROTIN"),
+						rset.getDouble("CARBO"),
+						rset.getDouble("CALORIE"),
+						rset.getDouble("SALT"),
+						rset.getDouble("FAT"),
+						rset.getDouble("CHOL"),
+						rset.getDouble("SATURATED_FAT"),
+						rset.getDouble("SUGAR"),
+						rset.getDouble("TRANS_FAT"));
+						
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return c;
 	}
 
 }

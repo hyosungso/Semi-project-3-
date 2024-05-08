@@ -72,4 +72,34 @@
 	WHERE REF_CODE=?
 	AND STATUS='Y'
 	</entry>
+	<entry key="insertComponent">
+	INSERT INTO COMPONENT(ITEM_CODE,
+						  CATEGORY_NO,
+						  PROTIN,
+						  CARBO,
+						  CALORIE,
+						  SALT,
+						  FAT,
+						  CHOL,
+						  SATURATED_FAT,
+						  SUGAR,
+						  TRANS_FAT)
+				   VALUES(SEQ_INO.CURRVAL,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?)
+	</entry>
+	<entry key="selectComponent">
+	SELECT *
+	FROM COMPONENT
+	WHERE ITEM_CODE=?
+	</entry>
+	
 </properties>

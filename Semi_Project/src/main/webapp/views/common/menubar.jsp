@@ -90,6 +90,9 @@
         	margin:auto;
         	width:1300PX;
             background-color: black;
+            position: relative;
+             z-index: 5;
+           
         }
         .menu{
             display: flex;
@@ -133,6 +136,7 @@
         #navi>li>ul:hover{
             display: block;
         }
+       
        .board-category a{
         font-size: 15px
        }
@@ -144,6 +148,15 @@
             margin-top: 50px; /*위로부터 50px 여백*/
 
         }
+    	 .image2{
+      	 width : 40px;
+      	 heigth: 40px;
+      }
+        
+        
+      .util-icons li{
+      margin : 4px;
+      }
 
     </style>
 
@@ -183,6 +196,7 @@
 
 
             </div>
+
             <%if(loginUser == null) {%>
             <div class="util"><ul>
             	
@@ -198,6 +212,20 @@
                 <a href="<%=contextPath %>/logout.me">로그아웃</a>
             </div>
              <%} %>
+                <br>
+            <ul class="util-icons">
+            	<li><a href="cart.mk">
+            	<img class="image" width = 40 height = 40>
+            	</a>
+            	</li>
+            	<li class="myPage-icon">
+            	<a href="myPage.me">
+            		<img class="image2">
+            	</a>
+            	</li>
+            	
+            </ul>
+            </div>
         </div>
             
             
@@ -222,6 +250,44 @@
         </div>
 
     </div>
+
+	<script>
+    //로그인성공/null-값 자체로 반환되기 때문에 문자열""로 감싸줘야함
+    var msg="<%=alertMsg%>";
+    if(msg!="null") {//alert값이 없으면 null 자체가 문자로 반환
+    	alert(msg);
+    //알림을 띄운후에 해당 메시지 지우기
+    <%session.removeAttribute("alertMsg");%>
+    }
+    const staticImg= "<%=contextPath%>/resources/icons/icons-cart-static.png"
+    const gifImg= "<%=contextPath%>/resources/icons/icons-cart.gif" 
+    
+    const image = document.querySelector('.image');
+
+    image.src = staticImg;
+
+    image.addEventListener("mouseenter", function() {
+      image.src = gifImg;
+    });
+    image.addEventListener("mouseleave", function() {
+      image.src = staticImg;
+    });
+    
+    const staticImg2= "<%=contextPath%>/resources/icons/img.icons-normal.png"
+        const gifImg2= "<%=contextPath%>/resources/icons/img.icons-hover.gif" 
+        
+        const image2 = document.querySelector('.image2');
+
+        image2.src = staticImg2;
+
+        image2.addEventListener("mouseenter", function() {
+          image2.src = gifImg2;
+        });
+        image2.addEventListener("mouseleave", function() {
+          image2.src = staticImg2;
+        });
+    
+    </script>
 
 </body>
 </html>
