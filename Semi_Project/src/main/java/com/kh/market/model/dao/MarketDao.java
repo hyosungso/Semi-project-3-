@@ -13,6 +13,7 @@ import java.util.Properties;
 import com.kh.board.model.vo.Category;
 import com.kh.common.JDBCTemplate;
 import com.kh.market.model.vo.Item;
+import com.kh.market.model.vo.ItemAttachment;
 
 public class MarketDao {
 
@@ -42,7 +43,8 @@ public class MarketDao {
 				list.add(new Item(rset.getInt("ITEM_CODE"),
 						rset.getString("CATEGORY_NAME"),
 						rset.getInt("PRICE"),
-						rset.getString("ITEM_NAME")
+						rset.getString("ITEM_NAME"),
+						rset.getString("THUMBNAIL")
 						));
 				
 			}
@@ -101,7 +103,7 @@ public class MarketDao {
 		stmt=conn.createStatement();
 		rset=stmt.executeQuery(sql);
 		
-		if(rset!=null) {
+		if(rset.next()) {
 			result=rset.getInt("NITEM_CODE");
 		}
 		
@@ -138,6 +140,89 @@ public class MarketDao {
 		}
 		
 		return cList;
+	}
+
+	public int insertItem(Item i, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql = prop.getProperty("insertItem");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, i.getCategory());
+			pstmt.setString(2, i.getItemName());
+			pstmt.setInt(3, i.getPrice());
+			pstmt.setString(4, i.getItemDetail());
+			
+			result= pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertItemAttachment(Connection conn, ArrayList<ItemAttachment> itList) {
+		int result=1;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("insertItemAttachment");
+		try {
+		
+			for(ItemAttachment it : itList) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, it.getOriginName());
+				pstmt.setString(2, it.getChangeName());
+				pstmt.setString(3, it.getFilePath());
+				pstmt.setInt(4, it.getFileLev());
+				
+				
+				result *=pstmt.executeUpdate();
+				
+			
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<ItemAttachment> selectAttachmentList(Connection conn, int itemNo) {
+		ResultSet rset=null; 
+		PreparedStatement pstmt=null;
+		ArrayList<ItemAttachment> itList = new ArrayList<>();
+		String sql = prop.getProperty("selectAttachmentList");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itemNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				itList.add(new ItemAttachment(rset.getInt("FILE_CODE"),
+											  rset.getString("ORIGIN_NAME"),
+											  rset.getString("CHANGE_NAME"),
+											  rset.getString("FILE_PATH")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		
+		return itList;
 	}
 
 }

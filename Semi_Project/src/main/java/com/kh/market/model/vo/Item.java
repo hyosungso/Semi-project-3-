@@ -10,7 +10,7 @@ public class Item {
 	private String itemName;
 	
 	private String categoryName; //카테고리 네임 join 구문으로 가져오는 용도
-	
+	private String thumbnailImg;
 	
 	public Item() {
 		super();
@@ -28,12 +28,13 @@ public class Item {
 	
 	
 	
-	public Item(int itemCode, String categoryName, int price, String itemName) {
+	public Item(int itemCode, String categoryName, int price, String itemName, String thumbnailImg) {
 		super();
 		this.itemCode = itemCode;
 		this.categoryName = categoryName;
 		this.price = price;
 		this.itemName = itemName;
+		this.thumbnailImg = thumbnailImg;
 	}
 	
 	
@@ -46,6 +47,8 @@ public class Item {
 		this.itemDetail = itemDetail;
 		this.itemCode = itemCode;
 	}
+	
+	
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -87,6 +90,12 @@ public class Item {
 	}
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
+	}
+	public String getThumbnailImg() {
+		return thumbnailImg;
+	}
+	public void setThumbnailImg(String thumbnailImg) {
+		this.thumbnailImg = thumbnailImg;
 	}
 	
 	

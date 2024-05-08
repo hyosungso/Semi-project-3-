@@ -1,6 +1,7 @@
 package com.kh.market.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.market.model.service.MarketService;
 import com.kh.market.model.vo.Item;
+import com.kh.market.model.vo.ItemAttachment;
 
 /**
  * Servlet implementation class MarketDetailController
@@ -32,9 +34,13 @@ public class MarketDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int itemNo=Integer.parseInt(request.getParameter("itno"));
 		
-		Item t= new MarketService().selectItem(itemNo);
+		MarketService ms = new MarketService();
 		
-		request.setAttribute("item", t );
+		Item i = ms.selectItem(itemNo);
+		ArrayList<ItemAttachment> itList = ms.selectAttachmentList(itemNo);
+		
+		request.setAttribute("i", i);
+		request.setAttribute("itList", itList);
 		
 		request.getRequestDispatcher("views/market/marketDetailView.jsp").forward(request, response);
 	

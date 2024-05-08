@@ -148,6 +148,16 @@
 
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
+	<script>
+	
+		var msg = "<%= alertMsg%>"
+		
+		if(msg!="null"){
+			alert(msg);
+			<%session.removeAttribute("alertMsg");%>
+		}
+	</script>
+
     <div class="header">
        
         <div class="header-inner">
