@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-
 <%
 	//로그인 정보 추출하기 
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	//로그인이 되어있지 않다면 loginUser라는 key값으로 데이터를 조회할 수 없으니 
 	//null이 반환된다. 로그인이 되었다면 해당 로그인 정보가 반환된다. 
-	
 	//알림 메세지 추출하기 
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	
@@ -26,6 +24,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	
+	<!-- Popper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .header{
             position: relative;
@@ -157,6 +162,17 @@
 
 </head>
 <body>
+	<script>
+		//알림메세지 띄워주기 
+		//로그인성공 또는 null - 값 자체로 반환되기때문에 문자열 " "처리 해야함
+		var msg = "<%=alertMsg%>";
+		
+		if(msg!="null"){ //null이 아니면 알림메세지 띄워라
+			alert(msg); 
+			//알림 띄워주고 해당 메세지 지워주기
+			<%session.removeAttribute("alertMsg");%>
+		}
+	</script>
 
 
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -180,12 +196,23 @@
 
 
             </div>
-            <div class="util">
-            <ul>
-	             <li><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
-	             <li><a href="enrollFormBefore.me">회원가입</a></li>
+
+            <%if(loginUser == null) {%>
+            <div class="util"><ul>
+            	
+                <li><br><br><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
+                <li>| <a href="enrollForm.me">회원가입</a></li>
             </ul>
-            <br>
+            </div>
+            	<%}else{ %>
+            <div class="util"><br><br>
+            <b><%=loginUser.getUserName()%>님 환영합니다.</b>
+            <div align="center">
+                <a href="${contextPath }/views/member/MyPage.jsp">마이페이지</a> 
+                <a href="<%=contextPath %>/logout.me">로그아웃</a>
+            </div>
+             <%} %>
+                <br>
             <ul class="util-icons">
             	<li><a href="cart.mk">
             	<img class="image" width = 40 height = 40>
@@ -199,6 +226,8 @@
             	
             </ul>
             </div>
+        </div>
+            
             
         </div>
   
@@ -209,7 +238,7 @@
                 <ul id="navi">
                     <li><a href="">게시판</a>
                         <ul class="board-category">
-                            <li><a href="${contextPath}/board.bo?currentPage=1&category=0&sort=latest">자유게시판</a></li>
+                            <li><a href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
                             <li><a href="">정보게시판</a></li>
                         </ul></li>
                 </ul>
@@ -221,6 +250,7 @@
         </div>
 
     </div>
+
 	<script>
     //로그인성공/null-값 자체로 반환되기 때문에 문자열""로 감싸줘야함
     var msg="<%=alertMsg%>";
@@ -258,5 +288,6 @@
         });
     
     </script>
+
 </body>
 </html>

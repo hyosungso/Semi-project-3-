@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,16 +14,16 @@ import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class MemberUpdateController
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/update.me")
+public class MemberUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MemberUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +33,6 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
@@ -44,47 +42,36 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
+		String test = request.getParameter("test");
+		String pass = request.getParameter("pass");
 		
-
 		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String userName = request.getParameter("userName");
+		String gender = request.getParameter("gender");
+		String nickName = request.getParameter("nickName");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		if(test.equals(pass)) {
+		Member m = new Member(userId,userName,gender,nickName,email,phone);
 		
-
-		Cookie cookie = null;
-
-		String saveId = request.getParameter("saveId");
+		Member uMember = new MemberService().updateMember(m);
 		
-
-		if(saveId != null) {
-
-			cookie = new Cookie("userId",userId);
-
-			cookie.setMaxAge(60*60*24);
-
-			response.addCookie(cookie);
-		}else { 
-			cookie = new Cookie("userId",null);
-			cookie.setMaxAge(0); 
-			response.addCookie(cookie);
-			
-		}
-		
-		Member loginUser = new MemberService().loginMember(userId,userPwd);
-		
-		
-		HttpSession session = request.getSession();
-		
-		if(loginUser==null) {
-
-			session.setAttribute("alertMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
-			RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
-		    view.forward(request, response);
+		if(uMember == null ) {
+			request.setAttribute("alertMsg", "정보수정실패");
+			response.sendRedirect(request.getContextPath()+"/myPage.me");
 			
 		}else {
-			session.setAttribute("loginUser",loginUser);
-			session.setAttribute("alertMsg", "로그인 성공");
-			response.sendRedirect(request.getContextPath());
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("alertMsg", "정보수정성공");
+			session.setAttribute("loginUser",uMember);
+			
+			response.sendRedirect(request.getContextPath()+"/myPage.me");
 			
 		}
+	}else {
+		request.getSession().setAttribute("alertMsg", "비밀번호가 일치하지않습니다. 다시 시도해주세요.");
+		response.sendRedirect(request.getContextPath()+"/myPage.me");
+	}
 	}
 }
