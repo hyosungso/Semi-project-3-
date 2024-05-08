@@ -63,7 +63,7 @@ public class MarketInsertController extends HttpServlet {
 																maxSize,
 																"UTF-8",
 																new MyFileRenamePolicy());
-			int itemCode=new MarketService().newItemCode();
+			
 			String productName=multiRequest.getParameter("productName");
 			int category=Integer.parseInt(multiRequest.getParameter("category"));
 			int price=Integer.parseInt(multiRequest.getParameter("price"));
@@ -73,7 +73,7 @@ public class MarketInsertController extends HttpServlet {
 			int fileCount = Integer.parseInt(multiRequest.getParameter("count"))-1;
 			
 			Item i= new Item();
-			i.setItemCode(itemCode);
+			
 			i.setItemCode(new MarketService().newItemCode());
 			i.setItemName(productName);
 			i.setCategory(category);

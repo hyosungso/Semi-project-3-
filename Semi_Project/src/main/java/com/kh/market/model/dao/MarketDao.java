@@ -166,7 +166,7 @@ public class MarketDao {
 		return result;
 	}
 
-	public int insertItemAttachment(Connection conn, ArrayList<ItemAttachment> itList, int itemCode) {
+	public int insertItemAttachment(Connection conn, ArrayList<ItemAttachment> itList) {
 		int result=1;
 		PreparedStatement pstmt=null;
 		String sql=prop.getProperty("insertItemAttachment");
@@ -174,11 +174,10 @@ public class MarketDao {
 		
 			for(ItemAttachment it : itList) {
 				pstmt=conn.prepareStatement(sql);
-				pstmt.setInt(1, itemCode);
-				pstmt.setString(2, it.getOriginName());
-				pstmt.setString(3, it.getChangeName());
-				pstmt.setString(4, it.getFilePath());
-				pstmt.setInt(5, it.getFileLev());
+				pstmt.setString(1, it.getOriginName());
+				pstmt.setString(2, it.getChangeName());
+				pstmt.setString(3, it.getFilePath());
+				pstmt.setInt(4, it.getFileLev());
 				
 				
 				result *=pstmt.executeUpdate();

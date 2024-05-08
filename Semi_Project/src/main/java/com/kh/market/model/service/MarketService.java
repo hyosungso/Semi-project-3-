@@ -48,10 +48,9 @@ public class MarketService {
 
 	public int insertItem(Item i, ArrayList<ItemAttachment> itList) {
 		Connection conn = JDBCTemplate.getConnection();
-		int itemCode= i.getItemCode();
 		int result = new MarketDao().insertItem(i,conn);
 		
-		int result2= new MarketDao().insertItemAttachment(conn,itList,itemCode);
+		int result2= new MarketDao().insertItemAttachment(conn,itList);
 		
 		
 		

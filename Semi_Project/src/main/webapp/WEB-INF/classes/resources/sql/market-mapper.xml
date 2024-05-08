@@ -28,14 +28,7 @@
 		WHERE STATUS='Y'
 		AND ITEM_CODE=?
 	</entry>
-	<entry key="newItemCode">
-		SELECT NITEM_CODE
-	FROM
-	(SELECT ITEM_CODE+1 NITEM_CODE
-	FROM ITEM
-	ORDER BY ITEM_CODE DESC)
-	WHERE ROWNUM = 1
-	</entry>
+	
 	<entry key="selectCategory">
 		SELECT *
 		FROM ITEM_CATEGORY
@@ -63,10 +56,20 @@
 								FILE_PATH,
 								FILE_LEVEL)
 					VALUES(SEQ_FNO.NEXTVAL,
-						   ?,
+						   SEQ_INO.CURRVAL,
 						   ?,
 						   ?,
 						   ?,
 						   ?)
+	</entry>
+	
+	<entry key="selectAttachmentList">
+	SELECT FILE_CODE,
+		   ORIGIN_NAME,
+		   CHANGE_NAME,
+		   FILE_PATH
+	FROM ITEM_ATTACHMENT
+	WHERE REF_CODE=?
+	AND STATUS='Y'
 	</entry>
 </properties>
