@@ -1,26 +1,23 @@
 package com.kh.exercise.controller;
 
-import java.io.*;
-import java.util.*;
-
-import javax.servlet.*;
+import java.io.IOException;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-
-import com.kh.exercise.model.service.ExerService;
-import com.kh.exercise.model.vo.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ExerListController
+ * Servlet implementation class ExerDetailController
  */
-@WebServlet("/list.ex")
-public class ExerListController extends HttpServlet {
+@WebServlet("/ExerDetailController")
+public class ExerDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ExerListController() {
+    public ExerDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,9 +26,8 @@ public class ExerListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Exercise> elist=new ExerService().selectexList();
-		request.setAttribute("elist",elist);
-		request.getRequestDispatcher("views/exercise/exerListView.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
