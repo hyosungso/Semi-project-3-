@@ -8,11 +8,11 @@
 </head>
 <body>
 	
-	<form action="Memorials.me" >
+	<form action="memorials.me" >
 	
 	
 	
-	<button type="submit"> 일지 작성하기 </button>
+	<button type="submit"> 일지 작성하기, </button>
 	
 	
 	네모

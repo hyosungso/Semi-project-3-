@@ -183,7 +183,7 @@
                 </div>
             <div><a href="">운동법</a></div>
             <div><a href="list.mk">매장(후순위)</a></div>
-            <div><a href="">개인기록(후순위)</a></div>
+            <div><a href="memoView.me">개인기록(후순위)</a></div>
         </div>
 
     </div>

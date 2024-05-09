@@ -84,7 +84,7 @@
            
             <tr>
                 <td colspan="2" align="center">
-                    오늘 나에게 주는 점수!
+                    오늘 나에게 주는 점수
                     <br>
                     <input type="range" name="">
                 </td>

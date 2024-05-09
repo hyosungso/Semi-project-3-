@@ -1,4 +1,4 @@
-package com.kh.Memorials.controller;
+package com.kh.memorials.controller;
 
 import java.io.File;
 import java.io.IOException;

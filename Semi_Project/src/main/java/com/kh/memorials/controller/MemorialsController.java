@@ -1,4 +1,4 @@
-package com.kh.Memorials.controller;
+package com.kh.memorials.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MemberIndividualRecordControlloer
  */
-@WebServlet("/Memorials.me")
+@WebServlet("/memorials.me")
 public class MemorialsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +26,7 @@ public class MemorialsController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/Memorials/Memorials.jsp").forward(request, response);
+		request.getRequestDispatcher("views/memorials/Memorials.jsp").forward(request, response);
 		
 	}
 
