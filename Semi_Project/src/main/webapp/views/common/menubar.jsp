@@ -201,7 +201,7 @@
             <div class="util"><ul>
             	
                 <li><br><br><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
-                <li>| <a href="enrollForm.me">회원가입</a></li>
+                <li>| <a href="enrollFormBefore.me">회원가입</a></li>
             </ul>
             </div>
             	<%}else{ %>
