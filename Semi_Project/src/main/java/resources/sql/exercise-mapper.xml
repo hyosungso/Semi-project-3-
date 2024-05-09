@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- 운동게시판 추가작업, 고유번호-시퀀스 SEQ_ENO로 -->
+	<entry key="exerInsert">
+		INSERT INTO EXERCISE(
+			EXER_NO
+			,EXER_TITLE
+			,EXER_TYPE
+			,EXER_COUNT
+			,EXER_PART
+		)
+		VALUES(
+			SEQ_ENO.NEXTVAL
+			,?
+			,?
+			,?
+			,?
+		)
+	</entry>
+	<!-- 운동게시판 수정 작업-->
+	<entry key="exerUpdate">
+		UPDATE EXERCISE
+		SET EXER_TITLE = ?
+			EXER_TYPE = ?
+			EXER_COUNT = ?
+			EXER_PART = ?
+		WHERE EXERCISE_NO = ?
+	</entry>
+</properties>
