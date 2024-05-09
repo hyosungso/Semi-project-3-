@@ -183,73 +183,70 @@
 		}
 	</script>
 
-	<div class="header">
-
-		<div class="header-inner">
-			<div class="logo">
-				<a href="${contextPath }">
-				<img src="${contextPath}/resources/logo/temp.png"></a>
-			</div>
-
-
-		</div>
-
-		<%if(loginUser == null) {%>
-		<div class="util">
-			<br>
-			<br> <a href="${contextPath}/views/member/login.jsp" id="imageLink"> 
-				<img class="image2"> </a>&nbsp;&nbsp;&nbsp; 
-				<a href="cart.mk"> 
-					<img class="image" width=40 height=40></a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
-					<a href="enrollFormBefore.me">회원가입</a>
-
-		</div>
-		<script>
-			document.getElementById('imageLink').addEventListener('click', function(event) {
-    		alert("로그인한 상태에서 사용 가능합니다.");
-    		window.location.href = "${contextPath}/views/member/login.jsp";
-			});
-		</script>
-		<%}else{ %>
-		<div class="util">
-			<br>
-			<br> <a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
-			<a href="cart.mk"> 
-				<img class="image" width=40 height=40>
-			</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<a href="logout.me">로그아웃</a>
-			<%} %>
-		</div>
-	</div>
+    <div class="header">
+       
+        <div class="header-inner">
+            <div class="logo">
+                <a href="${contextPath }"><img src="${contextPath}/resources/logo/temp.png"></a>
+            </div>
 
 
+            </div>
 
-	<div class="nav-area" align="center">
-		<div class="menu">
-			<div class="board">
-				<ul id="navi">
-					<li><a href="">게시판</a>
-						<ul class="board-category">
-							<li><a
-								href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
-							<li><a href="">정보게시판</a></li>
-						</ul></li>
-				</ul>
+            <%if(loginUser == null) {%>
+            <div class="util"><ul>
+            	
+                <li><br><br><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
+                <li>| <a href="enrollFormBefore.me">회원가입</a></li>
+            </ul>
+            </div>
+            	<%}else{ %>
+            <div class="util"><br><br>
+            <b><%=loginUser.getUserName()%>님 환영합니다.</b>
+            <div align="center">
+                <a href="${contextPath }/views/member/MyPage.jsp">마이페이지</a> 
+                <a href="<%=contextPath %>/logout.me">로그아웃</a>
+            </div>
+             <%} %>
+                <br>
+            <ul class="util-icons">
+            	<li><a href="cart.mk">
+            	<img class="image" width = 40 height = 40>
+            	</a>
+            	</li>
+            	<li class="myPage-icon">
+            	<a href="myPage.me">
+            		<img class="image2">
+            	</a>
+            	</li>
+            	
+            </ul>
+            </div>
+        </div>
+            
+            
+        </div>
+  
 
-			</div>
-			<div>
-				<a href="">운동법</a>
-			</div>
-			<div>
-				<a href="list.mk">매장(후순위)</a>
-			</div>
-			<div>
-				<a href="">개인기록(후순위)</a>
-			</div>
-		</div>
+    <div class="nav-area" align="center">
+        <div class="menu">
+            <div class="board">
+                <ul id="navi">
+                    <li><a href="">게시판</a>
+                        <ul class="board-category">
+                            <li><a href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
+                            <li><a href="">정보게시판</a></li>
+                        </ul></li>
+                </ul>
+               
+                </div>
+            <div><a href="">운동법</a></div>
+            <div><a href="list.mk">매장(후순위)</a></div>
+            <div><a href="">개인기록(후순위)</a></div>
+        </div>
 
-	</div>
+    </div>
+
 
 	<script>
     

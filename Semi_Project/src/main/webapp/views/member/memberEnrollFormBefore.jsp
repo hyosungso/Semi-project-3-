@@ -96,8 +96,9 @@
 		<div class="container">
         <h1>(주)헬스라이프 회원가입 약관동의</h1>
         <div class="terms">
-            <p>약관 내용을 여기에 작성합니다. 본 약관은 헬스라이프 서비스 이용에 관한 권리와 의무를 규정하는 내용입니다. 약관 내용을 꼼꼼하게 읽고 동의하셔야만 서비스를 이용하실 수 있습니다.</p>
+            <p>본 약관은 헬스라이프 서비스 이용에 관한 권리와 의무를 규정하는 내용입니다.</p>
             <p>...</p>
+            
             <p>...</p>
         </div>
         <div class="checkbox" >
@@ -108,7 +109,7 @@
         </div>
     	
     	 <div class="buttons">
-            <button class="button" id="nextButton" onlcick="enrollForm();">다음</button>
+            <button type="submit" class="button" id="nextButton">다음</button>
             <button class="button disabled" id="backButton">뒤로</button>
         </div>
     	
@@ -121,13 +122,11 @@
 
 </body>
 
-	<script>
-		function enrollForm(){
-			
-			location.href = "/WHAT/enrollForm.me"
-			
-		}
 	
-	</script>
+	
+	
+
+
+
 
 </html>
