@@ -4,40 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<<<<<<< HEAD
+<title>HEALTHLIFE</title>
+
 <style>	
 	
 	#form_area{
-=======
-<style>
-	.form-area{
->>>>>>> branch 'HYOSUNG' of https://github.com/hyosungso/Semi-project-3-.git
 		margin : auto;
 		width : 700px;
 	}
-<<<<<<< HEAD
+
 	.slide-container{
 		height : 450px;
 	    padding: 0px;
 	    margin: auto;
-=======
-	.container{
-		width: 960px;
-		height : 500px;
->>>>>>> branch 'HYOSUNG' of https://github.com/hyosungso/Semi-project-3-.git
-		transition : transform 0.5s;
-		
+
+
 	}
 	.inner{
-<<<<<<< HEAD
+
 		width: 450px;
 		height : 480px;
 		padding: 0px;
-=======
-		width: 480px;
-		height : 480px;
->>>>>>> branch 'HYOSUNG' of https://github.com/hyosungso/Semi-project-3-.git
 		float : left;
 	}
 	.inner img{
@@ -45,16 +32,11 @@
 			height : 100%;
 	}
 	.slide{
-<<<<<<< HEAD
 		width : 450px;
 		height : 480px;
 		overflow : hidden;
 		padding: 0px;
-	
-=======
-		width : 480px; 
-		height : 480px; 
-		overflow : hidden
+
 	}
 	.component_title{
 		font-weight : lighter;
@@ -64,7 +46,6 @@
 		width : 80px;
 		textalign : left;
 		padding : 0 0 0 5px;
->>>>>>> branch 'HYOSUNG' of https://github.com/hyosungso/Semi-project-3-.git
 	}
 
 	.order{
@@ -93,11 +74,11 @@
 				<td rowspan='4'>
 				
 			<div class="slide">
-<<<<<<< HEAD
+
 				<div class="slide-container" id="imgContainer">
-=======
+
 				<div class="container" id="imgContainer">
->>>>>>> branch 'HYOSUNG' of https://github.com/hyosungso/Semi-project-3-.git
+
 				<c:forEach  items="${itList }" var="it" >
 					<div class="inner">
 							<img src="${contextPath}${it.filePath }${it.changeName}">
@@ -107,6 +88,7 @@
 					
 				</div>
 			</div>
+				</div>
 			<div id="pagination">
 			<c:forEach items="${itList }" varStatus="status">
 			<button type="button" class="버튼${status.count }" onclick="movePage(${status.count})">${status.count }</button>
