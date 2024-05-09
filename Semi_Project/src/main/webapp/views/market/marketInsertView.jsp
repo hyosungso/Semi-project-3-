@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HEALTHLIFE</title>
 
 
 
@@ -18,15 +18,9 @@
 		margin : auto;
 		width : 800px;
 	}
-<<<<<<< HEAD
 	.slide-container{
 		width: 900px;
 		height : 500px;
-=======
-	.container{
-		width: 960px;
-		height : 480px;
->>>>>>> branch 'HYOSUNG' of https://github.com/hyosungso/Semi-project-3-.git
 		transition : transform 0.5s;
 	}
 	.inner{
@@ -74,13 +68,9 @@
 			<tr>
 				<td rowspan='4' width="480px">
 				
-<<<<<<< HEAD
-			<div style="width : 450px; height : 500px; overflow : hidden">
-				<div class="slide-container" id="imgContainer">
-=======
+
 			<div class="slide">
-				<div class="container" id="imgContainer">
->>>>>>> branch 'HYOSUNG' of https://github.com/hyosungso/Semi-project-3-.git
+				<div class="slide-container" id="imgContainer">
 					<div class="inner">
 						<img id="productImg1">
 					</div>
