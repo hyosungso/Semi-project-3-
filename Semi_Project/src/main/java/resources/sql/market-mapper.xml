@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectItemList">
+	SELECT ITEM_CODE,
+		   CATEGORY_NAME,
+		   PRICE,
+		   ITEM_NAME,
+		   FILE_PATH || CHANGE_NAME THUMBNAIL
+	FROM ITEM I
+	JOIN ITEM_CATEGORY USING (CATEGORY_NO)
+	JOIN ITEM_ATTACHMENT ON (ITEM_CODE = REF_CODE)
+	WHERE I.STATUS='Y'
+	AND FILE_LEVEL=1
+	ORDER BY SALES_VOL DESC
+		   
+	</entry>
+	
+	<entry key="selectItem">
+		SELECT ITEM_NAME,
+			   CATEGORY_NAME,
+			   PRICE,
+			   ITEM_DETAIL,
+			   ITEM_CODE
+		FROM ITEM
+		JOIN ITEM_CATEGORY USING (CATEGORY_NO)
+		WHERE STATUS='Y'
+		AND ITEM_CODE=?
+	</entry>
+	
+	<entry key="selectCategory">
+		SELECT *
+		FROM ITEM_CATEGORY
+	</entry>
+	
+	<entry key="insertItem">
+		Insert into HEALTHLIFE.ITEM (ITEM_CODE,
+									CATEGORY_NO,
+									ITEM_NAME,
+									PRICE,
+									SALES_VOL,
+									STATUS,
+									ITEM_DETAIL) 
+							values (SEQ_INO.NEXTVAL,
+									?,
+									?,
+									?,0,'Y',
+									?)
+	</entry>
+	<entry key="insertItemAttachment">
+	INSERT INTO ITEM_ATTACHMENT(FILE_CODE,
+								REF_CODE,
+								ORIGIN_NAME,
+								CHANGE_NAME,
+								FILE_PATH,
+								FILE_LEVEL)
+					VALUES(SEQ_FNO.NEXTVAL,
+						   SEQ_INO.CURRVAL,
+						   ?,
+						   ?,
+						   ?,
+						   ?)
+	</entry>
+	
+	<entry key="selectAttachmentList">
+	SELECT FILE_CODE,
+		   ORIGIN_NAME,
+		   CHANGE_NAME,
+		   FILE_PATH
+	FROM ITEM_ATTACHMENT
+	WHERE REF_CODE=?
+	AND STATUS='Y'
+	</entry>
+	<entry key="insertComponent">
+	INSERT INTO COMPONENT(ITEM_CODE,
+						  CATEGORY_NO,
+						  PROTIN,
+						  CARBO,
+						  CALORIE,
+						  SALT,
+						  FAT,
+						  CHOL,
+						  SATURATED_FAT,
+						  SUGAR,
+						  TRANS_FAT)
+				   VALUES(SEQ_INO.CURRVAL,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?,
+				   		  ?)
+	</entry>
+	<entry key="selectComponent">
+	SELECT *
+	FROM COMPONENT
+	WHERE ITEM_CODE=?
+	</entry>
+	
+</properties>
