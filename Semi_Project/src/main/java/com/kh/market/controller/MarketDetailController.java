@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.market.model.service.MarketService;
+import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
 
@@ -38,9 +39,11 @@ public class MarketDetailController extends HttpServlet {
 		
 		Item i = ms.selectItem(itemNo);
 		ArrayList<ItemAttachment> itList = ms.selectAttachmentList(itemNo);
+		Component c = ms.selectComponent(itemNo);
 		
 		request.setAttribute("i", i);
 		request.setAttribute("itList", itList);
+		request.setAttribute("c", c);
 		
 		request.getRequestDispatcher("views/market/marketDetailView.jsp").forward(request, response);
 	

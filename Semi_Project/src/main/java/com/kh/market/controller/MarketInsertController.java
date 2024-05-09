@@ -15,6 +15,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.kh.board.model.vo.Category;
 import com.kh.common.MyFileRenamePolicy;
 import com.kh.market.model.service.MarketService;
+import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
 import com.oreilly.servlet.MultipartRequest;
@@ -74,7 +75,6 @@ public class MarketInsertController extends HttpServlet {
 			
 			Item i= new Item();
 			
-			i.setItemCode(new MarketService().newItemCode());
 			i.setItemName(productName);
 			i.setCategory(category);
 			i.setPrice(price);
@@ -103,8 +103,29 @@ public class MarketInsertController extends HttpServlet {
 				}
 			}
 			
+			double calorie= Double.parseDouble(multiRequest.getParameter("calorie"));
+			double protin= Double.parseDouble(multiRequest.getParameter("protin"));
+			double salt= Double.parseDouble(multiRequest.getParameter("salt"));
+			double carbo= Double.parseDouble(multiRequest.getParameter("carbo"));
+			double fat= Double.parseDouble(multiRequest.getParameter("fat"));
+			double transFat= Double.parseDouble(multiRequest.getParameter("transFat"));
+			double saturatedFat= Double.parseDouble(multiRequest.getParameter("saturatedFat"));
+			double chol= Double.parseDouble(multiRequest.getParameter("chol"));
+			double sugar= Double.parseDouble(multiRequest.getParameter("sugar"));
+
+			Component c = new Component();
 			
-			int result=new MarketService().insertItem(i,itList);
+			c.setCalorie(calorie);
+			c.setProtin(protin);
+			c.setSalt(salt);
+			c.setCarbo(carbo);
+			c.setFat(fat);
+			c.setTransFat(transFat);
+			c.setSaturatedFat(saturatedFat);
+			c.setChol(chol);
+			c.setSugar(sugar);
+			
+			int result=new MarketService().insertItem(i,itList,category,c);
 			
 			HttpSession session=request.getSession();
 			String msg="";
