@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HEALTHLIFE</title>
 
 
 
@@ -18,9 +18,9 @@
 		margin : auto;
 		width : 800px;
 	}
-	.container{
-		width: 960px;
-		height : 480px;
+	.slide-container{
+		width: 900px;
+		height : 500px;
 		transition : transform 0.5s;
 	}
 	.inner{
@@ -33,7 +33,9 @@
 			height : 100%;
 	}
 	.component input{
-		width: 50%;
+		margin : 5px;
+		height : 20px;
+		width: 60px;
 	}
 	.component_title{
 		font-weight : lighter;
@@ -47,11 +49,11 @@
 		height : 480px; 
 		overflow : hidden
 	}
-	.btn{
+	.enter{
 		width : 100px;
 		height : 50px;
 		background-Color : skyblue;
-		border-radius : 10px
+		border-radius : 10px;
 	}
 </style>
 </head>
@@ -68,8 +70,9 @@
 			<tr>
 				<td rowspan='4' width="480px">
 				
+
 			<div class="slide">
-				<div class="container" id="imgContainer">
+				<div class="slide-container" id="imgContainer">
 					<div class="inner">
 						<img id="productImg1">
 					</div>
@@ -147,7 +150,7 @@
 	<br><br>
 	</div>
 	<div align="center">
-	<button class="btn" type="submit" >등록</button>
+	<button class="enter" type="submit" >등록</button>
 	</div>
 	
 	<br><br>
@@ -155,13 +158,15 @@
 	</form>
 	</div>
 	<script>
+		
+		
 		function movePage(num){
 			var pageLocation=480;
 			var pageNo=num-1;
 			document.querySelector(".버튼"+num).addEventListener('click',function(){
-				document.querySelector('.container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
+				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 				
-			$('.container').css("width",num*pageLocation+"px");
+				$('.slide-container').css("width",num*pageLocation+"px");
 			})
 		}
 			

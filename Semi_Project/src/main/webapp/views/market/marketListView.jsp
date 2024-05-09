@@ -30,11 +30,11 @@
 		<h2 align="center">판매 상품</h2>
 		<br>
 		<div class="list-area">
-<%-- 		<c:if test="${not empty loginUser && loginUser.status eq 'admin' }"> --%>
+		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 		<div align="center">
 			<button class='btn btn-info' onclick="location.href='${contextPath}/insert.mk'">상품등록</button>
 		</div>
-<%-- 		</c:if> --%>
+		</c:if>
 		
 		
 		<c:forEach var="it" items="${list }">

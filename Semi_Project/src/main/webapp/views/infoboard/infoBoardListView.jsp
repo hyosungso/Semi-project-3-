@@ -1,56 +1,166 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>정보게시판</title>
+<style>
+#categoryList {
+	width: 540px;
+	height: 60px;
+	align: left;
+	text-align: center;
+}
+
+#categoryList button {
+	width: 75%;
+	height: 35px;
+}
+
+button[name=category]:hover {
+	background-color: lightblue;
+}
+
+.infoboard-area {
+	width: 1200px;
+}
+
+.infoboard-area th {
+	text-align: center;
+}
+
+.infoboard-area>tbody tr:hover {
+	background-color: lightgrey;
+	cursor: pointer;
+}
+
+.ctSelected {
+	background-color: blue;
+	color: white;
+}
+</style>
 </head>
 <body>
-	<%@ include file="/views/common/menubar.jsp" %>
-	
-	<div class="search-area">
-	<input type="radio" name="category" value="10" id="normal" checked><label for="normal" >일반</label>
-	<input type="radio" name="category" value="20" id="training"><label for="training">홈트</label>
-	<input type="radio" name="category" value="30" id="gym"><label for="gym">헬스</label>
-	<input type="radio" name="category" value="40" id="food"><label for="food">식단</label>
-	<input type="text" name="keyword">
-	<button onclick="searchboard();">검색</button>
-	</div>
-	<table border="1">
-	<thead>
-	<tr>
-		<td>글번호</td>
-		<td>카테고리</td>
-		<td>제목</td>
-		<td>작성자</td>
-		<td>조회수</td>
-		<td>추천수</td>
-		<td>작성일</td>
-	</tr>
-	</thead>
-	<tbody></tbody>
+	<%@ include file="/views/common/menubar.jsp"%>
+	<br>
+	<div class=infoboard>
+		<!-- 카테고리 시작 -->
+		<table border="1" class="infoboard-area" align="center">
+			<thead>
+			<tr>
+				<th colspan="6">
+					<table id="categoryList">
+						<tr>
+							<td>
+							<button name="category" value="0">전체</button>
+							</td>
+							<c:forEach items="${ftList}" var="ft">
+							<td>
+							<button name="category" value="${ft.categoryNo}">${ft.categoryName }</button>
+							</td>
+							</c:forEach>
+						</tr>
+					</table>
+				</th>
+				<th>
+				<c:if test="${!empty loginUser eq 'admin'}">
+				<button onclick="location.href='Infoinsert.in'">글작성</button>
+				</c:if>
+				</th>
+				</tr>
+				<tr>
+					<th width="50px">글번호</th>
+					<th width="50px">카테고리</th>
+					<th width="400px">제목</th>
+					<th width="80px">작성자</th>
+					<th width="50px">조회수</th>
+					<th width="50px">추천수</th>
+					<th width="100px">작성일</th>
+
+				</tr>
+			</thead>
+			<!-- 카테고리 끝 -->
+			<tbody>
+			<c:forEach items="${fList}" var="f">
+				<tr>
+					<td>${f.boardNo}</td>
+					<td>${f.category}</td>
+					<td>${f.boardTitle}</td>
+					<td>${f.boardWriter}</td>
+					<td>${f.count}</td>
+					<td>${f.recommend}</td>
+					<td>${f.uploadDate}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
-	
-	<script>
-	function searchboard(){
-		//선택한 카테고리중 제목에 검색단어가 포함되어있는 글만 정렬(10개?)
-		$.ajax({
-			url : "search.bo",
-			data : {
-				category:$("input[name=category]:checked").val(),
-				keyword:$("input[name=keyword]").val()
-			},
-			type : "post",
-			success : function(){
-				
-			},
-			error : function(){
-				console.log($("input[name=keyword]").val());
-				console.log("아직 안만들었으니 없지");
+</div>
+    <script> 
+
+	function(){
+		$("button[name=category]").each(function(){
+			if($(this).val()==${category}){
+				$(this).attr("disabled",true);
+				$(this).addClass("ctSelected");
 			}
 		});
-	}
+		$("input[name=sortBy]").each(function(){
+			if($(this).val()=="${sort}"){
+				$(this).attr("checked",true);
+			}
+		});
+		$("button[name=category]").click(function(){
+			var category=$(this).val();
+			var sortBy=$("input[name=sortBy]:checked").val();
+			location.href="Infoboard.bo?currentPage=1&category="+category+"&sort="+sortBy;
+		});
+		$(".board-area>tbody tr").click(function(){
+			var bno=$(this).children().eq(0).text();
+			location.href="detail.bo?bno="+bno;
+		});
+	});
 	</script>
+	<!-- 검색창 -->
 	
+	<br>
+	<div class="paging" align="center">
+	<c:choose>
+	<c:when test="${pi.currentPage eq 1}">
+	<button disabled>이전</button>
+	</c:when>
+	<c:otherwise>
+	<button onclick="location.href='infoboard.bo?currentPage=${pi.currentPage-1}&category=${category}&sort=${sort}'">이전</button>
+	</c:otherwise>
+	
+	<c:forEach var = "i" begin="${pi.startPage}" end="${pi.endPage}">
+	<button onclick="location.href='infoboard.bo?currentPage=${i}&category=${category}&sort=${sort}'">${i}</button>
+	</c:forEach>
+	</c:choose>
+	
+	<c:choose>
+	<c:when test="${pi.currentPage eq pi.maxPage}">
+	<button disabled>다음</button>
+	</c:when>
+	<c:otherwise>
+	<button onclick="location.href='infoboard.bo?currentPage=${pi.currentPage+1}&category=${category}&sort=${sort}'">다음</button>
+	</c:otherwise>
+	</c:choose>
+	
+	<br><br>
+	
+	<form action="infosearch.bo">
+	<select name="searchCategory">
+	<option value="title">글제목</option>
+	<option value="content">글내용</option>
+	<!--<option value="nickname">닉네임</option>-->
+	</select>
+	
+	<input type="text" name="search" style="width:350px">
+	<button type="submit">검색</button>
+	</form>
+	</div>
+	
+
 </body>
 </html>

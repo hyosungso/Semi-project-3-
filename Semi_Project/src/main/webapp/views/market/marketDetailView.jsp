@@ -4,20 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-	.form-area{
+<title>HEALTHLIFE</title>
+
+<style>	
+	
+	#form_area{
 		margin : auto;
 		width : 700px;
 	}
-	.container{
-		width: 960px;
+
+	.slide-container{
+		width: 900px;
 		height : 500px;
 		transition : transform 0.5s;
+
 	}
 	.inner{
-		width: 480px;
+
+		width: 450px;
 		height : 480px;
+		padding: 0px;
 		float : left;
 	}
 	.inner img{
@@ -25,9 +31,11 @@
 			height : 100%;
 	}
 	.slide{
-		width : 480px; 
-		height : 480px; 
-		overflow : hidden
+		width : 450px;
+		height : 480px;
+		overflow : hidden;
+		padding: 0px;
+
 	}
 	.component_title{
 		font-weight : lighter;
@@ -57,6 +65,7 @@
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
 	<br>
+
 		<h2 align="center">상품 상세보기</h2>
 		
 		<div class="form-area">
@@ -65,7 +74,11 @@
 				<td rowspan='4'>
 				
 			<div class="slide">
-				<div class="container" id="imgContainer">
+
+				
+
+				<div class="slide-container" id="imgContainer">
+
 				<c:forEach  items="${itList }" var="it" >
 					<div class="inner">
 							<img src="${contextPath}${it.filePath }${it.changeName}">
@@ -75,6 +88,7 @@
 					
 				</div>
 			</div>
+				
 			<div id="pagination">
 			<c:forEach items="${itList }" varStatus="status">
 			<button type="button" class="버튼${status.count }" onclick="movePage(${status.count})">${status.count }</button>
@@ -103,12 +117,14 @@
 	 <div class="component">
 	 
 	 <div class="order">
-<!-- 	 	<input type="button" value="주문하기" style=" background-color: orange;"> -->
-<!-- 	 	<input type="button" value="장바구니"> -->
 
-		<button style=" background-color: orange;">주문하기</button>
-		<button>장바구니</button>
+	<form action="cart.mk?${i.itemCode }" method="post" name="addform">
+		<a href="#"></a>주문하기
+		장바구니
+	</form>
+		
 	 </div>
+	 
 	 <br><br>
 	<h3>영양성분</h3>
 		<table>
@@ -145,14 +161,21 @@
 	</div>
 	</div>
 	</div>
+
 	<script>
+	/* function addToCart(){
+		if(confirm('상품을 장바구니에 추가하시겠습니까?')){
+			document.addForm.
+		}
+	} */
+	
 	function movePage(num){
-		var pageLocation=480;
+		var pageLocation=450;
 		var pageNo=num-1;
 		document.querySelector(".버튼"+num).addEventListener('click',function(){
-			document.querySelector('.container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
+			document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 			
-		$('.container').css("width",num*pageLocation+"px");
+			$('.slide-container').css("width",num*pageLocation+"px");
 		})
 	}
 	
