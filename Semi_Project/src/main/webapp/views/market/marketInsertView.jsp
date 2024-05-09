@@ -33,7 +33,9 @@
 			height : 100%;
 	}
 	.component input{
-		width: 50%;
+		margin : 5px;
+		height : 20px;
+		width: 60px;
 	}
 	.component_title{
 		font-weight : lighter;
@@ -47,11 +49,11 @@
 		height : 480px; 
 		overflow : hidden
 	}
-	.btn{
+	.enter{
 		width : 100px;
 		height : 50px;
 		background-Color : skyblue;
-		border-radius : 10px
+		border-radius : 10px;
 	}
 </style>
 </head>
@@ -148,7 +150,7 @@
 	<br><br>
 	</div>
 	<div align="center">
-	<button class="btn" type="submit" >등록</button>
+	<button class="enter" type="submit" >등록</button>
 	</div>
 	
 	<br><br>
