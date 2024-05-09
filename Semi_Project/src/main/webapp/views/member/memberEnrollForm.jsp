@@ -47,7 +47,11 @@
 
 				<tr>
 					<td>성별 (F/M) </td>
-					<td><input type="text" name="gender" required></td>
+					<td>
+						<label><input type="checkbox" name="gender" required>
+						<input type="checkbox" name="gender" required>
+					
+					</td>
 				</tr>
 
 				<tr>
