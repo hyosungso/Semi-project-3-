@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+	pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
 	//로그인 정보 추출하기 
 	Member loginUser = (Member)session.getAttribute("loginUser");
@@ -14,168 +14,164 @@
 	//contextPath 변수처리해서 사용하기 
 	String contextPath = request.getContextPath();
 	
-%>  
+%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEALTHLIFE</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	
-	<!-- Popper JS -->
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .header{
-            position: relative;
-            width: 80%;
-            margin : auto;
-            z-index: 20;
-            background-color: #fff;
-        }
-        .header-inner{
-            
-        position: relative;
-        max-width: 1300px;
-        min-height: 130px;
-        margin: 0 auto;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
-        }
-        .util{
-            position: absolute;
-            top: 0px;
-           	right: 5%;
-        }
-        .util>ul{
-          
-            float: right;
-            list-style: none;
-            overflow: hidden;
-        }
-        .util>ul>li{
-            display: inline;
-            font-size: 13px;
-            
-        }
-        .util a{
-            text-decoration: none;
-            color: gray;
-        }
-            .logo{
-            display: block;
-            position: absolute;
-            top: 20px;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-        .logo img{
-            width: 300px;
-           float: left;
-          
-        }
-        .logo a{
-            width: 300px;
-           float: left;
-          
-        }
+<!-- Popper JS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
-        .nav-area{
-        	margin:auto;
-        	width:1300PX;
-            background-color: black;
-            position: relative;
-             z-index: 5;
-           
-        }
-        .menu{
-            display: flex;
-            height: 50px;
-            margin: auto;
-            width: 1100px;
-        }
-        .menu div{
-            width: 100%;
-            margin: auto
-        }
-        .menu a {
-            text-decoration: none;
-            color:white;
-            font-size: 20px;
-            font-weight: bold;
-            display: block;
-            width: 100%;
-            height: 100%;
-            line-height: 50px;
-        }
-        .menu a:hover{
-            background-color: rgb(144, 142, 142);
-        }
-        
-        .board ul{
-            margin: auto;
-        }
-        
-        #navi>li>ul{
-            list-style-type: none;
-            background-color: black;
-            padding: 0px;  /*padding 0 처리*/
-            display: none; /*안보이게 처리하기*/
-        }
-        #navi>li>a:hover+ul{
-            /*안보이는 ul 보여주기*/
-            
-            display: block;
-        }
-        #navi>li>ul:hover{
-            display: block;
-        }
-       
-       .board-category a{
-        font-size: 15px
-       }
-       	.outer{
-            background-color: black;
-            color: white;
-            width: 1300px;
-            margin: auto; /*가운데 자동정렬*/
-            margin-top: 50px; /*위로부터 50px 여백*/
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+.header {
+	position: relative;
+	width: 80%;
+	margin: auto;
+	z-index: 20;
+	background-color: #fff;
+}
 
-        }
-    	 .image2{
-      	 width : 40px;
-      	 heigth: 40px;
-      }
-        
-        
-      .util-icons li{
-      margin : 4px;
-      }
+.header-inner {
+	position: relative;
+	max-width: 1300px;
+	min-height: 130px;
+	margin: 0 auto;
+}
 
-    </style>
+.util {
+	position: absolute;
+	top: 0px;
+	right: 5%;
+}
+
+.util>ul {
+	float: right;
+	list-style: none;
+	overflow: hidden;
+}
+
+.util>ul>li {
+	display: inline;
+	font-size: 13px;
+}
+
+.util a {
+	text-decoration: none;
+	color: gray;
+}
+
+.logo {
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.logo img {
+	width: 300px;
+	float: left;
+}
+
+.logo a {
+	width: 300px;
+	float: left;
+}
+
+.nav-area {
+	margin: auto;
+	width: 1300PX;
+	background-color: black;
+	position: relative;
+	z-index: 5;
+}
+
+.menu {
+	display: flex;
+	height: 50px;
+	margin: auto;
+	width: 1100px;
+}
+
+.menu div {
+	width: 100%;
+	margin: auto
+}
+
+.menu a {
+	text-decoration: none;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	display: block;
+	width: 100%;
+	height: 100%;
+	line-height: 50px;
+}
+
+.menu a:hover {
+	background-color: rgb(144, 142, 142);
+}
+
+.board ul {
+	margin: auto;
+}
+
+#navi>li>ul {
+	list-style-type: none;
+	background-color: black;
+	padding: 0px;
+	display: none;
+}
+
+#navi>li>a:hover+ul {
+	/*안보이는 ul 보여주기*/
+	display: block;
+}
+
+#navi>li>ul:hover {
+	display: block;
+}
+
+.board-category a {
+	font-size: 15px
+}
+
+.outer {
+	background-color: black;
+	color: white;
+	width: 1300px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.image2 {
+	width: 40px;
+	heigth: 40px;
+}
+
+.util-icons li {
+	margin: 4px;
+}
+</style>
 
 </head>
 <body>
-	<script>
-		//알림메세지 띄워주기 
-		//로그인성공 또는 null - 값 자체로 반환되기때문에 문자열 " "처리 해야함
-		var msg = "<%=alertMsg%>";
-		
-		if(msg!="null"){ //null이 아니면 알림메세지 띄워라
-			alert(msg); 
-			//알림 띄워주고 해당 메세지 지워주기
-			<%session.removeAttribute("alertMsg");%>
-		}
-	</script>
-
-
-	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 	<script>
 	
@@ -187,78 +183,76 @@
 		}
 	</script>
 
-    <div class="header">
-       
-        <div class="header-inner">
-            <div class="logo">
-                <a href="${contextPath }"><img src="${contextPath}/resources/logo/temp.png"></a>
-            </div>
+	<div class="header">
+
+		<div class="header-inner">
+			<div class="logo">
+				<a href="${contextPath }">
+				<img src="${contextPath}/resources/logo/temp.png"></a>
+			</div>
 
 
-            </div>
+		</div>
 
-            <%if(loginUser == null) {%>
-            <div class="util"><ul>
-            	
-                <li><br><br><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
-                <li>| <a href="enrollForm.me">회원가입</a></li>
-            </ul>
-            </div>
-            	<%}else{ %>
-            <div class="util"><br><br>
-            <b><%=loginUser.getUserName()%>님 환영합니다.</b>
-            <div align="center">
-                <a href="${contextPath }/views/member/MyPage.jsp">마이페이지</a> 
-                <a href="<%=contextPath %>/logout.me">로그아웃</a>
-            </div>
-             <%} %>
-                <br>
-            <ul class="util-icons">
-            	<li><a href="cart.mk">
-            	<img class="image" width = 40 height = 40>
-            	</a>
-            	</li>
-            	<li class="myPage-icon">
-            	<a href="myPage.me">
-            		<img class="image2">
-            	</a>
-            	</li>
-            	
-            </ul>
-            </div>
-        </div>
-            
-            
-        </div>
-  
+		<%if(loginUser == null) {%>
+		<div class="util">
+			<br>
+			<br> <a href="${contextPath}/views/member/login.jsp" id="imageLink"> 
+				<img class="image2"> </a>&nbsp;&nbsp;&nbsp; 
+				<a href="cart.mk"> 
+					<img class="image" width=40 height=40></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
+					<a href="enrollFormBefore.me">회원가입</a>
 
-    <div class="nav-area" align="center">
-        <div class="menu">
-            <div class="board">
-                <ul id="navi">
-                    <li><a href="">게시판</a>
-                        <ul class="board-category">
-                            <li><a href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
-                            <li><a href="">정보게시판</a></li>
-                        </ul></li>
-                </ul>
-               
-                </div>
-            <div><a href="">운동법</a></div>
-            <div><a href="list.mk">매장(후순위)</a></div>
-            <div><a href="">개인기록(후순위)</a></div>
-        </div>
+		</div>
+		<script>
+			document.getElementById('imageLink').addEventListener('click', function(event) {
+    		alert("로그인한 상태에서 사용 가능합니다.");
+    		window.location.href = "${contextPath}/views/member/login.jsp";
+			});
+		</script>
+		<%}else{ %>
+		<div class="util">
+			<br>
+			<br> <a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
+			<a href="cart.mk"> 
+				<img class="image" width=40 height=40>
+			</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a href="logout.me">로그아웃</a>
+			<%} %>
+		</div>
+	</div>
 
-    </div>
+
+
+	<div class="nav-area" align="center">
+		<div class="menu">
+			<div class="board">
+				<ul id="navi">
+					<li><a href="">게시판</a>
+						<ul class="board-category">
+							<li><a
+								href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
+							<li><a href="">정보게시판</a></li>
+						</ul></li>
+				</ul>
+
+			</div>
+			<div>
+				<a href="">운동법</a>
+			</div>
+			<div>
+				<a href="list.mk">매장(후순위)</a>
+			</div>
+			<div>
+				<a href="">개인기록(후순위)</a>
+			</div>
+		</div>
+
+	</div>
 
 	<script>
-    //로그인성공/null-값 자체로 반환되기 때문에 문자열""로 감싸줘야함
-    var msg="<%=alertMsg%>";
-    if(msg!="null") {//alert값이 없으면 null 자체가 문자로 반환
-    	alert(msg);
-    //알림을 띄운후에 해당 메시지 지우기
-    <%session.removeAttribute("alertMsg");%>
-    }
+    
     const staticImg= "<%=contextPath%>/resources/icons/icons-cart-static.png"
     const gifImg= "<%=contextPath%>/resources/icons/icons-cart.gif" 
     
