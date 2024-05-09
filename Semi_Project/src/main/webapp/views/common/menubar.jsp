@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-
 <%
 	//로그인 정보 추출하기 
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	//로그인이 되어있지 않다면 loginUser라는 key값으로 데이터를 조회할 수 없으니 
 	//null이 반환된다. 로그인이 되었다면 해당 로그인 정보가 반환된다. 
-	
 	//알림 메세지 추출하기 
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	
@@ -26,6 +24,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	
+	<!-- Popper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .header{
             position: relative;
@@ -85,6 +90,9 @@
         	margin:auto;
         	width:1300PX;
             background-color: black;
+            position: relative;
+             z-index: 5;
+           
         }
         .menu{
             display: flex;
@@ -128,6 +136,7 @@
         #navi>li>ul:hover{
             display: block;
         }
+       
        .board-category a{
         font-size: 15px
        }
@@ -139,14 +148,44 @@
             margin-top: 50px; /*위로부터 50px 여백*/
 
         }
+    	 .image2{
+      	 width : 40px;
+      	 heigth: 40px;
+      }
+        
+        
+      .util-icons li{
+      margin : 4px;
+      }
 
     </style>
 
 </head>
 <body>
+	<script>
+		//알림메세지 띄워주기 
+		//로그인성공 또는 null - 값 자체로 반환되기때문에 문자열 " "처리 해야함
+		var msg = "<%=alertMsg%>";
+		
+		if(msg!="null"){ //null이 아니면 알림메세지 띄워라
+			alert(msg); 
+			//알림 띄워주고 해당 메세지 지워주기
+			<%session.removeAttribute("alertMsg");%>
+		}
+	</script>
 
 
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
+	<script>
+	
+		var msg = "<%= alertMsg%>"
+		
+		if(msg!="null"){
+			alert(msg);
+			<%session.removeAttribute("alertMsg");%>
+		}
+	</script>
 
     <div class="header">
        
@@ -157,15 +196,39 @@
 
 
             </div>
+
+            <%if(loginUser == null) {%>
             <div class="util"><ul>
-
-             
-
-             <li><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
-             <li><a href="enrollFormBefore.me">회원가입</a></li>
-
+            	
+                <li><br><br><a href='${pageContext.request.contextPath}/views/member/login.jsp'>로그인</a></li>
+                <li>| <a href="enrollForm.me">회원가입</a></li>
             </ul>
             </div>
+            	<%}else{ %>
+            <div class="util"><br><br>
+            <b><%=loginUser.getUserName()%>님 환영합니다.</b>
+            <div align="center">
+                <a href="${contextPath }/views/member/MyPage.jsp">마이페이지</a> 
+                <a href="<%=contextPath %>/logout.me">로그아웃</a>
+            </div>
+             <%} %>
+                <br>
+            <ul class="util-icons">
+            	<li><a href="cart.mk">
+            	<img class="image" width = 40 height = 40>
+            	</a>
+            	</li>
+            	<li class="myPage-icon">
+            	<a href="myPage.me">
+            		<img class="image2">
+            	</a>
+            	</li>
+            	
+            </ul>
+            </div>
+        </div>
+            
+            
         </div>
   
 
@@ -187,6 +250,44 @@
         </div>
 
     </div>
+
+	<script>
+    //로그인성공/null-값 자체로 반환되기 때문에 문자열""로 감싸줘야함
+    var msg="<%=alertMsg%>";
+    if(msg!="null") {//alert값이 없으면 null 자체가 문자로 반환
+    	alert(msg);
+    //알림을 띄운후에 해당 메시지 지우기
+    <%session.removeAttribute("alertMsg");%>
+    }
+    const staticImg= "<%=contextPath%>/resources/icons/icons-cart-static.png"
+    const gifImg= "<%=contextPath%>/resources/icons/icons-cart.gif" 
+    
+    const image = document.querySelector('.image');
+
+    image.src = staticImg;
+
+    image.addEventListener("mouseenter", function() {
+      image.src = gifImg;
+    });
+    image.addEventListener("mouseleave", function() {
+      image.src = staticImg;
+    });
+    
+    const staticImg2= "<%=contextPath%>/resources/icons/img.icons-normal.png"
+        const gifImg2= "<%=contextPath%>/resources/icons/img.icons-hover.gif" 
+        
+        const image2 = document.querySelector('.image2');
+
+        image2.src = staticImg2;
+
+        image2.addEventListener("mouseenter", function() {
+          image2.src = gifImg2;
+        });
+        image2.addEventListener("mouseleave", function() {
+          image2.src = staticImg2;
+        });
+    
+    </script>
 
 </body>
 </html>

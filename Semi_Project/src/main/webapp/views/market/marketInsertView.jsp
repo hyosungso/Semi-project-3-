@@ -10,18 +10,50 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script> <!-- 슬라이드 지원 -->
+
 
 
 <style>
 	#form_area{
 		margin : auto;
-		width : 700px;
+		width : 800px;
 	}
-	
+	.container{
+		width: 960px;
+		height : 480px;
+		transition : transform 0.5s;
+	}
+	.inner{
+		width: 480px;
+		height : 480px;
+		float : left;
+	}
+	.inner img{
+			width: 100%;
+			height : 100%;
+	}
+	.component input{
+		width: 50%;
+	}
+	.component_title{
+		font-weight : lighter;
+		font-size : 13px; 
+	}
+	.main{
+		width : 100%;
+	}
+	.slide{
+		width : 480px; 
+		height : 480px; 
+		overflow : hidden
+	}
+	.btn{
+		width : 100px;
+		height : 50px;
+		background-Color : skyblue;
+		border-radius : 10px
+	}
 </style>
-
 </head>
 <body>
 	
@@ -32,15 +64,28 @@
 		<br>
 		<div id="form_area">
 		<form action="${contextPath }/insert.mk" method="post" enctype="multipart/form-data" id="insert-form"> 
-		<table align="center" border="1">
+		<table class="main" align="center" border="1">
 			<tr>
-				<td rowspan=4>
-				 <img id="productImg" width="450px" height="500px">
+				<td rowspan='4' width="480px">
+				
+			<div class="slide">
+				<div class="container" id="imgContainer">
+					<div class="inner">
+						<img id="productImg1">
+					</div>
+					
+				</div>
+			</div>
+			<div id="pagination">
+			<button type="button" class="버튼1" onclick="movePage(1)">1</button>
+			</div>
+			
+			 
 				</td>
 				<th>상품명 : <input type=text name="productName" required></input></th>
 			</tr>
 			<tr>
-				<th> 카테고리 : <select>
+				<th> 카테고리 : <select name="category">
 					<c:forEach items="${cList }" var="cList">
 					<option value="${cList.categoryNo}">${cList.categoryName}</option>
 					</c:forEach>
@@ -52,9 +97,9 @@
 				
 				<th>가격 : <input type="number" name="price" required></th>
 			</tr>
-			<tr>
+			<tr align="center">
 				<td>상세설명 <br>
-				<textarea rows="26" cols="30" name="itemDetail" style="resize:none;" required></textarea> </td>
+				<textarea rows="25" cols="39" name="itemDetail" style="resize:none;" required></textarea> </td>
 			</tr>
 			
 			
@@ -66,22 +111,71 @@
 		</div>
 		
 		<button type="button" onclick="addImg();">사진 추가 입력</button> <br>
-		<button type="submit" align="center">등록</button>
+		
 		<input type="hidden" value="2" id="count" name="count">
+	
+	<br><br>
+	
+	<div class="component">
+	<h3>영양성분</h3>
+		<table>
+			<tbody>
+				<tr class="component_title">
+					<td>열량</td>
+					<td>단백질</td>
+					<td>나트륨</td>
+					<td>탄수화물</td>
+					<td>지방</td>
+					<td>트랜스지방</td>
+					<td>포화지방</td>
+					<td>콜레스테롤</td>
+					<td>당류</td>
+				</tr>
+				<tr>
+					<td><input type="number" name="calorie" step="0.01">kcal</td>
+					<td><input type="number" name="protin" step="0.01">g</td>
+					<td><input type="number" name="salt" step="0.01">mg</td>
+					<td><input type="number" name="carbo" step="0.01">g</td>
+					<td><input type="number" name="fat" step="0.01">g</td>
+					<td><input type="number" name="transFat" step="0.01">g</td>
+					<td><input type="number" name="saturatedFat" step="0.01">g</td>
+					<td><input type="number" name="chol" step="0.01">mg</td>
+					<td><input type="number" name="sugar" step="0.01">g</td>
+				</tr>
+			</tbody>
+		</table>
+	<br><br>
+	</div>
+	<div align="center">
+	<button class="btn" type="submit" >등록</button>
+	</div>
 	
 	<br><br>
 	
 	</form>
 	</div>
 	<script>
-		
-	
-		$(function(){
-			$("#productImg").click(function(){
-				$("#itemImg").click();
+		function movePage(num){
+			var pageLocation=480;
+			var pageNo=num-1;
+			document.querySelector(".버튼"+num).addEventListener('click',function(){
+				document.querySelector('.container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 				
+			$('.container').css("width",num*pageLocation+"px");
+			})
+		}
+			
+		
+		$(function(){
+			$("#productImg1").click(function(){
+				$("#itemImg1").click();
 			});
 		});
+		
+		function inputImg(num){
+			$("#itemImg"+num).click();
+		}
+		
 		
 		function loadImg(inputFile,num){
 			if(inputFile.files.length==1){
@@ -90,16 +184,22 @@
 				reader.readAsDataURL(inputFile.files[0]);
 				
 				reader.onload =function(e){
-						$("#productImg").attr("src",e.target.result);
+						$("#productImg"+num).attr("src",e.target.result);
 					}
 				}else{
-					$("#productImg").attr("src",null);
+					$("#productImg"+num).attr("src",null);
 			}
 		}
 		function addImg(){
 			var count=document.getElementById("count");
+			$("#pagination")
+			.append("<button type='button' class='버튼"+count.value+"' onclick='movePage("+count.value+")'>"+count.value+"</button>");
+			
 			$("#img-area")
 			.append("<label for='itemImg"+count.value+"'>상품이미지</label> <input type=file id='itemImg"+count.value+"' name='itemImg"+count.value+"' onchange='loadImg(this,"+count.value+");'><br>");
+			
+			$("#imgContainer")
+			.append("<div class='inner'><img id='productImg"+count.value+"' onclick='inputImg("+count.value+");'></div>");
 			count.value++;
 		}
 	</script>

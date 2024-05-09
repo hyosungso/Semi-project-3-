@@ -44,7 +44,7 @@
 	<table border="1" class="board-area" align="center">
 	<thead>
 	<tr>
-		<th colspan="7">
+		<th colspan="6">
 		<table id="categoryList">
 		<tr>
 		<td><button name="category" value="0">전체</button></td>
@@ -53,6 +53,18 @@
 		</c:forEach>
 		</tr>
 		</table>
+		<table>
+		<tr>
+		<td><input type="radio" name="sortBy" id="latest" value="latest"><label for="latest">최신순</label></td>
+		<td><input type="radio" name="sortBy" id="view" value="view"><label for="view">조회순</label></td>
+		<td><input type="radio" name="sortBy" id="recommend" value="recommend"><label for="recommend">추천순</label></td>
+		</tr>
+		</table>
+		</th>
+		<th>
+		<c:if test="${!empty loginUser }">
+		<button onclick="location.href='insert.bo'">글작성</button>
+		</c:if>
 		</th>
 	</tr>
 	<tr>
@@ -81,23 +93,7 @@
 	</table>
 	</div>
 	<script>
-	function searchboard(){
-		//선택한 카테고리중 제목에 검색단어가 포함되어있는 글만 정렬(10개?)
-		$.ajax({
-			url : "search.bo",
-			data : {
-				
-			},
-			type : "post",
-			success : function(){
-				
-			},
-			error : function(){
-				console.log($("input[name=keyword]").val());
-				console.log("아직 안만들었으니 없지");
-			}
-		});
-	}
+	
 	$(function(){
 		$("button[name=category]").each(function(){
 			if($(this).val()==${category}){
@@ -105,9 +101,15 @@
 				$(this).addClass("ctSelected");
 			}
 		});
+		$("input[name=sortBy]").each(function(){
+			if($(this).val()=="${sort}"){
+				$(this).attr("checked",true);
+			}
+		});
 		$("button[name=category]").click(function(){
 			var category=$(this).val();
-			location.href="board.bo?currentPage=1&category="+category;
+			var sortBy=$("input[name=sortBy]:checked").val();
+			location.href="board.bo?currentPage=1&category="+category+"&sort="+sortBy;
 		});
 		$(".board-area>tbody tr").click(function(){
 			var bno=$(this).children().eq(0).text();
@@ -123,20 +125,30 @@
 			<button disabled>이전</button>
 		</c:when>
 		<c:otherwise>
-			<button onclick="location.href='board.bo?currentPage=${pi.currentPage-1}&category=${category}'">이전</button>
+			<button onclick="location.href='board.bo?currentPage=${pi.currentPage-1}&category=${category}&sort=${sort}'">이전</button>
 		</c:otherwise>
 	</c:choose>
 		<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
-			<button onclick="location.href='board.bo?currentPage=${i}&category=${category}'">${i}</button>
+			<button onclick="location.href='board.bo?currentPage=${i}&category=${category}&sort=${sort}'">${i}</button>
 		</c:forEach>
 	<c:choose>
 		<c:when test="${pi.currentPage eq pi.maxPage}">
 			<button disabled>다음</button>
 		</c:when>
 		<c:otherwise>
-			<button onclick="location.href='board.bo?currentPage=${pi.currentPage+1}&category=${category}'">다음</button>
+			<button onclick="location.href='board.bo?currentPage=${pi.currentPage+1}&category=${category}&sort=${sort}'">다음</button>
 		</c:otherwise>
 	</c:choose>
+	<br>
+	<form action="search.bo">
+	<select name="searchCategory">
+	<option value="title">글제목</option>
+	<option value="content">글내용</option>
+	<!-- <option value="writer">작성자</option> -->
+	</select>
+	<input type="text" name="search" style="width:350px">
+	<button type="submit">검색</button>
+	</form>
 	</div>
 </body>
 </html>

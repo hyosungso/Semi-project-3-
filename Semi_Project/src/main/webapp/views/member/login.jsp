@@ -138,16 +138,24 @@
 </style>
 </head>
 <body>
+	<script>
+		var msg = "<%=alertMsg%>";
+		
+		if(msg!="null"){
+			alert(msg); 
+			<%session.removeAttribute("alertMsg");%>
+		}
+	</script>
  <%
-    String clientId = "FutmSJFgSoacokH2aZwQ";//애플리케이션 클라이언트 아이디값";
+    String naverId = "FutmSJFgSoacokH2aZwQ";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http://localhost:8888/HealthLife/views/member/callback.jsp", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
-         + "&client_id=" + clientId
+         + "&client_id=" + naverId
          + "&redirect_uri=" + redirectURI
          + "&state=" + state;
-    session.setAttribute("state", state);
+    session.setAttribute("clientId", naverId);
  %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	<div class="header">
@@ -172,33 +180,43 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<label for="saveId">아이디 저장</label><input type="checkbox" id="saveId" name="SaveId">
+						<label for="saveId">아이디 저장</label><input type="checkbox" id="saveId" name="saveId">
 					</td>
 				</tr>
 				<tr>
-					<th colspan="3">
+					<th colspan="2">
 						<button type="submit">로그인</button>
 						<button type="button" class="btn-secondary" onclick="location.href='${contextPath }/views/member/memberEnrollForm.jsp'">회원가입</button>
 						<a href="<%=apiURL%>"><img height="50" width="50%" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+						<br><br>
 					</th>
 				</tr>
+				<th colspan="2">
+   					<div style="display: flex; justify-content: space-between;">
+        				<button type="button" onclick="location.href='${contextPath }/views/member/fId.jsp'" name="FId" style="width: 48%; background-color: yellow; color : black;">아이디 찾기</button>
+        				<button type="button" onclick="location.href='${contextPath }/views/member/fPwd.jsp'" name="FPwd" style="width: 48%; background-color: yellow; color : black;">비밀번호 찾기</button>
+        				
+    				</div>
+				</th>
 				
 
 			
 			</table>
 		</form>
 		
+		
 		 <script>
         	$(function(){
         		
         		var saveId = "${cookie.userId.value}";
-        		console("saveId")
+        		console.log(saveId);
 				if(saveId!=""){
 					$("#saveId").attr("checked",true);
 					$("#loginId").val(saveId);
 				}        		
         		
         	});
+        	
         
         </script>
 

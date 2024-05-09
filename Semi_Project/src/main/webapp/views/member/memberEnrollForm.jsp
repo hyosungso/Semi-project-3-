@@ -23,20 +23,19 @@
 
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" id="userId" name="userId" required></td>
+					<td><input type="text" name="userId" required></td>
 					<td><button type="button" onclick="checkId();">중복확인</button></td>
 				</tr>
 
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" id="userPwd" name="userPwd"
-						required></td>
+					<td><input type="password" name="userPwd" required></td>
 					<td></td>
 				</tr>
 
 				<tr>
 					<td>비밀번호 확인</td>
-					<td><input type="password" id="pwChk" name="userPwd" required></td>
+					<td><input type="password" name="userPwd" required></td>
 				</tr>
 
 				<tr>
@@ -46,28 +45,28 @@
 				</tr>
 
 				<tr>
-					<td>성별 (F/M) </td>
+					<td>성별</td>
 					<td>
-						<label><input type="checkbox" name="gender" required>
-						<input type="checkbox" name="gender" required>
+						<label><input type="checkbox" name="gender" value="M">남자</label>
+						<label><input type="checkbox" name="gender" value="F">여자</label>
 					
 					</td>
 				</tr>
 
 				<tr>
 					<td>닉네임</td>
-					<td><input type="text" name="NickName" required></td>
+					<td><input type="text" name="nickName" required></td>
 				</tr>
 
 				<tr>
 					<td>이메일</td>
-					<td><input type="email" name="email"></td>
+					<td><input type="email" name="email" required></td>
 				</tr>
 
 				<tr>
 					<td>전화번호</td>
 					<td>
-						<input type="text" name="phone">
+						<input type="text" name="phone" required>
 					</td>
 				</tr>
 
