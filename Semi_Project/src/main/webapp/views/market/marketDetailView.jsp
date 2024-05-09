@@ -14,10 +14,9 @@
 	}
 
 	.slide-container{
-		height : 450px;
-	    padding: 0px;
-	    margin: auto;
-
+		width: 900px;
+		height : 500px;
+		transition : transform 0.5s;
 
 	}
 	.inner{
@@ -66,6 +65,7 @@
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
 	<br>
+
 		<h2 align="center">상품 상세보기</h2>
 		
 		<div class="form-area">
@@ -75,9 +75,9 @@
 				
 			<div class="slide">
 
-				<div class="slide-container" id="imgContainer">
+				
 
-				<div class="container" id="imgContainer">
+				<div class="slide-container" id="imgContainer">
 
 				<c:forEach  items="${itList }" var="it" >
 					<div class="inner">
@@ -88,7 +88,7 @@
 					
 				</div>
 			</div>
-				</div>
+				
 			<div id="pagination">
 			<c:forEach items="${itList }" varStatus="status">
 			<button type="button" class="버튼${status.count }" onclick="movePage(${status.count})">${status.count }</button>
@@ -117,12 +117,14 @@
 	 <div class="component">
 	 
 	 <div class="order">
-<!-- 	 	<input type="button" value="주문하기" style=" background-color: orange;"> -->
-<!-- 	 	<input type="button" value="장바구니"> -->
 
-		<button style=" background-color: orange;">주문하기</button>
-		<button>장바구니</button>
+	<form action="cart.mk?${i.itemCode }" method="post" name="addform">
+		<a href="#"></a>주문하기
+		장바구니
+	</form>
+		
 	 </div>
+	 
 	 <br><br>
 	<h3>영양성분</h3>
 		<table>
@@ -159,9 +161,16 @@
 	</div>
 	</div>
 	</div>
+
 	<script>
+	/* function addToCart(){
+		if(confirm('상품을 장바구니에 추가하시겠습니까?')){
+			document.addForm.
+		}
+	} */
+	
 	function movePage(num){
-		var pageLocation=480;
+		var pageLocation=450;
 		var pageNo=num-1;
 		document.querySelector(".버튼"+num).addEventListener('click',function(){
 			document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
