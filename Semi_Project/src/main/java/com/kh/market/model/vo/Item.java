@@ -5,6 +5,7 @@ public class Item {
 	private int itemCode;
 	private int category;
 	private int price;
+	private int discount;
 	private int salesVol;
 	private String itemDetail;
 	private String itemName;
@@ -49,6 +50,12 @@ public class Item {
 	}
 	
 	
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
 	public String getCategoryName() {
 		return categoryName;
 	}

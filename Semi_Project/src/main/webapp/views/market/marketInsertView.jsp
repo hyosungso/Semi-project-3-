@@ -68,7 +68,7 @@
 		<form action="${contextPath }/insert.mk" method="post" enctype="multipart/form-data" id="insert-form"> 
 		<table class="main" align="center" border="1">
 			<tr>
-				<td rowspan='4' width="480px">
+				<td rowspan='5' width="480px">
 				
 
 			<div class="slide">
@@ -99,6 +99,10 @@
 			<tr>
 				
 				<th>가격 : <input type="number" name="price" required></th>
+				
+			</tr>
+			<tr>
+				<td>할인률 : <input type="number" id="discount" name="discount" required>%</td>
 			</tr>
 			<tr align="center">
 				<td>상세설명 <br>
@@ -110,7 +114,8 @@
 		</table>
 		<br>
 		<div id="img-area">
-		<label for="itemImg1">상품이미지</label> <input type=file id="itemImg1" name="itemImg1" onchange="loadImg(this,1);" required><br>
+		<label for="itemImg1">상품이미지</label>
+		<input type=file id="itemImg1" name="itemImg1" onchange="loadImg(this,1);" required>
 		</div>
 		
 		<button type="button" onclick="addImg();">사진 추가 입력</button> <br>
@@ -135,22 +140,22 @@
 					<td>당류</td>
 				</tr>
 				<tr>
-					<td><input type="number" name="calorie" step="0.01">kcal</td>
-					<td><input type="number" name="protin" step="0.01">g</td>
-					<td><input type="number" name="salt" step="0.01">mg</td>
-					<td><input type="number" name="carbo" step="0.01">g</td>
-					<td><input type="number" name="fat" step="0.01">g</td>
-					<td><input type="number" name="transFat" step="0.01">g</td>
-					<td><input type="number" name="saturatedFat" step="0.01">g</td>
-					<td><input type="number" name="chol" step="0.01">mg</td>
-					<td><input type="number" name="sugar" step="0.01">g</td>
+					<td><input type="number" name="calorie" step="0.1" required>kcal</td>
+					<td><input type="number" name="protin" step="0.1" required>g</td>
+					<td><input type="number" name="salt" step="0.1" required>mg</td>
+					<td><input type="number" name="carbo" step="0.1" required>g</td>
+					<td><input type="number" name="fat" step="0.1" required>g</td>
+					<td><input type="number" name="transFat" step="0.1" required>g</td>
+					<td><input type="number" name="saturatedFat" step="0.1" required>g</td>
+					<td><input type="number" name="chol" step="0.1" required>mg</td>
+					<td><input type="number" name="sugar" step="0.1" required>g</td>
 				</tr>
 			</tbody>
 		</table>
 	<br><br>
 	</div>
 	<div align="center">
-	<button class="enter" type="submit" >등록</button>
+	<button class="enter" type="submit">등록</button>
 	</div>
 	
 	<br><br>
@@ -159,6 +164,18 @@
 	</div>
 	<script>
 		
+		function confirm(){
+			var discount=document.querrySelector("#discount");
+			
+			var confirm = true;
+			
+			var regExp =/^{ ,2}$/;
+			
+			if(!regExp.test(discount.value)){
+				alert("할인률은 2자리 이내로 기입해주세요")
+				return false;
+			}
+		}
 		
 		function movePage(num){
 			var pageLocation=480;
