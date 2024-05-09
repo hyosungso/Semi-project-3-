@@ -5,24 +5,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
+<style>	
+	
 	#form_area{
 		margin : auto;
 		width : 700px;
 	}
-	.container{
-		width: 900px;
-		height : 500px;
+	.slide-container{
+		height : 450px;
+	    padding: 0px;
+	    margin: auto;
 		transition : transform 0.5s;
+		
 	}
 	.inner{
 		width: 450px;
-		height : 500px;
+		height : 480px;
+		padding: 0px;
 		float : left;
 	}
 	.inner img{
 			width: 100%;
 			height : 100%;
+	}
+	.slide{
+		width : 450px;
+		height : 480px;
+		overflow : hidden;
+		padding: 0px;
+	
 	}
 
 </style>
@@ -37,8 +48,8 @@
 			<tr>
 				<td rowspan='4'>
 				
-			<div style="width : 450px; height : 500px; overflow : hidden">
-				<div class="container" id="imgContainer">
+			<div class="slide">
+				<div class="slide-container" id="imgContainer">
 				<c:forEach  items="${itList }" var="it" >
 					<div class="inner">
 							<img src="${contextPath}${it.filePath }${it.changeName}">
@@ -84,14 +95,12 @@
 		var pageLocation=450;
 		var pageNo=num-1;
 		document.querySelector(".버튼"+num).addEventListener('click',function(){
-			document.querySelector('.container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
+			document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 			
-		$('.container').css("width",num*pageLocation+"px");
+			$('.slide-container').css("width",num*pageLocation+"px");
 		})
 	}
-	function inputImg(num){
-		$("#itemImg"+num).click();
-	}
+	
 	
 	</script>
 	

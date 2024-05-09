@@ -18,7 +18,7 @@
 		margin : auto;
 		width : 700px;
 	}
-	.container{
+	.slide-container{
 		width: 900px;
 		height : 500px;
 		transition : transform 0.5s;
@@ -49,7 +49,7 @@
 				<td rowspan='4'>
 				
 			<div style="width : 450px; height : 500px; overflow : hidden">
-				<div class="container" id="imgContainer">
+				<div class="slide-container" id="imgContainer">
 					<div class="inner">
 						<img id="productImg1">
 					</div>
@@ -99,13 +99,15 @@
 	</form>
 	</div>
 	<script>
+		
+		
 		function movePage(num){
 			var pageLocation=450;
 			var pageNo=num-1;
 			document.querySelector(".버튼"+num).addEventListener('click',function(){
-				document.querySelector('.container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
+				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 				
-			$('.container').css("width",num*pageLocation+"px");
+				$('.slide-container').css("width",num*pageLocation+"px");
 			})
 		}
 			
