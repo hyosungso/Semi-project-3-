@@ -40,7 +40,7 @@ text-align:right;
 				<tr>
 					<th>이미지</th>
 					<td colspan="3" align="center"  width="200" height="170">
-						<img id="titleImg"  width="200" height="170">
+						<img id="titleImg"  width="200" height="169">
 					</td>
 				</tr>
 				

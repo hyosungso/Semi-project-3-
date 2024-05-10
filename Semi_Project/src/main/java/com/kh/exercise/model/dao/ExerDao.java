@@ -106,7 +106,7 @@ public class ExerDao {
 		String sql=prop.getProperty("insertExer");	
 		try {
 			pstmt=conn.prepareStatement(sql);
-			//pstmt.setInt(1, ex.getExerNo());
+			//pstmt.setInt(1, ex.getExerNo()); 삭제
 			pstmt.setString(1, ex.getExerType());			//5
 			pstmt.setString(2, ex.getExerTitle());			//2
 			pstmt.setString(3, ex.getExerInf());				//4

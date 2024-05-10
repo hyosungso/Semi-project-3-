@@ -54,9 +54,7 @@ public class Exercise {
 		this.exerContent = exerContent;
 		this.exerPart = exerPart;
 	}
-	
-	
-	
+	//
 	
 	public Exercise() {
 		super();
