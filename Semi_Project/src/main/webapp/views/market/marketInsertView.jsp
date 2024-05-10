@@ -107,7 +107,7 @@
 				<input type="number" id="discount" name="discount" min="1" max="99" required onkeyup="noMinus(this);autoCal();">%</td>
 			</tr>
 			<tr>
-				<td>총가격 : <input type="text" id="totalPrice" value="0" readonly>
+				<td>총가격 : <input type="text" name="totalPrice" id="totalPrice" value="0" readonly>
 			</tr>
 			
 			<tr align="center">
@@ -181,12 +181,6 @@
 				num.value = 0;
 			}
 			
-		function limit(num2){
-			if(num2.value>100){
-				alert('100% 이하로 입력해주세요');
-				num2.value=0;
-			}
-		}
 			
 		}
 		function autoCal(){
