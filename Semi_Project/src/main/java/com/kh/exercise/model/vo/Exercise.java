@@ -45,17 +45,16 @@ public class Exercise {
 	public void setExerPart(String exerPart) {
 		this.exerPart = exerPart;
 	}
-	public Exercise(int exerNo, String exerTitle, String exerType, String exerInf, String exerContent, String exerPart) {
+	public Exercise(int exerNo, String exerType, String exerTitle, String exerInf, String exerContent, String exerPart) {
 		super();
 		this.exerNo = exerNo;
-		this.exerTitle = exerTitle;
 		this.exerType = exerType;
+		this.exerTitle = exerTitle;
 		this.exerInf = exerInf;
 		this.exerContent = exerContent;
 		this.exerPart = exerPart;
 	}
-	
-	
+	//
 	
 	public Exercise() {
 		super();

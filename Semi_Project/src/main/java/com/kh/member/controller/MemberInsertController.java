@@ -59,7 +59,8 @@ public class MemberInsertController extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
-			response.sendRedirect(request.getContextPath()+"/welcome.me?userId="+userId+"&userName="+userName);
+			response.sendRedirect(request.getContextPath()+"/welcome.me?userId="+userId+"&userName="+userName
+					+"&nickName="+nickName+"&email="+email+"&phone="+phone);
 		
 		}else {  //실패
 			request.setAttribute("errorMsg", "회원가입 실패");
