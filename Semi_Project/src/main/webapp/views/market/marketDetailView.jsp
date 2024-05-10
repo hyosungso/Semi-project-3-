@@ -59,14 +59,27 @@
 		border-radius: : 10px;
 		
 	}
+	.quantity{
+		width : 61px;
+		height : 41px;
+		font-size : 20px;
+		text-align: center;
+	}
+	#quantity {
+	font-weight : 500;
+	font-size : 20px;
+	color : white;
+	width : 60px;
+	display: inline-block;"
+	}
+	
 </style>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
-	<br>
+	<br><br><br>
 
-		<h2 align="center">상품 상세보기</h2>
 		
 		<div class="form-area">
 		<table align="center" border="1">
@@ -107,20 +120,16 @@
 			
 			<tr>
 				
-				<td style="font-size : 13px; color : gray;">원가 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}"  /> 원 <br>
+				<td style="font-size : 13px; color : gray;"><del>원가 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}"  /> 원 </del><br>
 					할인률 : ${i.discount }% <br>
 					<c:set var="totalPrice" value="${i.price * (1-i.discount/100)}"/>
 					<p style="font-weight : 500; font-size : 20px; color : white">
-					<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice-(totalPrice%1)}" />원</p></td>
+					<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice-(totalPrice%1)}" />원</p><br>
+					<div id="quantity">수량 : </div><input type="number" maxLength="2" class="quantity" name="quantity">
+					</td>
 					
 			</tr>
-			<tr>
-				<td>
-				<select> 
-					<option></option>
-				</select>
-				</td>
-			</tr>
+
 			<tr>
 				<td>보관방법 : ${i.storageMethod } </td>
 			</tr>
@@ -129,12 +138,14 @@
 	 <div class="component">
 	 
 	 <div class="order">
-
+<br>
 	<form action="cart.mk?${i.itemCode }" method="post" name="addform">
 		
-		<br>
-		<a href="#"></a>주문하기
-		장바구니
+		<div>
+		<input type="submit" value="바로구매" class="btn btn-info">
+		<input type="button" value="장바구니" class="btn btn-primary"> 
+		</div>
+
 	</form>
 		
 	 </div>
