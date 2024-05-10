@@ -33,6 +33,7 @@
 		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 		<div align="center">
 			<button class='btn btn-info' onclick="location.href='${contextPath}/insert.mk'">상품등록</button>
+			<br><br>
 		</div>
 		</c:if>
 		

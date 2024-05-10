@@ -68,7 +68,7 @@
 		<form action="${contextPath }/insert.mk" method="post" enctype="multipart/form-data" id="insert-form"> 
 		<table class="main" align="center" border="1">
 			<tr>
-				<td rowspan='5' width="480px">
+				<td rowspan='6' width="480px">
 				
 
 			<div class="slide">
@@ -98,15 +98,25 @@
 			</tr>
 			<tr>
 				
-				<th>가격 : <input type="number" name="price" required></th>
+				<th>가격 : 
+				<input type="number" id="price" name="price" required onkeyup="noMinus(this);autoCal();"></th>
 				
 			</tr>
 			<tr>
-				<td>할인률 : <input type="number" id="discount" name="discount" required>%</td>
+				<td>할인률 : 
+				<input type="number" id="discount" name="discount" min="1" max="99" required onkeyup="noMinus(this);autoCal();">%</td>
 			</tr>
+			<tr>
+				<td>총가격 : <input type="text" id="totalPrice" value="0" readonly>
+			</tr>
+			
 			<tr align="center">
-				<td>상세설명 <br>
-				<textarea rows="25" cols="39" name="itemDetail" style="resize:none;" required></textarea> </td>
+				<td>보관방법 : <select name="storageMethod">
+				<option value="냉장보관">냉장보관</option>
+				<option value="상온보관">상온보관</option>
+				<option value="냉동보관">냉동보관</option>
+				<option value="비식품">비식품</option>
+							</select></td>
 			</tr>
 			
 			
@@ -140,15 +150,15 @@
 					<td>당류</td>
 				</tr>
 				<tr>
-					<td><input type="number" name="calorie" step="0.1" required>kcal</td>
-					<td><input type="number" name="protin" step="0.1" required>g</td>
-					<td><input type="number" name="salt" step="0.1" required>mg</td>
-					<td><input type="number" name="carbo" step="0.1" required>g</td>
-					<td><input type="number" name="fat" step="0.1" required>g</td>
-					<td><input type="number" name="transFat" step="0.1" required>g</td>
-					<td><input type="number" name="saturatedFat" step="0.1" required>g</td>
-					<td><input type="number" name="chol" step="0.1" required>mg</td>
-					<td><input type="number" name="sugar" step="0.1" required>g</td>
+					<td><input type="number" name="calorie" step="0.1" required onkeyup="noMinus(this);">kcal</td>
+					<td><input type="number" name="protin" step="0.1" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="salt" step="0.1" required onkeyup="noMinus(this);">mg</td>
+					<td><input type="number" name="carbo" step="0.1" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="fat" step="0.1" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="transFat" step="0.1" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="saturatedFat" step="0.1" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="chol" step="0.1" required onkeyup="noMinus(this);">mg</td>
+					<td><input type="number" name="sugar" step="0.1" required onkeyup="noMinus(this);">g</td>
 				</tr>
 			</tbody>
 		</table>
@@ -163,21 +173,39 @@
 	</form>
 	</div>
 	<script>
-		
-		function confirm(){
-			var discount=document.querrySelector("#discount");
+	
+		function noMinus(num){
 			
-			var confirm = true;
+			if(num.value<0){
+				alert('음수값은 입력이 불가능합니다.');
+				num.value = 0;
+			}
 			
-			var regExp =/^{ ,2}$/;
-			
-			if(!regExp.test(discount.value)){
-				alert("할인률은 2자리 이내로 기입해주세요")
-				return false;
+		function limit(num2){
+			if(num2.value>100){
+				alert('100% 이하로 입력해주세요');
+				num2.value=0;
 			}
 		}
+			
+		}
+		function autoCal(){
+			
+			var price=document.getElementById("price").value;
+			var discount=document.getElementById("discount").value;
+			
+			document.getElementById("totalPrice").value=Math.round(parseInt(price)*(1-discount/100)/10)*10;
+			
+			
+				
+				
+				
+			
+			
+			
+		}
 		
-		function movePage(num){
+			function movePage(num){
 			var pageLocation=480;
 			var pageNo=num-1;
 			document.querySelector(".버튼"+num).addEventListener('click',function(){

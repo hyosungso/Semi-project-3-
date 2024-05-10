@@ -21,7 +21,8 @@
 		SELECT ITEM_NAME,
 			   CATEGORY_NAME,
 			   PRICE,
-			   ITEM_DETAIL,
+			   DISCOUNT,
+			   STORAGE_METHOD,
 			   ITEM_CODE
 		FROM ITEM
 		JOIN ITEM_CATEGORY USING (CATEGORY_NO)
@@ -39,10 +40,12 @@
 									CATEGORY_NO,
 									ITEM_NAME,
 									PRICE,
+									DISCOUNT,
 									SALES_VOL,
 									STATUS,
-									ITEM_DETAIL) 
+									STORAGE_METHOD) 
 							values (SEQ_INO.NEXTVAL,
+									?,
 									?,
 									?,
 									?,0,'Y',
@@ -100,6 +103,11 @@
 	SELECT *
 	FROM COMPONENT
 	WHERE ITEM_CODE=?
+	</entry>
+	<entry key="deactivateItem">
+		UPDATE ITEM SET
+		STATUS='N'
+		WHERE ITEM_CODE=?
 	</entry>
 	
 </properties>

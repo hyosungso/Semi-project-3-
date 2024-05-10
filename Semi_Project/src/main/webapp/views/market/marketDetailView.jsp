@@ -71,7 +71,7 @@
 		<div class="form-area">
 		<table align="center" border="1">
 			<tr>
-				<td rowspan='4'>
+				<td rowspan='5'>
 				
 			<div class="slide">
 
@@ -104,13 +104,15 @@
 				<th> 카테고리 : ${i.categoryName }
 					</th>
 			</tr>
+			
 			<tr>
-				
-				<th>가격 : ${i.price }원</th>
+				<th>원가 : ${i.price }원</th>
 			</tr>
 			<tr>
-				<td>상세설명 <br>
-				<p>${i.itemDetail }</p> </td>
+				<th>할인률 : ${i.discount }%</th>
+			</tr>
+			<tr>
+				<td>보관방법 : ${i.storageMethod } </td>
 			</tr>
 		</table>
 		<br>
@@ -158,8 +160,20 @@
 			</tbody>
 		</table>
 	<br><br>
-	
-
+		
+		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
+		<div align="center">
+			<button class='btn btn-info' onclick="deleteItem();">상품 비활성화</button>
+			<script>
+				function deleteItem(){
+					var flag=confirm("상품 게시를 종료하시겠습니까?");
+				if(flag){
+					location.href="${contextPath}/delete.mk?itno=${i.itemCode }"
+					}
+				}
+			</script>
+		</div>
+		</c:if>
 	
 	<br><br>
 	</div>
