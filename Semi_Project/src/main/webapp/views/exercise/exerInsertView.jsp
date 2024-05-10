@@ -54,19 +54,23 @@ text-align:right;
 				<tr>
 					<th width="100">종류</th>
 					<td>
-						<select name="menu" id="type" >
-                			<option value="sum">유산소</option>
-                			<option value="meat">근력강화</option>
-                			<option value="san">중심잡기</option>
+						<select name="type" id="type" >
+                			<option value="유산소">유산소</option>
+                			<option value="근력">근력강화</option>
+                			<option value="중심">중심잡기</option>
             			</select>
 					</td>
 				
 					<th width="100">부위</th>
 					<td>
-						<select name="menu" id="part" >
-                			<option value="head">머리</option>
-                			<option value="shou">어깨</option>
-                			<option value="leg">다리</option>
+						<select name="part" id="part" >
+                			<option value="가슴">가슴</option>
+                			<option value="어깨">어깨</option>
+                			<option value="복부">복부</option>
+                			<option value="등">등</option>
+                			<option value="팔">팔</option>
+                			<option value="허벅지">허벅지</option>
+                			<option value="종아리">종아리</option>
             			</select>
 					</td>
 				</tr>

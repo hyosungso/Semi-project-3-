@@ -106,12 +106,12 @@ public class ExerDao {
 		String sql=prop.getProperty("insertExer");	
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, ex.getExerNo());
-			pstmt.setString(2, ex.getExerType());			//5
-			pstmt.setString(3, ex.getExerTitle());			//2
-			pstmt.setString(4, ex.getExerInf());				//4
-			pstmt.setString(5, ex.getExerContent());		//6
-			pstmt.setString(6, ex.getExerPart());			//3
+			//pstmt.setInt(1, ex.getExerNo());
+			pstmt.setString(1, ex.getExerType());			//5
+			pstmt.setString(2, ex.getExerTitle());			//2
+			pstmt.setString(3, ex.getExerInf());				//4
+			pstmt.setString(4, ex.getExerContent());		//6
+			pstmt.setString(5, ex.getExerPart());			//3
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
