@@ -8,7 +8,7 @@
 
 <style>	
 	
-	#form_area{
+	.form-area{
 		margin : auto;
 		width : 700px;
 	}
@@ -110,7 +110,7 @@
 			</tr>
 			<tr>
 				<td>상세설명 <br>
-				<textarea rows="26" cols="30" name="itemDetail" style="resize:none;" readonly required>${i.itemDetail }</textarea> </td>
+				<p>${i.itemDetail }</p> </td>
 			</tr>
 		</table>
 		<br>
@@ -119,6 +119,10 @@
 	 <div class="order">
 
 	<form action="cart.mk?${i.itemCode }" method="post" name="addform">
+		<select>
+			<option></option>
+		</select>
+		<br>
 		<a href="#"></a>주문하기
 		장바구니
 	</form>
@@ -163,11 +167,10 @@
 	</div>
 
 	<script>
-	/* function addToCart(){
+	  function addToCart(){
 		if(confirm('상품을 장바구니에 추가하시겠습니까?')){
-			document.addForm.
-		}
-	} */
+		
+	} 
 	
 	function movePage(num){
 		var pageLocation=450;

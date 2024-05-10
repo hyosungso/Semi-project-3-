@@ -68,6 +68,7 @@ public class MarketInsertController extends HttpServlet {
 			String productName=multiRequest.getParameter("productName");
 			int category=Integer.parseInt(multiRequest.getParameter("category"));
 			int price=Integer.parseInt(multiRequest.getParameter("price"));
+			double discount=Double.parseDouble(multiRequest.getParameter("discount"));
 			String itemDetail=multiRequest.getParameter("itemDetail");
 		
 			
