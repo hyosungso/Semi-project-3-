@@ -7,27 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+<%@ include file="/views/common/menubar.jsp" %>
+	<div align="center">
 		<h2 align="center">운동 기록</h2>
-		<form action="memorialsInsert.me" method="post">
+		<form action="${contextPath }/memorialsInsert.me" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="mUserId" value="${loginUser.userId }" required>
 			<table border="1">
 				<tr align="center">
-					<td colspan="2">날짜 <br> <input type="datetime-local">
+					<td colspan="2">날짜 <br> <input type="date" name="memorialsDate">
 						<br>
 					</td>
 				</tr>
 				<tr>
 					<td>몇 시간? : <select name="memorialsTime">
-							<option>30분</option>
-							<option>40분</option>
-							<option>50분</option>
-							<option>1시간</option>
-							<option>1시간 30분</option>
-							<option>2시간</option>
-							<option>2시간 30분</option>
-							<option>3시간</option>
-							<option>3시간 30분</option>
-							<option>4시간</option>
+							<option value="30분">30분</option>
+							<option value="40분">40분</option>
+							<option value="50분">50분</option>
+							<option value="1시간">1시간</option>
+							<option value="1시간 30분">1시간 30분</option>
+							<option value="2시간">2시간</option>
+							<option value="2시간 30분">2시간 30분</option>
+							<option value="3시간">3시간</option>
+							<option value="3시간 30분">3시간 30분</option>
+							<option value="4시간">4시간</option>
 					</select>
 					</td>
 					<td>오늘 어느 부위 했어? <br> <label><input
@@ -47,13 +49,13 @@
 				</tr>
 				<tr>
 					<td colspan="2">특이사항 및 메모 <br> <textarea
-							name="memorialsContent">
+							 name="memorialsContent">
  </textarea>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">오늘 나에게 주는 점수! <br> <input
-						type="range" name="">
+						type="range" name="MemorialsSelfScore">
 					</td>
 				</tr>
 			</table>
