@@ -69,6 +69,7 @@ public class MarketInsertController extends HttpServlet {
 			int category=Integer.parseInt(multiRequest.getParameter("category"));
 			int price=Integer.parseInt(multiRequest.getParameter("price"));
 			int discount=Integer.parseInt(multiRequest.getParameter("discount"));
+			int totalPrice=Integer.parseInt(multiRequest.getParameter("totalPrice"));
 			String storageMethod=multiRequest.getParameter("storageMethod");
 		
 		
@@ -82,6 +83,7 @@ public class MarketInsertController extends HttpServlet {
 			i.setPrice(price);
 			i.setStorageMethod(storageMethod);
 			i.setDiscount(discount);
+		
 			
 			ArrayList<ItemAttachment> itList=new ArrayList<>();
 			

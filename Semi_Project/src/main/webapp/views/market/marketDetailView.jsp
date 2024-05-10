@@ -106,10 +106,20 @@
 			</tr>
 			
 			<tr>
-				<th>원가 : ${i.price }원</th>
+				
+				<td style="font-size : 13px; color : gray;">원가 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}"  /> 원 <br>
+					할인률 : ${i.discount }% <br>
+					<c:set var="totalPrice" value="${i.price * (1-i.discount/100)}"/>
+					<p style="font-weight : 500; font-size : 20px; color : white">
+					<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice-(totalPrice%1)}" />원</p></td>
+					
 			</tr>
 			<tr>
-				<th>할인률 : ${i.discount }%</th>
+				<td>
+				<select> 
+					<option></option>
+				</select>
+				</td>
 			</tr>
 			<tr>
 				<td>보관방법 : ${i.storageMethod } </td>
@@ -121,9 +131,7 @@
 	 <div class="order">
 
 	<form action="cart.mk?${i.itemCode }" method="post" name="addform">
-		<select>
-			<option></option>
-		</select>
+		
 		<br>
 		<a href="#"></a>주문하기
 		장바구니
@@ -181,20 +189,17 @@
 	</div>
 
 	<script>
-	  function addToCart(){
-		if(confirm('상품을 장바구니에 추가하시겠습니까?')){
-		
-	} 
+	  
 	
-	function movePage(num){
-		var pageLocation=450;
-		var pageNo=num-1;
-		document.querySelector(".버튼"+num).addEventListener('click',function(){
-			document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
-			
-			$('.slide-container').css("width",num*pageLocation+"px");
-		})
-	}
+		function movePage(num){
+			var pageLocation=450;
+			var pageNo=num-1;
+			document.querySelector(".버튼"+num).addEventListener('click',function(){
+				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
+				
+				$('.slide-container').css("width",num*pageLocation+"px");
+			})
+		}
 	
 	
 	</script>

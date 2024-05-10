@@ -9,7 +9,7 @@ public class Cart {
 	
 	private String itemName;
 	private int itemPrice;
-	private int itemDicount;
+	private int itemDiscount;
 	
 	private int salePrice;
 	private int totalPrice;
@@ -23,7 +23,7 @@ public class Cart {
 
 
 	public Cart(int orderId, int userNo, int itemCode, int itemQuantity, String itemName, int itemPrice,
-			int itemDicount) {
+			int itemDiscount) {
 		super();
 		this.orderId = orderId;
 		this.userNo = userNo;
@@ -31,7 +31,18 @@ public class Cart {
 		this.itemQuantity = itemQuantity;
 		this.itemName = itemName;
 		this.itemPrice = itemPrice;
-		this.itemDicount = itemDicount;
+		this.itemDiscount = itemDiscount;
+	}
+
+
+	
+	public int getItemDiscount() {
+		return itemDiscount;
+	}
+
+
+	public void setItemDiscount(int itemDiscount) {
+		this.itemDiscount = itemDiscount;
 	}
 
 
@@ -55,15 +66,7 @@ public class Cart {
 	}
 
 
-	public int getItemDicount() {
-		return itemDicount;
-	}
-
-
-	public void setItemDicount(int itemDicount) {
-		this.itemDicount = itemDicount;
-	}
-
+	
 
 	public int getOrderId() {
 		return orderId;
@@ -119,7 +122,7 @@ public class Cart {
 	}
 	
 	public void initSaleTotal() {
-		this.salePrice = (int)(this.itemPrice*(1-this.itemDicount));
+		this.salePrice = (int)(this.itemPrice*(1-this.itemDiscount));
 		this.totalPrice = this.salePrice*this.itemQuantity;
 	}
 	
