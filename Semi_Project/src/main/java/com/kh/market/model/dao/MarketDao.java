@@ -77,8 +77,9 @@ public class MarketDao {
 				i=(new Item(
 						rset.getString("CATEGORY_NAME"),
 						rset.getInt("PRICE"),
+						rset.getInt("discount"),
 						rset.getString("ITEM_NAME"),
-						rset.getString("ITEM_DETAIL"),
+						rset.getString("STORAGE_METHOD"),
 						rset.getInt("ITEM_CODE")));
 			}
 			
@@ -132,7 +133,8 @@ public class MarketDao {
 			pstmt.setInt(1, i.getCategory());
 			pstmt.setString(2, i.getItemName());
 			pstmt.setInt(3, i.getPrice());
-			pstmt.setString(4, i.getItemDetail());
+			pstmt.setInt(4, i.getDiscount());
+			pstmt.setString(5, i.getStorageMethod());
 			
 			result= pstmt.executeUpdate();
 			
@@ -270,6 +272,26 @@ public class MarketDao {
 		
 		
 		return c;
+	}
+
+	public int deleteItem(Connection conn, int itno) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("deactivateItem");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itno);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

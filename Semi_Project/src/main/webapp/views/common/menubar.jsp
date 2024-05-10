@@ -232,7 +232,7 @@
 					<li><a href="">게시판</a>
 						<ul class="board-category">
 							<li><a
-								href="${contextPath}/board.bo?currentPage=1&category=0">자유게시판</a></li>
+								href="${contextPath}/board.bo?currentPage=1&category=0&sort=latest">자유게시판</a></li>
 							<li><a href="">정보게시판</a></li>
 						</ul></li>
 				</ul>

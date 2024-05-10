@@ -77,4 +77,17 @@ public class MarketService {
 		return c;
 	}
 
+	public int deleteItem(int itno) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MarketDao().deleteItem(conn,itno);
+		
+		if(result<0) {
+			JDBCTemplate.rollback(conn);
+		}else {
+			JDBCTemplate.commit(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

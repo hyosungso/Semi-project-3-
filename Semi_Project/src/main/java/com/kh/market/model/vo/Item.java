@@ -7,7 +7,7 @@ public class Item {
 	private int price;
 	private int discount;
 	private int salesVol;
-	private String itemDetail;
+	private String storageMethod;
 	private String itemName;
 	
 	private String categoryName; //카테고리 네임 join 구문으로 가져오는 용도
@@ -17,13 +17,13 @@ public class Item {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Item(int itemCode, int category, int price, int salesVol, String itemDetail, String itemName) {
+	public Item(int itemCode, int category, int price, int salesVol, String storageMethod, String itemName) {
 		super();
 		this.itemCode = itemCode;
 		this.category = category;
 		this.price = price;
 		this.salesVol = salesVol;
-		this.itemDetail = itemDetail;
+		this.storageMethod = storageMethod;
 		this.itemName = itemName;
 	}
 	
@@ -40,12 +40,13 @@ public class Item {
 	
 	
 	
-	public Item(String categoryName, int price, String itemName, String itemDetail,int itemCode) {
+	public Item(String categoryName, int price,int discount, String itemName, String storageMethod,int itemCode) {
 		super();
 		this.categoryName = categoryName;
 		this.price = price;
+		this.discount=discount;
 		this.itemName = itemName;
-		this.itemDetail = itemDetail;
+		this.storageMethod = storageMethod;
 		this.itemCode = itemCode;
 	}
 	
@@ -86,11 +87,11 @@ public class Item {
 	public void setSalesVol(int salesVol) {
 		this.salesVol = salesVol;
 	}
-	public String getItemDetail() {
-		return itemDetail;
+	public String getStorageMethod() {
+		return storageMethod;
 	}
-	public void setItemDetail(String itemDetail) {
-		this.itemDetail = itemDetail;
+	public void setStorageMethod(String itemDetail) {
+		this.storageMethod = itemDetail;
 	}
 	public String getItemName() {
 		return itemName;
