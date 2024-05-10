@@ -48,8 +48,8 @@ public class MemorialsInsertController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("gd");
-
+		
+		request.setCharacterEncoding("UTF-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize = 10* 1024 * 1024;
@@ -60,34 +60,36 @@ public class MemorialsInsertController extends HttpServlet {
 			
 			
 			// DB에 저장할 데이터 추가
-			
-			String memorialsTime = request.getParameter("MemorialsTime");
-			String memorialsParts = request.getParameter("MemorialsParts");
-			String memorialsContent = request.getParameter("MemorialsContent");
-			int memorialsSelfScore = Integer.parseInt(request.getParameter("MemorialsSelfScore"));
-			
-
+			String memorialsDate = multiRequest.getParameter("memorialsDate");
+			String memorialsTime = multiRequest.getParameter("memorialsTime");
+			String memorialsParts = multiRequest.getParameter("memorialsParts");
+			String memorialsContent = multiRequest.getParameter("memorialsContent");
+			int memorialsSelfScore = Integer.parseInt(multiRequest.getParameter("MemorialsSelfScore"));
+			String mUserId = multiRequest.getParameter("mUserId");
 			Memorials m = new Memorials();
 			
-			
+			m.setMemorialsDate(memorialsDate);
 			m.setMemorialsTime(memorialsTime);
 			m.setMemorialsParts(memorialsParts);
 			m.setMemorialsContent(memorialsContent);
 			m.setMemorialsSelfScore(memorialsSelfScore);
-			
+			m.setmUserId(mUserId);
 			MemorialsAttachment at = null;
 			
-			if(multiRequest.getOriginalFileName("uploadFile")!=null) {
+			
+			
+			if(multiRequest.getOriginalFileName("memorialsImg") != null) {
 				
-				
+				System.out.println("읭");
 				at = new MemorialsAttachment();
 				
-				at.setOriginName(multiRequest.getOriginalFileName("uploadFile"));
-				at.setOriginName(multiRequest.getFilesystemName("uploadFile"));
+				at.setOriginName(multiRequest.getOriginalFileName("memorialsImg"));
+				at.setChangeName(multiRequest.getFilesystemName("memorialsImg"));
 				at.setFilePath("/resources/uploadFiles/");	
 		
 			}
-			
+			System.out.println(m);
+			System.out.println(at);
 			int result = new MemorialsService().insertMemorials(m,at);
 			
 			HttpSession session = request.getSession();
@@ -95,7 +97,7 @@ public class MemorialsInsertController extends HttpServlet {
 			if(result>0) {
 				
 				session.setAttribute("alertMsg", "등록완료!");
-				response.sendRedirect(request.getContextPath()+"/");
+				response.sendRedirect(request.getContextPath());
 				
 			}else {
 				
@@ -103,7 +105,7 @@ public class MemorialsInsertController extends HttpServlet {
 					new File(savePath+at.getChangeName()).delete();
 				}
 				session.setAttribute("alertMsg", "등록 실패 ㅠㅠ");
-				response.sendRedirect(request.getContextPath()+"/");
+				response.sendRedirect(request.getContextPath());
 				
 				
 			}

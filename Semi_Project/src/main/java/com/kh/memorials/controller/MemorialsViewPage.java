@@ -34,7 +34,7 @@ public class MemorialsViewPage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/Memorials/MemorialsViewPage.jsp").forward(request, response);
+		request.getRequestDispatcher("views/memorials/memorialsViewPage.jsp").forward(request, response);
 	}
 
 }

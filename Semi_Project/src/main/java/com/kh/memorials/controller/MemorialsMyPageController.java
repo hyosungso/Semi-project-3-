@@ -35,7 +35,7 @@ public class MemorialsMyPageController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		request.getRequestDispatcher("views/Memorials/MemorialsMyPage.jsp").forward(request, response);
+		request.getRequestDispatcher("views/memorials/memorialsMyPage.jsp").forward(request, response);
 		
 	
 		

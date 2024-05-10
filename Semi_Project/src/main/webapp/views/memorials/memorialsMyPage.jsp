@@ -13,39 +13,31 @@
 				<td colspan="2">GREAT!</td>
 			</tr>
 			<tr>
-				<td rowspan="6">이미지 불러올 공간</td>
-				<td>날짜 불러올 공간</td>
-			</tr>
-			<tr>
-				<td>어느 부위?</td>
-			</tr>
-			<tr>
-				<td>몇시간 운동?</td>
-			</tr>
-			<tr>
-				<td>특이사항?</td>
-			</tr>
-			<tr>
-				<td>나에게 주는 점수?</td>
-			</tr>
-			<tr>
-				<td>
-					<button>수정하기</button>
-					<button>삭제하기</button>
-				</td>
-			</tr>
-		</table>
-	</div>
+				 <tr>
+                <td colspan="2"><img src="<%= memorialsAttachment.getMemorialsImgPath() %>" alt="운동 사진"></td>
+            </tr>
+            <tr>
+                <td>날짜: <%= memorials.getMemorialsDate() %></td>
+            </tr>
+            <tr>
+                <td>운동 부위: <%= memorials.getMemorialsParts() %></td>
+            </tr>
+            <tr>
+                <td>운동 시간: <%= memorials.getMemorialsTime() %></td>
+            </tr>
+            <tr>
+                <td>특이사항: <%= memorials.getMemorialsContent() %></td>
+            </tr>
+            <tr>
+                <td>운동 점수: <%= memorials.getMemorialsSelfScore() %></td>
+            </tr>
+            <tr>
+                <td>
+                    <button>수정하기</button>
+                    <button>삭제하기</button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 

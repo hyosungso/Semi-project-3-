@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="insertMemorials">
+	INSERT INTO MEMORIALS(MEMORIALS_NO
+						,MEMORIALS_DATE
+						,MEMORIALS_TIME
+						,MEMORIALS_PARTS
+						,MEMORIALS_CONTENT
+						,MEMORIALS_SELFSCORE
+						,CREATE_DATE
+						,MUSER_ID
+						,STATUS
+						)
+						VALUES(SEQ_MNO.NEXTVAL
+						,?
+						,?
+						,?
+						,?
+						,?
+						,DEFAULT
+						,?
+						,DEFAULT)
+	</entry>
+<entry key="memorialsInsertAttachment">
+    INSERT INTO MEMORIALSATTACHMENT(FILE_NO		
+    							   ,REF_MNO
+    							   ,ORIGIN_NAME
+    							   ,CHANGE_NAME
+    							   ,FILE_PATH
+    							   ,UPLOAD_DATE
+    							   ,STATUS
+    							   )
+    VALUES(SEQ_MNO.NEXTVAL, ?, ?, ?, ?, SYSDATE,DEFAULT)
+</entry>
+<entry key="selectmemorials">
+<!-- SELECT SEQ_BNO.NEXTVAL MNO -->
+	<!-- SELECT MEMORIALS_NO
+		FROM MEMORIALS -->
+		<!-- SELECT SEQ_BNO.NEXTVAL MNO
+		FROM MEMORIALS -->
+		
+		SELECT REF_MNO.NEXTVAL MNO
+		FROM DUAL
+		<!-- SELECT SEQ_BNO.NEXTVAL BNO
+		FROM DUAL -->
+</entry>
+</properties>

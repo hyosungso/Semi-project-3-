@@ -5,38 +5,26 @@ import java.sql.Date;
 public class MemorialsAttachment {
 	
 	private int fileNo; // FILE_NO NUMBER
-	private int refBno;// REF_BNO NUMBER
+	private int refMno;// REF_BNO NUMBER
 	private String originName;// ORIGIN_NAME VARCHAR2(255 BYTE)
 	private String changeName;// CHANGE_NAME VARCHAR2(255 BYTE)
 	private String filePath;// FILE_PATH VARCHAR2(1000 BYTE)
 	private Date uploadDate;// UPLOAD_DATE DATE
-	private int fileLevel;// FILE_LEVEL NUMBER
 	private String status;// STATUS VARCHAR2(1 BYTE)
 
 	public MemorialsAttachment() {
 		super();
 	}
-	
-	public MemorialsAttachment(int fileNo, String originName, String changeName, String filePath) {
+
+	public MemorialsAttachment(int fileNo, int refMno, String originName, String changeName, String filePath,
+			Date uploadDate, String status) {
 		super();
 		this.fileNo = fileNo;
-		this.originName = originName;
-		this.changeName = changeName;
-		this.filePath = filePath;
-	}
-
-
-
-	public MemorialsAttachment(int fileNo, int refBno, String originName, String changeName, String filePath, Date uploadDate,
-			int fileLevel, String status) {
-		super();
-		this.fileNo = fileNo;
-		this.refBno = refBno;
+		this.refMno = refMno;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.filePath = filePath;
 		this.uploadDate = uploadDate;
-		this.fileLevel = fileLevel;
 		this.status = status;
 	}
 
@@ -48,12 +36,12 @@ public class MemorialsAttachment {
 		this.fileNo = fileNo;
 	}
 
-	public int getRefBno() {
-		return refBno;
+	public int getRefMno() {
+		return refMno;
 	}
 
-	public void setRefBno(int refBno) {
-		this.refBno = refBno;
+	public void setRefMno(int refMno) {
+		this.refMno = refMno;
 	}
 
 	public String getOriginName() {
@@ -88,14 +76,6 @@ public class MemorialsAttachment {
 		this.uploadDate = uploadDate;
 	}
 
-	public int getFileLevel() {
-		return fileLevel;
-	}
-
-	public void setFileLevel(int fileLevel) {
-		this.fileLevel = fileLevel;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -106,10 +86,12 @@ public class MemorialsAttachment {
 
 	@Override
 	public String toString() {
-		return "Attachment [fileNo=" + fileNo + ", refBno=" + refBno + ", originName=" + originName + ", changeName="
-				+ changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel
-				+ ", status=" + status + "]";
+		return "MemorialsAttachment [fileNo=" + fileNo + ", refMno=" + refMno + ", originName=" + originName
+				+ ", changeName=" + changeName + ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", status="
+				+ status + "]";
 	}
+	
+	
 
 
 }

@@ -5,33 +5,30 @@ import java.util.Date;
 public class Memorials {
 	
 	private int memorialsNo;
-	private int memorialsType;
-	private Date memorialsDate; //사용자 지정 날짜
+	private String memorialsDate; //사용자 지정 날짜
 	private String memorialsTime;
 	private String memorialsParts;
 	private String memorialsContent;
 	private int memorialsSelfScore;
-	private int count;
 	private Date createDate; // 서버에 올린 날짜
+	private String mUserId;
 	private String status;
 	
 	public Memorials() {
 		super();
 	}
 
-	public Memorials(int memorialsNo, int memorialsType, Date memorialsDate, String memorialsTime,
-			String memorialsParts, String memorialsContent, int memorialsSelfScore, int count, Date createDate,
-			String status) {
+	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String memorialsParts,
+			String memorialsContent, int memorialsSelfScore, Date createDate, String mUserId, String status) {
 		super();
 		this.memorialsNo = memorialsNo;
-		this.memorialsType = memorialsType;
 		this.memorialsDate = memorialsDate;
 		this.memorialsTime = memorialsTime;
 		this.memorialsParts = memorialsParts;
 		this.memorialsContent = memorialsContent;
 		this.memorialsSelfScore = memorialsSelfScore;
-		this.count = count;
 		this.createDate = createDate;
+		this.mUserId = mUserId;
 		this.status = status;
 	}
 
@@ -43,19 +40,11 @@ public class Memorials {
 		this.memorialsNo = memorialsNo;
 	}
 
-	public int getMemorialsType() {
-		return memorialsType;
-	}
-
-	public void setMemorialsType(int memorialsType) {
-		this.memorialsType = memorialsType;
-	}
-
-	public Date getMemorialsDate() {
+	public String getMemorialsDate() {
 		return memorialsDate;
 	}
 
-	public void setMemorialsDate(Date memorialsDate) {
+	public void setMemorialsDate(String memorialsDate) {
 		this.memorialsDate = memorialsDate;
 	}
 
@@ -91,20 +80,20 @@ public class Memorials {
 		this.memorialsSelfScore = memorialsSelfScore;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
 	public Date getCreateDate() {
 		return createDate;
 	}
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public String getmUserId() {
+		return mUserId;
+	}
+
+	public void setmUserId(String mUserId) {
+		this.mUserId = mUserId;
 	}
 
 	public String getStatus() {
@@ -117,10 +106,10 @@ public class Memorials {
 
 	@Override
 	public String toString() {
-		return "Memorials [memorialsNo=" + memorialsNo + ", memorialsType=" + memorialsType + ", memorialsDate="
-				+ memorialsDate + ", memorialsTime=" + memorialsTime + ", memorialsParts=" + memorialsParts
-				+ ", memorialsContent=" + memorialsContent + ", memorialsSelfScore=" + memorialsSelfScore + ", count="
-				+ count + ", createDate=" + createDate + ", status=" + status + "]";
+		return "Memorials [memorialsNo=" + memorialsNo + ", memorialsDate=" + memorialsDate + ", memorialsTime="
+				+ memorialsTime + ", memorialsParts=" + memorialsParts + ", memorialsContent=" + memorialsContent
+				+ ", memorialsSelfScore=" + memorialsSelfScore + ", createDate=" + createDate + ", mUserId=" + mUserId
+				+ ", status=" + status + "]";
 	}
 
 	
