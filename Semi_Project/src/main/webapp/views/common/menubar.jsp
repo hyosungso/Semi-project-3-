@@ -215,7 +215,7 @@
 		<div class="util">
 			<br>
 			<br> <a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
-			<a href="cart.mk"> 
+			<a href="${contextPath }/views/market/cart.jsp"> 
 				<img class="image" width=40 height=40>
 			</a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<a href="logout.me">로그아웃</a>
@@ -242,10 +242,10 @@
 				<a href="">운동법</a>
 			</div>
 			<div>
-				<a href="list.mk">매장(후순위)</a>
+				<a href="${contextPath }/list.mk">매장(후순위)</a>
 			</div>
 			<div>
-				<a href="Memorials.me">개인기록(후순위)</a>
+				<a href="${contextPath }/Memorials.me">개인기록(후순위)</a>
 			</div>
 		</div>
 

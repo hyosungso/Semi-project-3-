@@ -74,6 +74,16 @@
 	}
 	
 </style>
+
+<script type="text/javascript">
+	function addToCart(){
+	if(confirm('상품을 장바구니에 추가하시겠습니까?')){
+		document.addForm.submit();
+	}else{
+		document.addForm.reset();
+	}
+	}
+</script>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
@@ -139,15 +149,12 @@
 	 
 	 <div class="order">
 <br>
-	<form action="cart.mk?${i.itemCode }" method="post" name="addform">
-		
-		<div>
-		<input type="submit" value="바로구매" class="btn btn-info">
-		<input type="button" value="장바구니" class="btn btn-primary"> 
-		</div>
-
+	<form name="addForm" action="${contextPath }/views/market/addCart.jsp?id=${i.itemCode }" method="post">
+	<a href="#" class="btn btn-info" onclick="addToCart()">상품추가&raquo;</a>
+	<a href="${contextPath }/views/market/cart.jsp" class="btn btn-warning">장바구니&raquo;</a>
+	<a href="./products01.jsp" class="btn btn-secondary">상품목록&raquo;</a>
 	</form>
-		
+	
 	 </div>
 	 
 	 <br><br>

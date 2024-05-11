@@ -12,6 +12,9 @@ public class Item {
 	
 	private String categoryName; //카테고리 네임 join 구문으로 가져오는 용도
 	private String thumbnailImg;
+	private int quantity;
+	private int totalPrice;
+	
 	
 	public Item() {
 		super();
@@ -29,11 +32,12 @@ public class Item {
 	
 	
 	
-	public Item(int itemCode, String categoryName, int price, String itemName, String thumbnailImg) {
+	public Item(int itemCode, String categoryName, int price,int discount, String itemName, String thumbnailImg) {
 		super();
 		this.itemCode = itemCode;
 		this.categoryName = categoryName;
 		this.price = price;
+		this.discount=discount;
 		this.itemName = itemName;
 		this.thumbnailImg = thumbnailImg;
 	}
@@ -52,6 +56,12 @@ public class Item {
 	
 	
 	
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	public int getDiscount() {
 		return discount;
 	}
@@ -106,6 +116,12 @@ public class Item {
 	public void setThumbnailImg(String thumbnailImg) {
 		this.thumbnailImg = thumbnailImg;
 	}
-	
+	public void setTotalPrice(int totalPrice) {
+		int tp=price * (1-discount/100);
+		this.totalPrice= tp-(tp%1);
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
 	
 }
