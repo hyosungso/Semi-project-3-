@@ -44,6 +44,7 @@ public class MarketDao {
 				list.add(new Item(rset.getInt("ITEM_CODE"),
 						rset.getString("CATEGORY_NAME"),
 						rset.getInt("PRICE"),
+						rset.getInt("DISCOUNT"),
 						rset.getString("ITEM_NAME"),
 						rset.getString("THUMBNAIL")
 						));

@@ -73,7 +73,20 @@
 	display: inline-block;"
 	}
 	
+}
+
+	
 </style>
+
+<script type="text/javascript">
+	function addToCart(){
+	if(confirm('상품을 장바구니에 추가하시겠습니까?')){
+		document.addForm.submit();
+	}else{
+		document.addForm.reset();
+	}
+	}
+</script>
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
@@ -82,6 +95,7 @@
 
 		
 		<div class="form-area">
+		<form name="addForm" action="${contextPath }/views/market/addCart.jsp?id=${i.itemCode }" method="post">
 		<table align="center" border="1">
 			<tr>
 				<td rowspan='5'>
@@ -122,10 +136,10 @@
 				
 				<td style="font-size : 13px; color : gray;"><del>원가 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}"  /> 원 </del><br>
 					할인률 : ${i.discount }% <br>
-					<c:set var="totalPrice" value="${i.price * (1-i.discount/100)}"/>
 					<p style="font-weight : 500; font-size : 20px; color : white">
-					<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice-(totalPrice%1)}" />원</p><br>
-					<div id="quantity">수량 : </div><input type="number" maxLength="2" class="quantity" name="quantity">
+					<fmt:formatNumber type="number" maxFractionDigits="3" value="${i.totalPrice}" />원</p><br>
+					<div id="quantity">수량 : </div>
+					<input type="number" value="1" class="quantity" name="quantity" onclick="minLimit(this);" onkeyup="minLimit(this);">
 					</td>
 					
 			</tr>
@@ -139,15 +153,13 @@
 	 
 	 <div class="order">
 <br>
-	<form action="cart.mk?${i.itemCode }" method="post" name="addform">
-		
-		<div>
-		<input type="submit" value="바로구매" class="btn btn-info">
-		<input type="button" value="장바구니" class="btn btn-primary"> 
-		</div>
-
-	</form>
-		
+	
+	
+	<a href="#" class="btn btn-info" onclick="addToCart()">상품추가&raquo;</a>
+	<a href="${contextPath }/views/market/cart.jsp" class="btn btn-warning">장바구니&raquo;</a>
+	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
+	
+	
 	 </div>
 	 
 	 <br><br>
@@ -191,16 +203,26 @@
 					}
 				}
 			</script>
+			
 		</div>
 		</c:if>
 	
 	<br><br>
 	</div>
+	</form>
 	</div>
+	
 	</div>
 
 	<script>
-	  
+		
+		function minLimit(num){
+			
+			if(num.value<=0){
+				alert('0 이하는 입력할수 없습니다..');
+				num.value = 1;
+			}
+		}
 	
 		function movePage(num){
 			var pageLocation=450;

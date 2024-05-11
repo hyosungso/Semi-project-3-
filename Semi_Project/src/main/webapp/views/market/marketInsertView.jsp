@@ -56,6 +56,7 @@
 		border-radius : 10px;
 	}
 </style>
+
 </head>
 <body>
 	
@@ -125,7 +126,7 @@
 		<br>
 		<div id="img-area">
 		<label for="itemImg1">상품이미지</label>
-		<input type=file id="itemImg1" name="itemImg1" onchange="loadImg(this,1);" required>
+		<input type=file id="itemImg1" name="itemImg1" onchange="loadImg(this,1);" required> <br>
 		</div>
 		
 		<button type="button" onclick="addImg();">사진 추가 입력</button> <br>
@@ -191,12 +192,6 @@
 			document.getElementById("totalPrice").value=Math.round(parseInt(price)*(1-discount/100)/10)*10;
 			
 			
-				
-				
-				
-			
-			
-			
 		}
 		
 			function movePage(num){
@@ -247,7 +242,6 @@
 			count.value++;
 		}
 	</script>
-	
 	
 	</div>
 	

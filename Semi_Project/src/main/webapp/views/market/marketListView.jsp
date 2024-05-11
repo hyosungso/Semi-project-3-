@@ -41,11 +41,14 @@
 		<c:forEach var="it" items="${list }">
 			<div class="itemImg" align="center" onclick="location.href='${contextPath }/detail.mk?itno=${it.itemCode }'">
 			<img src="<%=contextPath%>${it.thumbnailImg}" width="200px" height="200px">
-		<p>
+		
 			${it.itemName } ${it.categoryName } <br>
-			<fmt:formatNumber type="number" maxFractionDigits="3" value="${it.price }" />원
+			<del><fmt:formatNumber type="number" maxFractionDigits="3" value="${it.price }" />원</del>
 			
-		</p>
+			
+			<p style="font-weight : 500; font-size : 20px; color : white">
+			<fmt:formatNumber type="number" maxFractionDigits="3" value="${it.totalPrice}" />원</p>
+			
 			</div>
 			</c:forEach>
 		</div>
