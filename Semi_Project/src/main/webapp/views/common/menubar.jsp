@@ -199,7 +199,7 @@
 			<br>
 			<br> <a href="${contextPath}/views/member/login.jsp" id="imageLink"> 
 				<img class="image2"> </a>&nbsp;&nbsp;&nbsp; 
-				<a href="cart.mk"> 
+				<a href="${contextPath }/views/market/cart.jsp"> 
 					<img class="image" width=40 height=40></a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
 					<a href="enrollFormBefore.me">회원가입</a>

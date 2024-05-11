@@ -59,21 +59,21 @@
 				%>
 				<tr>
 					<td><input type="checkbox" class="chk" checked></td>
-					<td><%=item.getItemCode() %> - <%=item.getItemName() %></td>
-					<td><%=item.getTotalPrice() %></td>
+					<td><a href="${contextPath }/detail.mk?itno=<%=item.getItemCode()%>"><%=item.getItemName() %></a> </td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="<%=item.getTotalPrice() %>" /> 원</td>
 					<td><%=item.getQuantity() %></td>
-					<td><%=total %></td>
+					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="<%=total %>" /> 원</td>
 					<td>
 					   <a href="./removeCart.jsp?id<%=item.getItemCode()%>"
-					   class="bi bi-backspace-fill">%nbsp;삭제</a>
+					   class="bi bi-backspace-fill">&nbsp;삭제</a>
 					</td>
 				</tr>
 				<%} %>
 				<tr>
 					<th></th>
-					<th></th>
 					<th>총액</th>
-					<th><%=sum %></th>
+					<th><fmt:formatNumber type="number" maxFractionDigits="3" value="<%=sum %>" /> 원</th>
+					<th></th>
 					<th></th>
 					<th></th>
 				</tr>

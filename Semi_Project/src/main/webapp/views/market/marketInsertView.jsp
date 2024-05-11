@@ -175,7 +175,6 @@
 	</div>
 	<script>
 	
-		}
 		function noMinus(num){
 			
 			if(num.value<0){
@@ -191,12 +190,6 @@
 			var discount=document.getElementById("discount").value;
 			
 			document.getElementById("totalPrice").value=Math.round(parseInt(price)*(1-discount/100)/10)*10;
-			
-			
-				
-				
-				
-			
 			
 			
 		}
@@ -249,7 +242,6 @@
 			count.value++;
 		}
 	</script>
-	
 	
 	</div>
 	

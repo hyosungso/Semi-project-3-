@@ -45,9 +45,9 @@
 			${it.itemName } ${it.categoryName } <br>
 			<del><fmt:formatNumber type="number" maxFractionDigits="3" value="${it.price }" />원</del>
 			
-			<c:set var="totalPrice" value="${it.price * (1-it.discount/100)}"/>
+			
 			<p style="font-weight : 500; font-size : 20px; color : white">
-			<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice-(totalPrice%1)}" />원</p>
+			<fmt:formatNumber type="number" maxFractionDigits="3" value="${it.totalPrice}" />원</p>
 			
 			</div>
 			</c:forEach>

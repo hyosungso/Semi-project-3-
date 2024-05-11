@@ -10,6 +10,7 @@ public class Item {
 	private String storageMethod;
 	private String itemName;
 	
+	
 	private String categoryName; //카테고리 네임 join 구문으로 가져오는 용도
 	private String thumbnailImg;
 	private int quantity;
@@ -116,12 +117,13 @@ public class Item {
 	public void setThumbnailImg(String thumbnailImg) {
 		this.thumbnailImg = thumbnailImg;
 	}
-	public void setTotalPrice(int totalPrice) {
-		int tp=price * (1-discount/100);
-		this.totalPrice= tp-(tp%1);
-	}
+	
 	public int getTotalPrice() {
-		return totalPrice;
+	
+		int tp=(int)(Math.round(price*(1-discount/(double)100)/(double)10)*(double)10);
+		this.totalPrice=tp;
+		
+		return  totalPrice;
 	}
 	
 }

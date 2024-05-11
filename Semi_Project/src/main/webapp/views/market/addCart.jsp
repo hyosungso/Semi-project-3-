@@ -33,18 +33,19 @@
 		
 		
 		
-		int cnt =0;
+		int cnt=0;
+		int quantity=Integer.parseInt(request.getParameter("quantity"));
 		Item itemQnt = new Item();
 		for (int i=0; i< list.size(); i++ ){
 			itemQnt = list.get(i);
 			if(itemQnt.getItemCode()==intId){
 				cnt++;
-				int orderQuantity = itemQnt.getQuantity()+1;
+				int orderQuantity = itemQnt.getQuantity()+quantity;
 				itemQnt.setQuantity(orderQuantity);
 			}
 		}
 		if(cnt==0){
-			items.setQuantity(1);
+			items.setQuantity(quantity);
 			list.add(items);
 		}
 		
