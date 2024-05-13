@@ -160,4 +160,17 @@ public class BoardService {
 		return bList;
 	}
 
+	public int deleteReply(int rNo) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().deleteReply(conn,rNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

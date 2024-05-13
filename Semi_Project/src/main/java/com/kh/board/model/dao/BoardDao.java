@@ -520,6 +520,26 @@ public class BoardDao {
 		
 		return bList;
 	}
+
+	public int deleteReply(Connection conn, int rNo) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("deleteReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, rNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 

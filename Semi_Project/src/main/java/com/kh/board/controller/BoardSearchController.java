@@ -35,7 +35,7 @@ public class BoardSearchController extends HttpServlet {
 		String keyword=request.getParameter("search");
 		String category=request.getParameter("searchCategory");
 		int page=Integer.parseInt(request.getParameter("page"));
-		System.out.println(page);
+		
 
 		int currentPage=page; //현재페이지
 		int boardLimit; //한 페이지에 보여줄 게시글 개수

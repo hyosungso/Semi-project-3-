@@ -98,13 +98,13 @@ width:100%;
 	<table border="1" class="reply-list">
 	<thead>
 		<tr>
-		<th width="75px">작성자</th>
-		<th>댓글내용</th>
-		<th width="120px">작성일</th>
+		<th width="10%">작성자</th>
+		<th width="75%">댓글내용</th>
+		<th width="15%">작성일</th>
 		</tr>
 	</thead>
 	<tbody>
-	
+
 	</tbody>
 	</table>
 	<br>
@@ -163,9 +163,9 @@ width:100%;
 					
 					tr +="<tr>"
 						+"<td>"+list[i].replyWriter+"</td>"
-						+"<td>"+list[i].replyContent+"</td>"
+						+"<td id="+list[i].replyNo+">"+list[i].replyContent+"</td>"
 						+"<td>"+list[i].createDate+"</td>"
-						+"</tr>"
+					    +"</tr>";
 				}
 				$(".reply-list tbody").append(tr);
 			},
@@ -174,9 +174,37 @@ width:100%;
 			}
 		});
 	}
+	function deleteReply(rId,rName){
+		if(confirm(rName+"의 댓글을 삭제하시겠습니까?")){
+			$.ajax({
+				url : "deleteReply.bo",
+				data : {
+					rNo : rId
+				},
+				success : function(message){
+					alert(message);
+				},
+				error : function(){
+					alert("삭제에 실패했습니다.");
+				},
+				complete : function(){
+					replyList();
+				}
+			});
+		}
+	}
+	
 	$(function(){
 		//처음 게시글에 들어왔을때 댓글목록 조회후 댓글창에 표시
 		replyList();
+		
+		$(document).on("click",".reply-list tbody tr",function(){
+			var rName=$(this).children().eq(0).text();
+			var rId=$(this).children().eq(1).attr('id');
+			if(${!empty loginUser and (loginUser.userId eq b.boardWriter or loginUser.nickName eq b.boardWriter or loginUser.authCode eq 'ADMIN') }){
+				deleteReply(rId,rName);
+			}
+		});
 	});
 	</script>
 </body>

@@ -172,7 +172,11 @@
 		ORDER BY BOARD_NO DESC) S)
         WHERE "ROWNUM" BETWEEN ? AND ?
 	</entry>
-
+	<entry key="deleteReply">
+		UPDATE REPLY
+		SET STATUS='N'
+		WHERE REPLY_NO=?
+	</entry>
 	
 </properties>
 
