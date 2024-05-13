@@ -15,6 +15,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
+import com.kh.market.model.vo.Order;
 
 public class MarketDao {
 
@@ -291,6 +292,29 @@ public class MarketDao {
 		}finally {
 			JDBCTemplate.close(pstmt);
 		}
+		
+		return result;
+	}
+
+	public int insertOrder(Connection conn, Order o) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql =prop.getProperty("insertOrder");
+		
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, o.getOrderNo());
+				pstmt.setString(2, o.getName());
+				pstmt.setDate(3, o.getShippingDate());
+				pstmt.setString(4, o.getPostNum());
+				pstmt.setString(5, o.getAddress());
+				result=pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(conn);
+			}
 		
 		return result;
 	}

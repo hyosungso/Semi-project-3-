@@ -9,6 +9,7 @@ import com.kh.market.model.dao.MarketDao;
 import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
+import com.kh.market.model.vo.Order;
 
 public class MarketService {
 
@@ -87,6 +88,20 @@ public class MarketService {
 			JDBCTemplate.commit(conn);
 		}
 		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int insertOrder(Order o) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MarketDao().insertOrder(conn,o);
+		
+		if(result<0) {
+			JDBCTemplate.rollback(conn);
+		}else {
+			JDBCTemplate.commit(conn);
+		}
+		JDBCTemplate.close(conn);
+		
 		return result;
 	}
 

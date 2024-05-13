@@ -110,5 +110,17 @@
 		STATUS='N'
 		WHERE ITEM_CODE=?
 	</entry>
+	<entry key="insertOrder">
+		INSERT INTO ITEM_ORDER(ORDER_NUMBER,
+							   CUSTOMER_NAME,
+							   SHIPPING_DATE,
+							   POST_NUMBER,
+							   ADDRESS)
+					    VALUES(?,
+					    	   ?,
+					    	   ?,
+					    	   ?,
+					    	   ?) 
+	</entry>
 	
 </properties>

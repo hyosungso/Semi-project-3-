@@ -181,6 +181,10 @@
 				alert('음수값은 입력이 불가능합니다.');
 				num.value = 0;
 			}
+			if(num.value>=100){
+				alert('100%이상은 입력이 불가능합니다.');
+				num.value = 0;
+			}
 			
 			
 		}
