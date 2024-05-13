@@ -56,6 +56,21 @@ public Member loginMember(String userId, String userPwd) {
 		return flag;
 		
 	}
+	
+	// 닉네임 중복 체크 메소드
+	public Boolean CheckNickName(String inputNickName) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Boolean flag = new MemberDao().checkNickName(conn,inputNickName);
+		
+		JDBCTemplate.close(conn);
+		
+		return flag;
+	}
+	
+	
+	
 
 	public Member findPwd(String ffId, String ffEmail) {
 		// TODO Auto-generated method stub
@@ -135,4 +150,6 @@ public Member loginMember(String userId, String userPwd) {
 		return updateMember;
 
 	}
+
+	
 }
