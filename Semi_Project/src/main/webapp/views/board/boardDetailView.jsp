@@ -73,8 +73,18 @@ width:100%;
 				uno : "${loginUser.userNo}"
 			},
 			success : function(Message){
-				alert(Message);
-				$("#RC").text(${b.recommend}+1);
+				switch(Message){
+				case "RCNNN":
+					alert("이미 이 글을 추천했습니다.");
+					break;
+				case "RCYYN":
+					alert("추천에 실패했습니다");
+					break;
+				case "RCYYY":
+					alert("이 글을 추천했습니다.");
+					$("#RC").text(${b.recommend}+1);
+					break;
+				}
 			},
 			error : function(){
 				alert("추천에 실패했습니다.");	
