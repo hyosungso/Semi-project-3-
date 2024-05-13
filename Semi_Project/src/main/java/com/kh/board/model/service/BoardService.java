@@ -152,9 +152,9 @@ public class BoardService {
 		return result;
 	}
 
-	public ArrayList<Board> searchBoard(String keyword, String category) {
+	public ArrayList<Board> searchBoard(String keyword, String category, PageInfo pi) {
 		Connection conn=JDBCTemplate.getConnection();
-		ArrayList<Board> bList=new BoardDao().searchBoard(conn,keyword,category);
+		ArrayList<Board> bList=new BoardDao().searchBoard(conn,keyword,category,pi);
 		
 		JDBCTemplate.close(conn);
 		return bList;

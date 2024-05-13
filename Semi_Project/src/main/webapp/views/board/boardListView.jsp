@@ -34,6 +34,9 @@
 	background-color:blue;
 	color:white;
 	}
+	input[name=sortBy]{
+	margin:10px;
+	}
 
 </style>
 </head>
@@ -97,7 +100,6 @@
 	$(function(){
 		$("button[name=category]").each(function(){
 			if($(this).val()==${category}){
-				$(this).attr("disabled",true);
 				$(this).addClass("ctSelected");
 			}
 		});
@@ -147,6 +149,7 @@
 	<!-- <option value="writer">작성자</option> -->
 	</select>
 	<input type="text" name="search" style="width:350px">
+	<input type="hidden" name="page" value="1">
 	<button type="submit">검색</button>
 	</form>
 	</div>
