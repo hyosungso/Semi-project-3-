@@ -139,6 +139,7 @@ width:100%;
 			},
 			success : function(result){
 				alert(result);
+				$("#replyContent").html("");
 			},
 			error : function(){
 				alert("댓글 작성에 오류가 발생했습니다.");
@@ -201,7 +202,19 @@ width:100%;
 		$(document).on("click",".reply-list tbody tr",function(){
 			var rName=$(this).children().eq(0).text();
 			var rId=$(this).children().eq(1).attr('id');
-			if(${!empty loginUser and (loginUser.userId eq b.boardWriter or loginUser.nickName eq b.boardWriter or loginUser.authCode eq 'ADMIN') }){
+			var id="${loginUser.userId}";
+			var name="${loginUser.nickName}";
+			console.log(id);
+			console.log(name);
+			console.log("${b.boardWriter}");
+			console.log(rName);
+			console.log("${loginUser.authCode}");
+			
+			if(${!empty loginUser and (id eq b.boardWriter 
+									or name eq b.boardWriter 
+									or id eq rName 
+									or name eq rName 
+									or loginUser.authCode eq 'ADMIN') }){
 				deleteReply(rId,rName);
 			}
 		});
