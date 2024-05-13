@@ -250,12 +250,11 @@
 
 
                     <div class="agree-checkboxes">
-                        <input type="checkbox" id="agree-term" required>
-                        <label for="agree-term">헬스라이프 이용약관 <span class="required">(필수)</span></label>
-                        <input type="checkbox" id="agree-privacy" required>
-                        <label for="agree-privacy">개인정보 수집 및 이용 동의 <span class="required">(필수)</span></label>
-                        <input type="checkbox" id="agree-marketing" >
-                        <label for="agree-marketing">마케팅 정보 수신 동의 <span class="optional">(선택)</span></label>
+                        
+                        <input type="checkbox" name="all" onclick="chkAll();" id="all"><label for="all">전체선택 <span class="required"></span></label>
+				        <input type="checkbox" name="sub" id="j"><label>헬스라이프 이용약관 <span class="required">(필수)</span> </label>
+				        <input type="checkbox" name="sub" id="d"><label>개인정보 수집 및 이용 동의 <span class="required">(필수)</span></label>
+				        <input type="checkbox" name="sub" id="w"><label>마케팅 정보 수신 동의 <span class="optional">(선택)</span></label>
                     </div>
                 </div>
 
@@ -273,6 +272,27 @@
         </div>
 		
 	</form>
+	
+	<script>
+			//전체 체크 기능
+            function chkAll(){
+
+                var all = document.getElementById("all"); 
+                var subs = document.getElementsByName("sub");
+
+                if(all.checked){//전체선택 체크
+                    
+                    for(var i=0; i<subs.length; i++){
+                        subs[i].checked = true;
+                    }
+                }else{
+                    //나머지 요소 체크해제
+                    for(var i=0; i<subs.length; i++){
+                        subs[i].checked = false;
+                    }
+                }
+            }
+        </script>
     
 	
 </body>
