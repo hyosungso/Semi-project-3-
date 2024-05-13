@@ -18,7 +18,9 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardDao {
+	
 	private Properties prop=new Properties();
+	
 	public BoardDao() {
 		
 		try {
