@@ -62,7 +62,7 @@ public class BoardInsertController extends HttpServlet {
 		} else {
 			session.setAttribute("alertMsg","작성에 실패했습니다.");
 		}
-		response.sendRedirect(request.getContextPath()+"/board.bo?currentPage=1&category=0");
+		response.sendRedirect(request.getContextPath()+"/board.bo?currentPage=1&category=0&sort=latest");
 		
 		
 	}

@@ -56,6 +56,26 @@ public class Member {
 		this.authCode = authCode;
 	}
 
+	public Member(String userPwd) {
+	    super();
+	    this.userPwd = userPwd;
+	}
+
+
+
+
+
+
+
+	public Member(String userId, String userPwd) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+	}
+
+
+
+
 	public String getAuthCode() {
 		return authCode;
 	}
@@ -107,6 +127,19 @@ public class Member {
 	public String getNickName() {
 		return nickName;
 	}
+
+	public Member(String userId, String userName, String gender, String nickName, String email, String phone) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.gender = gender;
+		this.nickName = nickName;
+		this.email = email;
+		this.phone = phone;
+	}
+
+
+
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;

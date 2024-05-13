@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<!-- 글 번호 따기 -->
+	<entry key="selectExerNo">
+		SELECT EXER_NO
+		FROM(SELECT EXER_NO
+		FROM EXERCISE
+		ORDER BY EXER_NO DESC)
+		WHERE ROWNUM 1
+	</entry>
+
+	<!-- 운동게시판 리스트 조회 -->
+	<entry key="selectexList">
+		SELECT 	EXER_NO, 
+       					FILE_PATH||CHANGE_NAME REPHOTO, 
+       					EXER_PART,
+       					EXER_TITLE,
+       					EXER_INFORM,
+       					EXER_CONTENT
+		FROM EXERCISE
+		JOIN EXERPHOTO ON(EXER_NO=REF_BNO)
+		ORDER BY UPLOAD_DATE DESC
+	</entry>
+
+	<!-- 운동게시판 단일글 조회 -->
+	<entry key="selectExer">
+		SELECT EXER_NO
+				     ,EXER_TYPE
+				 	 ,EXER_TITLE
+				 	 ,EXER_INFORM
+					 ,EXER_CONTENT
+					 ,EXER_PART
+		FROM EXERCISE
+		WHERE EXER_NO=?
+	</entry>
+	
+	<!-- 운동게시판 글 작성 -->
+	<entry key="insertExer">
+		INSERT INTO EXERCISE(EXER_NO
+											 ,EXER_TYPE
+											 ,EXER_TITLE
+											 ,EXER_INFORM
+											 ,EXER_CONTENT
+											 ,EXER_PART)
+						VALUES(SEQ_ENO.NEXTVAL
+							,?
+							,?
+							,?
+							,?
+							,?)
+	</entry>
+	
+	<!-- 사진 등록하기 -->
+	<entry key="insertPhoto">
+		INSERT INTO EXERPHOTO(FILE_NO
+		                      					  ,REF_BNO
+		                      					  ,ORIGIN_NAME
+		                    					  ,CHANGE_NAME
+		                    					  ,FILE_PATH)
+            VALUES(SEQ_FNO.NEXTVAL
+                 		 ,SEQ_ENO.CURRVAL
+                 		 ,?
+                		 ,?
+                 		 ,?)
+	</entry>
+	
+	<!-- 운동게시판 사진 목록처리 -->
+	<entry key="insertPhotoArr">
+		INSERT INTO EXERPHOTO(FILE_NO
+		                      ,REF_BNO
+		                      ,ORIGIN_NAME
+		                      ,CHANGE_NAME
+		                      ,FILE_PATH
+		                      ,FILE_LEVEL)
+            VALUES(SEQ_FNO.NEXTVAL
+                  ,SEQ_ENO.CURRVAL
+                  ,?
+                  ,?
+                  ,?
+                  ,?)
+	</entry>
+	
+	<!-- 운동게시판 사진 조회 -->
+	<entry key="selectPhoto">
+		SELECT FILE_NO
+		      		 ,ORIGIN_NAME
+		      		 ,CHANGE_NAME
+		     		 ,FILE_PATH
+		FROM EXERPHOTO
+		WHERE REF_BNO = ?
+		AND STATUS='Y'
+	</entry>
+</properties>

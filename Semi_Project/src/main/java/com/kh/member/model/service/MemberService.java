@@ -57,6 +57,82 @@ public Member loginMember(String userId, String userPwd) {
 		
 	}
 
+	public Member findPwd(String ffId, String ffEmail) {
+		// TODO Auto-generated method stub
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member m = new MemberDao().findPwd(conn,ffId,ffEmail);
+//		System.out.println(m);
+		JDBCTemplate.close(conn);
+		
+		return m;
+		
+	}
+
+	public Member findId(String ffPn) {
+		// TODO Auto-generated method stub
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member m = new MemberDao().findId(conn,ffPn);
+		JDBCTemplate.close(conn);
+		
+		return m;
+	}
+
+	public int updatePwd(String userId,String userPwd,String updatePwd) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new MemberDao().updatePwd(conn,userId,userPwd,updatePwd);
+		
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn); 
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+	
+		
+		JDBCTemplate.close(conn); 
+		
+		return result;
+	}
 	
 	
+	public int deleteMember(String userId) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		
+		int result = new MemberDao().deleteMember(conn,userId);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public Member updateMember(Member m) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberDao().updateMember(conn, m);
+		
+		Member updateMember = null;
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+			updateMember = new MemberDao().selectMember(conn, m.getUserId());
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+
+		JDBCTemplate.close(conn);
+
+		return updateMember;
+
+	}
 }

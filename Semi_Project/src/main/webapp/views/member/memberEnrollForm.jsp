@@ -1,81 +1,298 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-</head>
-<body>
+
+<%
+
+	String alertMsg = (String)session.getAttribute("alertmsg");
 	
-	<div>
-		<br>
+	String contextPath = request.getContextPath();
+	
+%>
 
-		<h2 align="center">회원가입</h2>
-
-		<form id="enroll-form" action="insert.me" method="post">
+</head>
 
 
-			<table align="center">
+ <style>
+        
+        body {
+    font-family: 'Malgun Gothic', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f6f7;
+	}
+	
+	.container {
+	    max-width: 600px;
+	    margin: 0 auto;
+	    padding: 20px;
+	    background-color: #fff;
+	    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+	
+	header {
+	    text-align: center;
+	    margin-bottom: 30px;
+	}
+	
+	.logo img {
+	    max-width: 200px;
+	}
+	
+	main {
+	    margin-bottom: 30px;
+	}
+	
+	.progress-bar {
+	    height: 5px;
+	    background-color: #e5e5e5;
+	    margin-bottom: 30px;
+	}
+	
+	.progress {
+	    height: 100%;
+	    width: 66.66%;
+	    background-color: #ff0000;
+	}
+	
 
-				<tr>
-					<td>아이디</td>
-					<td><input type="text" id="userId" name="userId" required></td>
-					<td><button type="button" onclick="checkId();">중복확인</button></td>
-				</tr>
 
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" id="userPwd" name="userPwd"
-						required></td>
-					<td></td>
-				</tr>
+	
+	.optional{    color: #888;
+	}
+	        
+        
 
-				<tr>
-					<td>비밀번호 확인</td>
-					<td><input type="password" id="pwChk" name="userPwd" required></td>
-				</tr>
+		.buttons {
+			margin-top: 20px;
+			text-align: center;
+		}
 
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="userName" required></td>
-					
-				</tr>
+		.button {
+			padding: 10px 17px;
+			background-color: #000000; /* 짙은 회색 버튼 배경 */
+			color: #fff;
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+			transition: background-color 0.3s; /* hover 효과 */
+		}
 
-				<tr>
-					<td>성별 (F/M) </td>
-					<td><input type="text" name="gender" required></td>
-				</tr>
+        .button2 {
+			padding: 10px 17px;
+			background-color: #130000; /* 짙은 회색 버튼 배경 */
+			color: #fff;
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+			transition: background-color 0.3s; /* hover 효과 */
+		}
 
-				<tr>
-					<td>닉네임</td>
-					<td><input type="text" name="NickName" required></td>
-				</tr>
+        .button2:hover {
+			background-color: #ff0000; /* hover 시 밝은 회색으로 변화 */
+		}
 
-				<tr>
-					<td>이메일</td>
-					<td><input type="email" name="email"></td>
-				</tr>
+		.button:hover {
+			background-color: #ff0000; /* hover 시 밝은 회색으로 변화 */
+		}
 
-				<tr>
-					<td>전화번호</td>
-					<td>
-						<input type="text" name="phone">
-					</td>
-				</tr>
+		.disabled {
+			opacity: 0.5;
+			cursor: default;
+		}
 
-			</table>
 
-			<br> <br>
+        .input-box input::placeholder{
+        color : red;
+    }
+    
+    .input-box input{
+        width : 100%;
+        height : 100%;
+        background-color: transparent;
+        border : none;
+        outline : none;
+        border : 2px solid rgba(0, 0, 0, 0.2);
+        border-radius : 40px;
+        font-size: 16px;
+        color : rgb(0, 0, 0);
+        padding : 5px 45px 10px
+    }
 
-			<div align="center">
-				<button type="submit">회원가입</button>
-				<button type="reset">초기화</button>
-			</div>
-		</form>
+    .input-box input::placeholder{
+        color : red;
+    }
+
+    .checkbox input {
+    display: none;
+    }
+
+    .checkbox_icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 2px solid rgb(194, 193, 193);
+    position: relative;
+    cursor: pointer;
+    }
+
+    .checkbox_icon::before, .checkbox_icon::after {
+    content: ''; 
+    display: inline-block; 
+    width: 1px;
+    height: 0; 
+    background-color: red;
+    position: absolute; 
+    transform-origin: left top; 
+    }
+
+    .checkbox_icon::before {
+    top: 9px; 
+    left: 2px; 
+    transform: rotate(-45deg);
+    }
+
+    .checkbox_icon::after {
+    top: 16px; 
+    left: 9px; 
+    transform: rotate(-135deg); 
+    }
+
+    .checkbox input:checked + .checkbox_icon {
+    border-color: red;
+    }
+
+    .checkbox input:checked + .checkbox_icon::before {
+    height: 10px; /
+    transition: all 0.15s ease;
+    }
+
+    .checkbox input:checked + .checkbox_icon::after {
+    height: 20px; 
+    transition: all 0.15s ease 0.15s; 
+    }
+		
+    </style>
+
+
+
+</head>
+
+<body>
+
+	<form id="enroll-form" action="<%=contextPath%>/insert.me" method="post">
+	
+		<div class="container">
+            
+            <header>
+                <h1>
+                    <a href="#" class="logo">
+                        <img src="https://cdn-icons-png.flaticon.com/512/4205/4205505.png" alt="헬스라이프">
+                    </a>
+                </h1>
+
+
+            </header>
+           
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+
+                <table align="center">
+
+                    <tr class="input-box">
+                        <td>아이디</td>
+                        <td><input type="text" name="userId" required></td>
+                        <td><button type="button" class="button2" onclick="checkId();">중복확인</button></td>
+                    </tr>
+    
+                    <tr class="input-box">
+                        <td>비밀번호</td>
+                        <td><input type="password" name="userPwd" required></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr class="input-box">
+                        <td>비밀번호 확인</td>
+                        <td><input type="password" name="userPwd" required></td>
+                    </tr>
+    
+                    <tr class="input-box">
+                        <td>이름</td>
+                        <td><input type="text" name="userName" required></td>
+                        
+                    </tr>
+    
+                    <tr>
+                        <td>성별</td>
+                        <td>
+                            
+                            <label class="checkbox" ><input type="checkbox"  name="gender" value="M"><span class="checkbox_icon" ></span>
+                                <span class="checkbox_text"></span>남자</label>
+                                
+                            <label class="checkbox"><input type="checkbox" name="gender" value="F"><span class="checkbox_icon"></span>
+                                <span class="checkbox_text"></span>여자</label>
+                           
+                        </td>
+                    </tr>
+    
+                    <tr class="input-box">
+                        <td>닉네임</td>
+                        <td><input type="text" name="nickName" required></td>
+                    </tr>
+    
+                    <tr class="input-box">
+                        <td>이메일</td>
+                        <td><input type="email" name="email" required></td>
+                    </tr>
+    
+                    <tr class="input-box">
+                        <td>전화번호</td>
+                        <td>
+                            <input type="text" name="phone" required>
+                        </td>
+                    </tr>
+    
+                </table>
+    
+                <br> <br>
+    
+                <div align="center">
+                    <button type="submit" class="button" id="nextButton" onclick="real();">회원가입</button>
+                    <input type="reset" class="button disabled" id="nextButton" ></input>
+                </div>
+                
+                
+
+
+
+                </div>
+
+          
+		
+	</form>
+		
+		
+		<!-- 회원가입 성공시 / 실패시 -->
+		<script>
+		
+			var msg = "<%=alertMsg%>";
+			
+			
+			if(msg!="null"){
+				alert(msg);
+				<%session.removeAttribute("alertMsg");%>
+			}
+		
+		</script>
+		
 
 		<script>
 			function checkId(){
@@ -105,13 +322,21 @@
 						}
 					},
 					error : function(){
-						console.log("통신실패");
+						console.log("회원가입 실패");
 					}
 				});
 				
 				
-				
 			}
+			
+			
+			
+			
+			function real(){
+			   
+			       var result = window.confirm("회원가입 하시겠습니까?");
+			      
+			    }
 		
 		</script>
 

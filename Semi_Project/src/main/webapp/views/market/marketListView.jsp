@@ -30,21 +30,25 @@
 		<h2 align="center">판매 상품</h2>
 		<br>
 		<div class="list-area">
-<%-- 		<c:if test="${not empty loginUser && loginUser.status eq 'admin' }"> --%>
+		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 		<div align="center">
 			<button class='btn btn-info' onclick="location.href='${contextPath}/insert.mk'">상품등록</button>
+			<br><br>
 		</div>
-<%-- 		</c:if> --%>
+		</c:if>
 		
 		
 		<c:forEach var="it" items="${list }">
 			<div class="itemImg" align="center" onclick="location.href='${contextPath }/detail.mk?itno=${it.itemCode }'">
-			<img src="<%=contextPath%>/resources/marketImg/${it.itemCode}.jpg" width="200px" height="150px">
-		<p>
+			<img src="<%=contextPath%>${it.thumbnailImg}" width="200px" height="200px">
+		
 			${it.itemName } ${it.categoryName } <br>
-			<fmt:formatNumber type="number" maxFractionDigits="3" value="${it.price }" />원
+			<del><fmt:formatNumber type="number" maxFractionDigits="3" value="${it.price }" />원</del>
 			
-		</p>
+			
+			<p style="font-weight : 500; font-size : 20px; color : white">
+			<fmt:formatNumber type="number" maxFractionDigits="3" value="${it.totalPrice}" />원</p>
+			
 			</div>
 			</c:forEach>
 		</div>

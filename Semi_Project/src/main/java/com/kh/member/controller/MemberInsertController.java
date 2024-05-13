@@ -54,16 +54,17 @@ public class MemberInsertController extends HttpServlet {
 	
 		int result = new MemberService().insertMember(m);
 		
-		if(result>0) {//성공시 화면 
+		
+		if(result>0) {//성공
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
-			
-			
-			response.sendRedirect(request.getContextPath());
-			
-		}else { 
+			response.sendRedirect(request.getContextPath()+"/welcome.me?userId="+userId+"&userName="+userName
+					+"&nickName="+nickName+"&email="+email+"&phone="+phone);
+		
+		}else {  //실패
 			request.setAttribute("errorMsg", "회원가입 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			
 		}
 			
