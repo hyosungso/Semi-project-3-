@@ -49,7 +49,7 @@
 		<tr>
 		<td><button name="category" value="0">전체</button></td>
 		<c:forEach items="${ctList}" var="ct">
-		<td><button name="category" value="${ct.categoryNo}">${ct.categoryName }</button></td>
+		<td><button name="category" value="${ct.categoryNo}">${ct.categoryName}</button></td>
 		</c:forEach>
 		</tr>
 		</table>

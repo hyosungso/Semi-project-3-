@@ -38,7 +38,7 @@ width:100%;
 		<th width="10%">조회수</th>
 		<th width="5%">${b.count }</th>
 		<th width="10%">추천수</th>
-		<th width="5%">${b.recommend }</th>
+		<th width="5%" id="RC">${b.recommend }</th>
 	</tr>
 	<tr>
 		<th colspan="8" style="text-align:left">${b.boardTitle }</th>
@@ -74,6 +74,7 @@ width:100%;
 			},
 			success : function(Message){
 				alert(Message);
+				$("#RC").text(${b.recommend}+1);
 			},
 			error : function(){
 				alert("추천에 실패했습니다.");	
