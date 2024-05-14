@@ -19,10 +19,10 @@ width:50px;
 	<div align="center">
 		<h2 align="center">운동 기록</h2>
 		<form action="${contextPath }/memorialsInsert.me" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="mUserId" value="${loginUser.userId }" required>
+		<input type="hidden" name="mUserId" value="${loginUser.userNo}">
 			<table border="1">
 				<tr align="center">
-					<td colspan="2">날짜 <br> <input type="date" name="memorialsDate">
+					<td colspan="2">날짜 <br> <input type="date" name="memorialsDate" required>
 						<br>
 					</td>
 				</tr>
@@ -79,13 +79,35 @@ width:50px;
 				</tr>
 			</table>
 			<br>
-			<button type="submit">운동일지 올리기!</button>
+			<button onclick="return check();">운동일지 올리기!</button>
 		</form>
+		<script>
+		function check(){
+			var flag=false;
+			var check=0;
+			$("input[name=memorialsParts]").each(function(){
+				if($(this).prop("checked")){
+					flag=true;
+					check=1;
+				}
+			});
+			console.log($("textarea[name=memorialsContent]").val());
+			if(check==0){
+				alert("운동 부위를 선택해주세요.");
+				return flag;
+			} else if($("textarea[name=memorialsContent]").val()=="") {
+				alert("특이사항을 작성해주세요.");
+				flag=false;
+			}
+			if(flag){
+				return confirm("제출하시겠습니까?");
+			}
+		}
+		</script>
 		<br>
 		<br>
-		<form action="MemorialsMyPage.me" method="post">
-			<button type="submit">내 운동일지 확인하기</button>
-		</form>
+			<button onclick="location.href='MemorialsMyPage.me?id=${loginUser.userNo}'">내 운동일지 확인하기</button>
+
 	</div>
 
 

@@ -16,6 +16,9 @@ public class MemorialsService {
 	    Connection conn = JDBCTemplate.getConnection();
 	    int memorialsNo = 0; // 기념일 번호를 저장할 변수 초기화
 	    
+	    int result=0;
+	    int result2 = 1; // 기념일 첨부파일 등록 결과 변수 초기화
+	    
 	    try {
 	        // 기념일 번호를 조회하여 저장
 	        memorialsNo = new MemorialsDao().selectMemorialsNo(conn);
@@ -25,10 +28,8 @@ public class MemorialsService {
 	            m.setMemorialsNo(memorialsNo);
 	            
 	            // 기념일 등록
-	            int result = new MemorialsDao().insertMemorials(conn, m);
-	            
-	            int result2 = 1; // 기념일 첨부파일 등록 결과 변수 초기화
-	            
+	            result = new MemorialsDao().insertMemorials(conn, m);
+
 	            if (result > 0 && at != null) {
 	                // 기념일 첨부파일 등록
 	                at.setRefMno(memorialsNo);
@@ -48,6 +49,6 @@ public class MemorialsService {
 	        JDBCTemplate.close(conn);
 	    }
 	    
-	    return memorialsNo; // 등록된 기념일 번호 반환
+	    return result * result2 ; // 등록된 기념일 번호 반환
 	}
 }

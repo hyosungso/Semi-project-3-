@@ -17,6 +17,21 @@ public class Memorials {
 	public Memorials() {
 		super();
 	}
+	
+	
+
+	public Memorials(String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
+			int memorialsSelfScore, String mUserId) {
+		super();
+		this.memorialsDate = memorialsDate;
+		this.memorialsTime = memorialsTime;
+		this.memorialsParts = memorialsParts;
+		this.memorialsContent = memorialsContent;
+		this.memorialsSelfScore = memorialsSelfScore;
+		this.mUserId = mUserId;
+	}
+
+
 
 	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String memorialsParts,
 			String memorialsContent, int memorialsSelfScore, Date createDate, String mUserId, String status) {

@@ -1,4 +1,4 @@
-package com.kh.memorials.controller;
+package com.kh.infoboard.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.service.BoardService;
+import com.kh.infoboard.model.service.InfoBoardService;
+import com.kh.infoboard.model.vo.InfoBoard;
+
 /**
- * Servlet implementation class MemberIndividualRecordControlloer
+ * Servlet implementation class InfoBoardDetailController
  */
-@WebServlet("/MemorialsMyPage.me")
-public class MemorialsMyPageController extends HttpServlet {
+@WebServlet("/infodetail.bo")
+public class InfoBoardDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemorialsMyPageController() {
+    public InfoBoardDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,27 +30,29 @@ public class MemorialsMyPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id=request.getParameter("id");
-		
-		request.setAttribute("id", id);
-		
-		request.getRequestDispatcher("views/memorials/memorialsMyPage.jsp").forward(request, response);
+
+		int bno = Integer.parseInt(request.getParameter("bno"));
+
+		int result = new BoardService().increaseCount(bno);
+		if (result > 0) {
+			InfoBoard ib = new InfoBoardService().selectInfoBoard(bno);
+
+			request.setAttribute("ib", ib);
+		} else {
+			request.getSession().setAttribute("alertMsg", "게시판 접근에 실패했습니다.");
+			response.sendRedirect(request.getHeader("referer"));
+		}
+
+		request.getRequestDispatcher("/views/infoboard/infoBoardDetailView.jsp").forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		
-		
-	
-		
-		
-		
-		
-		
+		doGet(request, response);
 	}
 
 }

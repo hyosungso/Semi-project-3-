@@ -5,7 +5,7 @@ import java.sql.Date;
 public class InfoBoard {
 
 	private int boardNo; // 게시글 번호
-	private String boardWriter; // 작성자 아이디(회원번호->아이디)
+	private String boardWriter; // 작성자 아이디*(회원번호->아이디)*->회원번호를 넣어도 아이디가 검색될 수 있게
 	private String boardTitle; // 게시글 제목
 	private String boardContent; // 게시글 내용
 	private int count; // 조회수
@@ -20,6 +20,46 @@ public class InfoBoard {
 		super();
 	}
 	
+	
+	
+	public InfoBoard(String boardWriter, String boardTitle, String boardContent, String category) {
+		super();
+		
+		this.boardWriter = boardWriter;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.category = category;
+	}
+
+
+
+	public InfoBoard(int boardNo, String boardWriter, String boardTitle, String boardContent, int count, int recommend,
+			Date reviseDate, String category) {
+		super();
+		this.boardNo = boardNo;
+		this.boardWriter = boardWriter;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.count = count;
+		this.recommend = recommend;
+		this.reviseDate = reviseDate;
+		this.category = category;
+	}
+	
+	
+	public InfoBoard(int boardNo,String category,String boardTitle,String boardWriter, int count, int recommend,Date uploadDate) {
+		super();
+		this.boardNo = boardNo;
+		this.category = category;
+		this.boardTitle = boardTitle;
+		this.boardWriter = boardWriter;
+		this.count = count;
+		this.recommend = recommend;
+		this.uploadDate = uploadDate;
+	}
+
+
+
 	public InfoBoard(int boardNo, String boardWriter, String boardTitle, String boardContent, int count, int recommend,
 			Date uploadDate, Date reviseDate, String category) {
 		super();

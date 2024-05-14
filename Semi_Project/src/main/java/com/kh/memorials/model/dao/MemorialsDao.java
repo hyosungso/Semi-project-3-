@@ -41,7 +41,6 @@ public class MemorialsDao {
 	    Statement stmt = null;
 	    
 	    String sql = prop.getProperty("selectmemorials");
-	    System.out.println(sql);
 	    try {
 	        stmt = conn.createStatement();
 	        
@@ -70,15 +69,13 @@ public class MemorialsDao {
 		System.out.println(m);
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, m.getMemorialsDate());
-			
-			pstmt.setString(2, m.getMemorialsTime());
-			
-			pstmt.setString(3, m.getMemorialsParts());
-			pstmt.setString(4, m.getMemorialsContent());
-			pstmt.setInt(5, m.getMemorialsSelfScore());
-			pstmt.setString(6, m.getmUserId());
+			pstmt.setInt(1, m.getMemorialsNo());
+			pstmt.setString(2, m.getMemorialsDate());
+			pstmt.setString(3, m.getMemorialsTime());			
+			pstmt.setString(4, m.getMemorialsParts());
+			pstmt.setString(5, m.getMemorialsContent());
+			pstmt.setInt(6, m.getMemorialsSelfScore());
+			pstmt.setString(7, m.getmUserId());
 			
 			
 			result = pstmt.executeUpdate();

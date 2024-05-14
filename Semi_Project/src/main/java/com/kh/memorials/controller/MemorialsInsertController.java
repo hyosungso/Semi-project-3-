@@ -54,7 +54,9 @@ public class MemorialsInsertController extends HttpServlet {
 			
 			int maxSize = 10* 1024 * 1024;
 			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadFiles/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadFiles");
+			
+			
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
@@ -62,18 +64,18 @@ public class MemorialsInsertController extends HttpServlet {
 			// DB에 저장할 데이터 추가
 			String memorialsDate = multiRequest.getParameter("memorialsDate");
 			String memorialsTime = multiRequest.getParameter("memorialsTime");
-			String memorialsParts = multiRequest.getParameter("memorialsParts");
+			String[] memorialsParts = multiRequest.getParameterValues("memorialsParts");
 			String memorialsContent = multiRequest.getParameter("memorialsContent");
 			int memorialsSelfScore = Integer.parseInt(multiRequest.getParameter("MemorialsSelfScore"));
 			String mUserId = multiRequest.getParameter("mUserId");
-			Memorials m = new Memorials();
 			
-			m.setMemorialsDate(memorialsDate);
-			m.setMemorialsTime(memorialsTime);
-			m.setMemorialsParts(memorialsParts);
-			m.setMemorialsContent(memorialsContent);
-			m.setMemorialsSelfScore(memorialsSelfScore);
-			m.setmUserId(mUserId);
+			String memorialsPartsInfo="";
+			if(memorialsParts!=null) {
+			memorialsPartsInfo = String.join(",", memorialsParts);
+			}
+			
+			Memorials m = new Memorials(memorialsDate,memorialsTime,memorialsPartsInfo,memorialsContent,memorialsSelfScore,mUserId);
+
 			MemorialsAttachment at = null;
 			
 			
