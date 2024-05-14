@@ -1,8 +1,12 @@
 package com.kh.infoboard.model.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
+import com.kh.board.model.dao.BoardDao;
+import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Reply;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.infoboard.model.vo.Category;
@@ -11,6 +15,8 @@ import com.kh.infoboard.model.vo.InfoBoard;
 
 public class InfoBoardService {
 
+	
+	
 	public int listCount() {
 		
 		Connection conn =JDBCTemplate.getConnection();
@@ -29,6 +35,8 @@ public class InfoBoardService {
 		return result;
 	}
 
+	
+	
 	public ArrayList<InfoBoard> selectList(PageInfo pi, String sort) {
 
 		Connection conn = JDBCTemplate.getConnection();
@@ -49,10 +57,161 @@ public class InfoBoardService {
 		return fList;
 	}
 	
+	
+	
 	public ArrayList<Category> selectCategory() {
-		// TODO Auto-generated method stub
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Category> ctList = new InfoBoardDao().selectCategory(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return ctList;
+	}
+	
+	public InfoBoard selectInfoBoard(int bno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		InfoBoard ib = new InfoBoardDao().selectInfoBoard(conn, bno);
+		
+		JDBCTemplate.close(conn);
+		
 		return null;
+		
+	}
+
+	
+	
+	public int increaseCount(int bno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int result = new InfoBoardDao().increaseCount(conn,bno);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+	}
+
+	public int increaseRecommend(int uno,int bno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new InfoBoardDao().increaseRecommend(conn, uno,bno);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+		
+		}
+
+	
+	
+	public String checkRecommend(int uno ,  int bno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String result = new InfoBoardDao().checkRecommend(conn,uno,bno);
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int insertReply(Reply re) {
+		
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new InfoBoardDao().insertReply(conn,re);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
 	}
 
 
+	public ArrayList<Reply> selectReply(int bno) {
+		
+		Connection conn=JDBCTemplate.getConnection();
+		ArrayList<Reply> rList=new InfoBoardDao().selectReply(conn,bno);
+		
+		JDBCTemplate.close(conn);
+		return rList;
+	}
+
+	public int insertInfoBoard(InfoBoard ib) {
+		
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new InfoBoardDao().insertInfoBoard(conn,ib);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+
+	}
+	
+	
+	public int updateInfoBoard(InfoBoard ib) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new InfoBoardDao().updateInfoBoard(conn,ib);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+		
+	}
+
+	public int deleteInfoBoard(int bno) {
+		
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new InfoBoardDao().deleteInfoBoard(conn,bno);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	
+
+	public ArrayList<InfoBoard> searchInfoBoard(String keyword, String category) {
+		
+		Connection conn=JDBCTemplate.getConnection();
+		ArrayList<InfoBoard> fList=new InfoBoardDao().searchInfoBoard(conn,keyword,category);
+		
+		JDBCTemplate.close(conn);
+		return fList;
+	}
+	
+
+	
 }
+
