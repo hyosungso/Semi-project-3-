@@ -204,19 +204,29 @@ width:100%;
 			var rId=$(this).children().eq(1).attr('id');
 			var id="${loginUser.userId}";
 			var name="${loginUser.nickName}";
-			console.log(id);
-			console.log(name);
-			console.log("${b.boardWriter}");
-			console.log(rName);
-			console.log("${loginUser.authCode}");
+			var bId="${b.boardWriter}";
 			
-			if(${!empty loginUser and (id eq b.boardWriter 
-									or name eq b.boardWriter 
-									or id eq rName 
-									or name eq rName 
-									or loginUser.authCode eq 'ADMIN') }){
+			if(${!empty loginUser}){
+			if(id==bId){
+				console.log(id);
+				console.log(bId);
+				deleteReply(rId,rName);
+			}else if(name==bId){
+				console.log(2);
+				deleteReply(rId,rName);
+			}else if(id==rName){
+				console.log(3);
+				deleteReply(rId,rName);
+			}else if(name==rName){
+				console.log(4);
+				deleteReply(rId,rName);
+			}else if(${loginUser.authCode eq 'ADMIN'}){
+				console.log(5);
 				deleteReply(rId,rName);
 			}
+			}
+			
+			
 		});
 	});
 	</script>
