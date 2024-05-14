@@ -40,7 +40,7 @@ public class MemorialsDao {
 	    ResultSet rset = null;
 	    Statement stmt = null;
 	    
-	    String sql = prop.getProperty("selectmemorials");
+	    String sql = prop.getProperty("selectmemorialsNo");
 	    try {
 	        stmt = conn.createStatement();
 	        
@@ -110,5 +110,36 @@ public class MemorialsDao {
 	        JDBCTemplate.close(pstmt);
 	    }
 	    return result;
+	}
+
+
+
+
+	public Memorials selectMemorials(Connection conn, String id) {
+		Memorials memo=null;
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("selectMemorials");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				//MEMORIALS_DATE,MEMORIALS_TIME,MEMORIALS_PARTS,MEMORIALS_CONTENT,MEMORIALS_SELFSCORE
+				memo=new Memorials(rset.getString("MEMORIALS_DATE"),
+								   rset.getString("MEMORIALS_TIME"),
+								   rset.getString("MEMORIALS_PARTS"),
+								   rset.getString("MEMORIALS_CONTENT"),
+								   rset.getInt("MEMORIALS_SELFSCORE"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return memo;
 	}
 }

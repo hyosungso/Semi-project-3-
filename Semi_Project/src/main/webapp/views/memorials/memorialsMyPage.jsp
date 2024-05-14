@@ -18,19 +18,19 @@
                 <td colspan="2"><%--  <img src="<%= memorialsAttachment.getMemorialsImgPath() %>" alt="운동 사진"> --%></td>
             </tr>
             <tr>
-                <td>날짜: <%--  <%= memorials.getMemorialsDate() %> --%></td>
+                <td>날짜: ${memorials.memorialsDate } <%--  <%= memorials.getMemorialsDate() %> --%></td>
             </tr>
             <tr>
-                <td>운동 부위:<%--  <%= memorials.getMemorialsParts() %> --%></td>
+                <td>운동 부위: ${memorials.memorialsParts}<%--  <%= memorials.getMemorialsParts() %> --%></td>
             </tr>
             <tr>
-                <td>운동 시간:<%--  <%= memorials.getMemorialsTime() %> --%></td>
+                <td>운동 시간: ${memorials.memorialsTime}<%--  <%= memorials.getMemorialsTime() %> --%></td>
             </tr>
             <tr>
-                <td>특이사항:<%--   <%= memorials.getMemorialsContent() %> --%></td>
+                <td>특이사항: ${memorials.memorialsContent}<%--   <%= memorials.getMemorialsContent() %> --%></td>
             </tr>
             <tr>
-                <td>운동 점수:<%--  <%= memorials.getMemorialsSelfScore() %> --%></td>
+                <td>운동 점수: ${memorials.memorialsSelfScore}<%--  <%= memorials.getMemorialsSelfScore() %> --%></td>
             </tr>
             <tr>
                 <td>
