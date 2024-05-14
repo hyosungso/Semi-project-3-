@@ -116,16 +116,7 @@ public class BoardDao {
 									rset.getInt("RECOMMEND"),
 									rset.getDate("UPLOAD_DATE")));
 			}
-			/*for(Board b : bList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, b.getBoardWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					b.setBoardWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}	*/
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -176,17 +167,7 @@ public class BoardDao {
 									rset.getInt("RECOMMEND"),
 									rset.getDate("UPLOAD_DATE")));
 			}
-			/*for(Board b : bList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, b.getBoardWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					b.setBoardWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}	*/
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -227,7 +208,6 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		
 		String sql=prop.getProperty("selectBoard");
-		//String sql2=prop.getProperty("selectNickName");
 		Board b=null;
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -244,15 +224,7 @@ public class BoardDao {
 							rset.getString("CATEGORY_NAME"));
 				
 			}
-			
-			/*pstmt=conn.prepareStatement(sql2);
-			pstmt.setString(1, b.getBoardWriter());
-			rset=pstmt.executeQuery();
-			if(rset.next()) {
-				if(rset.getString("NICKNAME")!=null) {
-				b.setBoardWriter(rset.getString("NICKNAME"));
-				}
-			}*/
+
 				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -369,7 +341,6 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		
 		String sql=prop.getProperty("selectReply");
-		//String sql2=prop.getProperty("selectNickName");
 		ArrayList<Reply> rList=new ArrayList<>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -382,17 +353,7 @@ public class BoardDao {
 									rset.getString("REPLY_CONTENT"),
 									rset.getDate("CREATE_DATE")));
 			}
-			//닉네임이 있으면 아이디 대신 닉네임 출력
-			/*for(Reply r : rList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, r.getReplyWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					r.setReplyWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}*/
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -501,17 +462,7 @@ public class BoardDao {
 									rset.getInt("RECOMMEND"), 
 									rset.getDate("REVISE_DATE")));
 			}
-			/*String sql2=prop.getProperty("selectNickName");
-			for(Board b : bList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, b.getBoardWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					b.setBoardWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}*/
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

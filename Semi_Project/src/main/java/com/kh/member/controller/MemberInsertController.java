@@ -1,6 +1,8 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +43,7 @@ public class MemberInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
+		
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
@@ -60,9 +63,15 @@ public class MemberInsertController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
 			
+			response.setContentType("text/html; charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
 			
-			response.sendRedirect(request.getContextPath()+"/welcome.me?userId="+userId+"&userName="+userName
-					+"&nickName="+nickName+"&email="+email+"&phone="+phone);
+			String name = URLEncoder.encode(userName, "UTF-8");
+			String newName = URLEncoder.encode(nickName, "UTF-8");
+			
+			
+			response.sendRedirect(request.getContextPath()+"/welcome.me?userId="+userId+"&userName="+name
+					+"&nickName="+newName+"&email="+email+"&phone="+phone);
 		
 		}else {  //실패
 			request.setAttribute("errorMsg", "회원가입 실패");
