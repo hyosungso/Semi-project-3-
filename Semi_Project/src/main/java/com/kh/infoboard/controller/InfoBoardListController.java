@@ -19,7 +19,7 @@ import com.kh.infoboard.model.vo.InfoBoard;
 /**
  * Servlet implementation class InfoBoardListController
  */
-@WebServlet("/infoboard.bo")
+@WebServlet("/Infoboard.bo")
 public class InfoBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -88,7 +88,7 @@ public class InfoBoardListController extends HttpServlet {
 			fList = new InfoBoardService().selectList(pi,category,sort);
 		}
 		
-<<<<<<< HEAD
+
 		ArrayList<Category> ctList=new InfoBoardService().selectCategory();
 		
 		request.setAttribute("fList", fList);
@@ -99,18 +99,7 @@ public class InfoBoardListController extends HttpServlet {
 		request.getRequestDispatcher("/views/infoboard/infoBoardListView.jsp").forward(request, response);
 		
 		}
-=======
-		ArrayList<Category> ctList = new InfoBoardService().selectCategory();
-		// 자유게시판으로 넘기기
-		request.setAttribute("fList", fList);
-		request.setAttribute("ftList", ctList);
-		request.setAttribute("category", category);
-		request.setAttribute("sort", sort);
-		request.setAttribute("pi", pi);
-		
-		request.getRequestDispatcher("/views/infoboard/infoBoardListView.jsp").forward(request, response);
-	}
->>>>>>> refs/remotes/origin/main
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

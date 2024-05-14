@@ -131,22 +131,15 @@ button[name=category]:hover {
 	</c:when>
 	<c:otherwise>
 	<button onclick="location.href='infoboard.bo?currentPage=${pi.currentPage-1}&category=${category}&sort=${sort}'">이전</button>
-<<<<<<< HEAD
-	
-	
-=======
->>>>>>> refs/remotes/origin/main
+
 	<c:forEach var = "i" begin="${pi.startPage}" end="${pi.endPage}">
 	<button onclick="location.href='infoboard.bo?currentPage=${i}&category=${category}&sort=${sort}'">${i}</button>
 	
 	</c:forEach>
-<<<<<<< HEAD
-	</c:otherwise>
-=======
-	
+
 	</c:otherwise>
 	
->>>>>>> refs/remotes/origin/main
+
 	</c:choose>
 	
 	<c:choose>
