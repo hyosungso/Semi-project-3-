@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.part td{
+width:70px;
+}
+.part td>label{
+width:50px;
+}
+</style>
 </head>
 <body>
 <%@ include file="/views/common/menubar.jsp" %>
@@ -32,14 +40,25 @@
 							<option value="4시간">4시간</option>
 					</select>
 					</td>
-					<td>오늘 어느 부위 했어? <br> <label><input
-							type="checkbox" name="memorialsParts" value="chest" /> 가슴 </label> <label><input
-							type="checkbox" name="memorialsParts" value="arm" /> 팔</label> <label><input
-							type="checkbox" name="memorialsParts" value="back" /> 등</label> <br>
-						<label><input type="checkbox" name="memorialsParts"
-							value="shoulder" /> 어깨</label> <label><input type="checkbox"
-							name="memorialsParts" value="lowerbody" /> 하체</label> <label><input
-							type="checkbox" name="memorialsParts" value="cardio" /> 유산소</label>
+					<td>오늘 어느 부위 했어? <br>
+						<table class="part">
+						<tr>
+							<td><input type="checkbox" name="memorialsParts"
+							 id="chest" value="chest"><label for="chest">가슴</label></td>
+							<td><input type="checkbox" name="memorialsParts"
+							 id="arm" value="arm"><label for="arm">팔</label></td>
+							<td><input type="checkbox" name="memorialsParts"
+							 id="back" value="back"><label for="back">등</label></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="memorialsParts"
+							 id="shoulder" value="shoulder"><label for="shoulder">어깨</label></td>
+							<td><input type="checkbox" name="memorialsParts"
+							 id="lowerbody" value="lowerbody"><label for="lowerbody">하체</label></td>
+							<td><input type="checkbox" name="memorialsParts"
+							 id="cardio" value="cardio"><label for="cardio">유산소</label></td>
+						</tr>
+						</table>
 					</td>
 				</tr>
 				<tr>
@@ -48,14 +67,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">특이사항 및 메모 <br> <textarea
-							 name="memorialsContent">
- </textarea>
+					<td colspan="2">특이사항 및 메모 <br>
+					<textarea rows="5" style="resize:none; width:100%" name="memorialsContent"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">오늘 나에게 주는 점수! <br> <input
-						type="range" name="MemorialsSelfScore">
+						type="range" name="MemorialsSelfScore" oninput="document.getElementById('score').innerHTML=this.value;">
+						<span id="score">50</span>
 					</td>
 				</tr>
 			</table>
