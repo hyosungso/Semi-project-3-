@@ -18,7 +18,9 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardDao {
+	
 	private Properties prop=new Properties();
+	
 	public BoardDao() {
 		
 		try {
@@ -463,7 +465,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Board> searchBoard(Connection conn, String keyword, String category) {
+	public ArrayList<Board> searchBoard(Connection conn, String keyword, String category,PageInfo pi) {
 		ResultSet rset=null;
 		PreparedStatement pstmt=null;
 		String sql=null;
@@ -477,10 +479,15 @@ public class BoardDao {
 			break;
 		}
 		
+		int startRow=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+		int endRow=pi.getCurrentPage()*pi.getBoardLimit();
+		
 		ArrayList<Board> bList=new ArrayList<>();
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset=pstmt.executeQuery();
 			while(rset.next()) {
 				//BOARD_NO,USER_ID,BOARD_TITLE,BOARD_CONTENT,COUNT,RECOMMEND,REVISE_DATE,CATEGORY_NAME
@@ -512,6 +519,26 @@ public class BoardDao {
 		}
 		
 		return bList;
+	}
+
+	public int deleteReply(Connection conn, int rNo) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("deleteReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, rNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	

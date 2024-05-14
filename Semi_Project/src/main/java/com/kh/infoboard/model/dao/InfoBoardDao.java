@@ -21,7 +21,7 @@ public class InfoBoardDao {
 	public InfoBoardDao() {
 		
 			try {
-				String filePath =InfoBoardDao.class.getResource("/resources/sql/board-mappere.xml").getPath();
+				String filePath =InfoBoardDao.class.getResource("/resources/sql/board-mapper.xml").getPath();
 				prop.loadFromXML(new FileInputStream(filePath));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

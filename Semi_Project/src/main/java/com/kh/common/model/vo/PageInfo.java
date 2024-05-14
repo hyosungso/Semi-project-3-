@@ -15,6 +15,15 @@ public class PageInfo {
 		super();
 	}
 	
+	
+	public PageInfo(int currentPage, int boardLimit) {
+		super();
+		this.currentPage = currentPage;
+		this.boardLimit = boardLimit;
+	}
+
+
+
 	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
 			int endPage) {
 		super();
