@@ -1,4 +1,4 @@
-package com.kh.board.controller;
+package com.kh.infoboard.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.model.service.BoardService;
-import com.kh.board.model.vo.Board;
-import com.kh.common.model.vo.PageInfo;
+import com.kh.infoboard.model.service.InfoBoardService;
+import com.kh.infoboard.model.vo.InfoBoard;
 
 /**
- * Servlet implementation class BoardSearchController
+ * Servlet implementation class InfoBoardSearchController
  */
-@WebServlet("/search.bo")
-public class BoardSearchController extends HttpServlet {
+@WebServlet("/infosearch.bo")
+public class InfoBoardSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardSearchController() {
+    public InfoBoardSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +31,13 @@ public class BoardSearchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String keyword=request.getParameter("search");
-		String category=request.getParameter("searchCategory");
-		int page=Integer.parseInt(request.getParameter("page"));
 		
-
-		int currentPage=page; //현재페이지
-		int boardLimit; //한 페이지에 보여줄 게시글 개수
-		//한페이지에서 보여줄 게시글 개수
-		boardLimit=20;
-		PageInfo pi=new PageInfo(currentPage,boardLimit);
+		String keyword = request.getParameter("search");
+		String category = request.getParameter("searchCategory");
 		
-		ArrayList<Board> bList=new ArrayList<>();
-		BoardService bs=new BoardService();
+		ArrayList<InfoBoard> fList = new ArrayList<>();
+		InfoBoardService ibs = new InfoBoardService();
+		
 		/*switch(category) {
 		case "title":
 			bList=bs.searchBoardByTitle(keyword);
@@ -56,15 +49,14 @@ public class BoardSearchController extends HttpServlet {
 			bList=bs.searchBoardByWriter(keyword);
 			break;
 		}*/
-		bList=bs.searchBoard(keyword,category,pi);
-		request.setAttribute("bList", bList);
-		request.setAttribute("category", category);
+		
+		fList=ibs.searchInfoBoard(keyword,category);
+		request.setAttribute("fList", fList);
 		request.setAttribute("keyword", keyword);
-		request.setAttribute("page", page);
 		
 
 		
-		request.getRequestDispatcher("/views/board/boardSearchView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/infoboard/infoBoardSearchView.jsp").forward(request, response);
 		
 	}
 

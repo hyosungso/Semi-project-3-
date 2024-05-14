@@ -38,7 +38,7 @@ width:100%;
 		<th width="10%">조회수</th>
 		<th width="5%">${b.count }</th>
 		<th width="10%">추천수</th>
-		<th width="5%">${b.recommend }</th>
+		<th width="5%" id="RC">${b.recommend }</th>
 	</tr>
 	<tr>
 		<th colspan="8" style="text-align:left">${b.boardTitle }</th>
@@ -73,7 +73,18 @@ width:100%;
 				uno : "${loginUser.userNo}"
 			},
 			success : function(Message){
-				alert(Message);
+				switch(Message){
+				case "RCNNN":
+					alert("이미 이 글을 추천했습니다.");
+					break;
+				case "RCYYN":
+					alert("추천에 실패했습니다");
+					break;
+				case "RCYYY":
+					alert("이 글을 추천했습니다.");
+					$("#RC").text(${b.recommend}+1);
+					break;
+				}
 			},
 			error : function(){
 				alert("추천에 실패했습니다.");	
@@ -87,13 +98,13 @@ width:100%;
 	<table border="1" class="reply-list">
 	<thead>
 		<tr>
-		<th width="75px">작성자</th>
-		<th>댓글내용</th>
-		<th width="120px">작성일</th>
+		<th width="10%">작성자</th>
+		<th width="75%">댓글내용</th>
+		<th width="15%">작성일</th>
 		</tr>
 	</thead>
 	<tbody>
-	
+
 	</tbody>
 	</table>
 	<br>
@@ -128,6 +139,7 @@ width:100%;
 			},
 			success : function(result){
 				alert(result);
+				$("#replyContent").html("");
 			},
 			error : function(){
 				alert("댓글 작성에 오류가 발생했습니다.");
@@ -152,9 +164,9 @@ width:100%;
 					
 					tr +="<tr>"
 						+"<td>"+list[i].replyWriter+"</td>"
-						+"<td>"+list[i].replyContent+"</td>"
+						+"<td id="+list[i].replyNo+">"+list[i].replyContent+"</td>"
 						+"<td>"+list[i].createDate+"</td>"
-						+"</tr>"
+					    +"</tr>";
 				}
 				$(".reply-list tbody").append(tr);
 			},
@@ -163,9 +175,59 @@ width:100%;
 			}
 		});
 	}
+	function deleteReply(rId,rName){
+		if(confirm(rName+"의 댓글을 삭제하시겠습니까?")){
+			$.ajax({
+				url : "deleteReply.bo",
+				data : {
+					rNo : rId
+				},
+				success : function(message){
+					alert(message);
+				},
+				error : function(){
+					alert("삭제에 실패했습니다.");
+				},
+				complete : function(){
+					replyList();
+				}
+			});
+		}
+	}
+	
 	$(function(){
 		//처음 게시글에 들어왔을때 댓글목록 조회후 댓글창에 표시
 		replyList();
+		
+		$(document).on("click",".reply-list tbody tr",function(){
+			var rName=$(this).children().eq(0).text();
+			var rId=$(this).children().eq(1).attr('id');
+			var id="${loginUser.userId}";
+			var name="${loginUser.nickName}";
+			var bId="${b.boardWriter}";
+			
+			if(${!empty loginUser}){
+			if(id==bId){
+				console.log(id);
+				console.log(bId);
+				deleteReply(rId,rName);
+			}else if(name==bId){
+				console.log(2);
+				deleteReply(rId,rName);
+			}else if(id==rName){
+				console.log(3);
+				deleteReply(rId,rName);
+			}else if(name==rName){
+				console.log(4);
+				deleteReply(rId,rName);
+			}else if(${loginUser.authCode eq 'ADMIN'}){
+				console.log(5);
+				deleteReply(rId,rName);
+			}
+			}
+			
+			
+		});
 	});
 	</script>
 </body>

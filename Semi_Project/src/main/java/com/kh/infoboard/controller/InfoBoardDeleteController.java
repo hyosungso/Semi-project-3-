@@ -1,26 +1,26 @@
-package com.kh.board.controller;
+package com.kh.infoboard.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.board.model.service.BoardService;
+import com.kh.infoboard.model.service.InfoBoardService;
 
 /**
- * Servlet implementation class BoardRecommendController
+ * Servlet implementation class InfoBoardDeleteController
  */
-@WebServlet("/recommend.bo")
-public class BoardRecommendController extends HttpServlet {
+@WebServlet("/infodelete.bo")
+public class InfoBoardDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardRecommendController() {
+    public InfoBoardDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,29 +29,20 @@ public class BoardRecommendController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uno=Integer.parseInt(request.getParameter("uno"));
-		int bno=Integer.parseInt(request.getParameter("bno"));
 		
-		String message="";
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		switch(new BoardService().checkRecommend(uno,bno)) {
-		case "RCYYY": //추천기록이 없는경우
-			int result=new BoardService().increaseRecommend(uno,bno);
-			if(result>0) {
-				message="RCYYY";
-			} else {
-				message="RCYYN";
-			}
-			break;
-		case "RCNNN": //추천기록이 있는경우
-			message="RCNNN";
-			break;
+		int result = new InfoBoardService().deleteInfoBoard(bno);
+		
+		HttpSession session = request.getSession();
+		
+		if(result>0) {
+			session.setAttribute("alertMsg", "삭제완료");
+			response.sendRedirect(request.getContextPath()+"/currentPage=1&category=0");
+		}else {
+			session.setAttribute("alertMsg", "삭제실패");
+			response.sendRedirect(request.getContextPath()+"/infodetail.bo?bno="+bno);
 		}
-		
-		
-		
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().print(message);
 	}
 
 	/**

@@ -24,7 +24,9 @@
 			<table width="100%" style="margin : 10px;">
 				<tr>
 					<td style="padding-left: 10px;">
+
 						</td>
+
 					<td></td>
 					<td align="right" style="padding-right:35px;">
 					<a href="${contextPath }/views/market/deleteCart.jsp?cartId=<%=cartId %>"

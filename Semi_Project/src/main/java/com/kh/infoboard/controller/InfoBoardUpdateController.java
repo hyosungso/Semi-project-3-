@@ -1,4 +1,4 @@
-package com.kh.board.controller;
+package com.kh.infoboard.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,19 +12,21 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
-import com.kh.board.model.vo.Category;
+import com.kh.infoboard.model.service.InfoBoardService;
+import com.kh.infoboard.model.vo.Category;
+import com.kh.infoboard.model.vo.InfoBoard;
 
 /**
- * Servlet implementation class BoardInsertController
+ * Servlet implementation class InfoBoardUpdateController
  */
-@WebServlet("/insert.bo")
-public class BoardInsertController extends HttpServlet {
+@WebServlet("/infoupdate.bo")
+public class InfoBoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardInsertController() {
+    public InfoBoardUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,11 +36,13 @@ public class BoardInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Category> ctList=new BoardService().selectCategory();
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		InfoBoard ib = new InfoBoardService().selectInfoBoard(bno);
 		
-		request.setAttribute("ctList", ctList);
+		request.setAttribute("ib",ib);
+		ArrayList<Category> ftList = new InfoBoardService().selectCategory();
 		
-		request.getRequestDispatcher("/views/board/boardInsertView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/infoboard/infoboardUpdateView.jsp").forward(request, response);
 	}
 
 	/**
@@ -49,22 +53,25 @@ public class BoardInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String userNo=request.getParameter("userNo");
-		String category=request.getParameter("category");
 		String title=request.getParameter("boardTitle");
 		String content=request.getParameter("boardContent");
+		String category=request.getParameter("category");
 		
-		Board b=new Board(userNo,title,content,category);
-		int result=new BoardService().insertBoard(b);
+		int bno=Integer.parseInt(request.getParameter("boardNo"));
 		
-		HttpSession session=request.getSession();
+		InfoBoard ib=new InfoBoard(userNo,title,content,category);
+		ib.setBoardNo(bno);
+		
+		int result=new InfoBoardService().updateInfoBoard(ib);
+		
+		HttpSession session = request.getSession();
+		
 		if(result>0) {
-			session.setAttribute("alertMsg", "작성이 완료되었습니다.");
-		} else {
-			session.setAttribute("alertMsg","작성에 실패했습니다.");
+			session.setAttribute("alertMsg","수정완료");
+		}else {
+			session.setAttribute("alertMsg", "수정에 실패했습니다.");
 		}
-		response.sendRedirect(request.getContextPath()+"/board.bo?currentPage=1&category=0&sort=latest");
-		
-		
+		response.sendRedirect("infodetail.bo?bno="+bno);
 	}
 
 }

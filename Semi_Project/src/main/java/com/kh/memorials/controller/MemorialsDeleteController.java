@@ -1,26 +1,27 @@
-package com.kh.board.controller;
+package com.kh.memorials.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.board.model.service.BoardService;
+import com.kh.memorials.model.service.MemorialsService;
+import com.kh.memorials.model.vo.Memorials;
 
 /**
- * Servlet implementation class BoardRecommendController
+ * Servlet implementation class MemorialsDelete
  */
-@WebServlet("/recommend.bo")
-public class BoardRecommendController extends HttpServlet {
+@WebServlet("/memorialsDelete.me")
+public class MemorialsDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardRecommendController() {
+    public MemorialsDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,29 +30,20 @@ public class BoardRecommendController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uno=Integer.parseInt(request.getParameter("uno"));
-		int bno=Integer.parseInt(request.getParameter("bno"));
+		// TODO Auto-generated method stub
+		int mNo = Integer.parseInt(request.getParameter("mNo"));
 		
-		String message="";
+		int result = new MemorialsService().deleteMemorials(mNo);
 		
-		switch(new BoardService().checkRecommend(uno,bno)) {
-		case "RCYYY": //추천기록이 없는경우
-			int result=new BoardService().increaseRecommend(uno,bno);
-			if(result>0) {
-				message="RCYYY";
-			} else {
-				message="RCYYN";
-			}
-			break;
-		case "RCNNN": //추천기록이 있는경우
-			message="RCNNN";
-			break;
+		HttpSession session = request.getSession();
+		if(result>0) {
+			session.setAttribute("alertMsg", "삭제 성공");
+			response.sendRedirect(request.getContextPath()/* +"/views/memorials/memorials.jsp" */);
+		}else {
+			session.setAttribute("alertMsg", "삭제 실패");
+			response.sendRedirect(request.getContextPath()/* +"/views/memorials/memorials.jsp" */);
 		}
-		
-		
-		
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().print(message);
+				
 	}
 
 	/**

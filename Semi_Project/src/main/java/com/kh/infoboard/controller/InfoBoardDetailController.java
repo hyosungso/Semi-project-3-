@@ -1,7 +1,6 @@
-package com.kh.board.controller;
+package com.kh.infoboard.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,18 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
+import com.kh.infoboard.model.service.InfoBoardService;
+import com.kh.infoboard.model.vo.InfoBoard;
 
 /**
- * Servlet implementation class BoardRecommendController
+ * Servlet implementation class InfoBoardDetailController
  */
-@WebServlet("/recommend.bo")
-public class BoardRecommendController extends HttpServlet {
+@WebServlet("/infodetail.bo")
+public class InfoBoardDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardRecommendController() {
+    public InfoBoardDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,30 +30,22 @@ public class BoardRecommendController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uno=Integer.parseInt(request.getParameter("uno"));
-		int bno=Integer.parseInt(request.getParameter("bno"));
-		
-		String message="";
-		
-		switch(new BoardService().checkRecommend(uno,bno)) {
-		case "RCYYY": //추천기록이 없는경우
-			int result=new BoardService().increaseRecommend(uno,bno);
-			if(result>0) {
-				message="RCYYY";
-			} else {
-				message="RCYYN";
-			}
-			break;
-		case "RCNNN": //추천기록이 있는경우
-			message="RCNNN";
-			break;
+
+		int bno = Integer.parseInt(request.getParameter("bno"));
+
+		int result = new BoardService().increaseCount(bno);
+		if (result > 0) {
+			InfoBoard ib = new InfoBoardService().selectInfoBoard(bno);
+
+			request.setAttribute("ib", ib);
+		} else {
+			request.getSession().setAttribute("alertMsg", "게시판 접근에 실패했습니다.");
+			response.sendRedirect(request.getHeader("referer"));
 		}
-		
-		
-		
-		response.setContentType("text/html;charset=UTF-8");
-		response.getWriter().print(message);
+
+		request.getRequestDispatcher("/views/infoboard/infoBoardDetailView.jsp").forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
