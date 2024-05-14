@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.market.model.service.MarketService;
 import com.kh.market.model.vo.Component;
@@ -44,6 +45,7 @@ public class MarketDetailController extends HttpServlet {
 		request.setAttribute("i", i);
 		request.setAttribute("itList", itList);
 		request.setAttribute("c", c);
+		request.setAttribute("listLength", itList.size());
 		
 		request.getRequestDispatcher("views/market/marketDetailView.jsp").forward(request, response);
 	

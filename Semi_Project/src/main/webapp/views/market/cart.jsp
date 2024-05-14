@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <%
+	
 	String cartId = session.getId();
 %>
 <title>장바구니</title>
@@ -23,12 +24,14 @@
 			<table width="100%" style="margin : 10px;">
 				<tr>
 					<td style="padding-left: 10px;">
-						<input type="checkbox" id="allchk" checked>&nbsp;<label for="allchk"><b>전체</b></label></td>
+
+						</td>
+
 					<td></td>
 					<td align="right" style="padding-right:35px;">
-					<a href="./deleteCart.jsp?cartId<%=cartId %>"
-					class="btn btn-danger">삭제하기</a>
-					<a href="./shippingInfo.jsp?cartId<%=cartId%>"
+					<a href="${contextPath }/views/market/deleteCart.jsp?cartId=<%=cartId %>"
+					class="btn btn-danger">카트비우기</a>
+					<a href="${contextPath }/views/market/shippingInfo.jsp?cartId=<%=cartId%>"
 					class="btn btn-success">주문하기</a>
 					</td>
 				</tr>
@@ -58,13 +61,13 @@
 					
 				%>
 				<tr>
-					<td><input type="checkbox" class="chk" checked></td>
+					<td></td>
 					<td><a href="${contextPath }/detail.mk?itno=<%=item.getItemCode()%>"><%=item.getItemName() %></a> </td>
 					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="<%=item.getTotalPrice() %>" /> 원</td>
 					<td><%=item.getQuantity() %></td>
 					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="<%=total %>" /> 원</td>
 					<td>
-					   <a href="./removeCart.jsp?id<%=item.getItemCode()%>"
+					   <a href="${contextPath }/views/market/removeCart.jsp?id=<%=item.getItemCode()%>"
 					   class="bi bi-backspace-fill">&nbsp;삭제</a>
 					</td>
 				</tr>

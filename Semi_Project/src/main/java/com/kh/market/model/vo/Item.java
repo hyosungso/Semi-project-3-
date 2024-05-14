@@ -45,9 +45,10 @@ public class Item {
 	
 	
 	
-	public Item(String categoryName, int price,int discount, String itemName, String storageMethod,int itemCode) {
+	public Item(String categoryName,int category,  int price,int discount, String itemName, String storageMethod,int itemCode) {
 		super();
 		this.categoryName = categoryName;
+		this.category=category;
 		this.price = price;
 		this.discount=discount;
 		this.itemName = itemName;

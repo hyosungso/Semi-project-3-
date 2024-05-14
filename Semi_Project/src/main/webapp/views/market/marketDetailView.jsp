@@ -1,3 +1,4 @@
+<%@page import="com.kh.market.model.vo.Item"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -92,7 +93,7 @@
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
 	<br><br><br>
-
+		<input type="hidden" value="${listLength + 1 }" id="count" name="count">
 		
 		<div class="form-area">
 		<form name="addForm" action="${contextPath }/views/market/addCart.jsp?id=${i.itemCode }" method="post">
@@ -195,6 +196,7 @@
 		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 		<div align="center">
 			<button class='btn btn-info' onclick="deleteItem();">상품 비활성화</button>
+			<a href="${contextPath }/update.mk?itno=${i.itemCode}" class="btn btn-primary" role="botton">상품 업데이트</a>
 			<script>
 				function deleteItem(){
 					var flag=confirm("상품 게시를 종료하시겠습니까?");
@@ -227,10 +229,11 @@
 		function movePage(num){
 			var pageLocation=450;
 			var pageNo=num-1;
+			var count=document.getElementById("count").value;
 			document.querySelector(".버튼"+num).addEventListener('click',function(){
 				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 				
-				$('.slide-container').css("width",num*pageLocation+"px");
+				$('.slide-container').css("width",count*pageLocation+"px");
 			})
 		}
 	

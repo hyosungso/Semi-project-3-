@@ -15,6 +15,7 @@ import com.kh.common.JDBCTemplate;
 import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
+import com.kh.market.model.vo.Order;
 
 public class MarketDao {
 
@@ -77,6 +78,7 @@ public class MarketDao {
 			if(rset.next()) {
 				i=(new Item(
 						rset.getString("CATEGORY_NAME"),
+						rset.getInt("CATEGORY_NO"),
 						rset.getInt("PRICE"),
 						rset.getInt("discount"),
 						rset.getString("ITEM_NAME"),
@@ -215,16 +217,15 @@ public class MarketDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, category);
-			pstmt.setDouble(2, c.getCalorie());
-			pstmt.setDouble(3, c.getProtin());
-			pstmt.setDouble(4, c.getSalt());
-			pstmt.setDouble(5, c.getCarbo());
-			pstmt.setDouble(6, c.getFat());
-			pstmt.setDouble(7, c.getTransFat());
-			pstmt.setDouble(8, c.getSaturatedFat());
-			pstmt.setDouble(9, c.getChol());
-			pstmt.setDouble(10, c.getSugar());
+			pstmt.setDouble(1, c.getCalorie());
+			pstmt.setDouble(2, c.getProtin());
+			pstmt.setDouble(3, c.getSalt());
+			pstmt.setDouble(4, c.getCarbo());
+			pstmt.setDouble(5, c.getFat());
+			pstmt.setDouble(6, c.getTransFat());
+			pstmt.setDouble(7, c.getSaturatedFat());
+			pstmt.setDouble(8, c.getChol());
+			pstmt.setDouble(9, c.getSugar());
 			
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -251,7 +252,6 @@ public class MarketDao {
 			if(rset.next()) {
 				c=new Component(
 						rset.getInt("ITEM_CODE"),
-						rset.getInt("CATEGORY_NO"),
 						rset.getDouble("PROTIN"),
 						rset.getDouble("CARBO"),
 						rset.getDouble("CALORIE"),
@@ -294,5 +294,136 @@ public class MarketDao {
 		
 		return result;
 	}
+
+	public int insertOrder(Connection conn, Order o) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql =prop.getProperty("insertOrder");
+		
+			try {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, o.getOrderNo());
+				pstmt.setString(2, o.getName());
+				pstmt.setDate(3, o.getShippingDate());
+				pstmt.setString(4, o.getPostNum());
+				pstmt.setString(5, o.getAddress());
+				result=pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				JDBCTemplate.close(conn);
+			}
+		
+		return result;
+	}
+
+	public int updateItem(Item i, Connection conn, int itCode) {
+		int result =0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("updateItem");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, i.getCategory());
+			pstmt.setString(2, i.getItemName());
+			pstmt.setInt(3, i.getPrice());
+			pstmt.setInt(4, i.getDiscount());
+			pstmt.setString(5, i.getStorageMethod());
+			pstmt.setInt(6, itCode);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateItemAttachment(Connection conn, ArrayList<ItemAttachment> itList, int itCode) {
+		int result=1;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("updateItemAttachment");
+		try {
+		
+			for(ItemAttachment it : itList) {
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, itCode);
+				pstmt.setString(2, it.getOriginName());
+				pstmt.setString(3, it.getChangeName());
+				pstmt.setString(4, it.getFilePath());
+				pstmt.setInt(5, it.getFileLev());
+				
+				
+				result*=pstmt.executeUpdate();
+				
+			
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+	
+
+	public int updateComponent(int category, Connection conn, Component c, int itCode) {
+		int result =0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("updateComponent");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setDouble(1, c.getCalorie());
+			pstmt.setDouble(2, c.getProtin());
+			pstmt.setDouble(3, c.getSalt());
+			pstmt.setDouble(4, c.getCarbo());
+			pstmt.setDouble(5, c.getFat());
+			pstmt.setDouble(6, c.getTransFat());
+			pstmt.setDouble(7, c.getSaturatedFat());
+			pstmt.setDouble(8, c.getChol());
+			pstmt.setDouble(9, c.getSugar());
+			pstmt.setInt(10,itCode);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteItemAttachment(Connection conn, int fileLev, int itCode) {
+		// TODO Auto-generated method stub
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("deleteItemAttachment");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, fileLev);
+			pstmt.setInt(2, itCode);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
 
 }
