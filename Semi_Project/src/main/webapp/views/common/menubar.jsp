@@ -244,12 +244,24 @@
 			<div>
 				<a href="${contextPath }/list.mk">매장(후순위)</a>
 			</div>
+			<%if(loginUser == null) {%>
 			<div>
-				<a href="${contextPath }/Memorials.me">개인기록(후순위)</a>
+				<a href="${contextPath}/views/member/login.jsp" id="fake">개인기록(후순위)</a>
 			</div>
+			<%} else { %>
+			<div>
+				<a href="Memorials.me">개인기록(후순위)</a>
+			</div>
+			<%} %>
 		</div>
 
 	</div>
+	<script>
+			document.getElementById('fake').addEventListener('click', function(event) {
+    		alert("로그인한 상태에서 사용 가능합니다.");
+    		window.location.href = "${contextPath}/views/member/login.jsp";
+			});
+	</script>
 
 	<script>
     
