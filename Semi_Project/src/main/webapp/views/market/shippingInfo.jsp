@@ -1,3 +1,5 @@
+<%@page import="com.kh.market.model.vo.Item"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   
@@ -5,7 +7,14 @@
 <html>
 <head>
 	
-
+<%
+	@SuppressWarnings("unchecked")							
+	ArrayList<Item> cartList =(ArrayList<Item>)session.getAttribute("cartlist");
+	if(cartList==null){
+		
+		response.sendRedirect(request.getContextPath()+"/views/market/cart.jsp");
+	}
+%>
   
 <title>배송 정보</title>
 

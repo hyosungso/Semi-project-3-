@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <%
+	
 	String cartId = session.getId();
 %>
 <title>장바구니</title>
@@ -23,11 +24,11 @@
 			<table width="100%" style="margin : 10px;">
 				<tr>
 					<td style="padding-left: 10px;">
-						<input type="checkbox" id="allchk" checked>&nbsp;<b>전체</b></td>
+						</td>
 					<td></td>
 					<td align="right" style="padding-right:35px;">
 					<a href="${contextPath }/views/market/deleteCart.jsp?cartId=<%=cartId %>"
-					class="btn btn-danger">삭제하기</a>
+					class="btn btn-danger">카트비우기</a>
 					<a href="${contextPath }/views/market/shippingInfo.jsp?cartId=<%=cartId%>"
 					class="btn btn-success">주문하기</a>
 					</td>
@@ -58,7 +59,7 @@
 					
 				%>
 				<tr>
-					<td><input type="checkbox" class="chk" checked></td>
+					<td></td>
 					<td><a href="${contextPath }/detail.mk?itno=<%=item.getItemCode()%>"><%=item.getItemName() %></a> </td>
 					<td><fmt:formatNumber type="number" maxFractionDigits="3" value="<%=item.getTotalPrice() %>" /> 원</td>
 					<td><%=item.getQuantity() %></td>

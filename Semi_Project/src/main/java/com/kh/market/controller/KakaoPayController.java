@@ -66,18 +66,21 @@ public class KakaoPayController extends HttpServlet {
 		URL address =new URL("https://open-api.kakaopay.com/online/v1/payment/ready");
 		HttpURLConnection serverConn = (HttpURLConnection)address.openConnection();
 		serverConn.setRequestMethod("POST");
-		serverConn.setRequestProperty("Authorization","SECRET_KEY DEV4B01EEFB0271090A301E2AF9D8367C8400C55");
+		serverConn.setRequestProperty("Authorization","SECRET_KEY DEV4996F09AC415D4B6EBA132851F394E087142B");
+		serverConn.setRequestProperty("Content-Type",  "application/json;charset=UTF-8");
 		serverConn.setDoOutput(true);
 		String parameter = "cid=TC0ONETIME&"
-				+ "partner_order_id=partner_order_id+&"
+				+ "partner_order_id=partner_order_id&"
 				+ "partner_user_id=partner_user_id&"
 				+ "item_name=초코파이&"
 				+ "quantity=1&"
 				+ "total_amount=2200&"
+				+ "vat_amount=200&"
 				+ "tax_free_amount=0&"
 				+ "approval_url=http://localhost:8888/HealthLife/views/market/cart.jsp&"
 				+ "cancel_url=http://localhost:8888/HealthLife/views/market/cart.jsp&"
 				+ "fail_url=http://localhost:8888/HealthLife/views/market/cart.jsp";
+		
 		OutputStream output = serverConn.getOutputStream();
 		DataOutputStream dataOut=new DataOutputStream(output);
 		dataOut.writeBytes(parameter);
