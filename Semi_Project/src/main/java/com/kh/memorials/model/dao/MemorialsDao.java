@@ -41,11 +41,9 @@ public class MemorialsDao {
 	    ResultSet rset = null;
 	    Statement stmt = null;
 	    
-<<<<<<< HEAD
-	    String sql = prop.getProperty("selectmemorialsNo");
-=======
+
 	    String sql = prop.getProperty("selectmemorials");
->>>>>>> refs/remotes/origin/main
+
 	    try {
 	        stmt = conn.createStatement();
 	        
@@ -73,25 +71,13 @@ public class MemorialsDao {
 		String sql = prop.getProperty("insertMemorials");
 		try {
 			pstmt = conn.prepareStatement(sql);
-<<<<<<< HEAD
-			pstmt.setInt(1, m.getMemorialsNo());
-			pstmt.setString(2, m.getMemorialsDate());
-			pstmt.setString(3, m.getMemorialsTime());			
-			pstmt.setString(4, m.getMemorialsParts());
-			pstmt.setString(5, m.getMemorialsContent());
-			pstmt.setInt(6, m.getMemorialsSelfScore());
-			pstmt.setString(7, m.getmUserId());
-=======
-			
 			pstmt.setString(1, m.getMemorialsDate());
-			
 			pstmt.setString(2, m.getMemorialsTime());
-			
 			pstmt.setString(3, String.join(",", m.getMemorialsParts()));
 			pstmt.setString(4, m.getMemorialsContent());
 			pstmt.setInt(5, m.getMemorialsSelfScore());
 			pstmt.setString(6, m.getmUserId());
->>>>>>> refs/remotes/origin/main
+
 			
 			
 			result = pstmt.executeUpdate();
@@ -130,35 +116,9 @@ public class MemorialsDao {
 
 
 
-<<<<<<< HEAD
-	public Memorials selectMemorials(Connection conn, String id) {
-		Memorials memo=null;
-		ResultSet rset=null;
-		PreparedStatement pstmt=null;
-		
-		String sql=prop.getProperty("selectMemorials");
-		try {
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rset=pstmt.executeQuery();
-			
-			if(rset.next()) {
-				//MEMORIALS_DATE,MEMORIALS_TIME,MEMORIALS_PARTS,MEMORIALS_CONTENT,MEMORIALS_SELFSCORE
-				memo=new Memorials(rset.getString("MEMORIALS_DATE"),
-								   rset.getString("MEMORIALS_TIME"),
-								   rset.getString("MEMORIALS_PARTS"),
-								   rset.getString("MEMORIALS_CONTENT"),
-								   rset.getInt("MEMORIALS_SELFSCORE"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}
-		return memo;
-	}
-=======
+
+
+
 	public ArrayList<Memorials> MemorialsList(Connection conn, String UserId) {
 
 		ResultSet rset = null;
@@ -185,7 +145,7 @@ public class MemorialsDao {
 				list.add(new Memorials(rset.getInt("MEMORIALS_NO")
 							  			,rset.getString("MEMORIALS_DATE")
 							  			,rset.getString("MEMORIALS_TIME")
-							  			,rset.getString("MEMORIALS_PARTS").split(",")
+							  			,rset.getString("MEMORIALS_PARTS")
 							  			,rset.getString("MEMORIALS_CONTENT")
 							  			,rset.getInt("MEMORIALS_SELFSCORE")
 							  			));
@@ -367,7 +327,7 @@ public class MemorialsDao {
 				me = new Memorials(rset.getInt("MEMORIALS_NO")
 							      ,rset.getString("MEMORIALS_DATE")
 							      ,rset.getString("MEMORIALS_TIME")
-							      ,rset.getString("MEMORIALS_PARTS").split(",")
+							      ,rset.getString("MEMORIALS_PARTS")
 							      ,rset.getString("MEMORIALS_CONTENT")
 							      ,rset.getInt("MEMORIALS_SELFSCORE"));
 			}
@@ -412,7 +372,4 @@ public class MemorialsDao {
 		}
 		return at;
 	}
-	
-
->>>>>>> refs/remotes/origin/main
 }

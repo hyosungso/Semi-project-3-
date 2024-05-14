@@ -22,9 +22,10 @@ public class Memorials {
 	
 	
 
-	public Memorials(String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
+	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
 			int memorialsSelfScore) {
 		super();
+		this.memorialsNo = memorialsNo;
 		this.memorialsDate = memorialsDate;
 		this.memorialsTime = memorialsTime;
 		this.memorialsParts = memorialsParts;
@@ -60,6 +61,10 @@ public class Memorials {
 		this.mUserId = mUserId;
 		this.status = status;
 	}
+
+
+
+
 
 	public int getMemorialsNo() {
 		return memorialsNo;

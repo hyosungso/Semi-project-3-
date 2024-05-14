@@ -52,13 +52,7 @@ public class MemorialsService {
 	    return result * result2 ; // 등록된 기념일 번호 반환
 	}
 
-	public Memorials selectMemorials(String id) {
-		Connection conn=JDBCTemplate.getConnection();
-		Memorials memo=new MemorialsDao().selectMemorials(conn,id);
-		
-		JDBCTemplate.close(conn);
-		return memo;
-	}
+
 
 	public MemorialsAttachment selectMemorialsAttachment(int mNo) {
 		// TODO Auto-generated method stub
