@@ -106,7 +106,10 @@ width:50px;
 		</script>
 		<br>
 		<br>
-			<button onclick="location.href='MemorialsMyPage.me?id=${loginUser.userNo}'">내 운동일지 확인하기</button>
+		<form action="MemorialsMyPage.me" method="post">
+			<input type="hidden" name="UserId" value="${loginUser.userId }" required>
+			<button type="submit">내 운동일지 확인하기</button>
+		</form>
 
 	</div>
 	<script>

@@ -7,7 +7,7 @@ public class Memorials {
 	private int memorialsNo;
 	private String memorialsDate; //사용자 지정 날짜
 	private String memorialsTime;
-	private String memorialsParts;
+	private String[] memorialsParts;
 	private String memorialsContent;
 	private int memorialsSelfScore;
 	private Date createDate; // 서버에 올린 날짜
@@ -22,20 +22,28 @@ public class Memorials {
 	
 	
 
-	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
-			int memorialsSelfScore) {
+
+
+
+
+	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String memorialsParts,
+			String memorialsContent, int memorialsSelfScore) {
 		super();
 		this.memorialsNo = memorialsNo;
 		this.memorialsDate = memorialsDate;
 		this.memorialsTime = memorialsTime;
-		this.memorialsParts = memorialsParts;
+		//this.memorialsParts = memorialsParts;
 		this.memorialsContent = memorialsContent;
 		this.memorialsSelfScore = memorialsSelfScore;
 	}
 
 
 
-	public Memorials(String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
+
+
+
+
+	public Memorials(String memorialsDate, String memorialsTime, String[] memorialsParts, String memorialsContent,
 			int memorialsSelfScore, String mUserId) {
 		super();
 		this.memorialsDate = memorialsDate;
@@ -48,7 +56,7 @@ public class Memorials {
 
 
 
-	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String memorialsParts,
+	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String[] memorialsParts,
 			String memorialsContent, int memorialsSelfScore, Date createDate, String mUserId, String status) {
 		super();
 		this.memorialsNo = memorialsNo;
@@ -62,8 +70,16 @@ public class Memorials {
 		this.status = status;
 	}
 
-
-
+	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String[] memorialsParts,
+			String memorialsContent, int memorialsSelfScore) {
+		super();
+		this.memorialsNo = memorialsNo;
+		this.memorialsDate = memorialsDate;
+		this.memorialsTime = memorialsTime;
+		this.memorialsParts = memorialsParts;
+		this.memorialsContent = memorialsContent;
+		this.memorialsSelfScore = memorialsSelfScore;
+	}
 
 
 	public int getMemorialsNo() {
@@ -90,11 +106,11 @@ public class Memorials {
 		this.memorialsTime = memorialsTime;
 	}
 
-	public String getMemorialsParts() {
+	public String[] getMemorialsParts() {
 		return memorialsParts;
 	}
 
-	public void setMemorialsParts(String memorialsParts) {
+	public void setMemorialsParts(String[] memorialsParts) {
 		this.memorialsParts = memorialsParts;
 	}
 

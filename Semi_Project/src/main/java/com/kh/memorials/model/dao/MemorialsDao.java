@@ -33,9 +33,6 @@ public class MemorialsDao {
 	}
 }
 
-	
-
-
 	public int selectMemorialsNo(Connection conn) {
 	    int memorialsNo = 0;
 	    ResultSet rset = null;
@@ -73,6 +70,7 @@ public class MemorialsDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getMemorialsDate());
 			pstmt.setString(2, m.getMemorialsTime());
+
 			pstmt.setString(3, String.join(",", m.getMemorialsParts()));
 			pstmt.setString(4, m.getMemorialsContent());
 			pstmt.setInt(5, m.getMemorialsSelfScore());
@@ -112,12 +110,6 @@ public class MemorialsDao {
 	    }
 	    return result;
 	}
-
-
-
-
-
-
 
 	public ArrayList<Memorials> MemorialsList(Connection conn, String UserId) {
 
@@ -161,9 +153,6 @@ public class MemorialsDao {
 		return list;
 	}
 
-
-
-
 	public ArrayList<MemorialsAttachment> MemorialsListAttachment(Connection conn, int meNo) {
 		// TODO Auto-generated method stub
 		ResultSet rset = null;
@@ -196,9 +185,6 @@ public class MemorialsDao {
 	return atlist;
 }
 
-
-
-
 	public int deleteMemorials(Connection conn, int mNo) {
 		// TODO Auto-generated method stub
 		int result = 0;
@@ -220,9 +206,6 @@ public class MemorialsDao {
 		
 	}
 
-
-
-
 	public int deleteMemorialsAttachment(Connection conn, int mNo) {
 		// TODO Auto-generated method stub
 		int result = 0;
@@ -243,8 +226,6 @@ public class MemorialsDao {
 		return result;
 		
 	}
-
-
 
 
 	public int UpdateMemorials(Connection conn, Memorials m) {
@@ -276,9 +257,6 @@ public class MemorialsDao {
 		return result;
 	}
 
-
-
-
 	public int updateMemorialsAttachment(Connection conn, MemorialsAttachment at) {
 		
 		int result = 0;
@@ -304,8 +282,6 @@ public class MemorialsDao {
 		
 		return result;
 	}
-
-
 
 
 	public Memorials selectMemorials(Connection conn, int memorialsNo) {
@@ -341,9 +317,6 @@ public class MemorialsDao {
 		return me;
 	}
 
-
-
-
 	public MemorialsAttachment selectMemorialsAttachment(Connection conn, int memorialsNo) {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -372,4 +345,5 @@ public class MemorialsDao {
 		}
 		return at;
 	}
+
 }
