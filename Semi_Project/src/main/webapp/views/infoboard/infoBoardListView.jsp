@@ -65,7 +65,7 @@ button[name=category]:hover {
 				</th>
 				<th>
 				<c:if test="${!empty loginUser eq 'admin'}">
-				<button onclick="location.href='Infoinsert.in'">글작성</button>
+				<button onclick="location.href='Infoinsert.bo'">글작성</button>
 				</c:if>
 				</th>
 				</tr>
@@ -160,6 +160,7 @@ button[name=category]:hover {
 	<button type="submit">검색</button>
 	</form>
 	</div>
+	
 	
 
 </body>

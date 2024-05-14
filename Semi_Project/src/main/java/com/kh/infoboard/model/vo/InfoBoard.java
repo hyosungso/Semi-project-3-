@@ -21,6 +21,33 @@ public class InfoBoard {
 	}
 	
 	public InfoBoard(int boardNo, String boardWriter, String boardTitle, String boardContent, int count, int recommend,
+			Date reviseDate, String category) {
+		super();
+		this.boardNo = boardNo;
+		this.boardWriter = boardWriter;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.count = count;
+		this.recommend = recommend;
+		this.reviseDate = reviseDate;
+		this.category = category;
+	}
+	
+	
+	public InfoBoard(int boardNo,String category,String boardTitle,String boardWriter, int count, int recommend,Date uploadDate) {
+		super();
+		this.boardNo = boardNo;
+		this.category = category;
+		this.boardTitle = boardTitle;
+		this.boardWriter = boardWriter;
+		this.count = count;
+		this.recommend = recommend;
+		this.uploadDate = uploadDate;
+	}
+
+
+
+	public InfoBoard(int boardNo, String boardWriter, String boardTitle, String boardContent, int count, int recommend,
 			Date uploadDate, Date reviseDate, String category) {
 		super();
 		this.boardNo = boardNo;

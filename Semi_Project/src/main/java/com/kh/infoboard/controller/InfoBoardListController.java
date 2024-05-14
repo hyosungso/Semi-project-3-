@@ -19,7 +19,7 @@ import com.kh.infoboard.model.vo.InfoBoard;
 /**
  * Servlet implementation class InfoBoardListController
  */
-@WebServlet("/Infoboard.bo")
+@WebServlet("/infoboard.bo")
 public class InfoBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -68,9 +68,11 @@ public class InfoBoardListController extends HttpServlet {
 		//endPage : PageLimit가 10일때 startpage가 1이면 10,11이면 20...
 		endPage = startPage+pageLimit-1;
 		//만약 현재 페이징 바 처리에 endpage가 maxpage보다 더 많을경우 endpage값을 maxpage값에 맞춰두기
-		if(maxPage<endPage) {
+		
+		if(maxPage<endPage){
 			endPage=maxPage;
 		}
+	
 		
 		//페이지 관련 데이터들을 객체에 담기
 		PageInfo pi = new PageInfo(listCount,currentPage,pageLimit,boardLimit,maxPage,startPage,endPage);
@@ -86,8 +88,15 @@ public class InfoBoardListController extends HttpServlet {
 			fList = new InfoBoardService().selectList(pi,category,sort);
 		}
 		
-		ArrayList<Category> ctList=new InfoBoardService().selectCategory();
-		}
+		ArrayList<Category> ctList = new InfoBoardService().selectCategory();
+		// 자유게시판으로 넘기기
+		request.setAttribute("fList", fList);
+		request.setAttribute("ftList", ctList);
+		request.setAttribute("category", category);
+		request.setAttribute("sort", sort);
+		request.setAttribute("pi", pi);
+		request.getRequestDispatcher("/views/infoboard/infoBoardListView.jsp").forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
