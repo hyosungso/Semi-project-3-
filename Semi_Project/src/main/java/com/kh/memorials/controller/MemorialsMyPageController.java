@@ -1,7 +1,9 @@
 package com.kh.memorials.controller;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 
 import javax.servlet.ServletException;
@@ -19,6 +21,9 @@ import com.kh.memorials.model.vo.MemorialsAttachment;
 import com.kh.memorials.model.service.MemorialsService;
 import com.kh.memorials.model.vo.Memorials;
 import com.kh.memorials.model.vo.MemorialsAttachment;
+
+import com.kh.memorials.model.service.MemorialsService;
+import com.kh.memorials.model.vo.Memorials;
 
 /**
  * Servlet implementation class MemberIndividualRecordControlloer
@@ -40,10 +45,12 @@ public class MemorialsMyPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("id");
-		
 
-		
+		Memorials memo=new MemorialsService().selectMemorials(id);
+
 		request.setAttribute("id", id);
+
+		request.setAttribute("memorials", memo);
 
 		
 		request.getRequestDispatcher("views/memorials/memorialsMyPage.jsp").forward(request, response);

@@ -127,6 +127,14 @@ public class MemorialsService {
 		return at;
 
 	}
+
+	public Memorials selectMemorials(String id) {
+		Connection conn=JDBCTemplate.getConnection();
+		Memorials memo=new MemorialsDao().selectMemorials(conn,id);
+		
+		JDBCTemplate.close(conn);
+		return memo;
+	}
 }
 
 
