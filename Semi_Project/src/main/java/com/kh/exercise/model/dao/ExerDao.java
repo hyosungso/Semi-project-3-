@@ -31,7 +31,7 @@ public class ExerDao {
 			stmt = conn.createStatement();
 			rset = stmt.executeQuery(sql);
 			if(rset.next()) {
-				exerNo = rset.getInt("EX_NO");
+				exerNo = rset.getInt("EXER_NO");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,11 +54,10 @@ public class ExerDao {
 			rset=stmt.executeQuery(sql);		
 			while(rset.next()) {		//순서대로 운동게시글번호, 사진, 운동부위, 운동명, 운동정보, 운동내용(수정)
 				elist.add(new Exercise(rset.getInt("EXER_NO")
-												  ,rset.getString("REPHOTO")
-												  ,rset.getString("EXER_PART")
-												  ,rset.getString("EXER_TITLE")
-												  ,rset.getString("EXER_INFORM")
-												  ,rset.getString("EXER_CONTENT")));
+						  ,rset.getString("REPHOTO")
+				  		  ,rset.getString("EXER_TITLE")
+						  ,rset.getString("EXER_INFORM")
+						  ,rset.getString("EXER_CONTENT")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -107,11 +106,11 @@ public class ExerDao {
 		try {
 			pstmt=conn.prepareStatement(sql);
 			//pstmt.setInt(1, ex.getExerNo()); 삭제
-			pstmt.setString(1, ex.getExerType());			//5
-			pstmt.setString(2, ex.getExerTitle());			//2
-			pstmt.setString(3, ex.getExerInf());				//4
-			pstmt.setString(4, ex.getExerContent());		//6
-			pstmt.setString(5, ex.getExerPart());			//3
+			pstmt.setString(1, ex.getExerType());			
+			pstmt.setString(2, ex.getExerTitle());			
+			pstmt.setString(3, ex.getExerInf());			
+			pstmt.setString(4, ex.getExerContent());		
+			pstmt.setString(5, ex.getExerPart());			
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

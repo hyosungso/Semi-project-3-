@@ -6,68 +6,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>운동게시판 제목입니다</title>
-<style>
-        div{
-            border: 3px solid rgba(142, 170, 223, 0.37);
-            margin: 15px;
-            
-        }
-        li{
-            padding: 10px;
-        }
-        img{
-            margin:15px;vertical-align: middle;
-        }
-        img span{
-            display:table-cell;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--글꼴 테스트 없애도 됩니다-->
+    <link href="https://fonts.google.com/?query=Gowun+Dodum&subset=korean&noto.script=Kore">
+    
+    <!--background, 글꼴은 임시 지정-->
+   <title>운동게시판 리스트보기</title>
+    <style>
+        .exercise{
+            background:rgba(197, 154, 154, 0.349);
+            border: 1px solid black;
             vertical-align: middle;
-            
+        }
+        .exex{
+            width:98%;
+            padding: 5px;
+            overflow : hidden;
+            text-overflow : ellipsis;
+        }
+        .bodypt{
+        	 margin: auto;
+        }
+        .eximg{
+        	float:left;
+            vertical-align: middle;
+            clear:both;
+        }
+        .text{
+            white-space : nowrap;
+        }
+        .textar{
+            width:50%;
+            overflow : hidden;
+            text-overflow : ellipsis;
         }
     </style>
 </head>
 <body>
-	
+    <%@ include file="/views/common/menubar.jsp" %>
 
-	<div>
-		<h2 align="center">DO EXERCISE (테스트)</h2>
+    <div class="exex">
+		<h2 align="center">운동 게시판</h2>
+		<br>
+		<c:if test="${!empty loginUser.getAuthCode() eq 'admin'}">
+			<button onclick="location.href='${contextPath}/insert.ex'">작성</button>
+		</c:if>
+		<!-- 운영자만 작성 가능하게끔 -->
+			
 		
-		<div align="center">
-			<button onclick="location.href='insert.ex'">작성해보기(test 없애도 됨)</button>
-		</div>
+		<!-- Test1 : 버튼을 만들고 숨긴 뒤 SELECT -->
 		
+		
+        <!--이미지는 이미 사이트에 등록되어있어야합니다.-->
+        <img class="bodypt" src="${contextPath}/resources/body/mybody.jpg" usemap="#image-map">
+		<map name="image-map">
+            <area target="" alt="가슴" title="가슴운동" href="${contextPath}/insert.ex" coords="118,120,138,98,196,98,212,118,199,133,141,135" shape="poly">
+            <area alt="어깨" title="어깨운동" href="-------------" coords="105,121,119,92,152,81,118,117" coords="" shape="poly">
+            <area alt="어깨" title="어깨운동" href="------------" coords="188,82,219,94,231,120,217,119" shape="poly">
+            <area alt="복부" title="복부운동" href="-------------" coords="132,135,202,213" shape="rect">
+            <area alt="허벅지" title="허벅지운동" href="---------" coords="122,232,121,295,156,304,166,252,185,305,211,294,214,233" shape="poly">
+            <area alt="종아리" title="종아리운동" href="----------" coords="122,317,120,391,138,396,156,319,181,319,197,390,215,391,215,319" shape="poly">
+            <area alt="등운동" title="등운동" href="----------" coords="500,190,381,86" shape="rect">
+            <area alt="힙운동" title="힙운동" href="---------" coords="392,203,489,244" shape="rect">
+            <area alt="팔" title="팔운동" href="-----------" coords="102,121,61,190,74,202,125,137,121,122" shape="poly">
+            <area alt="팔" title="팔운동" href="-----------" coords="213,123,212,142,258,202,273,198,233,122" shape="poly">
+        </map>
+        
 		<div class="listarea">
-		<ol  style="list-style-type: none">
 			<c:forEach var="e" items="${elist}">
-				<div class="exercise" align="center" onclick="detail.ex?eno=${e.exerNo}">
-					<img src="/HEALTHLIFE${e.titleImg}" width="200px" height="150px" style="vertical-align: middle">
-					<span> 제목 / </span>
-				
-				<table border="1" cellpadding="0" cellspacing="0" width="500">
-				<tr>
-					<td>운동번호</td>
-					<td>운동명</td>
-					<td>운동종류</td>
-					<td>운동정보</td>
-					<td>운동내용</td>
-					<td>운동부위</td>
-				</tr>
-				
-				
-				<tr>
-					<td>${e.exerNo}번호</td>
-					<td>${e.exerTitle}운동이름</td>
-					<td>${e.exerType}운동종류</td>
-					<td>${e.exerInf}운동정보</td>
-					<td>${e.exerContent}운동내용</td>
-					<td>${e.exerPart}운동부위</td>
-				</tr>
-			</table>
-				</div>		
+				<div class="exercise" alt="${e.exerTitle}" align="center" onclick="location.htef='${contextPath}/detail.ex?eno=${e.exerNo}'">
+					<img id="eximg" src="${e.titleImg}" width="200px" height="150px"> ◀◀◀운동사진
+					<b>${e.exerTitle}◀◀◀운동이름</b><br><br>                
+
+                    <span>${e.exerInf}운동정보운동정보운동정보운동정보운동정보운동정보</span><br><br>
+                    <div class="textar">
+                    <!--textar은 정보 입력란이고, 특정 글자 이상이 넘어가면 ...으로 출력하게 style 설정해둠 (60%)-->
+                    
+                    <span class="text" id="text">${e.exerContent}◀◀◀운동내용</span><br>
+                    </div>
+                </div>
+                <br>
 			</c:forEach>
-		</ol>
 		</div>
+        
 	</div>
 </body>
 </html>

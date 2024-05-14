@@ -15,6 +15,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.kh.common.MyFileRenamePolicy;
 import com.kh.exercise.model.service.ExerService;
 import com.kh.exercise.model.vo.Exercise;
+import com.kh.exercise.model.vo.Photo;
 import com.oreilly.servlet.MultipartRequest;
 
 /**

@@ -13,16 +13,17 @@
 
 	<!-- 운동게시판 리스트 조회 -->
 	<entry key="selectexList">
-		SELECT 	EXER_NO, 
-       					FILE_PATH||CHANGE_NAME REPHOTO, 
-       					EXER_PART,
-       					EXER_TITLE,
-       					EXER_INFORM,
-       					EXER_CONTENT
-		FROM EXERCISE
-		JOIN EXERPHOTO ON(EXER_NO=REF_BNO)
-		ORDER BY UPLOAD_DATE DESC
-	</entry>
+		SELECT 	 EXER_NO 
+       			,FILE_PATH||CHANGE_NAME REPHOTO 
+       			,EXER_TITLE
+       			,EXER_INFORM
+       			,EXER_CONTENT
+	FROM EXERCISE
+	JOIN EXERPHOTO ON(EXER_NO=REF_BNO)
+	WHERE FILE_LEVEL=1
+	ORDER BY UPLOAD_DATE DESC
+</entry>
+
 
 	<!-- 운동게시판 단일글 조회 -->
 	<entry key="selectExer">
