@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.security.SecureRandom" %>
-<%@ page import="java.math.BigInteger" %>
 <% //로그인 정보 추출하기 
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	
@@ -24,11 +22,6 @@
 	String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.net.URL" %>
-<%@ page import="java.net.HttpURLConnection" %>
-<%@ page import="java.io.BufferedReader" %>
-<%@ page import="java.io.InputStreamReader" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -146,17 +139,7 @@
 			<%session.removeAttribute("alertMsg");%>
 		}
 	</script>
- <%
-    String naverId = "FutmSJFgSoacokH2aZwQ";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8888/HealthLife/views/member/callback.jsp", "UTF-8");
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
-         + "&client_id=" + naverId
-         + "&redirect_uri=" + redirectURI
-         + "&state=" + state;
-    session.setAttribute("clientId", naverId);
- %>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	<div class="header">
         <div class="header-inner">
@@ -187,7 +170,6 @@
 					<th colspan="2">
 						<button type="submit">로그인</button>
 						<button type="button" class="btn-secondary" onclick="location.href='${contextPath }/views/member/memberEnrollForm.jsp'">회원가입</button>
-						<a href="<%=apiURL%>"><img height="50" width="50%" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 						<br><br>
 					</th>
 				</tr>
@@ -195,7 +177,6 @@
    					<div style="display: flex; justify-content: space-between;">
         				<button type="button" onclick="location.href='${contextPath }/views/member/fId.jsp'" name="FId" style="width: 48%; background-color: yellow; color : black;">아이디 찾기</button>
         				<button type="button" onclick="location.href='${contextPath }/views/member/fPwd.jsp'" name="FPwd" style="width: 48%; background-color: yellow; color : black;">비밀번호 찾기</button>
-        				
     				</div>
 				</th>
 				
