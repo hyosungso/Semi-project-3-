@@ -18,8 +18,8 @@ width:50px;
 <%@ include file="/views/common/menubar.jsp" %>
 	<div align="center">
 		<h2 align="center">운동 기록</h2>
-		<form action="${contextPath }/memorialsInsert.me" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="mUserId" value="${loginUser.userNo}">
+		<form action="${contextPath }/memorialsInsert.me" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+		<input type="hidden" name="mUserId" value="${loginUser.userId }" required>
 			<table border="1">
 				<tr align="center">
 					<td colspan="2">날짜 <br> <input type="date" name="memorialsDate" required>
@@ -27,7 +27,7 @@ width:50px;
 					</td>
 				</tr>
 				<tr>
-					<td>몇 시간? : <select name="memorialsTime">
+					<td>몇 시간? : <select name="memorialsTime" required>
 							<option value="30분">30분</option>
 							<option value="40분">40분</option>
 							<option value="50분">50분</option>
@@ -62,8 +62,8 @@ width:50px;
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">오운완 이미지 파일 업로드 <br> <input type="file"
-						name="memorialsImg">
+					<td colspan="2">오운완 이미지 파일 업로드 <br> 
+					<input type="file" name="memorialsImg" required>
 					</td>
 				</tr>
 				<tr>
@@ -109,13 +109,22 @@ width:50px;
 			<button onclick="location.href='MemorialsMyPage.me?id=${loginUser.userNo}'">내 운동일지 확인하기</button>
 
 	</div>
-
-
-
-
-
-
-
-
+	<script>
+		function validateForm() {
+		    var parts = document.getElementsByName("memorialsParts");
+		    var isChecked = false;
+		    for (var i = 0; i < parts.length; i++) {
+		        if (parts[i].checked) {
+		            isChecked = true;
+		            break;
+		        }
+		    }
+		    if (!isChecked) {
+		        alert("오늘 운동한 부위를 선택하세요.");
+		        return false;
+		    }
+		    return true;
+		}
+</script>
 </body>
 </html>

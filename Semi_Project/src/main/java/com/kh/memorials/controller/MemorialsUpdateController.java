@@ -2,9 +2,6 @@ package com.kh.memorials.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,23 +11,23 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.kh.common.MyFileRenamePolicy;
 import com.kh.memorials.model.service.MemorialsService;
 import com.kh.memorials.model.vo.Memorials;
 import com.kh.memorials.model.vo.MemorialsAttachment;
-import com.kh.common.MyFileRenamePolicy;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class RecordInsertController
+ * Servlet implementation class MemorialsUpdateController
  */
-@WebServlet("/memorialsInsert.me")
-public class MemorialsInsertController extends HttpServlet {
+@WebServlet("/MemorialsUpdateController.me")
+public class MemorialsUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemorialsInsertController() {
+    public MemorialsUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,69 +36,91 @@ public class MemorialsInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int memorialsNo = Integer.parseInt(request.getParameter("memorialsNo"));
+		
+		
+		
+		Memorials me = new MemorialsService().selectMemorials(memorialsNo);
+		
+		MemorialsAttachment at = new MemorialsService().selectAttachment(memorialsNo);
+	
+		request.setAttribute("me", me);
+		request.setAttribute("at", at);
+		String mas = String.join(",", me.getMemorialsParts());
+		request.setAttribute("mas", mas);
+		request.getRequestDispatcher("views/memorials/memorialsUpdate.jsp").forward(request, response);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+        
 		request.setCharacterEncoding("UTF-8");
 		if(ServletFileUpload.isMultipartContent(request)) {
 			
 			int maxSize = 10* 1024 * 1024;
 			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadFiles");
-			
-			
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadFiles/");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
-			
+			// DB에 저장할 데이터 추가
 			String memorialsDate = multiRequest.getParameter("memorialsDate");
 			String memorialsTime = multiRequest.getParameter("memorialsTime");
 			String[] memorialsParts = multiRequest.getParameterValues("memorialsParts");
 			String memorialsContent = multiRequest.getParameter("memorialsContent");
 			int memorialsSelfScore = Integer.parseInt(multiRequest.getParameter("MemorialsSelfScore"));
 			String mUserId = multiRequest.getParameter("mUserId");
+			int memorialsNo = Integer.parseInt(multiRequest.getParameter("memorialsNo"));
+			Memorials m = new Memorials();
 			
-			String memorialsPartsInfo="";
-			if(memorialsParts!=null) {
-			memorialsPartsInfo = String.join(",", memorialsParts);
-			}
+			m.setMemorialsDate(memorialsDate);
+			m.setMemorialsTime(memorialsTime);
+			m.setMemorialsParts(memorialsParts);
+			m.setMemorialsContent(memorialsContent);
+			m.setMemorialsSelfScore(memorialsSelfScore);
+			m.setmUserId(mUserId);
+			m.setMemorialsNo(memorialsNo);
 			
-			Memorials m = new Memorials(memorialsDate,memorialsTime,memorialsPartsInfo,memorialsContent,memorialsSelfScore,mUserId);
-
+			
 			MemorialsAttachment at = null;
 			
 			if(multiRequest.getOriginalFileName("memorialsImg") != null) {
-				
 				at = new MemorialsAttachment();
 				
 				at.setOriginName(multiRequest.getOriginalFileName("memorialsImg"));
 				at.setChangeName(multiRequest.getFilesystemName("memorialsImg"));
 				at.setFilePath("/resources/uploadFiles/");
+				
+				if(multiRequest.getParameter("originFileNo")!= null) {
+					at.setFileNo(Integer.parseInt(multiRequest.getParameter("originFileNo")));
+					
+				}else { 
+					at.setRefMno(memorialsNo); 
+				}
 			}
-			int result = new MemorialsService().insertMemorials(m,at);
+			int result = new MemorialsService().UpdateMemorials(m,at);
 			
 			HttpSession session = request.getSession();
 			
 			if(result>0) {
 				
-				session.setAttribute("alertMsg", "등록완료!");
+				session.setAttribute("alertMsg", "수정완료!");
 				response.sendRedirect(request.getContextPath()/* +"/views/memorials/memorials.jsp" */);
 				
 			}else {
 				
-				if(at!=null) {
+				if(at!=null&& at.getFileNo()!=0) {
 					new File(savePath+at.getChangeName()).delete();
 				}
-				session.setAttribute("alertMsg", "등록 실패 ㅠㅠ");
-				response.sendRedirect(request.getContextPath()/*+"/views/memorials/memorials.jsp"*/);
+				session.setAttribute("alertMsg", "수정 실패 ㅠㅠ");
+				response.sendRedirect(request.getContextPath()/* +"/views/memorials/memorials.jsp" */);
+				
+				
 			}
+    
 		}
 	}
 

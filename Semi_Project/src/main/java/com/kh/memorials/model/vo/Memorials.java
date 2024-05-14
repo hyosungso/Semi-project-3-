@@ -14,11 +14,25 @@ public class Memorials {
 	private String mUserId;
 	private String status;
 	
+	private String memorialsImg; //운동기록 파일의 경로 저장용 변수
+	
 	public Memorials() {
 		super();
 	}
 	
 	
+
+	public Memorials(String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
+			int memorialsSelfScore) {
+		super();
+		this.memorialsDate = memorialsDate;
+		this.memorialsTime = memorialsTime;
+		this.memorialsParts = memorialsParts;
+		this.memorialsContent = memorialsContent;
+		this.memorialsSelfScore = memorialsSelfScore;
+	}
+
+
 
 	public Memorials(String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
 			int memorialsSelfScore, String mUserId) {
@@ -118,6 +132,20 @@ public class Memorials {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	
+
+	public String getMemorialsImg() {
+		return memorialsImg;
+	}
+
+
+
+	public void setMemorialsImg(String memorialsImg) {
+		this.memorialsImg = memorialsImg;
+	}
+
+
 
 	@Override
 	public String toString() {
