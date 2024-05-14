@@ -152,12 +152,25 @@ public class BoardService {
 		return result;
 	}
 
-	public ArrayList<Board> searchBoard(String keyword, String category) {
+	public ArrayList<Board> searchBoard(String keyword, String category, PageInfo pi) {
 		Connection conn=JDBCTemplate.getConnection();
-		ArrayList<Board> bList=new BoardDao().searchBoard(conn,keyword,category);
+		ArrayList<Board> bList=new BoardDao().searchBoard(conn,keyword,category,pi);
 		
 		JDBCTemplate.close(conn);
 		return bList;
+	}
+
+	public int deleteReply(int rNo) {
+		Connection conn=JDBCTemplate.getConnection();
+		int result=new BoardDao().deleteReply(conn,rNo);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

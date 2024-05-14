@@ -34,6 +34,9 @@
 	background-color:blue;
 	color:white;
 	}
+	input[name=sortBy]{
+	margin:10px;
+	}
 
 </style>
 </head>
@@ -49,7 +52,7 @@
 		<tr>
 		<td><button name="category" value="0">전체</button></td>
 		<c:forEach items="${ctList}" var="ct">
-		<td><button name="category" value="${ct.categoryNo}">${ct.categoryName }</button></td>
+		<td><button name="category" value="${ct.categoryNo}">${ct.categoryName}</button></td>
 		</c:forEach>
 		</tr>
 		</table>
@@ -97,7 +100,6 @@
 	$(function(){
 		$("button[name=category]").each(function(){
 			if($(this).val()==${category}){
-				$(this).attr("disabled",true);
 				$(this).addClass("ctSelected");
 			}
 		});
@@ -147,6 +149,7 @@
 	<!-- <option value="writer">작성자</option> -->
 	</select>
 	<input type="text" name="search" style="width:350px">
+	<input type="hidden" name="page" value="1">
 	<button type="submit">검색</button>
 	</form>
 	</div>

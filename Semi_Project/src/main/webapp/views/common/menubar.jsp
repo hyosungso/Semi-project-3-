@@ -202,7 +202,7 @@
 				<a href="${contextPath }/views/market/cart.jsp"> 
 					<img class="image" width=40 height=40></a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
-					<a href="enrollFormBefore.me">회원가입</a>
+					<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
 
 		</div>
 		<script>
@@ -233,7 +233,7 @@
 						<ul class="board-category">
 							<li><a
 								href="${contextPath}/board.bo?currentPage=1&category=0&sort=latest">자유게시판</a></li>
-							<li><a href="">정보게시판</a></li>
+							<li><a href="${contextPath}/Infoboard.bo?currentPage=1&category=0&sort=latest">정보게시판</a></li>
 						</ul></li>
 				</ul>
 

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 <%
 	String userId = (String)request.getParameter("userId");
@@ -28,14 +28,14 @@
             text-align: center;
             line-height: 30px;
             border-radius: 10px;
-            border: 2px solid rgb(0, 0, 0);
+            border: 2px solid rgb(255, 255, 255);
             cursor: pointer;
             
         }
 
         .p1{
             text-align: center;
-            border: 1px solid rgb(255, 0, 0);
+            border: 1px solid rgb(255, 255, 255);
             background-color: rgba(252, 0, 0, 0.033);
             line-height: 30px;
             width: 500px;
@@ -101,6 +101,10 @@
     background-color: #f5f6f7;
 	}
 
+    #id{
+        
+    }
+
     </style>
 
 
@@ -124,27 +128,29 @@
             <div class="progress"></div>
         </div>
 
-    	<h1>  <span class="name">헬스라이프</span> 가입을<br> 축하드립니다!</h1> 
-        <h5>
-           <%=userName %>님, 회원가입을 축하합니다.<br>
-            헬스라이프의 새로운 아이디는 <%=userId%>입니다. 
+    	<h1>  <span class="name">헬스라이프</span> 가입 완료<br> </h1> 
+        <h6>
+           <span class="name"><%=userName %></span>님, 가입을 축하합니다.<br>
+            헬스라이프의 새로운 아이디는 <span id="id"><%=userId%></span>입니다. 
             <br>
         
-        </h5>
+        </h6>
+
+                
         
         
         <div class="div1">내정보 상세보기 </div>
         <p class="p1">
                 <br>
-                <span class="sp1">회원 아이디 </span> <br> <%=userId %>
+                <span class="sp1"><i class='bx bxs-user'></i></span> <br> <%=userId %>
                 <br><br>
-                <span class="sp1">회원명 <br></span> <%=userName %>
+                <span class="sp1"><i class='bx bxs-rename'></i> <br></span> <%=userName %>
                 <br><br>
-                <span class="sp1">닉네임 <br> </span> <%=nickName %> 
+                <span class="sp1"><i class='bx bx-wink-smile'></i> <br> </span> <%=nickName %> 
                 <br><br>
-                <span class="sp1">이메일 <br>  </span><%=email %>
+                <span class="sp1"><i class='bx bxs-envelope'></i> <br>  </span><%=email %>
                 <br><br>
-                <span class="sp1">휴대폰 <br> </span> <%=phone %>
+                <span class="sp1"><i class='bx bxs-phone'></i> <br> </span> <%=phone %>
             
         </p>
     </div>

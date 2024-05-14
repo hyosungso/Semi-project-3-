@@ -23,7 +23,7 @@
 			<table width="100%" style="margin : 10px;">
 				<tr>
 					<td style="padding-left: 10px;">
-						<input type="checkbox" id="allchk" checked>&nbsp;<b>전체</b></td>
+						<input type="checkbox" id="allchk" checked>&nbsp;<label for="allchk"><b>전체</b></label></td>
 					<td></td>
 					<td align="right" style="padding-right:35px;">
 					<a href="./deleteCart.jsp?cartId<%=cartId %>"
