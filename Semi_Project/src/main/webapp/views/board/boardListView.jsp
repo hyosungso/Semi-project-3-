@@ -146,7 +146,7 @@
 	<select name="searchCategory">
 	<option value="title">글제목</option>
 	<option value="content">글내용</option>
-	<!-- <option value="writer">작성자</option> -->
+	<option value="writer">작성자</option>
 	</select>
 	<input type="text" name="search" style="width:350px">
 	<input type="hidden" name="page" value="1">

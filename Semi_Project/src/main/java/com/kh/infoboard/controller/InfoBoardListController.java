@@ -87,6 +87,14 @@ public class InfoBoardListController extends HttpServlet {
 		}
 		
 		ArrayList<Category> ctList=new InfoBoardService().selectCategory();
+		
+		request.setAttribute("fList", fList);
+		request.setAttribute("ctList", ctList);
+		request.setAttribute("category", category);
+		request.setAttribute("sort", sort);
+		request.setAttribute("pi", pi);
+		request.getRequestDispatcher("/views/infoboard/infoBoardListView.jsp").forward(request, response);
+		
 		}
 
 	/**
