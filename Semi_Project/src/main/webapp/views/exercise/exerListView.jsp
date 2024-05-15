@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,26 +28,44 @@
     </style>
 </head>
 <body>
+	
 
-<%@ include file="/views/common/menubar.jsp"%>
 	<div>
 		<h2 align="center">DO EXERCISE (테스트)</h2>
 		
+		<div align="center">
+			<button onclick="location.href='insert.ex'">작성해보기(test 없애도 됨)</button>
+		</div>
 		
 		<div class="listarea">
 		<ol  style="list-style-type: none">
-			<c:forEach var="pt" items="${list}">
-				<div class="photo" align="center" onclick="">
-					<img src="https://img.animalplanet.co.kr/news/2023/05/24/700/4xy2vqn10re654bgc604.jpg" width="200px" height="150px">
-					<li>
-						사진이요<br>
-						이름이요
-					</li>
+			<c:forEach var="e" items="${elist}">
+				<div class="exercise" align="center" onclick="detail.ex?eno=${e.exerNo}">
+					<img src="/HEALTHLIFE${e.titleImg}" width="200px" height="150px" style="vertical-align: middle">
+					<span> 제목 / </span>
+				
+				<table border="1" cellpadding="0" cellspacing="0" width="500">
+				<tr>
+					<td>운동번호</td>
+					<td>운동명</td>
+					<td>운동종류</td>
+					<td>운동정보</td>
+					<td>운동내용</td>
+					<td>운동부위</td>
+				</tr>
+				
+				
+				<tr>
+					<td>${e.exerNo}번호</td>
+					<td>${e.exerTitle}운동이름</td>
+					<td>${e.exerType}운동종류</td>
+					<td>${e.exerInf}운동정보</td>
+					<td>${e.exerContent}운동내용</td>
+					<td>${e.exerPart}운동부위</td>
+				</tr>
+			</table>
 				</div>		
 			</c:forEach>
-			
-			
-			
 		</ol>
 		</div>
 	</div>
