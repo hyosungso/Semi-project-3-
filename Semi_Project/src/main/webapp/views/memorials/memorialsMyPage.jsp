@@ -1,8 +1,5 @@
-
- 
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="/views/common/menubar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,11 +51,13 @@
         margin-top: 0;
     }
 
+
 </style>
-
-
 </head>
 <body>
+	<%@ include file="/views/common/menubar.jsp" %>
+
+
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<div class="outer">
 		<br>

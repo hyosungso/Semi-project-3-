@@ -59,7 +59,7 @@
 		WHERE FILE_NO = ?
 		AND STATUS = 'Y'
 	</entry>
-	deleteMemorials
+
 	<entry key="deleteMemorials">
 		UPDATE MEMORIALS
 		SET STATUS = 'N'

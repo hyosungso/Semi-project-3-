@@ -33,15 +33,14 @@ public class MemorialsDao {
 	}
 }
 
-	
-
-
 	public int selectMemorialsNo(Connection conn) {
 	    int memorialsNo = 0;
 	    ResultSet rset = null;
 	    Statement stmt = null;
 	    
+
 	    String sql = prop.getProperty("selectmemorials");
+
 	    try {
 	        stmt = conn.createStatement();
 	        
@@ -69,15 +68,14 @@ public class MemorialsDao {
 		String sql = prop.getProperty("insertMemorials");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, m.getMemorialsDate());
-			
 			pstmt.setString(2, m.getMemorialsTime());
-			
+
 			pstmt.setString(3, String.join(",", m.getMemorialsParts()));
 			pstmt.setString(4, m.getMemorialsContent());
 			pstmt.setInt(5, m.getMemorialsSelfScore());
 			pstmt.setString(6, m.getmUserId());
+
 			
 			
 			result = pstmt.executeUpdate();
@@ -114,8 +112,6 @@ public class MemorialsDao {
 	}
 
 
-
-
 	public ArrayList<Memorials> MemorialsList(Connection conn, String UserId) {
 
 		ResultSet rset = null;
@@ -142,7 +138,7 @@ public class MemorialsDao {
 				list.add(new Memorials(rset.getInt("MEMORIALS_NO")
 							  			,rset.getString("MEMORIALS_DATE")
 							  			,rset.getString("MEMORIALS_TIME")
-							  			,rset.getString("MEMORIALS_PARTS").split(",")
+							  			,rset.getString("MEMORIALS_PARTS")
 							  			,rset.getString("MEMORIALS_CONTENT")
 							  			,rset.getInt("MEMORIALS_SELFSCORE")
 							  			));
@@ -157,9 +153,6 @@ public class MemorialsDao {
 		}
 		return list;
 	}
-
-
-
 
 	public ArrayList<MemorialsAttachment> MemorialsListAttachment(Connection conn, int meNo) {
 		// TODO Auto-generated method stub
@@ -193,9 +186,6 @@ public class MemorialsDao {
 	return atlist;
 }
 
-
-
-
 	public int deleteMemorials(Connection conn, int mNo) {
 		// TODO Auto-generated method stub
 		int result = 0;
@@ -217,9 +207,6 @@ public class MemorialsDao {
 		
 	}
 
-
-
-
 	public int deleteMemorialsAttachment(Connection conn, int mNo) {
 		// TODO Auto-generated method stub
 		int result = 0;
@@ -240,8 +227,6 @@ public class MemorialsDao {
 		return result;
 		
 	}
-
-
 
 
 	public int UpdateMemorials(Connection conn, Memorials m) {
@@ -273,9 +258,6 @@ public class MemorialsDao {
 		return result;
 	}
 
-
-
-
 	public int updateMemorialsAttachment(Connection conn, MemorialsAttachment at) {
 		
 		int result = 0;
@@ -303,8 +285,6 @@ public class MemorialsDao {
 	}
 
 
-
-
 	public Memorials selectMemorials(Connection conn, int memorialsNo) {
 
 		
@@ -324,7 +304,7 @@ public class MemorialsDao {
 				me = new Memorials(rset.getInt("MEMORIALS_NO")
 							      ,rset.getString("MEMORIALS_DATE")
 							      ,rset.getString("MEMORIALS_TIME")
-							      ,rset.getString("MEMORIALS_PARTS").split(",")
+							      ,rset.getString("MEMORIALS_PARTS")
 							      ,rset.getString("MEMORIALS_CONTENT")
 							      ,rset.getInt("MEMORIALS_SELFSCORE"));
 			}
@@ -337,9 +317,6 @@ public class MemorialsDao {
 		}
 		return me;
 	}
-
-
-
 
 	public MemorialsAttachment selectMemorialsAttachment(Connection conn, int memorialsNo) {
 		ResultSet rset = null;
@@ -369,6 +346,38 @@ public class MemorialsDao {
 		}
 		return at;
 	}
-	
+
+
+
+
+
+
+	public Memorials selectMemorials(Connection conn, String id) {
+		Memorials memo=null;
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("selectMemorials");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				//MEMORIALS_DATE,MEMORIALS_TIME,MEMORIALS_PARTS,MEMORIALS_CONTENT,MEMORIALS_SELFSCORE
+				memo=new Memorials(rset.getString("MEMORIALS_DATE"),
+								   rset.getString("MEMORIALS_TIME"),
+								   rset.getString("MEMORIALS_PARTS"),
+								   rset.getString("MEMORIALS_CONTENT"),
+								   rset.getInt("MEMORIALS_SELFSCORE"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return memo;
+	}
 
 }

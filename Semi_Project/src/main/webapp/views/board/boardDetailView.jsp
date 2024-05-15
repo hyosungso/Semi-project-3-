@@ -207,21 +207,14 @@ width:100%;
 			var bId="${b.boardWriter}";
 			
 			if(${!empty loginUser}){
-			if(id==bId){
-				console.log(id);
-				console.log(bId);
+			if((id==bId)||(name==bId)){
+				//이 글의 작성자인 경우
 				deleteReply(rId,rName);
-			}else if(name==bId){
-				console.log(2);
-				deleteReply(rId,rName);
-			}else if(id==rName){
-				console.log(3);
-				deleteReply(rId,rName);
-			}else if(name==rName){
-				console.log(4);
+			}else if((id==rName)||(name==rName)){
+				//해당 댓글의 작성자인 경우
 				deleteReply(rId,rName);
 			}else if(${loginUser.authCode eq 'ADMIN'}){
-				console.log(5);
+				//로그인 아이디가 운영자 권한을 가진경우
 				deleteReply(rId,rName);
 			}
 			}

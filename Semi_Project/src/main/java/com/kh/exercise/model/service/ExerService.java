@@ -1,12 +1,12 @@
 package com.kh.exercise.model.service;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
-import com.kh.common.model.vo.PageInfo;
 import com.kh.exercise.model.dao.ExerDao;
 import com.kh.exercise.model.vo.Exercise;
+import com.kh.exercise.model.vo.Photo;
 
 
 public class ExerService {
