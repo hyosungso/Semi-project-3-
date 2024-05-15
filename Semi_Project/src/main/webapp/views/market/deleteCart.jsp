@@ -6,7 +6,9 @@ if(id==null || id.trim().equals("")){
 	response.sendRedirect("cart.jsp");
 	return;
 }
-	session.invalidate();
+	session.removeAttribute("cartlist");
+	session.removeAttribute("sum");
+	session.removeAttribute("allItemName");
 	
 	response.sendRedirect("cart.jsp");
 %>

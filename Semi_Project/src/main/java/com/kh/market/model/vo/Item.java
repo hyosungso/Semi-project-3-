@@ -15,6 +15,7 @@ public class Item {
 	private String thumbnailImg;
 	private int quantity;
 	private int totalPrice;
+	private double score;
 	
 	
 	public Item() {
@@ -33,31 +34,43 @@ public class Item {
 	
 	
 	
-	public Item(int itemCode, String categoryName, int price,int discount, String itemName, String thumbnailImg) {
+	public Item(int itemCode, String categoryName, int price,int discount, String itemName,int salesVol,double score, String thumbnailImg) {
 		super();
 		this.itemCode = itemCode;
 		this.categoryName = categoryName;
 		this.price = price;
 		this.discount=discount;
 		this.itemName = itemName;
+		this.salesVol=salesVol;
+		this.score=score;
 		this.thumbnailImg = thumbnailImg;
 	}
 	
 	
 	
-	public Item(String categoryName,int category,  int price,int discount, String itemName, String storageMethod,int itemCode) {
+	public Item(String categoryName,int category,  int price,int discount, String itemName,int salesVol, String storageMethod,int itemCode) {
 		super();
 		this.categoryName = categoryName;
 		this.category=category;
 		this.price = price;
 		this.discount=discount;
 		this.itemName = itemName;
+		this.salesVol=salesVol;
 		this.storageMethod = storageMethod;
 		this.itemCode = itemCode;
 	}
 	
 	
 	
+	public double getScore() {
+		return score;
+	}
+	public void setScore(double score) {
+		this.score = score;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public int getQuantity() {
 		return quantity;
 	}

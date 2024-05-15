@@ -13,12 +13,20 @@ import com.kh.market.model.vo.Order;
 
 public class MarketService {
 
-	public ArrayList<Item> selectItemList() {
+	public ArrayList<Item> selectItemList(String sort) {
 		Connection conn =JDBCTemplate.getConnection();
-		ArrayList<Item> list = new MarketDao().selectItemList(conn);
+		ArrayList<Item> list = new MarketDao().selectItemList(conn,sort);
 		
 		JDBCTemplate.close(conn);
 		
+		
+		return list;
+	}
+	public ArrayList<Item> selectItemList(String sort, int categoryNo) {
+		Connection conn =JDBCTemplate.getConnection();
+		ArrayList<Item> list = new MarketDao().selectItemList(conn,sort,categoryNo);
+		
+		JDBCTemplate.close(conn);
 		
 		return list;
 	}
@@ -82,10 +90,10 @@ public class MarketService {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new MarketDao().deleteItem(conn,itno);
 		
-		if(result<0) {
-			JDBCTemplate.rollback(conn);
-		}else {
+		if(result>0) {
 			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
 		return result;
@@ -95,10 +103,10 @@ public class MarketService {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new MarketDao().insertOrder(conn,o);
 		
-		if(result<0) {
-			JDBCTemplate.rollback(conn);
-		}else {
+		if(result>0) {
 			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
 		
@@ -131,6 +139,28 @@ public class MarketService {
 		int result = new MarketDao().deleteItemAttachment(conn,fileLev,itCode);
 		
 		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Order> selectOrder(int userNo){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Order> ol = new MarketDao().selectOrder(conn,userNo);
+		
+		JDBCTemplate.close(conn);
+		return ol;
+	}
+
+	public int updateSalVol(Item item) {
+		Connection conn= JDBCTemplate.getConnection();
+		int result=new MarketDao().updateSalVol(item,conn);
+	
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
 		return result;
 	}
 

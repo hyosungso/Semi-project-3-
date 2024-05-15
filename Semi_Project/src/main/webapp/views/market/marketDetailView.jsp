@@ -74,7 +74,33 @@
 	display: inline-block;"
 	}
 	
-}
+	.star-rating {
+      display: flex;
+    }
+
+    .star {
+      appearance: none;
+      padding: 1px;
+    }
+
+    .star::after {
+      content: '☆';
+      color: hsl(60, 80%, 45%);
+      font-size: 20px;
+    }
+
+    .star:hover::after,
+    .star:has(~ .star:hover)::after,
+    .star:checked::after,
+    .star:has(~ .star:checked)::after {
+      content: '★';
+    }
+	
+	.star:checked ~ .star::after,
+    .star:hover ~ .star::after {
+      content: '☆';
+    }
+
 
 	
 </style>
@@ -93,6 +119,23 @@
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
 	<br><br><br>
+		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
+			<div align="center">
+				<button class='btn btn-info' onclick="deleteItem();">상품 비활성화</button>
+				<a href="${contextPath }/update.mk?itno=${i.itemCode}" class="btn btn-primary" role="botton">상품 업데이트</a>
+				<script>
+					function deleteItem(){
+						var flag=confirm("상품 게시를 종료하시겠습니까?");
+					if(flag){
+						location.href="${contextPath}/delete.mk?itno=${i.itemCode }"
+						}
+					}
+				</script>
+			
+		</div>
+		<br>
+		</c:if>
+		
 		<input type="hidden" value="${listLength + 1 }" id="count" name="count">
 		
 		<div class="form-area">
@@ -132,7 +175,9 @@
 				<th> 카테고리 : ${i.categoryName }
 					</th>
 			</tr>
-			
+			<tr>
+				<th>판매량 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.salesVol }" /></th>
+			</tr>
 			<tr>
 				
 				<td style="font-size : 13px; color : gray;"><del>원가 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}"  /> 원 </del><br>
@@ -150,19 +195,29 @@
 			</tr>
 		</table>
 		<br>
-	 <div class="component">
+	
 	 
 	 <div class="order">
 <br>
-	
-	
+	<c:choose>
+	<c:when test="${not empty loginUser }">
 	<a href="#" class="btn btn-info" onclick="addToCart()">상품추가&raquo;</a>
 	<a href="${contextPath }/views/market/cart.jsp" class="btn btn-warning">장바구니&raquo;</a>
 	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
+	</c:when>
+	<c:otherwise>
+	<a href="${contextPath}/views/member/login.jsp" class="btn btn-info">상품추가&raquo;</a>
+	<a href="${contextPath}/views/member/login.jsp" class="btn btn-warning">장바구니&raquo;</a>
+	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
+	</c:otherwise>
+	</c:choose>
+						
+	
+	
 	
 	
 	 </div>
-	 
+	  <div class="component">
 	 <br><br>
 	<h3>영양성분</h3>
 		<table>
@@ -191,30 +246,74 @@
 				</tr>
 			</tbody>
 		</table>
-	<br><br>
-		
-		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
-		<div align="center">
-			<button class='btn btn-info' onclick="deleteItem();">상품 비활성화</button>
-			<a href="${contextPath }/update.mk?itno=${i.itemCode}" class="btn btn-primary" role="botton">상품 업데이트</a>
-			<script>
-				function deleteItem(){
-					var flag=confirm("상품 게시를 종료하시겠습니까?");
-				if(flag){
-					location.href="${contextPath}/delete.mk?itno=${i.itemCode }"
-					}
-				}
-			</script>
-			
 		</div>
-		</c:if>
+		</form>
+	<br><br>
+		<div id="review-area">
+			<table border="1" align="center">
+				<thead>
+					<c:choose>
+						<c:when test="${not empty loginUser }">
+							<tr>
+								<th>리뷰작성</th>
+								<td>
+									 <div class="star-rating">
+									    <input type="radio" class="star" name="score" value="1">
+									    <input type="radio" class="star" name="score" value="2">
+									    <input type="radio" class="star" name="score" value="3">
+									    <input type="radio" class="star" name="score" value="4">
+									    <input type="radio" class="star" name="score" checked="checked" value="5">
+									  </div>
+								</td>
+								 <td>
+								 	<textarea id="reviewContent" rows="3" cols="50" style="resize:none;" required></textarea>
+								 </td>
+								 <td><button onclick="insertReview();">작성</button> </td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<th>리뷰작성</th>
+								<td>
+									<div class="star-rating">
+									    <input type="radio" class="star" name="score" value="1">
+									    <input type="radio" class="star" name="score" value="2">
+									    <input type="radio" class="star" name="score" value="3">
+									    <input type="radio" class="star" name="score" value="4">
+									    <input type="radio" class="star" name="score" checked="checked" value="5">
+									  </div>
+								</td>
+								 <td>
+								 	<textarea readonly rows="3" cols="50" style="resize:none;">로그인 후 이용 가능한 서비스입니다.</textarea>
+								 </td>
+								 <td><button disabled>작성</button> </td>
+							</tr>
+						
+						</c:otherwise>
+						
+						
+						
+					</c:choose>
+					<tr>
+						<th>작성자</th>
+						<th>평점</th>
+						<th>내용</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody class="review-list tbody">
+					
+				</tbody>
+			</table>
+		</div>
+		
 	
 	<br><br>
 	</div>
-	</form>
-	</div>
 	
 	</div>
+	
+	
 
 	<script>
 		
@@ -236,7 +335,89 @@
 				$('.slide-container').css("width",count*pageLocation+"px");
 			})
 		}
-	
+		
+		function insertReview(){
+			
+		
+		$('.star').click(function(){
+			var checkedVal = $('[name="score"]:checked').val();
+			 
+			});
+		
+			$.ajax({
+				url : "insertR.mk",
+				type : "post",
+				data : {
+					itno : ${i.itemCode},
+					uno : userNo,
+					content : $("#reviewContent").val(),
+					checkedVal : checkedVal
+				},
+				success : function(result){
+					alert(result);
+					$("#reviewContent").html("");
+				},
+				error : function(){
+					alert("리뷰 작성에 오류가 발생했습니다.");
+				},
+				complete : function(){
+					
+					reviewList();
+				}
+			});
+		}
+				
+			function reviewList(){
+				$.ajax({
+					url : "review.mk",
+					data : {
+						itno : ${i.itemCode}
+					},
+					success : function(list){
+						//기존에있던 댓글을 지우고 다시 조회
+						$(".review-list tbody").children().remove();
+						var tr="";
+						for(var i in list) {
+							
+							tr +="<tr>"
+								+"<td>"+list[i].reviewWriter+"</td>"
+								+"<td>"+list[i].score+"</td>"
+								+"<td>"+list[i].reviewContent+"</td>"
+								+"<td>"+list[i].createDate+"</td>"
+							    +"</tr>";
+						}
+						$(".reply-list tbody").append(tr);
+					},
+					error : function(){
+						alert("리뷰를 불러오는데 실패했습니다.");
+					}
+				});
+			}
+			function deleteReply(rId,rName){
+				if(confirm(rName+"의 리뷰를 삭제하시겠습니까?")){
+					$.ajax({
+						url : "deleteReply.bo",
+						data : {
+							rNo : rId
+						},
+						success : function(message){
+							alert(message);
+						},
+						error : function(){
+							alert("삭제에 실패했습니다.");
+						},
+						complete : function(){
+							replyList();
+						}
+					});
+				}
+			}
+			
+			$(function(){
+				//처음 게시글에 들어왔을때 댓글목록 조회후 댓글창에 표시
+				replyList();
+				});
+			
 	
 	</script>
 	

@@ -32,12 +32,20 @@ public class MarketDao {
 		}
 	}
 
-	public ArrayList<Item> selectItemList(Connection conn) {
+	public ArrayList<Item> selectItemList(Connection conn, String sort) {
 		ResultSet rset=null;
 		Statement stmt=null;
 		ArrayList<Item> list= new ArrayList<>();
-		String sql=prop.getProperty("selectItemList") ;
-		
+		String sql=null;
+		if(sort.equals("topSal")) {
+		sql=prop.getProperty("selectItemListOrderBySal") ;
+		}
+		if(sort.equals("latest")) {
+			sql=prop.getProperty("selectItemListOrderBydate") ;
+			}
+		if(sort.equals("topSco")) {
+			sql=prop.getProperty("selectItemListOrderBysco") ;
+			}
 		try {
 			stmt=conn.createStatement();
 			rset=stmt.executeQuery(sql);
@@ -47,6 +55,8 @@ public class MarketDao {
 						rset.getInt("PRICE"),
 						rset.getInt("DISCOUNT"),
 						rset.getString("ITEM_NAME"),
+						rset.getInt("SALES_VOL"),
+						rset.getDouble("SCORE"),
 						rset.getString("THUMBNAIL")
 						));
 				
@@ -59,8 +69,46 @@ public class MarketDao {
 			JDBCTemplate.close(stmt);
 		}
 		
-		
-		
+		return list;
+	}
+	
+	public ArrayList<Item> selectItemList(Connection conn, String sort, int categoryNo) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		ArrayList<Item> list= new ArrayList<>();
+		String sql=null ;
+		if(sort.equals("topSal")) {
+			sql=prop.getProperty("selectItemListOrderBySalSort") ;
+			}
+			if(sort.equals("latest")) {
+				sql=prop.getProperty("selectItemListOrderByDateSoty") ;
+				}
+			if(sort.equals("topSco")) {
+				sql=prop.getProperty("selectItemListOrderByscoSort") ;
+				}
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, categoryNo);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Item(rset.getInt("ITEM_CODE"),
+						rset.getString("CATEGORY_NAME"),
+						rset.getInt("PRICE"),
+						rset.getInt("DISCOUNT"),
+						rset.getString("ITEM_NAME"),
+						rset.getInt("SALES_VOL"),
+						rset.getDouble("SCORE"),
+						rset.getString("THUMBNAIL")
+						));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		
 		return list;
 	}
@@ -82,6 +130,7 @@ public class MarketDao {
 						rset.getInt("PRICE"),
 						rset.getInt("discount"),
 						rset.getString("ITEM_NAME"),
+						rset.getInt("SALES_VOL"),
 						rset.getString("STORAGE_METHOD"),
 						rset.getInt("ITEM_CODE")));
 			}
@@ -307,6 +356,9 @@ public class MarketDao {
 				pstmt.setDate(3, o.getShippingDate());
 				pstmt.setString(4, o.getPostNum());
 				pstmt.setString(5, o.getAddress());
+				pstmt.setInt(6, o.getPrice());
+				pstmt.setString(7, o.getCartList());
+				pstmt.setInt(8, o.getUserNo());
 				result=pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -423,6 +475,62 @@ public class MarketDao {
 		
 		return result;
 	}
+
+	public ArrayList<Order> selectOrder(Connection conn, int userNo) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		ArrayList<Order> ol=new ArrayList<>();
+		String sql = prop.getProperty("selectOrder");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				ol.add(new Order(
+						rset.getString("ORDER_NUMBER"),
+						rset.getString("CUSTOMER_NAME"),
+						rset.getDate("SHIPPING_DATE"),
+						rset.getString("POST_NUMBER"),
+						rset.getString("ADDRESS"),
+						rset.getString("CART_LIST"),
+						rset.getInt("PRICE"),
+						rset.getInt("USER_NO")));
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return ol;
+	}
+
+	public int updateSalVol(Item item, Connection conn) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("updateSalVol");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, item.getSalesVol());
+			pstmt.setInt(2, item.getItemCode());
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
 
 	
 
