@@ -10,6 +10,7 @@ import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
 import com.kh.market.model.vo.Order;
+import com.kh.market.model.vo.Review;
 
 public class MarketService {
 
@@ -162,6 +163,28 @@ public class MarketService {
 		JDBCTemplate.close(conn);
 		
 		return result;
+	}
+	public int insertReview(Review re) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new MarketDao().insertReview(conn,re);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		
+		return result;
+	}
+	public ArrayList<Review> selectReview(int itno) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Review> rList=new MarketDao().selectReview(conn,itno);
+		
+		JDBCTemplate.close(conn);
+		
+		return rList;
 	}
 
 	

@@ -364,7 +364,7 @@
 						<th>작성일</th>
 					</tr>
 				</thead>
-				<tbody class="review-list tbody">
+				<tbody class="review-list">
 					
 				</tbody>
 			</table>
@@ -398,21 +398,21 @@
 				$('.slide-container').css("width",count*pageLocation+"px");
 			})
 		}
-		
+	
 		function insertReview(){
 			
 		
 		$('.star').click(function(){
 			var checkedVal = $('[name="score"]:checked').val();
 			 
-			});
+			
 		
 			$.ajax({
 				url : "insertR.mk",
 				type : "post",
 				data : {
 					itno : ${i.itemCode},
-					uno : userNo,
+					uno : ${loginUser.userNo},
 					content : $("#reviewContent").val(),
 					checkedVal : checkedVal
 				},
@@ -428,57 +428,42 @@
 					reviewList();
 				}
 			});
-		}
+		
+		});
+		
+	}
 				
 			function reviewList(){
 				$.ajax({
-					url : "review.mk",
+					url : "listR.mk",
 					data : {
 						itno : ${i.itemCode}
 					},
 					success : function(list){
 						//기존에있던 댓글을 지우고 다시 조회
-						$(".review-list tbody").children().remove();
+						$(".review-list").children().remove();
 						var tr="";
 						for(var i in list) {
 							
 							tr +="<tr>"
-								+"<td>"+list[i].reviewWriter+"</td>"
+								+"<td>"+list[i].nickName+"</td>"
 								+"<td>"+list[i].score+"</td>"
-								+"<td>"+list[i].reviewContent+"</td>"
-								+"<td>"+list[i].createDate+"</td>"
+								+"<td>"+list[i].content+"</td>"
+								+"<td>"+list[i].update+"</td>"
 							    +"</tr>";
 						}
-						$(".reply-list tbody").append(tr);
+						$(".review-list").append(tr);
 					},
 					error : function(){
 						alert("리뷰를 불러오는데 실패했습니다.");
 					}
 				});
 			}
-			function deleteReply(rId,rName){
-				if(confirm(rName+"의 리뷰를 삭제하시겠습니까?")){
-					$.ajax({
-						url : "deleteReply.bo",
-						data : {
-							rNo : rId
-						},
-						success : function(message){
-							alert(message);
-						},
-						error : function(){
-							alert("삭제에 실패했습니다.");
-						},
-						complete : function(){
-							replyList();
-						}
-					});
-				}
-			}
+		
 			
 			$(function(){
 				//처음 게시글에 들어왔을때 댓글목록 조회후 댓글창에 표시
-				replyList();
+				reviewList();
 				});
 			
 	
