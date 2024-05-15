@@ -37,7 +37,7 @@
 		  position: fixed;
 		  width: 15%;
 		 
-		  top: 40%;
+		  top: 30%;
 		  left: -10%;
 		  background-color: rgb(41 ,41 ,41);
 		  transition: left 1s;
@@ -72,7 +72,12 @@
 	<div class="outer">
 	<nav class="menu-box-1">
   <div class="button">
-  <p></p>
+  <ul>
+  <li align="right"><<&nbsp;&nbsp;<li>
+  </ul>
+  <ul>
+  	<li><a href="${contextPath }/list.mk?sort=topSal" class="a">전체품목</a></li>
+  </ul>
   	<c:forEach items="${cList }" var="c">
   <ul>
     <li>

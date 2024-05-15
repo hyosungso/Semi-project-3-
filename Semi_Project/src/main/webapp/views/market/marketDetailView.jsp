@@ -101,7 +101,50 @@
       content: '☆';
     }
 
-
+		body,ul,li {
+	  margin: 0;
+	  padding: 0;
+	  list-style: none;
+		}
+		body {
+		  position: relative;
+		}
+		.a {
+		  color: white;
+		  text-decoration: none;
+		}
+		.menu-box-1 {
+		  position: fixed;
+		  width: 15%;
+		 
+		  top: 30%;
+		  left: -10%;
+		  background-color: rgb(41 ,41 ,41);
+		  transition: left 1s;
+		}
+		.menu-box-1:hover {
+		  left: 0;
+		  transition: left 1s;
+		}
+		.menu-box-1 > ul {
+		  position: relative;
+		  width: 100%;
+		  top: 10%;
+		}
+		.menu-box-1 > ul > li {
+		  padding-left: 10%;
+		}
+		.menu-box-1 > ul > li:hover {
+		  background-color: red;
+		}
+		.menu-box-1 ul > li > a {
+		  display: block;
+		  padding: 10px;
+		}
+		.menu-box-1 ul > li:hover > a {
+		  background-color: red;
+		  color: white;
+		}
 	
 </style>
 
@@ -118,6 +161,26 @@
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
+	
+	<nav class="menu-box-1">
+  <div class="button">
+   <ul>
+  <li align="right"><<&nbsp;&nbsp;<li>
+  </ul>
+  
+  <ul>
+  	<li><a href="${contextPath }/list.mk?sort=topSal" class="a">전체품목</a></li>
+  </ul>
+  	<c:forEach items="${cList }" var="c">
+  <ul>
+    <li>
+      <a href="${contextPath }/list.mk?sort=topSal&category=${c.categoryNo}" class="a">${c.categoryName }</a>
+    </li>
+    </ul>
+    </c:forEach>
+    </div>
+    </nav>
+    
 	<br><br><br>
 		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 			<div align="center">
