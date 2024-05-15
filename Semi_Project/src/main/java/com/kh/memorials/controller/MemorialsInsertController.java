@@ -68,12 +68,7 @@ public class MemorialsInsertController extends HttpServlet {
 			int memorialsSelfScore = Integer.parseInt(multiRequest.getParameter("MemorialsSelfScore"));
 			String mUserId = multiRequest.getParameter("mUserId");
 			
-			String memorialsPartsInfo="";
-			if(memorialsParts!=null) {
-			memorialsPartsInfo = String.join(",", memorialsParts);
-			}
 			
-			Memorials m = new Memorials(memorialsDate,memorialsTime,memorialsPartsInfo,memorialsContent,memorialsSelfScore,mUserId);
 
 			MemorialsAttachment at = null;
 			

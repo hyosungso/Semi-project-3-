@@ -59,7 +59,7 @@
 
 
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+	<div class="outer">
 		<br>
 
 		<div class="list-area">

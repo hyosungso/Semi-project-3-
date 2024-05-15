@@ -14,47 +14,13 @@ public class Memorials {
 	private String mUserId;
 	private String status;
 	
-	private String memorialsImg; //운동기록 파일의 경로 저장용 변수
+
 	
 	public Memorials() {
 		super();
 	}
 	
 
-	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String memorialsParts,
-			String memorialsContent, int memorialsSelfScore) {
-		super();
-		this.memorialsNo = memorialsNo;
-		this.memorialsDate = memorialsDate;
-		this.memorialsTime = memorialsTime;
-		//this.memorialsParts = memorialsParts;
-		this.memorialsContent = memorialsContent;
-		this.memorialsSelfScore = memorialsSelfScore;
-	}
-
-
-	public Memorials(String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
-			int memorialsSelfScore) {
-		super();
-		this.memorialsDate = memorialsDate;
-		this.memorialsTime = memorialsTime;
-		//this.memorialsParts = memorialsParts;
-		this.memorialsContent = memorialsContent;
-		this.memorialsSelfScore = memorialsSelfScore;
-	}
-
-
-
-	public Memorials(String memorialsDate, String memorialsTime, String memorialsParts, String memorialsContent,
-			int memorialsSelfScore, String mUserId) {
-		super();
-		this.memorialsDate = memorialsDate;
-		this.memorialsTime = memorialsTime;
-		//this.memorialsParts = memorialsParts;
-		this.memorialsContent = memorialsContent;
-		this.memorialsSelfScore = memorialsSelfScore;
-		this.mUserId = mUserId;
-	}
 
 
 
