@@ -1,4 +1,4 @@
-package com.kh.memorials.controller;
+package com.kh.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.model.service.MemberService;
+
 /**
- * Servlet implementation class MemorialsViewPage
+ * Servlet implementation class MemberCheckNickController
  */
-@WebServlet("/memoView.me")
-public class MemorialsViewPage extends HttpServlet {
+@WebServlet("/nickNameCheck.me")
+public class MemberCheckNickController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemorialsViewPage() {
+    public MemberCheckNickController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +36,22 @@ public class MemorialsViewPage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/memorials/memorialsViewPage.jsp").forward(request, response);
+		
+		String inputNickName = request.getParameter("inputNickName");
+		
+		Boolean flag = new MemberService().CheckNickName(inputNickName);
+		
+		String responseStr = "";
+		
+		if(flag) {
+			responseStr = "WWWWW";
+			
+		}else {
+			responseStr = "WWWWZ";
+		}
+		
+		response.getWriter().print(responseStr);
+		
 	}
 
 }

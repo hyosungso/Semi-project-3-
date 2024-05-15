@@ -9,6 +9,7 @@ import com.kh.market.model.dao.MarketDao;
 import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
+import com.kh.market.model.vo.Order;
 
 public class MarketService {
 
@@ -89,5 +90,50 @@ public class MarketService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int insertOrder(Order o) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MarketDao().insertOrder(conn,o);
+		
+		if(result<0) {
+			JDBCTemplate.rollback(conn);
+		}else {
+			JDBCTemplate.commit(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int updateItem(Item i, ArrayList<ItemAttachment> itList, int category, Component c, int itCode) {
+		
+	Connection conn = JDBCTemplate.getConnection();
+	int result = new MarketDao().updateItem(i,conn,itCode);
+			
+	int result2= new MarketDao().updateItemAttachment(conn,itList,itCode);
+			
+	int result3 = new MarketDao().updateComponent(category,conn,c,itCode);
+			
+	if(result*result2*result3>0) {
+		JDBCTemplate.commit(conn);
+	}else {
+		JDBCTemplate.rollback(conn);
+	}
+	JDBCTemplate.close(conn);
+			
+	return result*result2*result3;
+	
+	}
+
+	public int deleteItemAttachment(int fileLev, int itCode) {
+		// TODO Auto-generated method stub
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MarketDao().deleteItemAttachment(conn,fileLev,itCode);
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	
 
 }

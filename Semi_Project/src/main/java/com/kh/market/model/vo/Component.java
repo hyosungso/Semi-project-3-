@@ -2,7 +2,6 @@ package com.kh.market.model.vo;
 
 public class Component {
 	private int itemCode;
-	private int categoryNo;
 	private double protin;
 	private double carbo;
 	private double calorie;
@@ -16,11 +15,10 @@ public class Component {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Component(int itemCode, int categoryNo, double protin, double carbo, double calorie, double salt, double fat,
+	public Component(int itemCode, double protin, double carbo, double calorie, double salt, double fat,
 			double chol, double saturatedFat, double sugar, double transFat) {
 		super();
 		this.itemCode = itemCode;
-		this.categoryNo = categoryNo;
 		this.protin = protin;
 		this.carbo = carbo;
 		this.calorie = calorie;
@@ -36,12 +34,6 @@ public class Component {
 	}
 	public void setItemCode(int itemCode) {
 		this.itemCode = itemCode;
-	}
-	public int getCategoryNo() {
-		return categoryNo;
-	}
-	public void setCategoryNo(int categoryNo) {
-		this.categoryNo = categoryNo;
 	}
 	public double getProtin() {
 		return protin;

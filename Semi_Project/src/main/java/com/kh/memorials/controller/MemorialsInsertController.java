@@ -59,10 +59,9 @@ public class MemorialsInsertController extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			
-			// DB에 저장할 데이터 추가
 			String memorialsDate = multiRequest.getParameter("memorialsDate");
 			String memorialsTime = multiRequest.getParameter("memorialsTime");
-			String memorialsParts = multiRequest.getParameter("memorialsParts");
+			String[] memorialsParts = multiRequest.getParameterValues("memorialsParts");
 			String memorialsContent = multiRequest.getParameter("memorialsContent");
 			int memorialsSelfScore = Integer.parseInt(multiRequest.getParameter("MemorialsSelfScore"));
 			String mUserId = multiRequest.getParameter("mUserId");
@@ -76,20 +75,14 @@ public class MemorialsInsertController extends HttpServlet {
 			m.setmUserId(mUserId);
 			MemorialsAttachment at = null;
 			
-			
-			
 			if(multiRequest.getOriginalFileName("memorialsImg") != null) {
 				
-				System.out.println("읭");
 				at = new MemorialsAttachment();
 				
 				at.setOriginName(multiRequest.getOriginalFileName("memorialsImg"));
 				at.setChangeName(multiRequest.getFilesystemName("memorialsImg"));
-				at.setFilePath("/resources/uploadFiles/");	
-		
+				at.setFilePath("/resources/uploadFiles/");
 			}
-			System.out.println(m);
-			System.out.println(at);
 			int result = new MemorialsService().insertMemorials(m,at);
 			
 			HttpSession session = request.getSession();
@@ -97,7 +90,7 @@ public class MemorialsInsertController extends HttpServlet {
 			if(result>0) {
 				
 				session.setAttribute("alertMsg", "등록완료!");
-				response.sendRedirect(request.getContextPath());
+				response.sendRedirect(request.getContextPath()/* +"/views/memorials/memorials.jsp" */);
 				
 			}else {
 				
@@ -105,20 +98,9 @@ public class MemorialsInsertController extends HttpServlet {
 					new File(savePath+at.getChangeName()).delete();
 				}
 				session.setAttribute("alertMsg", "등록 실패 ㅠㅠ");
-				response.sendRedirect(request.getContextPath());
-				
-				
+				response.sendRedirect(request.getContextPath()/*+"/views/memorials/memorials.jsp"*/);
 			}
-			
-			
-			
-			
-			
 		}
-		
-		
-		
-		
 	}
 
 }

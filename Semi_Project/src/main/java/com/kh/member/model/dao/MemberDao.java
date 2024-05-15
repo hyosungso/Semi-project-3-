@@ -152,6 +152,34 @@ public class MemberDao {
 		
 		return flag;
 	}
+	
+	public Boolean checkNickName(Connection conn, String inputNickName) {
+		
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("checkNickName");
+		
+		boolean flag = false;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, inputNickName);
+			
+			rset = pstmt.executeQuery();
+			
+			flag = rset.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return flag;
+	}
+
 
 
 	public Member findPwd(Connection conn, String ffId, String ffEmail) {
@@ -327,6 +355,8 @@ public class MemberDao {
 		return m;
 	}
 
+
+	
 
 
 	

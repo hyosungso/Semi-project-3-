@@ -100,11 +100,11 @@
 	</tbody>
 	</table>
 	<br>
-	<table border="1" id="insertReply">
+	<table border="1" id="infoinsertReply">
 	<tr>
 	<td width="120px">댓글 작성란</td>
 	<td><textarea id="replyContent" rows="5" style="resize:none;"></textarea></td>
-	<td width="100px"><button onclick="insertReply();" style="height:50px">작성</button></td>
+	<td width="100px"><button onclick="infoinsertReply();" style="height:50px">작성</button></td>
 	</tr>
 	</table>
 	</div>
@@ -125,7 +125,7 @@
 		//로그인 했으면 작성자를 로그인 유저의 아이디(닉네임)으로, 안했으면 "익명"으로 표시
 		
 		$.ajax{
-			url : "insertReply.bo".
+			url : "infoinsertReply.bo".
 			type : "post",
 			date : {
 				bno : ${f.boardNo},

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.model.service.BoardService;
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.PageInfo;
 
 /**
  * Servlet implementation class BoardSearchController
@@ -33,6 +34,14 @@ public class BoardSearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String keyword=request.getParameter("search");
 		String category=request.getParameter("searchCategory");
+		int page=Integer.parseInt(request.getParameter("page"));
+		
+
+		int currentPage=page; //현재페이지
+		int boardLimit; //한 페이지에 보여줄 게시글 개수
+		//한페이지에서 보여줄 게시글 개수
+		boardLimit=20;
+		PageInfo pi=new PageInfo(currentPage,boardLimit);
 		
 		ArrayList<Board> bList=new ArrayList<>();
 		BoardService bs=new BoardService();
@@ -47,9 +56,11 @@ public class BoardSearchController extends HttpServlet {
 			bList=bs.searchBoardByWriter(keyword);
 			break;
 		}*/
-		bList=bs.searchBoard(keyword,category);
+		bList=bs.searchBoard(keyword,category,pi);
 		request.setAttribute("bList", bList);
+		request.setAttribute("category", category);
 		request.setAttribute("keyword", keyword);
+		request.setAttribute("page", page);
 		
 
 		

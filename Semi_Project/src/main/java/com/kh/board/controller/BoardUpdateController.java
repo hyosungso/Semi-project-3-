@@ -47,7 +47,9 @@ public class BoardUpdateController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
+		
 		String userNo=request.getParameter("userNo");
 		String title=request.getParameter("boardTitle");
 		String content=request.getParameter("boardContent");
@@ -58,7 +60,9 @@ public class BoardUpdateController extends HttpServlet {
 		b.setBoardNo(bno);
 		
 		int result=new BoardService().updateBoard(b);
+		
 		HttpSession session=request.getSession();
+		
 		if(result>0) {
 			session.setAttribute("alertMsg", "수정이 완료되었습니다.");
 		} else {

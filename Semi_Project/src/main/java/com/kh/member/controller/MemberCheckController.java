@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.kh.member.model.service.MemberService;
 
 /**
@@ -30,8 +29,13 @@ public class MemberCheckController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		String inputId = request.getParameter("inputId");
+//		
+//		String responseData = "'"+inputId+"'은 이미 사용중인 아이디입니다.";
+//		
+//		response.setContentType("text/html;charset=UTF-8");
+//		response.getWriter().print(responseData);
+	
 	}
 
 	/**
@@ -51,8 +55,13 @@ public class MemberCheckController extends HttpServlet {
 		} else {
 			responseStr = "NNNNY";
 		}
+		
+		
 
 		response.getWriter().print(responseStr);
+		
+		
+		
 	}
 
 }

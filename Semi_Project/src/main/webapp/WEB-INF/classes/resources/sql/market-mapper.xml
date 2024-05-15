@@ -11,8 +11,9 @@
 		   FILE_PATH || CHANGE_NAME THUMBNAIL
 	FROM ITEM I
 	JOIN ITEM_CATEGORY USING (CATEGORY_NO)
-	JOIN ITEM_ATTACHMENT ON (ITEM_CODE = REF_CODE)
+	JOIN ITEM_ATTACHMENT A ON (ITEM_CODE = REF_CODE)
 	WHERE I.STATUS='Y'
+    AND A.STATUS='Y'
 	AND FILE_LEVEL=1
 	ORDER BY SALES_VOL DESC
 		   
@@ -21,6 +22,7 @@
 	<entry key="selectItem">
 		SELECT ITEM_NAME,
 			   CATEGORY_NAME,
+			   CATEGORY_NO,
 			   PRICE,
 			   DISCOUNT,
 			   STORAGE_METHOD,
@@ -75,21 +77,21 @@
 	FROM ITEM_ATTACHMENT
 	WHERE REF_CODE=?
 	AND STATUS='Y'
+	ORDER BY FILE_LEVEL
 	</entry>
 	<entry key="insertComponent">
 	INSERT INTO COMPONENT(ITEM_CODE,
-						  CATEGORY_NO,
-						  PROTIN,
-						  CARBO,
 						  CALORIE,
+						  PROTIN,
 						  SALT,
+						  CARBO,
 						  FAT,
-						  CHOL,
+						  TRANS_FAT,
 						  SATURATED_FAT,
-						  SUGAR,
-						  TRANS_FAT)
+						  CHOL,
+						  SUGAR
+						  )
 				   VALUES(SEQ_INO.CURRVAL,
-				   		  ?,
 				   		  ?,
 				   		  ?,
 				   		  ?,
@@ -110,5 +112,66 @@
 		STATUS='N'
 		WHERE ITEM_CODE=?
 	</entry>
+	<entry key="insertOrder">
+		INSERT INTO ITEM_ORDER(ORDER_NUMBER,
+							   CUSTOMER_NAME,
+							   SHIPPING_DATE,
+							   POST_NUMBER,
+							   ADDRESS)
+					    VALUES(?,
+					    	   ?,
+					    	   ?,
+					    	   ?,
+					    	   ?) 
+	</entry>
+	
+	<entry key="updateItem">
+		UPDATE ITEM SET
+		CATEGORY_NO = ?,
+		ITEM_NAME= ?,
+		PRICE=?,
+		DISCOUNT=?,
+		STORAGE_METHOD=?
+		WHERE ITEM_CODE=?
+	</entry>
+	
+	<entry key="updateItemAttachment">
+	INSERT INTO ITEM_ATTACHMENT(FILE_CODE,
+								REF_CODE,
+								ORIGIN_NAME,
+								CHANGE_NAME,
+								FILE_PATH,
+								FILE_LEVEL)
+					VALUES(SEQ_FNO.NEXTVAL,
+						   ?,
+						   ?,
+						   ?,
+						   ?,
+						   ?)
+	
+	</entry>
+	
+	<entry key="updateComponent">
+	UPDATE COMPONENT SET
+	CALORIE=?,
+	PROTIN=?,
+	SALT=?,
+	CARBO=?,
+	FAT=?,
+	TRANS_FAT=?,
+	SATURATED_FAT=?,
+	CHOL=?,
+	SUGAR=?
+	WHERE ITEM_CODE=?
+	</entry>
+	
+	<entry key="deleteItemAttachment">
+	UPDATE ITEM_ATTACHMENT SET
+	STATUS = 'N'
+	WHERE FILE_LEVEL=?
+	AND REF_CODE=?
+	</entry>
+	
+	
 	
 </properties>

@@ -69,7 +69,6 @@ public class MarketInsertController extends HttpServlet {
 			int category=Integer.parseInt(multiRequest.getParameter("category"));
 			int price=Integer.parseInt(multiRequest.getParameter("price"));
 			int discount=Integer.parseInt(multiRequest.getParameter("discount"));
-			int totalPrice=Integer.parseInt(multiRequest.getParameter("totalPrice"));
 			String storageMethod=multiRequest.getParameter("storageMethod");
 		
 		
@@ -94,13 +93,8 @@ public class MarketInsertController extends HttpServlet {
 					it.setOriginName(multiRequest.getOriginalFileName(key));
 					it.setChangeName(multiRequest.getFilesystemName(key));
 					it.setFilePath("/resources/marketImg/");
+					it.setFileLev(j);
 					
-					
-					if(j==1) {
-						it.setFileLev(1);
-					}else {
-						it.setFileLev(2);
-					}
 					
 					itList.add(it);
 					
