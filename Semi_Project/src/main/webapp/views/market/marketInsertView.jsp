@@ -151,15 +151,15 @@
 					<td>당류</td>
 				</tr>
 				<tr>
-					<td><input type="number" name="calorie" step="0.1" required onkeyup="noMinus(this);">kcal</td>
-					<td><input type="number" name="protin" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="salt" step="0.1" required onkeyup="noMinus(this);">mg</td>
-					<td><input type="number" name="carbo" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="fat" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="transFat" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="saturatedFat" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="chol" step="0.1" required onkeyup="noMinus(this);">mg</td>
-					<td><input type="number" name="sugar" step="0.1" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="calorie" step="0.1" min="0" required onkeyup="noMinus(this);">kcal</td>
+					<td><input type="number" name="protin" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="salt" step="0.1" min="0" required onkeyup="noMinus(this);">mg</td>
+					<td><input type="number" name="carbo" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="fat" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="transFat" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="saturatedFat" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="chol" step="0.1" min="0" required onkeyup="noMinus(this);">mg</td>
+					<td><input type="number" name="sugar" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
 				</tr>
 			</tbody>
 		</table>

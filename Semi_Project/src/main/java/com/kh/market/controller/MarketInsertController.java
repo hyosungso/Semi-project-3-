@@ -44,7 +44,6 @@ public class MarketInsertController extends HttpServlet {
 		
 		Category[] category = cList.toArray(new Category[cList.size()]);
 		
-		
 		request.setAttribute("cList", category);
 		request.getRequestDispatcher("views/market/marketInsertView.jsp").forward(request, response);;
 	}

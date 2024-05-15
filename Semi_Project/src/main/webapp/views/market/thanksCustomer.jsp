@@ -31,7 +31,7 @@
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="jumbotron" style="padding-top: 80px; padding-bottom:80px">
-		<h6 class="text-dark text-uppercase">Special Sale</h6>
+		<h6 class="text-dark text-uppercase">Order Completed</h6>
 		<h1 class="text-uppercase">주문완료</h1>
 		
 	</div>
@@ -46,7 +46,10 @@
 </body>
 </html>
 <%
-	session.invalidate();
+		session.removeAttribute("cartlist");
+		session.removeAttribute("sum");
+		session.removeAttribute("allItemName");
+		
 	for(int i =0; i< cookies.length; i++ ){
 		Cookie thisCookie=cookies[i];
 		String n= thisCookie.getName();

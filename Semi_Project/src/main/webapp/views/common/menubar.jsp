@@ -1,3 +1,5 @@
+<%@page import="com.kh.market.model.vo.Item"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,6 +15,11 @@
 	
 	//contextPath 변수처리해서 사용하기 
 	String contextPath = request.getContextPath();
+	
+	//카트 번호 생신용
+	@SuppressWarnings("unchecked")
+	ArrayList<Item> list= (ArrayList<Item>)session.getAttribute("cartlist");
+	
 	
 %>
 
@@ -167,6 +174,19 @@
 .util-icons li {
 	margin: 4px;
 }
+#cartCount {
+ position : absolute;
+ text-align: center;
+ background: #FF542A;
+        font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    top:50px;
+    right: 85px;
+    width: 18px;
+    height: 18px;
+    color: #fff;
+}
 </style>
 
 </head>
@@ -197,10 +217,12 @@
 		<%if(loginUser == null) {%>
 		<div class="util">
 			<br>
-			<br> <a href="${contextPath}/views/member/login.jsp" id="imageLink"> 
+			<br> <a href="#" id="imageLink"> 
 				<img class="image2"> </a>&nbsp;&nbsp;&nbsp; 
-				<a href="${contextPath }/views/market/cart.jsp"> 
-					<img class="image" width=40 height=40></a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" id="imageLink2"> 
+					<img class="image" width=40 height=40>
+					<em id=cartCount style="right : 145px">0</em>
+					</a>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
 					<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
 
@@ -210,6 +232,11 @@
     		alert("로그인한 상태에서 사용 가능합니다.");
     		window.location.href = "${contextPath}/views/member/login.jsp";
 			});
+			
+			document.getElementById('imageLink2').addEventListener('click', function(event) {
+	    		alert("로그인한 상태에서 사용 가능합니다.");
+	    		window.location.href = "${contextPath}/views/member/login.jsp";
+			});
 		</script>
 		<%}else{ %>
 		<div class="util">
@@ -217,11 +244,18 @@
 			<br> <a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
 			<a href="${contextPath }/views/market/cart.jsp"> 
 				<img class="image" width=40 height=40>
+				<%if(list!=null){ %>
+				<em id=cartCount><%=list.size() %></em>
+				<%}else{ %>
+				<em id=cartCount>0</em>
+				<%} %>
 			</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<a href="logout.me">로그아웃</a>
+			<a href="${contextPath }/logout.me">로그아웃</a>
 			<%} %>
+			
+			</div>
 		</div>
-	</div>
+	
 
 
 
@@ -242,26 +276,26 @@
 				<a href="">운동법</a>
 			</div>
 			<div>
-				<a href="${contextPath }/list.mk">매장(후순위)</a>
+				<a href="${contextPath }/list.mk?sort=topSal">매장</a>
 			</div>
 			<%if(loginUser == null) {%>
 			<div>
-				<a href="${contextPath}/views/member/login.jsp" id="fake">개인기록(후순위)</a>
+				<a href="${contextPath}/views/member/login.jsp" id="fake">개인기록</a>
 			</div>
-			<%} else { %>
-			<div>
-				<a href="Memorials.me">개인기록(후순위)</a>
-			</div>
-			<%} %>
-		</div>
-
-	</div>
 	<script>
 			document.getElementById('fake').addEventListener('click', function(event) {
     		alert("로그인한 상태에서 사용 가능합니다.");
     		window.location.href = "${contextPath}/views/member/login.jsp";
 			});
 	</script>
+			<%} else { %>
+			<div>
+				<a href="Memorials.me">개인기록</a>
+			</div>
+			<%} %>
+		</div>
+
+	</div>
 
 	<script>
     

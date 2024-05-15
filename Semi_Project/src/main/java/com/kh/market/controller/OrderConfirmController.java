@@ -2,6 +2,7 @@ package com.kh.market.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.market.model.service.MarketService;
+import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.Order;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class OrderConfirmController
@@ -34,15 +37,33 @@ public class OrderConfirmController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session=request.getSession();
 		
+		@SuppressWarnings("unchecked")
+		ArrayList<Item> cartList= (ArrayList<Item>) session.getAttribute("cartlist");
+		for (int i=0; i<cartList.size();i++){
+			Item item = cartList.get(i);
+			int orderQun=item.getSalesVol();
+			item.setSalesVol(orderQun+=item.getQuantity());
+			int result=new MarketService().updateSalVol(item);
+			if(result==0) {
+				session.setAttribute("alertMsg", "상품구매에 실패하였습니다. (정보 갱신오류)");
+				response.sendRedirect(request.getContextPath()+"/views/market/cart.jsp");
+				return;
+			}
+		}
 		String shipping_cartId="";
 		String shipping_name="";
 		Date shipping_shippingDate=null;
 		String shipping_postNumber="";
 		String shipping_address="";
-		
-		
+		int price=(int)session.getAttribute("sum");
+		String allItmeName=(String)session.getAttribute("allItemName");
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int userNo =loginUser.getUserNo();
+	
 		Cookie[] cookies=request.getCookies();
+		
 		
 		
 		if(cookies !=null){
@@ -68,11 +89,15 @@ public class OrderConfirmController extends HttpServlet {
 				shipping_name,
 				shipping_shippingDate,
 				shipping_postNumber,
-				shipping_address);
+				shipping_address,
+				allItmeName,
+				price,
+				userNo
+				);
 		
 		int result = new MarketService().insertOrder(o);
 		
-		HttpSession session = request.getSession();
+		
 		
 		if (result>0) {
 			response.sendRedirect(request.getContextPath()+"/views/market/thanksCustomer.jsp");

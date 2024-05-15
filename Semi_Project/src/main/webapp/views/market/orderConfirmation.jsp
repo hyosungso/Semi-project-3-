@@ -4,8 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String cartId = session.getId();
-
+	
 	String shipping_cartId="";
 	String shipping_name="";
 	String shipping_shippingDate="";
@@ -60,7 +59,7 @@
 			<table style="text-align: center;">
 			<tr>
 				<th>항목</th>
-				<th>#</th>
+				<th>수량</th>
 				<th>가격</th>
 				<th>소계</th>
 			</tr>
@@ -75,7 +74,7 @@
 				Item item = cartList.get(i);
 				int total = item.getTotalPrice()*item.getQuantity();
 				sum = sum+total;
-				allItemName+=item.getItemName()+", ";
+				allItemName+=item.getItemName()+" ";
 				
 			%>
 			<tr>
@@ -85,31 +84,29 @@
 				<td><%=total %>원</td>
 			</tr>
 			<%} 
-			if(allItemName.length()>10){			
-			request.setAttribute("allItemName", allItemName.substring(1, 10)+"...");
-			}else{
-			request.setAttribute("allItemName", allItemName);
-			}
+			
+			session.setAttribute("allItemName", allItemName);
+			session.setAttribute("sum", sum);
 			%>
 			<tr>
 				<td></td>
 				<td></td>
 				<td style="text-align:right;"><strong>총액 : </strong></td>
 				<td style="text-align:center;" ><strong><%=sum %></strong></td>
-				<%request.setAttribute("sum", sum); %>
+				
 			</tr>
 			</table>
 			
 			<a href="${contextPath }/views/market/shippingInfo.jsp?cartId=<%=shipping_cartId%>"
 			class="btn btn-secondary" role="button"> 이전 </a>
-<%-- 			<a href="${contextPath }/views/market/confirm.mk"  --%>
-<!-- 			class="btn btn-success" role="button"> 주문완료 </a> -->
-			<button class="btn btn-success" id="kakaopay"> 주문완료 </button>
+			<a href="${contextPath }/views/market/confirm.mk" 
+ 			class="btn btn-success" role="button"> 주문완료 </a> 
+<!-- 			<button class="btn btn-success" id="kakaopay"> 주문완료 </button> -->
 			<a href="${contextPath }/views/market/checkOutCancelled.jsp"
 			class="btn btn-secondary" role="button"> 주문취소 </a>
 		</div>
 	</div>
-	<script>
+	<!-- <script>
 		$(function(){
 			$('#kakaopay').click(function(){
 				$.ajax({
@@ -128,6 +125,6 @@
 				});	
 			});
 		});
-	</script>
+	</script> -->
 	</body>
 </html>

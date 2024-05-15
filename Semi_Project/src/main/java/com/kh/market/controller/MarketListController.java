@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.model.vo.Category;
 import com.kh.market.model.service.MarketService;
 import com.kh.market.model.vo.Item;
 
@@ -31,10 +32,26 @@ public class MarketListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArrayList<Category> cList =new MarketService().selectCategory();
 		
-		ArrayList<Item> list = new MarketService().selectItemList();
+		Category[] category = cList.toArray(new Category[cList.size()]);
+		
+		request.setAttribute("cList", category);
+		ArrayList<Item> list=null;
+		int categoryNo=0;
+		if(request.getParameter("category")!=null) {
+			categoryNo=Integer.parseInt(request.getParameter("category"));
+		}
+		String sort=request.getParameter("sort");
+		if(categoryNo==0) {
+			
+			 list = new MarketService().selectItemList(sort);
+		}else {
+			list = new MarketService().selectItemList(sort,categoryNo);
+		}
 		
 		request.setAttribute("list", list);
+		
 		
 		request.getRequestDispatcher("views/market/marketListView.jsp").forward(request, response);
 	}
