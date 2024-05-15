@@ -16,6 +16,7 @@ import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
 import com.kh.market.model.vo.Order;
+import com.kh.market.model.vo.Review;
 
 public class MarketDao {
 
@@ -528,6 +529,60 @@ public class MarketDao {
 		}
 		
 		return result;
+	}
+
+	public int insertReview(Connection conn, Review re) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("insertReview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, re.getRefItemNo());
+			pstmt.setString(2, re.getContent());
+			pstmt.setDouble(3, re.getScore());
+			pstmt.setInt(4, re.getReviewWriter());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Review> selectReview(Connection conn, int itno) {
+		ResultSet rset=null;
+		PreparedStatement pstmt=null;
+		ArrayList<Review> rList=new ArrayList<>();
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itno);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				rList.add(new Review(
+						rset.getInt("REVIEW_NO"),
+						rset.getInt("REF_ITEMNO"),
+						rset.getString("CONTENT"),
+						rset.getDouble("SCORE"),
+						rset.getInt("REVIEW_WRITER"),
+						rset.getString("NICKNAME"),
+						rset.getDate("UP_DATE")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return rList;
 	}
 
 	

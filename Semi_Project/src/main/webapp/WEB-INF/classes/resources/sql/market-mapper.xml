@@ -291,5 +291,32 @@
 		WHERE ITEM_CODE=?
 	</entry>
 	
+	<entry key="insertReview">
+		INSERT INTO ITEM_REVIEW(REVIEW_NO,
+							   REF_ITEMNO,
+							   CONTENT,
+							   SCORE,
+							   REVIEW_WRITER
+							   )
+					    VALUES(SEQ_RVNO.NEXTVAL,
+					    	   ?,
+					    	   ?,
+					    	   ?,
+					    	   ?)
+					    	    
+	</entry>
+	<entry key="selectReview">
+		SELECT REVIEW_NO,
+			   REF_ITEMNO,
+			   CONTENT,
+			   SCORE,
+			   REVIEW_WRITER,
+			   NICKNAME,
+			   UP_DATE
+		FROM ITEM_REVIEW
+		JOIN MEMBER ON (REVIEW_WRITER = USER_NO )
+		WHERE REF_ITEMNO=?
+	</entry>
+	
 	
 </properties>
