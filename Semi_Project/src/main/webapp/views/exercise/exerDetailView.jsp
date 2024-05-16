@@ -1,8 +1,8 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Exercise_DetailView</title>
@@ -11,76 +11,91 @@
             background-color:rgba(175, 45, 45, 0.884);
             color: rgba(224, 238, 238, 0.829);
         }
+        .title{
+        width:66%;
+        }
+        tr{
+        text-align: center;
+        }
+        #ci{
+        	background-color:rgba(168, 134, 134, 0.884);
+        }
     </style>
 </head>
 <body>
-    <div class="outer">
+    <%@ include file="/views/common/menubar.jsp" %>
+    <div class="outer" id="md">
 		<br>
         <!--button onclick="history.back()">Go Back</button>-->
-        <label onclick="location.href='https://www.google.com';">←뒤로가기</label>
-		
+        <label onclick="location.href='${contextPath}/list.ex';" style="border: 1px solid grey">←목록으로</label>
+        
+		<!-- h2 align="center">${e.exerTitle}운동이름</h2>-->
 		<br>
-		
-		<form action="${contextPath}" method="post" enctype="multipart/form-data" id="detail-form">
+		<form action="${contextPath}/detail.ex?eno=${ex.exerNo}" method="post" enctype="multipart/form-data" id="detail-form">
 			
 			<table align="center" border="5" width="67%">
-				<c:forEach var="pt" items="${ptList}" varStatus="vs">
-					<h2 align="center">${e.exerTitle}운동이름</h2>
-					<c:choose>
-						<c:when test="${vs.index eq 0}">
-							<tr>
-								<th colspan="3"><!-- 메인사진 -->
-									<img src="${contextPath}${pt.filePath}${pt.changeName}" width="100%">
-								</th>
-                			</tr> 
-						</c:when>
-						<c:otherwise>
+				
+				<tr>
+					<th colspan="3">
+                        <h2 align="center">${ex.exerTitle}</h2>
+                    </th>
+				</tr>
+							<c:forEach items="${ap}" var="a" varStatus="w">
+								<c:choose>
+									<c:when test="${w.index eq 0}">
+                            			<tr>
+                            				<th colspan="3">
+                             					<img id="titleImg" src="${contextPath}${a.filePath}${a.changeName}">
+                            				</th>
+                            			</tr> 
+                            		</c:when>
+                            		<c:otherwise>
+                            			
+                            				<td id="ci">
+                                    			<img id="contentImg${w.index}" src="${contextPath}${a.filePath}${a.changeName}" height="200px">
+                                			</td>
+                                		
+                            		</c:otherwise>
+                            	</c:choose>
+                            </c:forEach>
+				
+		
+                      
+		
                             <tr>
-                                <td colspan="2">
-                                    <!--img src="birdfolder/긴사진예시.jpg" width="24%" 넣은 사진 개수만큼 크기변경 -->
-                                    <img src="contentImg${vs.index}" width="100/${vs.index}%">
+                                <td colspan="3">
+                                    <img src="<%=request.getContextPath() %>/resources/logo/temp.png" width="100%"> 
+                                    <!--없을때는 temp사진 출력-->
                                 </td>
                             </tr>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<tr>
-				    <td colspan="3">
-                    	<img src="${contextPath}/resources/logo/temp.png" width="100%"> 
-                    	<!--없을때는 temp사진 출력-->
-                    </td>
-                </tr>
                 <tr>
 					<td colspan="3">
-                        ${e.exerInf}운동정보
+                        ${ex.exerInf}
                     </td>
 				</tr>
 				<tr>
 					<th width="30%">운동종류</th>
 					<td colspan="3">
-						<p>${e.exerType}</p>
+						<p>${ex.exerType}</p>
 					</td>
 				</tr>
-                <tr onclick="location.href='해당부위 SELECT 위치로'">
+                <tr>
 					<th>운동부위</th>
 					<td colspan="3">
-						<p>${e.exerPart}</p>
+						<p>${ex.categoryName}</p>
 					</td>
 				</tr>
                 <tr>
                     <td colspan="3">
-                        ${e.exerContent}운동내용
+                        ${ex.exerContent}
                     </td>
                 </tr>
                 
 			</table>
 			<br><br>
-			<script>
-			</script>
 			<div align="center">
-				<c:if test="${!empty loginUser.getAuthCode() eq 'admin'}"><!-- 관리자만 작성가능  -->
-					<button type="submit">글작성</button>
-				</c:if>
+				<button type="submit" style="display:none">글수정</button>
+                <!--style="display:none"-->
 			</div>
 		</form>
 	</div>

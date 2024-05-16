@@ -66,14 +66,10 @@ box-sizing:border-box;
 				
 					<th width="100">부위</th>
 					<td>
-						<select name="part" id="part" >
-                			<option value="가슴">가슴</option>
-                			<option value="어깨">어깨</option>
-                			<option value="복부">복부</option>
-                			<option value="등">등</option>
-                			<option value="팔">팔</option>
-                			<option value="허벅지">허벅지</option>
-                			<option value="종아리">종아리</option>
+						<select name="category" id="category" >
+                			<c:forEach items="${category}" var="c">
+                				<option value="${c.categoryNo}">${c.categoryName}</option>
+                			</c:forEach>
             			</select>
 					</td>
 				</tr>
@@ -112,9 +108,7 @@ box-sizing:border-box;
 			</div>
 			<br><br>
 			<div align="center">
-				<c:if test="${!empty loginUser.getAuthCode() eq 'admin'}"><!-- 관리자만 작성가능  -->
 					<button type="submit">글작성</button>
-				</c:if>
 			</div>
 		</form>
 		<script>
