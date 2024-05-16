@@ -139,7 +139,7 @@ width:100%;
 			},
 			success : function(result){
 				alert(result);
-				$("#replyContent").html("");
+				$("#replyContent").val("");
 			},
 			error : function(){
 				alert("댓글 작성에 오류가 발생했습니다.");
