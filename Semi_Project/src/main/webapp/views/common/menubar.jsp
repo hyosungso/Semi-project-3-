@@ -273,7 +273,7 @@
 
 			</div>
 			<div>
-				<a href="">운동법</a>
+				<a href="${contextPath}/list.ex">운동법</a>
 			</div>
 			<div>
 				<a href="${contextPath }/list.mk?sort=topSal">매장</a>

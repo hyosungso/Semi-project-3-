@@ -80,12 +80,12 @@
     body {
         margin: 0;
         padding: 0;
-        background-color: black ; 
+        background-color: black;
     }
 
     
     form {
-        max-width: 400px;
+        max-width: 500px;
         margin: auto; 
         background-color: red; 
         border-radius: 8px; 
@@ -147,12 +147,13 @@
                 <a href="${contextPath }"><img src="${contextPath}/resources/logo/temp.png"></a>
             </div>
             </div>
-        </div><br><br><br>
+        </div><br><br><br><br>
 	<div class="login-area">
 	
 		<form id="login-form" action="<%=contextPath%>/login.me" method="post">
-		<img name="login-image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAyMDA2MTNfMzkg%2FMDAxNTkyMDI3MTE1Njkz.tinbvbYJf4_QXzkrLpI2nCPXq98W-jVJGy7It8TLObUg.SgMpdY818xVrmzWiONQiiIJyTlx5QfiIj4RqjMcUwIog.GIF%2FexternalFile.gif&type=a340" alt="로그인 이미지"><br><br>
-			<table>
+		<img name="login-image" src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140925_74%2Filomarta_1411621796365wo9SX_JPEG%2Fbodybuilding_motivation-wallpaper-1920x1200.jpg&type=a340" alt="로그인 이미지" style="display: block; margin: 0 auto; width: 100%;">
+		<br><br><br>
+			<table style="margin : 0 auto;">
 				<tr>
 					<th>아이디</th>
 					<td><input type="text" id="loginId" name="userId" required></td>
@@ -169,17 +170,18 @@
 				<tr>
 					<th colspan="2">
 						<button type="submit">로그인</button>
-						<button type="button" class="btn-secondary" onclick="location.href='${contextPath }/views/member/memberEnrollForm.jsp'">회원가입</button>
+						<button type="button" class="btn-secondary" onclick="location.href='${contextPath }/enrollFormBefore.me'">회원가입</button>
 						<br><br>
 					</th>
 				</tr>
-				<th colspan="2">
-   					<div style="display: flex; justify-content: space-between;">
-        				<button type="button" onclick="location.href='${contextPath }/views/member/fId.jsp'" name="FId" style="width: 48%; background-color: yellow; color : black;">아이디 찾기</button>
-        				<button type="button" onclick="location.href='${contextPath }/views/member/fPwd.jsp'" name="FPwd" style="width: 48%; background-color: yellow; color : black;">비밀번호 찾기</button>
-    				</div>
-				</th>
-				
+				<tr>
+					<th colspan="2">
+	   					<div style="display: flex; justify-content: space-between;">
+	        				<button type="button" onclick="location.href='${contextPath }/views/member/fId.jsp'" name="FId" style="width: 49%; background-color: yellow; color : black;">아이디 찾기</button>
+	        				<button type="button" onclick="location.href='${contextPath }/views/member/fPwd.jsp'" name="FPwd" style="width: 49%; background-color: yellow; color : black;">비밀번호 찾기</button>
+	    				</div>
+					</th>
+				</tr>
 
 			
 			</table>
