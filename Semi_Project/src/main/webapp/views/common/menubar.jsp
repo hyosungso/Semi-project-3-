@@ -48,7 +48,7 @@
 	width: 80%;
 	margin: auto;
 	z-index: 20;
-	background-color: #fff;
+	background-color: #ffffff;
 }
 
 .header-inner {
@@ -102,7 +102,7 @@
 .nav-area {
 	margin: auto;
 	width: 1300PX;
-	background-color: black;
+	background-color: #d60000;
 	position: relative;
 	z-index: 5;
 }
@@ -131,7 +131,9 @@
 }
 
 .menu a:hover {
-	background-color: rgb(144, 142, 142);
+	background-color: rgb(0, 0, 0);
+    cursor: pointer;
+	transition: background-color 1s;
 }
 
 .board ul {
@@ -140,22 +142,26 @@
 
 #navi>li>ul {
 	list-style-type: none;
-	background-color: black;
+	background-color: rgb(0, 0, 0);
 	padding: 0px;
 	display: none;
+    
 }
 
 #navi>li>a:hover+ul {
 	/*안보이는 ul 보여주기*/
 	display: block;
+    
 }
 
 #navi>li>ul:hover {
 	display: block;
+    
 }
 
 .board-category a {
 	font-size: 15px
+    
 }
 
 .outer {
@@ -174,6 +180,16 @@
 .util-icons li {
 	margin: 4px;
 }
+
+
+
+#pic{
+    
+    height : 400px;
+    
+}
+
+
 #cartCount {
  position : absolute;
  text-align: center;
@@ -187,6 +203,7 @@
     height: 18px;
     color: #fff;
 }
+
 </style>
 
 </head>
@@ -252,11 +269,90 @@
 				<a href="${contextPath }/list.mk?sort=topSal">매장</a>
 			</div>
 			<div>
-				<a href="Memorials.me">개인기록(후순위)</a>
+				<a href="${contextPath}/views/member/login.jsp" id="fake">개인기록</a>
 			</div>
+	
+	
+	<script>
+	
+			document.getElementById('fake').addEventListener('click', function(event) {
+    		alert("로그인한 상태에서 사용 가능합니다.");
+    		window.location.href = "${contextPath}/views/member/login.jsp";
+			});
+	</script>
+	
+	
+			<%} else { %>
+			<div>
+				<a href="Memorials.me">개인기록</a>
+			</div>
+			<%} %>
+
 		</div>
 
 	</div>
+
+    <br>
+    <br>
+    <br>
+
+
+
+    <div>
+    
+
+            
+            <table border="1" align="center">
+                <tr id="pic" >
+                    <td>
+                        <img width=420 height=600
+                        src="https://qi-o.qoo10cdn.com/goods_image_big/8/7/8/6/8531128786_l.jpg">
+                    </td>
+                    <td>
+                        <img width=420 height=600
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0zL2gkxeYEnH4GWjkF7CFmtGONvlTywmNyg&usqp=CAU">
+                        
+                    </td>
+                    <td>
+                        <img width=420 height=600
+                        src="https://i.namu.wiki/i/Bd2ylwd4Lho5SqGM6XyAmwoyJtEnspKNAVDP1jd7EmViHckUSNcEm4JMyuePE56jP98WASRF8wDpg58l6tB0vQ.webp">
+                    </td>
+                </tr>
+                
+            </table>
+            
+            
+        </div>
+
+        <br><br>
+        
+
+
+        <div align="center">
+            <!-- 바디 게시판-->
+            <div class="bodyboard">
+                <table border="1">
+                    <tr align="center">
+                        <td width="600">정보게시판</td>
+                        <td width="600">자유게시판</td>
+                    </tr>
+
+                    <tr align="center">
+                        <td height="400">인기있는 글 </td>
+                        <td height="400">인기있는 글 </td>
+                    </tr>
+                </table>
+
+            </div>
+    
+    
+        </div>
+
+    </body>
+
+
+
+
 
 	<script>
     

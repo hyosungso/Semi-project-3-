@@ -128,7 +128,7 @@
                     <div class="progress"></div>
                 </div>
                 <div class="terms">
-                    <h2>이용약관</h2>
+                    <h2>이용약관 동의서</h2>
                     <div class="terms-content" style="width : 580px">여러분을 환영합니다.
                         헬스라이프 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 헬스라이프 서비스의 이용과 관련하여 헬스라이프 서비스를 제공하는 헬스라이프 주식회사(이하 ‘헬스라이프’)와 이를 이용하는 헬스라이프 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 헬스라이프 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
                         
@@ -251,9 +251,9 @@
 
                     <div class="agree-checkboxes">
                         
-                        <input type="checkbox" name="all" onclick="chkAll();" id="all"><label for="all">전체선택 <span class="required"></span></label>
-				        <input type="checkbox" name="sub" id="j"><label>헬스라이프 이용약관 <span class="required">(필수)</span> </label>
-				        <input type="checkbox" name="sub" id="d"><label>개인정보 수집 및 이용 동의 <span class="required">(필수)</span></label>
+                        <input type="checkbox" name="all" onclick="chkAll();" id="all"><label for="all">전체동의<span class="required"></span></label>
+				        <input type="checkbox" name="sub" id="j" required><label>헬스라이프 이용약관 <span class="required">(필수)</span> </label>
+				        <input type="checkbox" name="sub" id="d" required><label>개인정보 수집 및 이용 동의 <span class="required">(필수)</span></label>
 				        <input type="checkbox" name="sub" id="w"><label>마케팅 정보 수신 동의 <span class="optional">(선택)</span></label>
                     </div>
                 </div>
