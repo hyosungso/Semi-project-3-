@@ -37,7 +37,6 @@
 		SELECT REF_MNO.NEXTVAL MNO
 		FROM DUAL
 </entry>
-
 <entry key="memorialsList">
 		SELECT MEMORIALS_NO,
        		   MEMORIALS_DATE,
@@ -59,7 +58,6 @@
 		WHERE FILE_NO = ?
 		AND STATUS = 'Y'
 	</entry>
-
 	<entry key="deleteMemorials">
 		UPDATE MEMORIALS
 		SET STATUS = 'N'
@@ -70,7 +68,6 @@
 		SET STATUS = 'N'
 		WHERE FILE_NO = ?
 	</entry>
-	
 	<entry key="updateMemorials">
 		UPDATE MEMORIALS
 		SET MEMORIALS_DATE = ? 
@@ -82,7 +79,6 @@
 		WHERE MEMORIALS_NO = ?
 		AND STATUS ='Y'
 	</entry>
-	
 	<entry key="updateMemorialsAttachment">
 		UPDATE MEMORIALSATTACHMENT
 		SET ORIGIN_NAME = ? 
@@ -103,7 +99,6 @@
 		WHERE MEMORIALS_NO = ?
 		AND STATUS = 'Y'
 	</entry>
-	
 	<entry key="selectMemorialsAttachment">
 		SELECT FILE_NO
 			  ,ORIGIN_NAME
@@ -113,7 +108,4 @@
 		WHERE FILE_NO = ?
 		AND STATUS = 'Y'
 	</entry>
-	
-	
-	
 </properties>

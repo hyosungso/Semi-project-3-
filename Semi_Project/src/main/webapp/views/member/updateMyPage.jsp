@@ -97,22 +97,25 @@
             <tr>
                 <td>성별</td>
                 <td><%= loginUser.getGender() %></td>
-                <td><input type="text" name="gender" value="<%= loginUser.getGender() %>"></td>
+                <td>
+			        <label><input type="radio" name="gender" value="M" required/> 남성</label>
+                	<label><input type="radio" name="gender" value="F" required/> 여성</label>
+			    </td>
             </tr>
             <tr>
                 <td>별명</td>
                 <td><%= loginUser.getNickName() %></td>
-                <td><input type="text" name="nickName" value="<%= loginUser.getNickName() %>"></td>
+                <td><input type="text" name="nickName" value="<%= loginUser.getNickName() %>" required></td>
             </tr>
             <tr>
                 <td>이메일</td>
                 <td><%= loginUser.getEmail() %></td>
-                <td><input type="text" name="email" value="<%= loginUser.getEmail() %>"></td>
+                <td><input type="text" name="email" value="<%= loginUser.getEmail() %>" required></td>
             </tr>
             <tr>
                 <td>핸드폰 번호</td>
                 <td><%= loginUser.getPhone() %></td>
-                <td><input type="text" name="phone" value="<%= loginUser.getPhone() %>"></td>
+                <td><input type="text" name="phone" value="<%= loginUser.getPhone() %>" required></td>
             </tr>
             <tr>
             	<td>가입 날짜</td>
@@ -121,7 +124,7 @@
             </tr>
             <tr>
             <td>현재 비밀번호 입력</td>
-            <td><input type="text" name="test" value=""></td>
+            <td><input type="text" name="test" value="" required></td>
             <td><input type="hidden" name="pass" value="<%=loginUser.getUserPwd() %>"></td>
             </tr>
         </table>

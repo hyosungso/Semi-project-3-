@@ -14,15 +14,9 @@ public class Memorials {
 	private String mUserId;
 	private String status;
 	
-
-	
 	public Memorials() {
 		super();
 	}
-	
-
-
-
 
 	public Memorials(int memorialsNo, String memorialsDate, String memorialsTime, String[] memorialsParts,
 			String memorialsContent, int memorialsSelfScore, Date createDate, String mUserId, String status) {
@@ -48,7 +42,6 @@ public class Memorials {
 		this.memorialsContent = memorialsContent;
 		this.memorialsSelfScore = memorialsSelfScore;
 	}
-
 
 	public int getMemorialsNo() {
 		return memorialsNo;
@@ -121,12 +114,6 @@ public class Memorials {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-
-
-
-
 
 	@Override
 	public String toString() {
