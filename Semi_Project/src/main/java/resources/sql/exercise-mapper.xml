@@ -67,18 +67,18 @@
 	</entry>
 	
 	<!-- 사진 등록하기 -->
-	<entry key="insertPhoto">
-		INSERT INTO EXERPHOTO(FILE_NO
-		                      					  ,REF_BNO
-		                      					  ,ORIGIN_NAME
-		                    					  ,CHANGE_NAME
-		                    					  ,FILE_PATH)
-            VALUES(SEQ_FNO.NEXTVAL
-                 		 ,SEQ_ENO.CURRVAL
-                 		 ,?
-                		 ,?
-                 		 ,?)
-	</entry>
+<!-- 	<entry key="insertPhoto"> -->
+<!-- 		INSERT INTO EXERPHOTO(FILE_NO -->
+<!-- 		                      					  ,REF_BNO -->
+<!-- 		                      					  ,ORIGIN_NAME -->
+<!-- 		                    					  ,CHANGE_NAME -->
+<!-- 		                    					  ,FILE_PATH) -->
+<!--             VALUES(SEQ_FNO.NEXTVAL -->
+<!--                  		 ,SEQ_ENO.CURRVAL -->
+<!--                  		 ,? -->
+<!--                 		 ,? -->
+<!--                  		 ,?) -->
+<!-- 	</entry> -->
 	
 	<!-- 운동게시판 사진 목록처리 -->
 	<entry key="insertPhotoArr">
