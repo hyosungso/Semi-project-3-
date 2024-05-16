@@ -16,5 +16,6 @@
 	<h1 align="center" style="color:pink"><%=errorMsg %></h1>
 	<%-- <a href="<%=contextPath %>/login.me">로그아웃</a> --%>
 	<h3 align="center"><a href="javascript:history.back();">로그인화면으로</a> </h3>
+	
 </body>
 </html>

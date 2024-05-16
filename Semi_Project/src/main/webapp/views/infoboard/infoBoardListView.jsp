@@ -166,6 +166,6 @@ button[name=category]:hover {
 	</div>
 	
 	
-
+<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

@@ -21,5 +21,6 @@
 		<p> <a href="${contextPath }" 
 		class="btn btn-secondary"> &laquo; 메인으로</a>
 	</div>
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

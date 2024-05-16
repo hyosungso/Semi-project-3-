@@ -134,6 +134,8 @@
 	background-color: rgb(0, 0, 0);
     cursor: pointer;
 	transition: background-color 1s;
+	text-decoration: none;
+	color: white;
 }
 
 .board ul {
@@ -156,6 +158,7 @@
 
 #navi>li>ul:hover {
 	display: block;
+	background-color: gray;
     
 }
 
@@ -165,9 +168,9 @@
 }
 
 .outer {
-	background-color: black;
+	background-color: #26272b;
 	color: white;
-	width: 1300px;
+	width: 100%;
 	margin: auto;
 	margin-top: 50px;
 }

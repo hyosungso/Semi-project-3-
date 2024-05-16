@@ -87,7 +87,7 @@
 			
 				<div id="pagination">
 				<c:forEach items="${itList }" varStatus="status">
-				<button type="button" class="버튼${status.count } ${status.count}" onclick="movePage(${status.count})">${status.count }</button>
+				<button type="button" class="버튼${status.count } ${status.count}" onclick="movePage(${status.count})" style="width :25px; border-radius:10px ;background-color: gray; color:white;">${status.count }</button>
 				</c:forEach>
 				</div>
 			
@@ -266,7 +266,7 @@
 		function addImg(){
 			var count=document.getElementById("count");
 			$("#pagination")
-			.append("<button type='button' class='버튼"+count.value+" "+count.value+"' onclick='movePage("+count.value+")'>"+count.value+"</button>");
+			.append("<button type='button' class='버튼"+count.value+" "+count.value+"' style='width :25px; border-radius:10px ;background-color: gray; color:white;' onclick='movePage("+count.value+")'>"+count.value+"</button>");
 			
 			$("#img-area")
 			.append("<label for='itemImg"+count.value+" class='"+count.value+"'>상품이미지</label> <input type=file class="+count.value+" id='itemImg"+count.value+"' name='itemImg"+count.value+"' onchange='loadImg(this,"+count.value+");'><button type='button' class='"+count.value+"' onclick='deleteSlide("+count.value+"})'>"+count.value+"번삭제</button><br>");
@@ -300,6 +300,6 @@
 	</script>
 	
 	</div>
-	
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

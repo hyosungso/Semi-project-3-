@@ -269,7 +269,7 @@
 				
 			<div id="pagination">
 			<c:forEach items="${itList }" varStatus="status">
-			<button type="button" class="버튼${status.count }" onclick="movePage(${status.count})">${status.count }</button>
+			<button type="button" class="버튼${status.count }" onclick="movePage(${status.count})" style="width :25px; border-radius:10px ;background-color: gray; color:white;">${status.count }</button>
 			</c:forEach>
 			
 			</div>
@@ -514,6 +514,6 @@
 			
 	
 	</script>
-	
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

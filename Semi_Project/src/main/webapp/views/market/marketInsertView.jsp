@@ -81,7 +81,7 @@
 				</div>
 			</div>
 			<div id="pagination">
-			<button type="button" class="버튼1" onclick="movePage(1)">1</button>
+			<button type="button" class="버튼1" onclick="movePage(1)" style="width :25px; border-radius:10px ;background-color: gray; color:white;">1</button>
 			</div>
 			
 			 
@@ -239,7 +239,7 @@
 		function addImg(){
 			var count=document.getElementById("count");
 			$("#pagination")
-			.append("<button type='button' class='버튼"+count.value+"' onclick='movePage("+count.value+")'>"+count.value+"</button>");
+			.append("<button type='button' class='버튼"+count.value+"' style='width :25px; border-radius:10px ;background-color: gray; color:white;'onclick='movePage("+count.value+")'>"+count.value+"</button>");
 			
 			$("#img-area")
 			.append("<label for='itemImg"+count.value+"'>상품이미지</label> <input type=file id='itemImg"+count.value+"' name='itemImg"+count.value+"' onchange='loadImg(this,"+count.value+");'><br>");
@@ -255,6 +255,6 @@
 	</script>
 	
 	</div>
-	
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

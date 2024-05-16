@@ -32,10 +32,8 @@
                 </tr>
                 
             </table>
-            
-            
         </div>
-
+		<div class="outer">
         <br><br>
         
 
@@ -59,13 +57,14 @@
     
     
         </div>
-
-    </body>
-
-
-
+        <br><br><br>
+</div> 
+    
 
 
+
+
+<%@ include file="/views/common/footer.jsp" %>
 	
 	
 	
