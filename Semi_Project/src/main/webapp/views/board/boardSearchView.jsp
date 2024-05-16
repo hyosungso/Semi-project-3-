@@ -68,14 +68,21 @@
 	<br>
 	</div>
 	<div align="center">
-	<h4 align="center">검색결과가 너무 많을경우 최신글 기준 20개까지만 표시됩니다.</h4>
+	<h4 align="center">검색결과가 너무 많을경우 20개까지만 표시됩니다.</h4>
+	<c:if test="${page ne 1}">
+	<button onclick="location.href='search.bo?searchCategory=${category}&search=${keyword}&page=${page-1}'">이전 검색</button>
+	</c:if>
+	<c:if test="${!empty bList}">
+	<button onclick="location.href='search.bo?searchCategory=${category}&search=${keyword}&page=${page+1}'">다음 검색</button>
+	</c:if>
 	<form action="search.bo">
 	<select name="searchCategory">
 	<option value="title">글제목</option>
 	<option value="content">글내용</option>
-	<!-- <option value="writer">작성자</option> -->
+	<option value="writer">작성자</option>
 	</select>
 	<input type="text" name="search" style="width:350px">
+	<input type="hidden" name="page" value="1">
 	<button type="submit">검색</button>
 	</form>
 	</div>

@@ -18,7 +18,9 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
 
 public class BoardDao {
+	
 	private Properties prop=new Properties();
+	
 	public BoardDao() {
 		
 		try {
@@ -109,21 +111,12 @@ public class BoardDao {
 				bList.add(new Board(rset.getInt("BOARD_NO"),
 									rset.getString("CATEGORY_NAME"),
 									rset.getString("BOARD_TITLE"),
-									rset.getString("USER_ID"),
+									rset.getString("NICKNAME"),
 									rset.getInt("COUNT"),
 									rset.getInt("RECOMMEND"),
 									rset.getDate("UPLOAD_DATE")));
 			}
-			for(Board b : bList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, b.getBoardWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					b.setBoardWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}	
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -169,22 +162,12 @@ public class BoardDao {
 				bList.add(new Board(rset.getInt("BOARD_NO"),
 									rset.getString("CATEGORY_NAME"),
 									rset.getString("BOARD_TITLE"),
-									rset.getString("USER_ID"), //boardWriter
+									rset.getString("NICKNAME"), //boardWriter
 									rset.getInt("COUNT"),
 									rset.getInt("RECOMMEND"),
 									rset.getDate("UPLOAD_DATE")));
 			}
-			for(Board b : bList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, b.getBoardWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					b.setBoardWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}	
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -225,7 +208,6 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		
 		String sql=prop.getProperty("selectBoard");
-		String sql2=prop.getProperty("selectNickName");
 		Board b=null;
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -233,7 +215,7 @@ public class BoardDao {
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
 				b=new Board(rset.getInt("BOARD_NO"),
-							rset.getString("USER_ID"),
+							rset.getString("NICKNAME"),
 							rset.getString("BOARD_TITLE"),
 							rset.getString("BOARD_CONTENT"),
 							rset.getInt("COUNT"),
@@ -242,15 +224,7 @@ public class BoardDao {
 							rset.getString("CATEGORY_NAME"));
 				
 			}
-			
-			pstmt=conn.prepareStatement(sql2);
-			pstmt.setString(1, b.getBoardWriter());
-			rset=pstmt.executeQuery();
-			if(rset.next()) {
-				if(rset.getString("NICKNAME")!=null) {
-				b.setBoardWriter(rset.getString("NICKNAME"));
-				}
-			}
+
 				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -367,7 +341,6 @@ public class BoardDao {
 		PreparedStatement pstmt=null;
 		
 		String sql=prop.getProperty("selectReply");
-		String sql2=prop.getProperty("selectNickName");
 		ArrayList<Reply> rList=new ArrayList<>();
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -376,21 +349,11 @@ public class BoardDao {
 			while(rset.next()) {
 				//REPLY_NO,USER_ID,REPLY_CONTENT,CREATE_DATE
 				rList.add(new Reply(rset.getInt("REPLY_NO"),
-									rset.getString("USER_ID"),
+									rset.getString("NICKNAME"),
 									rset.getString("REPLY_CONTENT"),
 									rset.getDate("CREATE_DATE")));
 			}
-			//닉네임이 있으면 아이디 대신 닉네임 출력
-			for(Reply r : rList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, r.getReplyWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					r.setReplyWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -463,7 +426,7 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Board> searchBoard(Connection conn, String keyword, String category) {
+	public ArrayList<Board> searchBoard(Connection conn, String keyword, String category,PageInfo pi) {
 		ResultSet rset=null;
 		PreparedStatement pstmt=null;
 		String sql=null;
@@ -475,34 +438,31 @@ public class BoardDao {
 		case "content":
 			sql=prop.getProperty("searchBoardByContent");
 			break;
+		case "writer":
+			sql=prop.getProperty("searchBoardByWriter");
 		}
+		
+		int startRow=(pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
+		int endRow=pi.getCurrentPage()*pi.getBoardLimit();
 		
 		ArrayList<Board> bList=new ArrayList<>();
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset=pstmt.executeQuery();
 			while(rset.next()) {
 				//BOARD_NO,USER_ID,BOARD_TITLE,BOARD_CONTENT,COUNT,RECOMMEND,REVISE_DATE,CATEGORY_NAME
 				bList.add(new Board(rset.getInt("BOARD_NO"),
 									rset.getString("CATEGORY_NAME"), 
 									rset.getString("BOARD_TITLE"), 
-									rset.getString("USER_ID"), 
+									rset.getString("NICKNAME"), 
 									rset.getInt("COUNT"), 
 									rset.getInt("RECOMMEND"), 
 									rset.getDate("REVISE_DATE")));
 			}
-			String sql2=prop.getProperty("selectNickName");
-			for(Board b : bList) {
-				pstmt=conn.prepareStatement(sql2);
-				pstmt.setString(1, b.getBoardWriter());
-				rset=pstmt.executeQuery();
-				if(rset.next()) {
-					if(rset.getString("NICKNAME")!=null) {
-					b.setBoardWriter(rset.getString("NICKNAME"));
-					}
-				}
-			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -512,6 +472,26 @@ public class BoardDao {
 		}
 		
 		return bList;
+	}
+
+	public int deleteReply(Connection conn, int rNo) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		
+		String sql=prop.getProperty("deleteReply");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, rNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 	
 	

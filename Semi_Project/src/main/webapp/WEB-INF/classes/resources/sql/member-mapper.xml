@@ -37,13 +37,6 @@
 		WHERE USER_ID = ?
 	</entry>
 	
-	
-	<entry key="checkNickName">
-		SELECT *
-		FROM MEMBER
-		WHERE NICKNAME = ?
-	</entry>
-	
 	<entry key="findPwd">
 	SELECT USER_PWD
 	FROM MEMBER

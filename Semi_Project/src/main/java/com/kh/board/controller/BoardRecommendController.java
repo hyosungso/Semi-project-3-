@@ -38,13 +38,13 @@ public class BoardRecommendController extends HttpServlet {
 		case "RCYYY": //추천기록이 없는경우
 			int result=new BoardService().increaseRecommend(uno,bno);
 			if(result>0) {
-				message="이 글을 추천했습니다.";
+				message="RCYYY";
 			} else {
-				message="추천에 실패했습니다.";
+				message="RCYYN";
 			}
 			break;
 		case "RCNNN": //추천기록이 있는경우
-			message="이미 이 글을 추천했습니다.";
+			message="RCNNN";
 			break;
 		}
 		

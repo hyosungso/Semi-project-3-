@@ -55,7 +55,7 @@ button[name=category]:hover {
 							<td>
 							<button name="category" value="0">전체</button>
 							</td>
-							<c:forEach items="${ftList}" var="ft">
+							<c:forEach items="${ctList}" var="ft">
 							<td>
 							<button name="category" value="${ft.categoryNo}">${ft.categoryName }</button>
 							</td>
@@ -64,8 +64,8 @@ button[name=category]:hover {
 					</table>
 				</th>
 				<th>
-				<c:if test="${!empty loginUser eq 'admin'}">
-				<button onclick="location.href='Infoinsert.in'">글작성</button>
+				<c:if test="${!empty loginUser}">
+				<button onclick="location.href='Infoinsert.bo'">글작성</button>
 				</c:if>
 				</th>
 				</tr>
@@ -131,11 +131,15 @@ button[name=category]:hover {
 	</c:when>
 	<c:otherwise>
 	<button onclick="location.href='infoboard.bo?currentPage=${pi.currentPage-1}&category=${category}&sort=${sort}'">이전</button>
-	</c:otherwise>
-	
+
 	<c:forEach var = "i" begin="${pi.startPage}" end="${pi.endPage}">
 	<button onclick="location.href='infoboard.bo?currentPage=${i}&category=${category}&sort=${sort}'">${i}</button>
+	
 	</c:forEach>
+
+	</c:otherwise>
+	
+
 	</c:choose>
 	
 	<c:choose>
@@ -160,6 +164,7 @@ button[name=category]:hover {
 	<button type="submit">검색</button>
 	</form>
 	</div>
+	
 	
 
 </body>

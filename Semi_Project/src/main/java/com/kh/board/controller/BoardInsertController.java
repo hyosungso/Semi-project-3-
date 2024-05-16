@@ -33,7 +33,9 @@ public class BoardInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ArrayList<Category> ctList=new BoardService().selectCategory();
+		
 		request.setAttribute("ctList", ctList);
 		
 		request.getRequestDispatcher("/views/board/boardInsertView.jsp").forward(request, response);
@@ -43,7 +45,9 @@ public class BoardInsertController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
+		
 		String userNo=request.getParameter("userNo");
 		String category=request.getParameter("category");
 		String title=request.getParameter("boardTitle");
@@ -59,6 +63,7 @@ public class BoardInsertController extends HttpServlet {
 			session.setAttribute("alertMsg","작성에 실패했습니다.");
 		}
 		response.sendRedirect(request.getContextPath()+"/board.bo?currentPage=1&category=0&sort=latest");
+		
 		
 	}
 

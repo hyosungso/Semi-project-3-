@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.market.model.service.MarketService;
+
 /**
- * Servlet implementation class CartInsertController
+ * Servlet implementation class updateSlideDelete
  */
-@WebServlet("/insert.ct")
-public class CartInsertController extends HttpServlet {
+@WebServlet("/deleteSlide.mk")
+public class updateSlideDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartInsertController() {
+    public updateSlideDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,8 +36,16 @@ public class CartInsertController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		int fileLevel=Integer.parseInt(request.getParameter("num"));
+		int itemNo=Integer.parseInt(request.getParameter("itno"));
+	
+		int result=new MarketService().deleteItemAttachment(fileLevel,itemNo);
+		
+		response.getWriter().print(result);
+
+	
 	}
+	
 
 }

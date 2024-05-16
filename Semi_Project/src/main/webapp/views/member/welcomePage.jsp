@@ -186,7 +186,9 @@
     <br><br>
 
     <div align="center">
-    <button type="submit" class="button" id="nextButton" 
+    <button class="button" id="nextButton" 
+        onclick="location.href='${contextPath }/views/member/login.jsp'">로그인 화면으로</button>
+    <button class="button" id="nextButton" 
         onclick="location.href='${contextPath }/'">홈으로 돌아가기</button>
     </div>
 
