@@ -64,8 +64,8 @@
 		
                             <tr>
                                 <td colspan="3">
-                                    <img src="<%=request.getContextPath() %>/resources/logo/temp.png" width="100%"> 
-                                    <!--없을때는 temp사진 출력-->
+                                    <img src="<%=request.getContextPath() %>/resources/logo/white.png" width="100%"> 
+                                    <!--없을때는 white사진 출력-->
                                 </td>
                             </tr>
                 <tr>
