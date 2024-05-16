@@ -31,10 +31,7 @@ public class MemorialsService {
 	    return result*result2; 
 	}
 	
-
-
-
-
+	
 
 	public ArrayList<Memorials> MemorialsList(String UserId) {
 		// TODO Auto-generated method stub
@@ -125,15 +122,6 @@ public class MemorialsService {
 		JDBCTemplate.close(conn);
 		
 		return at;
-
-	}
-
-	public Memorials selectMemorials(String id) {
-		Connection conn=JDBCTemplate.getConnection();
-		Memorials memo=new MemorialsDao().selectMemorials(conn,id);
-		
-		JDBCTemplate.close(conn);
-		return memo;
 	}
 }
 
