@@ -193,31 +193,16 @@
 
 
 		</div>
-
+		<div class="util">
+		<br><br> 
+		<a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
+		<a href="${contextPath}/views/market/cart.jsp"> 
+		<img class="image" width=40 height=40>
+		</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		<%if(loginUser == null) {%>
-		<div class="util">
-			<br>
-			<br> <a href="${contextPath}/views/member/login.jsp" id="imageLink"> 
-				<img class="image2"> </a>&nbsp;&nbsp;&nbsp; 
-				<a href="${contextPath }/views/market/cart.jsp"> 
-					<img class="image" width=40 height=40></a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
-					<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
-
-		</div>
-		<script>
-			document.getElementById('imageLink').addEventListener('click', function(event) {
-    		alert("로그인한 상태에서 사용 가능합니다.");
-    		window.location.href = "${contextPath}/views/member/login.jsp";
-			});
-		</script>
-		<%}else{ %>
-		<div class="util">
-			<br>
-			<br> <a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
-			<a href="${contextPath }/views/market/cart.jsp"> 
-				<img class="image" width=40 height=40>
-			</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
+			<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
+			<%}else{ %>
 			<a href="logout.me">로그아웃</a>
 			<%} %>
 		</div>
@@ -244,24 +229,12 @@
 			<div>
 				<a href="${contextPath }/list.mk">매장(후순위)</a>
 			</div>
-			<%if(loginUser == null) {%>
-			<div>
-				<a href="${contextPath}/views/member/login.jsp" id="fake">개인기록(후순위)</a>
-			</div>
-			<%} else { %>
 			<div>
 				<a href="Memorials.me">개인기록(후순위)</a>
 			</div>
-			<%} %>
 		</div>
 
 	</div>
-	<script>
-			document.getElementById('fake').addEventListener('click', function(event) {
-    		alert("로그인한 상태에서 사용 가능합니다.");
-    		window.location.href = "${contextPath}/views/member/login.jsp";
-			});
-	</script>
 
 	<script>
     
