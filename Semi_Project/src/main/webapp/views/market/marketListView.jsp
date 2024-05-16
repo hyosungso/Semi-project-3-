@@ -115,12 +115,23 @@
     </div>
     </nav>
 		<br>
-		<h2 align="center">판매 상품</h2>
+		<%String sort= request.getParameter("sort"); %>
+		<%if(sort.equals("N")){ %>
+			<h2 align="center">판매 중지 상품</h2>
+			<%}else{ %>
+			<h2 align="center">판매 상품</h2>
+			<%} %>
+		
 		<br>
 		<div class="list-area">
 		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 		<div align="center">
+			
+			<%if(sort.equals("N")){ %>
+			<a href="${contextPath }/list.mk?sort=topSal" class="btn btn-primary" role="botton">게시상품 목록</a>
+			<%}else{ %>
 			<a href="${contextPath }/list.mk?sort=N" class="btn btn-danger" role="botton">게시중단 상품 목록</a>
+			<%} %>
 			<button class='btn btn-info' onclick="location.href='${contextPath}/insert.mk'">상품등록</button>
 			<br><br>
 		</div>

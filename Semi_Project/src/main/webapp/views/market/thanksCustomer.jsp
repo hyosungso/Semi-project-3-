@@ -30,7 +30,7 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	<div class="jumbotron" style="padding-top: 80px; padding-bottom:80px">
+	<div class="jumbotron" style="padding-top: 80px; padding-bottom:80px; width:700px " align="center" >
 		<h6 class="text-dark text-uppercase">Order Completed</h6>
 		<h1 class="text-uppercase">주문완료</h1>
 		

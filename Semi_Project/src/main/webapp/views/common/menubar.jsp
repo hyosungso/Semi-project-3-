@@ -241,7 +241,7 @@
 		<%}else{ %>
 		<div class="util">
 			<br>
-			<br> <a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
+			<br> <a href="${contextPath}/myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
 			<a href="${contextPath }/views/market/cart.jsp"> 
 				<img class="image" width=40 height=40>
 				<%if(list!=null){ %>
