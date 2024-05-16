@@ -36,7 +36,7 @@ public class BoardDeleteController extends HttpServlet {
 		HttpSession session=request.getSession();
 		if(result>0) {
 			session.setAttribute("alertMsg", "삭제가 완료되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/board.bo?currentPage=1&category=0");
+			response.sendRedirect(request.getContextPath()+"/board.bo?currentPage=1&category=0&sort=latest");
 		} else {
 			session.setAttribute("alertMsg", "삭제에 실패했습니다.");
 			response.sendRedirect(request.getContextPath()+"/detail.bo?bno="+bno);
