@@ -251,13 +251,24 @@
 			<div>
 				<a href="${contextPath }/list.mk?sort=topSal">매장</a>
 			</div>
+			<%if(loginUser == null) {%>
 			<div>
-				<a href="Memorials.me">개인기록(후순위)</a>
+				<a href="${contextPath}/views/member/login.jsp" id="fake">개인기록</a>
 			</div>
+			<script>
+			document.getElementById('fake').addEventListener('click', function(event) {
+    		alert("로그인한 상태에서 사용 가능합니다.");
+    		window.location.href = "${contextPath}/views/member/login.jsp";
+			});
+			</script>
+			<%} else { %>
+			<div>
+				<a href="Memorials.me">개인기록</a>
+			</div>
+			<%} %>
 		</div>
 
 	</div>
-
 	<script>
     
     const staticImg= "<%=contextPath%>/resources/icons/icons-cart-static.png"
