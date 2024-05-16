@@ -124,15 +124,7 @@ public class Memorials {
 	
 	
 
-	public String getMemorialsImg() {
-		return memorialsImg;
-	}
 
-
-
-	public void setMemorialsImg(String memorialsImg) {
-		this.memorialsImg = memorialsImg;
-	}
 
 
 

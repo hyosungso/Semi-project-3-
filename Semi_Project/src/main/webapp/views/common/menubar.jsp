@@ -239,7 +239,7 @@
 
 			</div>
 			<div>
-				<a href="">운동법</a>
+				<a href="${contextPath}/list.ex">운동법</a>
 			</div>
 			<div>
 				<a href="${contextPath }/list.mk">매장(후순위)</a>
