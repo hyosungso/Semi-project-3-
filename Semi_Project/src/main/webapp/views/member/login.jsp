@@ -144,7 +144,7 @@
 	<div class="header">
         <div class="header-inner">
             <div class="logo">
-                <a href="${contextPath }"><img src="${contextPath}/resources/logo/temp.png"></a>
+                <a href="${contextPath }"><img src="${contextPath}/resources/logo/white.png"></a>
             </div>
             </div>
         </div><br><br><br><br>

@@ -231,43 +231,16 @@
 
 		</div>
 		<div class="util">
-
-			<br>
-			<br> <a href="#" id="imageLink"> 
-				<img class="image2"> </a>&nbsp;&nbsp;&nbsp; 
-				<a href="#" id="imageLink2"> 
-					<img class="image" width=40 height=40>
-					<em id=cartCount style="right : 145px">0</em>
-					</a>&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
-					<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
-
-		</div>
-		<script>
-			document.getElementById('imageLink').addEventListener('click', function(event) {
-    		alert("로그인한 상태에서 사용 가능합니다.");
-    		window.location.href = "${contextPath}/views/member/login.jsp";
-			});
-			
-			document.getElementById('imageLink2').addEventListener('click', function(event) {
-	    		alert("로그인한 상태에서 사용 가능합니다.");
-	    		window.location.href = "${contextPath}/views/member/login.jsp";
-			});
-		</script>
-		<%}else{ %>
-		<div class="util">
-			<br>
-			<br> <a href="${contextPath}/myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
-			<a href="${contextPath }/views/market/cart.jsp"> 
-				<img class="image" width=40 height=40>
-				<%if(list!=null){ %>
-				<em id=cartCount><%=list.size() %></em>
-				<%}else{ %>
-				<em id=cartCount>0</em>
-				<%} %>
-			</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<a href="${contextPath }/logout.me">로그아웃</a>
-
+		<br><br> 
+		<a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
+		<a href="${contextPath}/views/market/cart.jsp"> 
+		<img class="image" width=40 height=40>
+		</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<%if(loginUser == null) {%>
+			<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
+			<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
+			<%}else{ %>
+			<a href="logout.me">로그아웃</a>
 			<%} %>
 			
 			</div>
@@ -295,124 +268,35 @@
 			<div>
 				<a href="${contextPath }/list.mk?sort=topSal">매장</a>
 			</div>
-			<%if(loginUser == null) {%>
+			
+	<%if(loginUser==null){ %>
 			<div>
 				<a href="${contextPath}/views/member/login.jsp" id="fake">개인기록</a>
 			</div>
-			<script>
+	<script>
+	
 			document.getElementById('fake').addEventListener('click', function(event) {
     		alert("로그인한 상태에서 사용 가능합니다.");
     		window.location.href = "${contextPath}/views/member/login.jsp";
 			});
-			</script>
+	</script>
+	
+			
 			<%} else { %>
 			<div>
 				<a href="Memorials.me">개인기록</a>
 			</div>
 			<%} %>
+
 		</div>
 
 	</div>
-		
-	
-
-
-	
-		
 
     <br>
     <br>
     <br>
 
 
-
-    <div>
-    
-
-            
-            <table border="1" align="center">
-                <tr id="pic" >
-                    <td>
-                        <img width=420 height=600
-                        src="https://qi-o.qoo10cdn.com/goods_image_big/8/7/8/6/8531128786_l.jpg">
-                    </td>
-                    <td>
-                        <img width=420 height=600
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0zL2gkxeYEnH4GWjkF7CFmtGONvlTywmNyg&usqp=CAU">
-                        
-                    </td>
-                    <td>
-                        <img width=420 height=600
-                        src="https://i.namu.wiki/i/Bd2ylwd4Lho5SqGM6XyAmwoyJtEnspKNAVDP1jd7EmViHckUSNcEm4JMyuePE56jP98WASRF8wDpg58l6tB0vQ.webp">
-                    </td>
-                </tr>
-                
-            </table>
-            
-            
-        </div>
-
-        <br><br>
-        
-
-
-        <div align="center">
-            <!-- 바디 게시판-->
-            <div class="bodyboard">
-                <table border="1">
-                    <tr align="center">
-                        <td width="600">정보게시판</td>
-                        <td width="600">자유게시판</td>
-                    </tr>
-
-                    <tr align="center">
-                        <td height="400">인기있는 글 </td>
-                        <td height="400">인기있는 글 </td>
-                    </tr>
-                </table>
-
-            </div>
-    
-    
-        </div>
-
-    </body>
-
-
-
-
-
-	<script>
-    
-    const staticImg= "<%=contextPath%>/resources/icons/icons-cart-static.png"
-    const gifImg= "<%=contextPath%>/resources/icons/icons-cart.gif" 
-    
-    const image = document.querySelector('.image');
-
-    image.src = staticImg;
-
-    image.addEventListener("mouseenter", function() {
-      image.src = gifImg;
-    });
-    image.addEventListener("mouseleave", function() {
-      image.src = staticImg;
-    });
-    
-    const staticImg2= "<%=contextPath%>/resources/icons/img.icons-normal.png"
-        const gifImg2= "<%=contextPath%>/resources/icons/img.icons-hover.gif" 
-        
-        const image2 = document.querySelector('.image2');
-
-        image2.src = staticImg2;
-
-        image2.addEventListener("mouseenter", function() {
-          image2.src = gifImg2;
-        });
-        image2.addEventListener("mouseleave", function() {
-          image2.src = staticImg2;
-        });
-    
-    </script>
 
 </body>
 </html>
