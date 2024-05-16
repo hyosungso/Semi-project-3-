@@ -139,7 +139,7 @@
                 
         
         
-        <div class="div1">내정보 상세보기 </div>
+      <div class="div1">내정보 상세보기 </div>
         <p class="p1">
                 <br>
                 <span class="sp1"><i class='bx bxs-user'></i></span> <br> <%=userId %>
@@ -150,10 +150,9 @@
                 <br><br>
                 <span class="sp1"><i class='bx bxs-envelope'></i> <br>  </span><%=email %>
                 <br><br>
-                <span class="sp1"><i class='bx bxs-phone'></i> <br> </span> <%=phone %>
-            
+                <span class="sp1"><i class='bx bxs-phone'></i> <br> </span> <%=phone %>   
         </p>
-    </div>
+   	 </div>
 
 
 
@@ -189,8 +188,10 @@
     <button class="button" id="nextButton" 
         onclick="location.href='${contextPath }/views/member/login.jsp'">로그인 화면으로</button>
     <button class="button" id="nextButton" 
-        onclick="location.href='${contextPath }/'">홈으로 돌아가기</button>
+        onclick="location.href='${contextPath}/'">홈으로 돌아가기</button>
     </div>
+    
+    <br><br><br>
 
 </body>
 </html>
