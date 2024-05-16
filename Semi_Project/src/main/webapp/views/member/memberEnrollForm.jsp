@@ -248,18 +248,21 @@
     
                     <tr class="input-box">
                         <td>이름</td>
-                        <td><input type="text" name="userName" id="userName" required placeholder="2글자 이상 5글자 이하 한글"> </td>
+                        <td><input type="text" name="userName" id="userName" required placeholder="2글자 이상 5글자 이하 한글 입력"> </td>
                         
                     </tr>
-    
+    				<tr>
+    					<td>　</td>
+    				</tr>
                     <tr>
                         <td>성별</td>
+                        
                         <td>
                             
                             <label class="checkbox" >
                                 <input type="checkbox" name="gender" value="M"  onclick="clickCheck(this)" checked>
                                     <span class="checkbox_icon" ></span>
-                                    <span class="checkbox_text"></span>남자
+                                    <span class="checkbox_text"></span>남자　　
                             </label>
                                 
                             <label class="checkbox">
@@ -267,19 +270,24 @@
                                     <span class="checkbox_icon"></span>
                                     <span class="checkbox_text"></span>여자
                             </label>
-                           
+                      
                         </td>
+                        
                     </tr>
+                    
+                    <tr>
+    					<td>　</td>
+    				</tr>
     
                     <tr class="input-box">
                         <td>닉네임</td>
-                        <td><input type="text" name="nickName" id="nickName" required placeholder="2글자 이상 8글자 이하 한글"></td>
+                        <td><input type="text" name="nickName" id="nickName" required placeholder="2글자 이상 8글자 이하 한글 입력"></td>
                         <td><button type="button" class="button" onclick="checkNickName();">중복확인</button></td>
                     </tr>
     
                     <tr class="input-box">
                         <td>이메일</td>
-                        <td><input type="email" name="email" id="email" required placeholder="이메일 @ 양식을 지켜주세요."></td>
+                        <td><input type="email" name="email" id="email" required placeholder="ex) test1@naver.com"></td>
                     </tr>
     
                     <tr class="input-box">
@@ -330,7 +338,7 @@
  
 			  const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~!@#$%^&*()+|=]{8,20}$/;
 			  if(!pwdRegex.test(inputPwd)) {
-			    alert("영문,숫자로 8~20글자 채워주세요.");
+			    alert("비밀번호 오류 : 영문,숫자로 8~20글자 채워주세요.");
 			    $("#userPwd").focus();
 			    return false; 
 			  }
@@ -340,7 +348,7 @@
  
 			  const nameRegex = /^[가-힣]{2,5}$/;
 			  if (!nameRegex.test(inputName)) {
-			    alert("이름은 한글만 2글자 이상 5글자 이하 가능합니다.");
+			    alert("이름 오류 : 이름은 한글만 2글자 이상 5글자 이하 가능합니다.");
 			    $("#userName").focus();
 			    return false; 
 			  }
@@ -348,15 +356,7 @@
 				  
 			
 				
-				//닉네임
-				  const inputNickName = $("#nickName").val();
-	 
-				  const nickNameRegex = /^[가-힣]{2,8}$/;
-				  if (!nickNameRegex.test(inputNickName)) {
-				    alert("닉네임은 한글로만 2글자부터 8글자까지 가능합니다. ");
-				    $("#nickName").focus();
-				    return false; 
-				  }
+				
 				
 				
 				  
@@ -365,7 +365,7 @@
 	 
 				  const phoneRegex = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
 				  if (!phoneRegex.test(inputPhone)) {
-				    alert("잘못된 휴대전화번호입니다. (하이픈(-) 포함 필수!)");
+				    alert("잘못된 형식의 휴대전화번호입니다. (하이픈(-) 포함 필수!)");
 				    $("#phone").focus();
 				    return false; 
 				  }
@@ -418,9 +418,13 @@
 				// * 아이디 영문 숫자만, 6~20자  
 				var idRegex = /^[a-zA-Z][a-zA-Z0-9]{5,19}$/;
 	            
+				if(document.getElementById("userId").value==""){
+					alert("아이디를 입력하세요.");
+					return;
+				}
 
 	            if (!idRegex.test(inputId)) {
-				    alert("아이디는 6자 이상 20자 이하의 대소문자로 시작하는 조합입니다.");
+				    alert("아이디 오류 : 6자 이상 20자 이하의 대소문자로 입력해주세요.");
 				    $("#userId").val("").focus();
 				    return;
 				  }
@@ -437,10 +441,7 @@
 						//result가 NNNNN 또는 NNNNY로 반환됨 
 						
 						
-						if(document.getElementById("userId").value==""){
-							alert("아이디를 입력하세요.");
-							return;
-						}
+
 						
 						if(result=="NNNNN"){ //사용불가
 							alert("이미 존재하는 아이디입니다.");
@@ -467,66 +468,44 @@
 			}
 			
 
-			
-			
-			
-
-			
-			// * 아이디 출력
-//			$(function(){
-//
-//			$("#btn1").click(function(){
-//				
-//				$.ajax({
-//					url : "idCheck.me",
-//					data : { 
-//						inputId : $("#userId").val()
-//					},
-//					success : function(result){ 
-//						
-//						$("#output1").text(result);
-//					},
-//					error : function(){ //통신 실패시 실행할 작업을 정의하는 함수
-//						console.log("통신 실패");
-//					},
-//					complete : function(){// 성공 실패 여부와 상관없이 실행되는 함수 
-//						console.log("성공 실패 여부와 상관없이 실행");
-//					}
-//				});
-//			});
-//		});
-			
-			
-			
-			
-			
+	
 			
 			// * 닉네임 중복 체크 
 			function checkNickName(){
 				
+				var inputNickName = $("#nickName").val()
+				const nickNameRegex = /^[가-힣]{2,8}$/;
 				
-				var inputNickName = $("#nickName").val();
+				
+				if(document.getElementById("nickName").value==""){
+					alert("닉네임을 입력하세요.");
+					return;
+				}
+				
+				  if (!nickNameRegex.test(inputNickName)) {
+				    alert("닉네임 오류 : 한글로만 2글자부터 8글자까지 가능합니다. ");
+				    $("#nickName").focus();
+				    return false; 
+				  }
 				
 				
 				$.ajax({
 					url : "nickNameCheck.me",
 					type : "post",
 					data : {
-						inputNickName : inputNickName
+						inputNickName : $("#nickName").val()
 					},
 					success : function(result){
 						
-						if(document.getElementById("nickName").value==""){
-							alert("닉네임을 입력하세요.");
-							return;
-						}
 						
 						if(result=="WWWWW"){ //사용불가
 							alert("이미 존재하는 닉네임입니다.");
 						}else{ //사용가능
-							if(confirm("정말 사용하시겠습니까?")){
-								$("#userEmail").focus();
+							if(confirm("정말 사용하시겠습니까?")){ //사용
+								$("#nickName").attr("readonly",true);
+								$("#email").focus();
 								
+							
 							}else{ //사용안함 
 								//다시 입력유도
 								$("#nickName").focus();
