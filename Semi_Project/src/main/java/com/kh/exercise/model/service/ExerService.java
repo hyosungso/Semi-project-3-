@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.exercise.model.dao.ExerDao;
+import com.kh.exercise.model.vo.ExerCategory;
 import com.kh.exercise.model.vo.Exercise;
 import com.kh.exercise.model.vo.Photo;
 
@@ -18,9 +19,9 @@ public class ExerService {
 		return elist;
 	}
 	
-	public Exercise selectExer(int bno) {																//단일게시글 조회
+	public Exercise selectExer(int eno) {																//단일게시글 조회
 		Connection conn=JDBCTemplate.getConnection();
-		Exercise ex=new ExerDao().selectExer(conn,bno);
+		Exercise ex=new ExerDao().selectExer(conn,eno);
 		JDBCTemplate.close(conn);
 		return ex;
 	}
@@ -44,12 +45,12 @@ public class ExerService {
 		return getphoto*photoNo;
 	}
 
-	public Photo selectPhoto(int bno) {												//사진 조회하기
-		Connection conn=JDBCTemplate.getConnection();
-		Photo p=new ExerDao().selectPhoto(conn, bno);
-		JDBCTemplate.close(conn);
-		return p;
-	}
+//	public Photo selectPhoto(int eno) {												//사진 조회하기
+//		Connection conn=JDBCTemplate.getConnection();
+//		Photo p=new ExerDao().selectPhoto(conn, eno);
+//		JDBCTemplate.close(conn);
+//		return p;
+//	}
 	
 	public ArrayList<Photo> selectPhotoArr(int exerNo){					//게시글 사진 상세보기
 		Connection conn=JDBCTemplate.getConnection();
@@ -60,6 +61,24 @@ public class ExerService {
 		
 		return elist;
 		
+	}
+
+	public ArrayList<ExerCategory> selectCategory() {
+		Connection conn=JDBCTemplate.getConnection();
+		
+		ArrayList<ExerCategory> ec=new ExerDao().selectCategory(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return ec;
+		
+	}
+
+	public ArrayList<Exercise> selectexList(int categoryNo) {
+		Connection conn = JDBCTemplate.getConnection();		
+		ArrayList<Exercise> elist = new ExerDao().selectexList(conn,categoryNo);		
+		JDBCTemplate.close(conn);		
+		return elist;
 	}
 
 	

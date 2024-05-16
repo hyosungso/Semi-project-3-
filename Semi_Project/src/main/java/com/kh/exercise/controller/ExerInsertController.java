@@ -14,6 +14,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.common.MyFileRenamePolicy;
 import com.kh.exercise.model.service.ExerService;
+import com.kh.exercise.model.vo.ExerCategory;
 import com.kh.exercise.model.vo.Exercise;
 import com.kh.exercise.model.vo.Photo;
 import com.oreilly.servlet.MultipartRequest;
@@ -38,7 +39,10 @@ public class ExerInsertController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		ArrayList<ExerCategory> ec=new ExerService().selectCategory();
+		request.setAttribute("category", ec);
 		request.getRequestDispatcher("views/exercise/exerInsertView.jsp").forward(request, response);
+	
 	}
 
 	/**
@@ -54,8 +58,9 @@ public class ExerInsertController extends HttpServlet {
 			
 			MultipartRequest multiRequest=new MultipartRequest(request, savePath, maxSize, "UTF-8",new MyFileRenamePolicy());
 		
-		String type, title, inf, content, part;
-		part=multiRequest.getParameter("part");
+		String type, title, inf, content;
+		int category;
+		category=Integer.parseInt(multiRequest.getParameter("category"));
 		title=multiRequest.getParameter("title");
 		inf=multiRequest.getParameter("inf");
 		type=multiRequest.getParameter("type");
@@ -65,7 +70,7 @@ public class ExerInsertController extends HttpServlet {
 		// 이후 insertview에 input형식 추가 밸류 : 유저고유번호
 		
 		Exercise ex=new Exercise();
-		ex.setExerPart(part);
+		ex.setCategoryNo(category);
 		ex.setExerTitle(title);
 		ex.setExerInf(inf);
 		ex.setExerType(type);
@@ -92,7 +97,6 @@ public class ExerInsertController extends HttpServlet {
 			}
 		}
 		
-
 		
 		int result=new ExerService().insertExer(ex,ptlist);
 		HttpSession session=request.getSession();

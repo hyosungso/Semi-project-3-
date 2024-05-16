@@ -29,8 +29,26 @@ public class ExerListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Exercise> elist=new ExerService().selectexList();
+		
+		ArrayList<ExerCategory> ec=new ExerService().selectCategory();
+		
+		ArrayList<Exercise> elist=new ArrayList<>();
+		if(request.getParameter("category")!=null) {
+			int categoryNo= Integer.parseInt(request.getParameter("category"));
+			elist=new ExerService().selectexList(categoryNo);
+			
+			
+		}else {
+			
+			elist=new ExerService().selectexList();
+		}
+		
+		
+		
 		request.setAttribute("elist",elist);
+		request.setAttribute("ec", ec);
+		
+		
 		request.getRequestDispatcher("views/exercise/exerListView.jsp").forward(request, response);
 	}
 

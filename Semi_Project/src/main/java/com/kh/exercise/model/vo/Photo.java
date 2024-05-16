@@ -61,7 +61,6 @@ public class Photo {
 	}
 	public Photo(int fileNo, int refBno, String originName, String changeName, String filePath, Date uploadDate,
 			int fileLevel, String status) {
-		super();
 		this.fileNo = fileNo;
 		this.refBno = refBno;
 		this.originName = originName;
@@ -76,7 +75,6 @@ public class Photo {
 	}
 // 사용하는 메소드 : selectPhoto, selectPhotoArr
 	public Photo(int fileNo, String originName, String changeName, String filePath) { 
-		super();
 		this.fileNo = fileNo;
 		this.originName = originName;
 		this.changeName = changeName;
@@ -86,7 +84,6 @@ public class Photo {
 	
 	// 사용하는 메소드 : insertPhoto, insertPhotoArr
 	public Photo(int refBno, String originName, String changeName, String filePath, int fileLevel) {
-		super();
 		this.refBno = refBno;
 		this.originName = originName;
 		this.changeName = changeName;
