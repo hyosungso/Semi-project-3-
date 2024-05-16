@@ -102,13 +102,13 @@
 		<%for(int i=0;i<or.length;i++){ %>
 		<table class="table table-hover" style="width:100%">
 			<tr>
-				<th>주문번호</th>
-				<th>수취인</th>
-				<th>배송예정일</th>
-				<th>우편번호</th>
-				<th>주소</th>
-				<th>물품목록</th>
-				<th>가격</th>
+				<th width="400px">주문번호</th>
+				<th width="80px">수취인</th>
+				<th width="120px">배송예정일</th>
+				<th width="100px">우편번호</th>
+				<th width="65px">주소</th>
+				<th width="100px">물품목록</th>
+				<th width="65px">가격</th>
 			</tr>
 		
 			<tr>

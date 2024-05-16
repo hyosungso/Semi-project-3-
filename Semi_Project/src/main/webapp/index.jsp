@@ -66,37 +66,7 @@
 
 
 
-	<script>
-    
-    const staticImg= "<%=contextPath%>/resources/icons/icons-cart-static.png"
-    const gifImg= "<%=contextPath%>/resources/icons/icons-cart.gif" 
-    
-    const image = document.querySelector('.image');
-
-    image.src = staticImg;
-
-    image.addEventListener("mouseenter", function() {
-      image.src = gifImg;
-    });
-    image.addEventListener("mouseleave", function() {
-      image.src = staticImg;
-    });
-    
-    const staticImg2= "<%=contextPath%>/resources/icons/img.icons-normal.png"
-        const gifImg2= "<%=contextPath%>/resources/icons/img.icons-hover.gif" 
-        
-        const image2 = document.querySelector('.image2');
-
-        image2.src = staticImg2;
-
-        image2.addEventListener("mouseenter", function() {
-          image2.src = gifImg2;
-        });
-        image2.addEventListener("mouseleave", function() {
-          image2.src = staticImg2;
-        });
-    
-    </script>
+	
 	
 	
 	
