@@ -6,12 +6,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.part td{
-width:70px;
-}
-.part td>label{
-width:50px;
-}
+<!-- 버튼 -->
+.button !important {
+			padding: 17px 20px;
+			background-color: #000000; /* 짙은 회색 버튼 배경 */
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.2s; /* hover 효과 */
+		}
+
+
+
+		.button:hover !important {
+			background-color: #ff0000; /* hover 시 밝은 회색으로 변화 */
+		}
 </style>
 </head>
 <body>
@@ -40,25 +50,14 @@ width:50px;
 							<option value="4시간">4시간</option>
 					</select>
 					</td>
+					
 					<td>오늘 어느 부위 했어? <br>
-						<table class="part">
-						<tr>
-							<td><input type="checkbox" name="memorialsParts"
-							 id="chest" value="chest"><label for="chest">가슴</label></td>
-							<td><input type="checkbox" name="memorialsParts"
-							 id="arm" value="arm"><label for="arm">팔</label></td>
-							<td><input type="checkbox" name="memorialsParts"
-							 id="back" value="back"><label for="back">등</label></td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" name="memorialsParts"
-							 id="shoulder" value="shoulder"><label for="shoulder">어깨</label></td>
-							<td><input type="checkbox" name="memorialsParts"
-							 id="lowerbody" value="lowerbody"><label for="lowerbody">하체</label></td>
-							<td><input type="checkbox" name="memorialsParts"
-							 id="cardio" value="cardio"><label for="cardio">유산소</label></td>
-						</tr>
-						</table>
+						<label><input type="checkbox" name="memorialsParts" value="chest" /> 가슴 </label>
+						<label><input type="checkbox" name="memorialsParts" value="arm" /> 팔</label>
+						<label><input type="checkbox" name="memorialsParts" value="back" /> 등</label> <br>
+					    <label><input type="checkbox" name="memorialsParts" value="shoulder" /> 어깨</label>
+					    <label><input type="checkbox" name="memorialsParts" value="lowerbody" /> 하체</label>
+					    <label><input type="checkbox" name="memorialsParts" value="cardio" /> 유산소</label>
 					</td>
 				</tr>
 				<tr>
@@ -67,50 +66,25 @@ width:50px;
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">특이사항 및 메모 <br>
-					<textarea rows="5" style="resize:none; width:100%" name="memorialsContent"></textarea>
+					<td colspan="2">특이사항 및 메모 <br> 
+					<textarea name="memorialsContent" required></textarea>
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">오늘 나에게 주는 점수! <br> <input
-						type="range" name="MemorialsSelfScore" oninput="document.getElementById('score').innerHTML=this.value;">
-						<span id="score">50</span>
+					<td colspan="2" align="center">오늘 나에게 주는 점수! <br> 
+					<input type="range" name="MemorialsSelfScore" required>
 					</td>
 				</tr>
 			</table>
 			<br>
-			<button onclick="return check();">운동일지 올리기!</button>
+			<button type="submit" class="button">운동일지 올리기!</button>
 		</form>
-		<script>
-		function check(){
-			var flag=false;
-			var check=0;
-			$("input[name=memorialsParts]").each(function(){
-				if($(this).prop("checked")){
-					flag=true;
-					check=1;
-				}
-			});
-			console.log($("textarea[name=memorialsContent]").val());
-			if(check==0){
-				alert("운동 부위를 선택해주세요.");
-				return flag;
-			} else if($("textarea[name=memorialsContent]").val()=="") {
-				alert("특이사항을 작성해주세요.");
-				flag=false;
-			}
-			if(flag){
-				return confirm("제출하시겠습니까?");
-			}
-		}
-		</script>
 		<br>
 		<br>
 		<form action="MemorialsMyPage.me" method="post">
 			<input type="hidden" name="UserId" value="${loginUser.userId }" required>
-			<button type="submit">내 운동일지 확인하기</button>
+			<button type="submit" class="button">내 운동일지 확인하기</button>
 		</form>
-
 	</div>
 	<script>
 		function validateForm() {

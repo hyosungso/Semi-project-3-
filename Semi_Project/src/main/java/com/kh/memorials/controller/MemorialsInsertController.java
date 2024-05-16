@@ -54,9 +54,7 @@ public class MemorialsInsertController extends HttpServlet {
 			
 			int maxSize = 10* 1024 * 1024;
 			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadFiles");
-			
-			
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/uploadFiles/");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
@@ -67,9 +65,14 @@ public class MemorialsInsertController extends HttpServlet {
 			String memorialsContent = multiRequest.getParameter("memorialsContent");
 			int memorialsSelfScore = Integer.parseInt(multiRequest.getParameter("MemorialsSelfScore"));
 			String mUserId = multiRequest.getParameter("mUserId");
+			Memorials m = new Memorials();
 			
-			
-
+			m.setMemorialsDate(memorialsDate);
+			m.setMemorialsTime(memorialsTime);
+			m.setMemorialsParts(memorialsParts);
+			m.setMemorialsContent(memorialsContent);
+			m.setMemorialsSelfScore(memorialsSelfScore);
+			m.setmUserId(mUserId);
 			MemorialsAttachment at = null;
 			
 			if(multiRequest.getOriginalFileName("memorialsImg") != null) {
