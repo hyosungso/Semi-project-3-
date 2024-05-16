@@ -105,7 +105,7 @@
 			</tr>
 			<tr>
 				<td>할인률 : 
-				<input type="number" id="discount" name="discount" min="1" max="99" required onkeyup="noMinus(this);autoCal();">%</td>
+				<input type="number" id="discount" name="discount" min="0" max="99" required onkeyup="noMinus(this);autoCal();limit(this)">%</td>
 			</tr>
 			<tr>
 				<td>총가격 : <input type="text" name="totalPrice" id="totalPrice" value="0" readonly>
@@ -151,15 +151,15 @@
 					<td>당류</td>
 				</tr>
 				<tr>
-					<td><input type="number" name="calorie" step="0.1" required onkeyup="noMinus(this);">kcal</td>
-					<td><input type="number" name="protin" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="salt" step="0.1" required onkeyup="noMinus(this);">mg</td>
-					<td><input type="number" name="carbo" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="fat" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="transFat" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="saturatedFat" step="0.1" required onkeyup="noMinus(this);">g</td>
-					<td><input type="number" name="chol" step="0.1" required onkeyup="noMinus(this);">mg</td>
-					<td><input type="number" name="sugar" step="0.1" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="calorie" step="0.1" min="0" required onkeyup="noMinus(this);">kcal</td>
+					<td><input type="number" name="protin" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="salt" step="0.1" min="0" required onkeyup="noMinus(this);">mg</td>
+					<td><input type="number" name="carbo" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="fat" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="transFat" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="saturatedFat" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
+					<td><input type="number" name="chol" step="0.1" min="0" required onkeyup="noMinus(this);">mg</td>
+					<td><input type="number" name="sugar" step="0.1" min="0" required onkeyup="noMinus(this);">g</td>
 				</tr>
 			</tbody>
 		</table>
@@ -183,6 +183,13 @@
 			}
 			
 			
+			
+		}
+		function limit(num){
+			if(num.value>=100){
+				alert('100%이상은 입력이 불가능합니다.');
+				num.value = 0;
+			}
 		}
 		function autoCal(){
 			
@@ -200,7 +207,7 @@
 			document.querySelector(".버튼"+num).addEventListener('click',function(){
 				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 				
-				$('.slide-container').css("width",num*pageLocation+"px");
+				
 			})
 		}
 			
@@ -239,7 +246,11 @@
 			
 			$("#imgContainer")
 			.append("<div class='inner'><img id='productImg"+count.value+"' onclick='inputImg("+count.value+");'></div>");
+			
+			$('.slide-container').css("width",count.value*480+"px");
+			
 			count.value++;
+			
 		}
 	</script>
 	

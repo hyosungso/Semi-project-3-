@@ -9,15 +9,25 @@ import com.kh.market.model.dao.MarketDao;
 import com.kh.market.model.vo.Component;
 import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
+import com.kh.market.model.vo.Order;
+import com.kh.market.model.vo.Review;
 
 public class MarketService {
 
-	public ArrayList<Item> selectItemList() {
+	public ArrayList<Item> selectItemList(String sort) {
 		Connection conn =JDBCTemplate.getConnection();
-		ArrayList<Item> list = new MarketDao().selectItemList(conn);
+		ArrayList<Item> list = new MarketDao().selectItemList(conn,sort);
 		
 		JDBCTemplate.close(conn);
 		
+		
+		return list;
+	}
+	public ArrayList<Item> selectItemList(String sort, int categoryNo) {
+		Connection conn =JDBCTemplate.getConnection();
+		ArrayList<Item> list = new MarketDao().selectItemList(conn,sort,categoryNo);
+		
+		JDBCTemplate.close(conn);
 		
 		return list;
 	}
@@ -81,13 +91,102 @@ public class MarketService {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = new MarketDao().deleteItem(conn,itno);
 		
-		if(result<0) {
-			JDBCTemplate.rollback(conn);
-		}else {
+		if(result>0) {
 			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int insertOrder(Order o) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MarketDao().insertOrder(conn,o);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int updateItem(Item i, ArrayList<ItemAttachment> itList, int category, Component c, int itCode) {
+		
+	Connection conn = JDBCTemplate.getConnection();
+	int result = new MarketDao().updateItem(i,conn,itCode);
+			
+	int result2= new MarketDao().updateItemAttachment(conn,itList,itCode);
+			
+	int result3 = new MarketDao().updateComponent(category,conn,c,itCode);
+			
+	if(result*result2*result3>0) {
+		JDBCTemplate.commit(conn);
+	}else {
+		JDBCTemplate.rollback(conn);
+	}
+	JDBCTemplate.close(conn);
+			
+	return result*result2*result3;
+	
+	}
+
+	public int deleteItemAttachment(int fileLev, int itCode) {
+		// TODO Auto-generated method stub
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MarketDao().deleteItemAttachment(conn,fileLev,itCode);
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Order> selectOrder(int userNo){
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Order> ol = new MarketDao().selectOrder(conn,userNo);
+		
+		JDBCTemplate.close(conn);
+		return ol;
+	}
+
+	public int updateSalVol(Item item) {
+		Connection conn= JDBCTemplate.getConnection();
+		int result=new MarketDao().updateSalVol(item,conn);
+	
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+	public int insertReview(Review re) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result=new MarketDao().insertReview(conn,re);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		
+		
+		return result;
+	}
+	public ArrayList<Review> selectReview(int itno) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Review> rList=new MarketDao().selectReview(conn,itno);
+		
+		JDBCTemplate.close(conn);
+		
+		return rList;
+	}
+
+	
 
 }

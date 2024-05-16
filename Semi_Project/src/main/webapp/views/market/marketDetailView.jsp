@@ -1,3 +1,4 @@
+<%@page import="com.kh.market.model.vo.Item"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -73,8 +74,77 @@
 	display: inline-block;"
 	}
 	
-}
+	.star-rating {
+      display: flex;
+    }
 
+    .star {
+      appearance: none;
+      padding: 1px;
+    }
+
+    .star::after {
+      content: '☆';
+      color: hsl(60, 80%, 45%);
+      font-size: 20px;
+    }
+
+    .star:hover::after,
+    .star:has(~ .star:hover)::after,
+    .star:checked::after,
+    .star:has(~ .star:checked)::after {
+      content: '★';
+    }
+	
+	.star:checked ~ .star::after,
+    .star:hover ~ .star::after {
+      content: '☆';
+    }
+
+		body,ul,li {
+	  margin: 0;
+	  padding: 0;
+	  list-style: none;
+		}
+		body {
+		  position: relative;
+		}
+		.a {
+		  color: white;
+		  text-decoration: none;
+		}
+		.menu-box-1 {
+		  position: fixed;
+		  width: 15%;
+		 
+		  top: 30%;
+		  left: -10%;
+		  background-color: rgb(41 ,41 ,41);
+		  transition: left 1s;
+		}
+		.menu-box-1:hover {
+		  left: 0;
+		  transition: left 1s;
+		}
+		.menu-box-1 > ul {
+		  position: relative;
+		  width: 100%;
+		  top: 10%;
+		}
+		.menu-box-1 > ul > li {
+		  padding-left: 10%;
+		}
+		.menu-box-1 > ul > li:hover {
+		  background-color: red;
+		}
+		.menu-box-1 ul > li > a {
+		  display: block;
+		  padding: 10px;
+		}
+		.menu-box-1 ul > li:hover > a {
+		  background-color: red;
+		  color: white;
+		}
 	
 </style>
 
@@ -91,8 +161,45 @@
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="outer">
+	
+	<nav class="menu-box-1">
+  <div class="button">
+   <ul>
+  <li align="right"><<&nbsp;&nbsp;<li>
+  </ul>
+  
+  <ul>
+  	<li><a href="${contextPath }/list.mk?sort=topSal" class="a">전체품목</a></li>
+  </ul>
+  	<c:forEach items="${cList }" var="c">
+  <ul>
+    <li>
+      <a href="${contextPath }/list.mk?sort=topSal&category=${c.categoryNo}" class="a">${c.categoryName }</a>
+    </li>
+    </ul>
+    </c:forEach>
+    </div>
+    </nav>
+    
 	<br><br><br>
-
+		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
+			<div align="center">
+				<button class='btn btn-info' onclick="deleteItem();">상품 비활성화</button>
+				<a href="${contextPath }/update.mk?itno=${i.itemCode}" class="btn btn-primary" role="botton">상품 업데이트</a>
+				<script>
+					function deleteItem(){
+						var flag=confirm("상품 게시를 종료하시겠습니까?");
+					if(flag){
+						location.href="${contextPath}/delete.mk?itno=${i.itemCode }"
+						}
+					}
+				</script>
+			
+		</div>
+		<br>
+		</c:if>
+		
+		<input type="hidden" value="${listLength + 1 }" id="count" name="count">
 		
 		<div class="form-area">
 		<form name="addForm" action="${contextPath }/views/market/addCart.jsp?id=${i.itemCode }" method="post">
@@ -131,7 +238,9 @@
 				<th> 카테고리 : ${i.categoryName }
 					</th>
 			</tr>
-			
+			<tr>
+				<th>판매량 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.salesVol }" /></th>
+			</tr>
 			<tr>
 				
 				<td style="font-size : 13px; color : gray;"><del>원가 : <fmt:formatNumber type="number" maxFractionDigits="3" value="${i.price}"  /> 원 </del><br>
@@ -149,19 +258,29 @@
 			</tr>
 		</table>
 		<br>
-	 <div class="component">
+	
 	 
 	 <div class="order">
 <br>
-	
-	
+	<c:choose>
+	<c:when test="${not empty loginUser }">
 	<a href="#" class="btn btn-info" onclick="addToCart()">상품추가&raquo;</a>
 	<a href="${contextPath }/views/market/cart.jsp" class="btn btn-warning">장바구니&raquo;</a>
 	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
+	</c:when>
+	<c:otherwise>
+	<a href="${contextPath}/views/member/login.jsp" class="btn btn-info">상품추가&raquo;</a>
+	<a href="${contextPath}/views/member/login.jsp" class="btn btn-warning">장바구니&raquo;</a>
+	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
+	</c:otherwise>
+	</c:choose>
+						
+	
+	
 	
 	
 	 </div>
-	 
+	  <div class="component">
 	 <br><br>
 	<h3>영양성분</h3>
 		<table>
@@ -190,29 +309,74 @@
 				</tr>
 			</tbody>
 		</table>
-	<br><br>
-		
-		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
-		<div align="center">
-			<button class='btn btn-info' onclick="deleteItem();">상품 비활성화</button>
-			<script>
-				function deleteItem(){
-					var flag=confirm("상품 게시를 종료하시겠습니까?");
-				if(flag){
-					location.href="${contextPath}/delete.mk?itno=${i.itemCode }"
-					}
-				}
-			</script>
-			
 		</div>
-		</c:if>
+		</form>
+	<br><br>
+		<div id="review-area">
+			<table border="1" align="center">
+				<thead>
+					<c:choose>
+						<c:when test="${not empty loginUser }">
+							<tr>
+								<th>리뷰작성</th>
+								<td>
+									 <div class="star-rating">
+									    <input type="radio" class="star" name="score" value="1">
+									    <input type="radio" class="star" name="score" value="2">
+									    <input type="radio" class="star" name="score" value="3">
+									    <input type="radio" class="star" name="score" value="4">
+									    <input type="radio" class="star" name="score" checked="checked" value="5">
+									  </div>
+								</td>
+								 <td>
+								 	<textarea id="reviewContent" rows="3" cols="50" style="resize:none;" required></textarea>
+								 </td>
+								 <td><button onclick="insertReview();">작성</button> </td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<th>리뷰작성</th>
+								<td>
+									<div class="star-rating">
+									    <input type="radio" class="star" name="score" value="1">
+									    <input type="radio" class="star" name="score" value="2">
+									    <input type="radio" class="star" name="score" value="3">
+									    <input type="radio" class="star" name="score" value="4">
+									    <input type="radio" class="star" name="score" checked="checked" value="5">
+									  </div>
+								</td>
+								 <td>
+								 	<textarea readonly rows="3" cols="50" style="resize:none;">로그인 후 이용 가능한 서비스입니다.</textarea>
+								 </td>
+								 <td><button disabled>작성</button> </td>
+							</tr>
+						
+						</c:otherwise>
+						
+						
+						
+					</c:choose>
+					<tr>
+						<th>작성자</th>
+						<th>평점</th>
+						<th>내용</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody class="review-list">
+					
+				</tbody>
+			</table>
+		</div>
+		
 	
 	<br><br>
 	</div>
-	</form>
-	</div>
 	
 	</div>
+	
+	
 
 	<script>
 		
@@ -227,13 +391,81 @@
 		function movePage(num){
 			var pageLocation=450;
 			var pageNo=num-1;
+			var count=document.getElementById("count").value;
 			document.querySelector(".버튼"+num).addEventListener('click',function(){
 				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
 				
-				$('.slide-container').css("width",num*pageLocation+"px");
+				$('.slide-container').css("width",count*pageLocation+"px");
 			})
 		}
 	
+		function insertReview(){
+			
+		
+		$('.star').click(function(){
+			var checkedVal = $('[name="score"]:checked').val();
+			 
+			
+		
+			$.ajax({
+				url : "insertR.mk",
+				type : "post",
+				data : {
+					itno : ${i.itemCode},
+					uno : ${loginUser.userNo},
+					content : $("#reviewContent").val(),
+					checkedVal : checkedVal
+				},
+				success : function(result){
+					alert(result);
+					$("#reviewContent").html("");
+				},
+				error : function(){
+					alert("리뷰 작성에 오류가 발생했습니다.");
+				},
+				complete : function(){
+					
+					reviewList();
+				}
+			});
+		
+		});
+		
+	}
+				
+			function reviewList(){
+				$.ajax({
+					url : "listR.mk",
+					data : {
+						itno : ${i.itemCode}
+					},
+					success : function(list){
+						//기존에있던 댓글을 지우고 다시 조회
+						$(".review-list").children().remove();
+						var tr="";
+						for(var i in list) {
+							
+							tr +="<tr>"
+								+"<td>"+list[i].nickName+"</td>"
+								+"<td>"+list[i].score+"</td>"
+								+"<td>"+list[i].content+"</td>"
+								+"<td>"+list[i].update+"</td>"
+							    +"</tr>";
+						}
+						$(".review-list").append(tr);
+					},
+					error : function(){
+						alert("리뷰를 불러오는데 실패했습니다.");
+					}
+				});
+			}
+		
+			
+			$(function(){
+				//처음 게시글에 들어왔을때 댓글목록 조회후 댓글창에 표시
+				reviewList();
+				});
+			
 	
 	</script>
 	
