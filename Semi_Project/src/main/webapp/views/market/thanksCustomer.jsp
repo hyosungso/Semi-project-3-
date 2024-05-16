@@ -30,7 +30,7 @@
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
-	<div class="jumbotron" style="padding-top: 80px; padding-bottom:80px">
+	<div class="jumbotron" style="padding-top: 80px; padding-bottom:80px; width:700px " align="center" >
 		<h6 class="text-dark text-uppercase">Order Completed</h6>
 		<h1 class="text-uppercase">주문완료</h1>
 		
@@ -41,7 +41,7 @@
 	<div class="container">
 		<p> <b></b></p>
 		<p> <b> 주문번호 : <% out.println(shipping_cartId); %></b></p>
-		<a href="${contextPath }/list.mk"> &laquo; 쇼핑하기 </a>
+		<a href="${contextPath }/list.mk?sort=topSal"> &laquo; 쇼핑하기 </a>
 	</div>
 </body>
 </html>

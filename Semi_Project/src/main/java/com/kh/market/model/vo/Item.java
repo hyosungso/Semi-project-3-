@@ -16,7 +16,7 @@ public class Item {
 	private int quantity;
 	private int totalPrice;
 	private double score;
-	
+	private String status;
 	
 	public Item() {
 		super();
@@ -48,7 +48,7 @@ public class Item {
 	
 	
 	
-	public Item(String categoryName,int category,  int price,int discount, String itemName,int salesVol, String storageMethod,int itemCode) {
+	public Item(String categoryName,int category,  int price,int discount, String itemName,int salesVol, String storageMethod,int itemCode, String status) {
 		super();
 		this.categoryName = categoryName;
 		this.category=category;
@@ -58,10 +58,17 @@ public class Item {
 		this.salesVol=salesVol;
 		this.storageMethod = storageMethod;
 		this.itemCode = itemCode;
+		this.status = status;
 	}
 	
 	
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public double getScore() {
 		return score;
 	}

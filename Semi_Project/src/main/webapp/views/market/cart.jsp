@@ -95,7 +95,7 @@
 					<th></th>
 				</tr>
 			</table>
-			<a href="${contextPath }/list.mk" class="btn btn-secondary">&laquo; 쇼핑 계속하기</a>
+			<a href="${contextPath }/list.mk?sort=topSal" class="btn btn-secondary">&laquo; 쇼핑 계속하기</a>
 		</div>
 		<hr>
 		<% if(orlist!=null){%>

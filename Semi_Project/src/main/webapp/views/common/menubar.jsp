@@ -231,16 +231,43 @@
 
 		</div>
 		<div class="util">
-		<br><br> 
-		<a href="myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
-		<a href="${contextPath}/views/market/cart.jsp"> 
-		<img class="image" width=40 height=40>
-		</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		<%if(loginUser == null) {%>
-			<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
-			<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
-			<%}else{ %>
-			<a href="logout.me">로그아웃</a>
+
+			<br>
+			<br> <a href="#" id="imageLink"> 
+				<img class="image2"> </a>&nbsp;&nbsp;&nbsp; 
+				<a href="#" id="imageLink2"> 
+					<img class="image" width=40 height=40>
+					<em id=cartCount style="right : 145px">0</em>
+					</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
+					<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
+
+		</div>
+		<script>
+			document.getElementById('imageLink').addEventListener('click', function(event) {
+    		alert("로그인한 상태에서 사용 가능합니다.");
+    		window.location.href = "${contextPath}/views/member/login.jsp";
+			});
+			
+			document.getElementById('imageLink2').addEventListener('click', function(event) {
+	    		alert("로그인한 상태에서 사용 가능합니다.");
+	    		window.location.href = "${contextPath}/views/member/login.jsp";
+			});
+		</script>
+		<%}else{ %>
+		<div class="util">
+			<br>
+			<br> <a href="${contextPath}/myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
+			<a href="${contextPath }/views/market/cart.jsp"> 
+				<img class="image" width=40 height=40>
+				<%if(list!=null){ %>
+				<em id=cartCount><%=list.size() %></em>
+				<%}else{ %>
+				<em id=cartCount>0</em>
+				<%} %>
+			</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a href="${contextPath }/logout.me">로그아웃</a>
+
 			<%} %>
 			
 			</div>

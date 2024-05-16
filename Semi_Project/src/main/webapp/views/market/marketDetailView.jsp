@@ -136,6 +136,7 @@
 		}
 		.menu-box-1 > ul > li:hover {
 		  background-color: red;
+		  
 		}
 		.menu-box-1 ul > li > a {
 		  display: block;
@@ -143,7 +144,20 @@
 		}
 		.menu-box-1 ul > li:hover > a {
 		  background-color: red;
+		 
 		  color: white;
+		}
+			.menu-box-1 ul ul {
+		  display: none;
+		 background-color: rgb(55,55,55);
+		  width: 100%;
+		  top: 0%;
+		  left: 100%;
+		  
+		}
+		.menu-box-1 ul > li:hover > ul {
+		
+		  display: block;
 		}
 	
 </style>
@@ -169,12 +183,23 @@
   </ul>
   
   <ul>
-  	<li><a href="${contextPath }/list.mk?sort=topSal" class="a">전체품목</a></li>
+  	<li><a href="${contextPath }/list.mk?sort=topSal" class="a">전체품목</a>
+	<ul>
+    		<li><a href="${contextPath }/list.mk?sort=topSal" class="a">판매순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=topSco" class="a">평점순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=latest" class="a">신상품</a></li>
+    	</ul>    	
+  	</li>
   </ul>
   	<c:forEach items="${cList }" var="c">
   <ul>
     <li>
       <a href="${contextPath }/list.mk?sort=topSal&category=${c.categoryNo}" class="a">${c.categoryName }</a>
+    	<ul>
+    		<li><a href="${contextPath }/list.mk?sort=topSal&category=${c.categoryNo}" class="a">판매순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=topSco&category=${c.categoryNo}" class="a">평점순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=latest&category=${c.categoryNo}" class="a">신상품</a></li>
+    	</ul>
     </li>
     </ul>
     </c:forEach>
@@ -184,7 +209,21 @@
 	<br><br><br>
 		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 			<div align="center">
-				<button class='btn btn-info' onclick="deleteItem();">상품 비활성화</button>
+			<c:choose>
+				<c:when test="${i.status eq 'N' }">
+				<button class='btn btn-info' onclick="reacitivateItem();">상품 활성화</button>
+				<a href="${contextPath }/update.mk?itno=${i.itemCode}" class="btn btn-primary" role="botton">상품 업데이트</a>
+				<script>
+					function reacitivateItem(){
+						var flag=confirm("상품 게시을 다시 게시하시겠습니까?");
+					if(flag){
+						location.href="${contextPath}/reinsert.mk?itno=${i.itemCode }"
+						}
+					}
+				</script>
+				</c:when>
+				<c:otherwise>
+				<button class='btn btn-danger' onclick="deleteItem();">상품 비활성화</button>
 				<a href="${contextPath }/update.mk?itno=${i.itemCode}" class="btn btn-primary" role="botton">상품 업데이트</a>
 				<script>
 					function deleteItem(){
@@ -194,6 +233,11 @@
 						}
 					}
 				</script>
+				</c:otherwise>
+			</c:choose>
+			
+			
+				
 			
 		</div>
 		<br>
@@ -263,15 +307,17 @@
 	 <div class="order">
 <br>
 	<c:choose>
-	<c:when test="${not empty loginUser }">
+	<c:when test="${not empty loginUser && i.status eq 'Y' }">
 	<a href="#" class="btn btn-info" onclick="addToCart()">상품추가&raquo;</a>
 	<a href="${contextPath }/views/market/cart.jsp" class="btn btn-warning">장바구니&raquo;</a>
 	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
 	</c:when>
 	<c:otherwise>
-	<a href="${contextPath}/views/member/login.jsp" class="btn btn-info">상품추가&raquo;</a>
-	<a href="${contextPath}/views/member/login.jsp" class="btn btn-warning">장바구니&raquo;</a>
+		
+			<a href="${contextPath}/views/member/login.jsp" class="btn btn-secondary">상품추가&raquo;</a>
+	<a href="${contextPath}/views/member/login.jsp" class="btn btn-secondary">장바구니&raquo;</a>
 	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
+		
 	</c:otherwise>
 	</c:choose>
 						
@@ -402,7 +448,7 @@
 		function insertReview(){
 			
 		
-		$('.star').click(function(){
+		
 			var checkedVal = $('[name="score"]:checked').val();
 			 
 			
@@ -418,7 +464,7 @@
 				},
 				success : function(result){
 					alert(result);
-					$("#reviewContent").html("");
+					reviewList();
 				},
 				error : function(){
 					alert("리뷰 작성에 오류가 발생했습니다.");
@@ -429,7 +475,7 @@
 				}
 			});
 		
-		});
+	
 		
 	}
 				

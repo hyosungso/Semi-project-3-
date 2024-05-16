@@ -11,6 +11,7 @@ import com.kh.market.model.vo.Item;
 import com.kh.market.model.vo.ItemAttachment;
 import com.kh.market.model.vo.Order;
 import com.kh.market.model.vo.Review;
+import com.kh.member.model.dao.MemberDao;
 
 public class MarketService {
 
@@ -185,6 +186,43 @@ public class MarketService {
 		JDBCTemplate.close(conn);
 		
 		return rList;
+	}
+	public double selectScore(int itemCode) {
+		Connection conn=JDBCTemplate.getConnection();
+		double result= new MarketDao().selectScore(conn,itemCode);
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+	}
+
+	public int updateScore(int itemCode, Double result2) {
+		Connection conn =JDBCTemplate.getConnection();
+		int result=new MarketDao().updateScore(conn,itemCode,result2);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		
+		return result;
+	}
+	public int reinsertItem(int itno) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MarketDao().reinsertItem(conn,itno);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+
 	}
 
 	

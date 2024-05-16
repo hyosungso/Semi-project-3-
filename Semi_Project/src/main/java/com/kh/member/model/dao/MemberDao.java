@@ -359,6 +359,52 @@ public class MemberDao {
 	
 
 
+	public double selectScore(Connection conn, int itemCode) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		String sql=prop.getProperty("selectScore");
+		
+		double result=0;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itemCode);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				result=rset.getDouble("result");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int updateScore(Connection conn, int itemCode, Double result2) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateScore");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setDouble(1, result2);
+			pstmt.setInt(2,itemCode);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+
 	
 		
 

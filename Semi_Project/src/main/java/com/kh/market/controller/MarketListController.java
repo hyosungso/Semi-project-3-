@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.vo.Category;
 import com.kh.market.model.service.MarketService;
 import com.kh.market.model.vo.Item;
+import com.kh.member.model.service.MemberService;
 
 /**
  * Servlet implementation class MarketListController
@@ -50,12 +52,22 @@ public class MarketListController extends HttpServlet {
 			list = new MarketService().selectItemList(sort,categoryNo);
 		}
 		
-		request.setAttribute("list", list);
+		for (int i=0;i<list.size();i++) {
+			
+			int itemCode=list.get(i).getItemCode();
+			
+			Double result=(Double) new MarketService().selectScore(itemCode);
+			
+			new MarketService().updateScore(itemCode, result);
+				
+			}
+	
 		
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("views/market/marketListView.jsp").forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

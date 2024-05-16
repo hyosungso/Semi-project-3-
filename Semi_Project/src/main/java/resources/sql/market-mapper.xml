@@ -119,11 +119,11 @@
 			   DISCOUNT,
 			   SALES_VOL,
 			   STORAGE_METHOD,
-			   ITEM_CODE
+			   ITEM_CODE,
+			   STATUS
 		FROM ITEM
 		JOIN ITEM_CATEGORY USING (CATEGORY_NO)
-		WHERE STATUS='Y'
-		AND ITEM_CODE=?
+		WHERE ITEM_CODE=?
 	</entry>
 	
 	<entry key="selectCategory">
@@ -318,5 +318,38 @@
 		WHERE REF_ITEMNO=?
 	</entry>
 	
+	<entry key="selectScore">
+	SELECT  
+	ROUND(AVG(SCORE),1) result
+	FROM ITEM_REVIEW
+	WHERE REF_ITEMNO=?
+	</entry>
 	
+	<entry key="updateScore">
+	UPDATE ITEM SET
+	SCORE = ?
+	WHERE ITEM_CODE= ?
+	</entry>
+	<entry key="selectItemListN">
+		SELECT ITEM_CODE,
+		   CATEGORY_NAME,
+		   PRICE,
+		   DISCOUNT,
+		   ITEM_NAME,
+		   SALES_VOL,
+		   SCORE,
+		   FILE_PATH || CHANGE_NAME THUMBNAIL
+	FROM ITEM I
+	JOIN ITEM_CATEGORY USING (CATEGORY_NO)
+	JOIN ITEM_ATTACHMENT A ON (ITEM_CODE = REF_CODE)
+	WHERE I.STATUS='N'
+    AND A.STATUS='Y'
+	AND FILE_LEVEL=1
+	ORDER BY SALES_VOL DESC
+	</entry>
+	<entry key="reactivateItem">
+		UPDATE ITEM SET
+		STATUS='Y'
+		WHERE ITEM_CODE=?
+	</entry>
 </properties>

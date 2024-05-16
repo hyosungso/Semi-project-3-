@@ -47,6 +47,9 @@ public class MarketDao {
 		if(sort.equals("topSco")) {
 			sql=prop.getProperty("selectItemListOrderBysco") ;
 			}
+		if(sort.equals("N")) {
+			sql=prop.getProperty("selectItemListN");
+		}
 		try {
 			stmt=conn.createStatement();
 			rset=stmt.executeQuery(sql);
@@ -133,7 +136,8 @@ public class MarketDao {
 						rset.getString("ITEM_NAME"),
 						rset.getInt("SALES_VOL"),
 						rset.getString("STORAGE_METHOD"),
-						rset.getInt("ITEM_CODE")));
+						rset.getInt("ITEM_CODE"),
+						rset.getString("STATUS")));
 			}
 			
 		} catch (SQLException e) {
@@ -585,7 +589,72 @@ public class MarketDao {
 		return rList;
 	}
 
-	
+	public double selectScore(Connection conn, int itemCode) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		String sql=prop.getProperty("selectScore");
+		
+		double result=0;
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itemCode);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				result=rset.getDouble("result");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int updateScore(Connection conn, int itemCode, Double result2) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String sql=prop.getProperty("updateScore");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setDouble(1, result2);
+			pstmt.setInt(2,itemCode);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int reinsertItem(Connection conn, int itno) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("reactivateItem");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, itno);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
 
 	
 
