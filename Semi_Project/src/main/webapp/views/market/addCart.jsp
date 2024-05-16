@@ -16,7 +16,7 @@
 			response.sendRedirect("exceptionNoItem.jsp");
 		}
 		
-		ArrayList<Item> itemList = new MarketService().selectItemList();
+		ArrayList<Item> itemList = new MarketService().selectItemList("topSal");
 		Item items= new Item();
 		for (int i=0; i<itemList.size();i++){
 			items=itemList.get(i);

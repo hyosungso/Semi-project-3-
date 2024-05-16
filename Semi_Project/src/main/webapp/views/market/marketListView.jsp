@@ -56,6 +56,7 @@
 		}
 		.menu-box-1 > ul > li:hover {
 		  background-color: red;
+		  
 		}
 		.menu-box-1 ul > li > a {
 		  display: block;
@@ -63,8 +64,22 @@
 		}
 		.menu-box-1 ul > li:hover > a {
 		  background-color: red;
+		 
 		  color: white;
 		}
+			.menu-box-1 ul ul {
+		  display: none;
+		 background-color: rgb(55,55,55);
+		  width: 100%;
+		  top: 0%;
+		  left: 100%;
+		  
+		}
+		.menu-box-1 ul > li:hover > ul {
+		
+		  display: block;
+		}
+		
 </style>
 </head>
 <body>
@@ -72,16 +87,28 @@
 	<div class="outer">
 	<nav class="menu-box-1">
   <div class="button">
-  <ul>
+   <ul>
   <li align="right"><<&nbsp;&nbsp;<li>
   </ul>
+  
   <ul>
-  	<li><a href="${contextPath }/list.mk?sort=topSal" class="a">전체품목</a></li>
+  	<li><a href="${contextPath }/list.mk?sort=topSal" class="a">전체품목</a>
+	<ul>
+    		<li><a href="${contextPath }/list.mk?sort=topSal" class="a">판매순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=topSco" class="a">평점순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=latest" class="a">신상품</a></li>
+    	</ul>    	
+  	</li>
   </ul>
   	<c:forEach items="${cList }" var="c">
   <ul>
     <li>
       <a href="${contextPath }/list.mk?sort=topSal&category=${c.categoryNo}" class="a">${c.categoryName }</a>
+    	<ul>
+    		<li><a href="${contextPath }/list.mk?sort=topSal&category=${c.categoryNo}" class="a">판매순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=topSco&category=${c.categoryNo}" class="a">평점순</a></li>
+    		<li><a href="${contextPath }/list.mk?sort=latest&category=${c.categoryNo}" class="a">신상품</a></li>
+    	</ul>
     </li>
     </ul>
     </c:forEach>
@@ -93,6 +120,7 @@
 		<div class="list-area">
 		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
 		<div align="center">
+			<a href="${contextPath }/list.mk?sort=N" class="btn btn-danger" role="botton">게시중단 상품 목록</a>
 			<button class='btn btn-info' onclick="location.href='${contextPath}/insert.mk'">상품등록</button>
 			<br><br>
 		</div>

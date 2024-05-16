@@ -133,7 +133,7 @@ public class MarketInsertController extends HttpServlet {
 			}
 			
 			session.setAttribute("alertMsg", msg);
-			response.sendRedirect(request.getContextPath()+"/list.mk");
+			response.sendRedirect(request.getContextPath()+"/list.mk?sort=topSal");
 		}
 		
 		

@@ -36,11 +36,13 @@ public class ReviewListController extends HttpServlet {
 		
 		ArrayList<Review> rList =new MarketService().selectReview(itno);
 		
-		System.out.println(rList.get(0).getNickName());
+		if(rList!=null) {
+			response.setContentType("json/application;charset=UTF-8");
+			//GSON으로 댓글 리스트 넘겨주기
+			new Gson().toJson(rList, response.getWriter());
+			
+		}
 		
-		response.setContentType("json/application;charset=UTF-8");
-		//GSON으로 댓글 리스트 넘겨주기
-		new Gson().toJson(rList, response.getWriter());
 	}
 
 	/**

@@ -52,7 +52,6 @@ public class BoardInsertController extends HttpServlet {
 		String category=request.getParameter("category");
 		String title=request.getParameter("boardTitle");
 		String content=request.getParameter("boardContent");
-		
 		Board b=new Board(userNo,title,content,category);
 		int result=new BoardService().insertBoard(b);
 		

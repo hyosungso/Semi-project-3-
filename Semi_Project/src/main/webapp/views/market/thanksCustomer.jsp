@@ -41,7 +41,7 @@
 	<div class="container">
 		<p> <b></b></p>
 		<p> <b> 주문번호 : <% out.println(shipping_cartId); %></b></p>
-		<a href="${contextPath }/list.mk"> &laquo; 쇼핑하기 </a>
+		<a href="${contextPath }/list.mk?sort=topSal"> &laquo; 쇼핑하기 </a>
 	</div>
 </body>
 </html>
