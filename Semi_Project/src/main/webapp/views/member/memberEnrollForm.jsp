@@ -100,7 +100,11 @@
 		}
 
 		
-
+		input::placeholder {
+        color: rgb(204, 191, 191);
+        font-style: italic;
+        font-size:  13px;
+        }
 
        
         
@@ -225,13 +229,13 @@
 
                     <tr class="input-box">
                         <td>아이디</td>
-                        <td><input type="text" id="userId" name="userId" required></td>
+                        <td><input type="text" id="userId" name="userId" required placeholder="6자 이상 20자 이하의 대소문자"></td>
                         <td><button type="button" class="button" id="btn1" onclick="checkId();">중복확인</button></td>
                     </tr>
     
                     <tr class="input-box">
                         <td>비밀번호</td>
-                        <td><input type="password" id="userPwd" name="userPwd" required></td>
+                        <td><input type="password" id="userPwd" name="userPwd" required placeholder="8자 이상 20자 이하 영문,숫자"></td>
                         <td></td>
                     </tr>
                     
@@ -244,7 +248,7 @@
     
                     <tr class="input-box">
                         <td>이름</td>
-                        <td><input type="text" name="userName" id="userName" required></td>
+                        <td><input type="text" name="userName" id="userName" required placeholder="2글자 이상 5글자 이하 한글"> </td>
                         
                     </tr>
     
@@ -269,19 +273,19 @@
     
                     <tr class="input-box">
                         <td>닉네임</td>
-                        <td><input type="text" name="nickName" id="nickName" required></td>
+                        <td><input type="text" name="nickName" id="nickName" required placeholder="2글자 이상 8글자 이하 한글"></td>
                         <td><button type="button" class="button" onclick="checkNickName();">중복확인</button></td>
                     </tr>
     
                     <tr class="input-box">
                         <td>이메일</td>
-                        <td><input type="email" name="email" id="email" required></td>
+                        <td><input type="email" name="email" id="email" required placeholder="이메일 @ 양식을 지켜주세요."></td>
                     </tr>
     
                     <tr class="input-box">
                         <td>전화번호</td>
                         <td>
-                            <input type="text" name="phone" id="phone" required>
+                            <input type="text" name="phone" id="phone" required placeholder="(-) 하이픈을 반드시 기입해 주세요.">
                         </td>
                     </tr>
     
