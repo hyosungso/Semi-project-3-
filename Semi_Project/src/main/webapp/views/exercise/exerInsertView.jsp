@@ -49,7 +49,7 @@ box-sizing:border-box;
 				<tr>
 					<th width="100">정보</th>
 					<td colspan="4" height="100">
-						<input type="text" name="inf" placeholder="시간, 빈도 등 간단한 정보 작성 (75자)" maxlength=75 required>
+						<input type="text" name="inf" placeholder="시간, 빈도 등 간단한 정보 작성 (150자)" maxlength=150 required>
 					</td>
 				</tr>
 				
@@ -77,7 +77,7 @@ box-sizing:border-box;
 				<tr>
 					<th>내용</th>
 					<td colspan="4">
-						<textarea name="content" rows="10" style="resize:none;" required></textarea>
+						<textarea name="content" rows="10" style="resize:none;" maxlength=500 required></textarea>
 					</td>
 				</tr>
 				<tr>
