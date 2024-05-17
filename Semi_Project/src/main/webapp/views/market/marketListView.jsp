@@ -125,7 +125,7 @@
 		
 		<br>
 		<div class="list-area">
-		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
+		<c:if test="${not empty loginUser && loginUser.authCode eq 'ADMIN' }">
 		<div align="center">
 			
 			<%if(sort.equals("N")){ %>

@@ -375,7 +375,7 @@
 	 
 				  const emailRegex = /^[A-Za-z-0-9\-\.]+@[A-Ja-z-0-9\-\.]+\.[A-Ja-z-0-9]+$/;
 				  if (!emailRegex.test(inputEmail)) {
-				    alert("올바른 이메일 형식으로 작성해 주세요.(하이픈(-)을 포함해야 합니다.)");
+				    alert("올바른 이메일 형식으로 작성해 주세요.");
 				    $("#email").focus();
 				    return false; 
 				  }
