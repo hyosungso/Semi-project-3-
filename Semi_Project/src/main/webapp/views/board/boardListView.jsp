@@ -133,7 +133,7 @@
 		</c:otherwise>
 	</c:choose>
 		<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
-			<button onclick="location.href='board.bo?currentPage=${i}&category=${category}&sort=${sort}'">${i}</button>
+			<button onclick="location.href='board.bo?currentPage=${i}&category=${category}&sort=${sort}'" style="width: 20px">${i}</button>
 		</c:forEach>
 	<c:choose>
 		<c:when test="${pi.currentPage eq pi.maxPage}">
