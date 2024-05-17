@@ -5,61 +5,73 @@
 <head>
 <meta charset="UTF-8">
 <title>HEALTHLIFE</title>
+
+
+	<style type="text/css">
+	.slide-container{
+		width: 3900px;
+		hight: 850px;
+		transition : transform 1s;
+		
+	}
+	.inner{
+		width: 1300px;
+		hight: 850px;
+		float : left;
+	}
+	.inner img{
+			width: 100%;
+			height : 100%;
+	}
+	.slide{ 
+		width: 1300px;
+		overflow : hidden
+	}
+	</style>
 </head>
+
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
 
-	
-    <div>
-    
-
-            
-            <table border="1" align="center">
-                <tr id="pic" >
-                    <td>
-                        <img width=420 height=600
-                        src="https://qi-o.qoo10cdn.com/goods_image_big/8/7/8/6/8531128786_l.jpg">
-                    </td>
-                    <td>
-                        <img width=420 height=600
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0zL2gkxeYEnH4GWjkF7CFmtGONvlTywmNyg&usqp=CAU">
-                        
-                    </td>
-                    <td>
-                        <img width=420 height=600
-                        src="https://i.namu.wiki/i/Bd2ylwd4Lho5SqGM6XyAmwoyJtEnspKNAVDP1jd7EmViHckUSNcEm4JMyuePE56jP98WASRF8wDpg58l6tB0vQ.webp">
-                    </td>
-                </tr>
-                
-            </table>
-        </div>
-		<div class="outer">
-        <br><br>
-        
-
-
-        <div align="center">
-            <!-- 바디 게시판-->
-            <div class="bodyboard">
-                <table border="1">
-                    <tr align="center">
-                        <td width="600">정보게시판</td>
-                        <td width="600">자유게시판</td>
-                    </tr>
-
-                    <tr align="center">
-                        <td height="400">인기있는 글 </td>
-                        <td height="400">인기있는 글 </td>
-                    </tr>
-                </table>
-
+	 
+   
+  			  <div class="slide" style="    margin-right: auto;
+   						 margin-left: auto;">
+				<div class="slide-container" id="imgContainer">
+				
+					<div class="inner">
+						
+						<img class="img" src="${contextPath }/resources/uploadFiles/1.jpg">
+					</div>
+					<div class="inner">
+						
+						<img class="img" src="${contextPath }/resources/uploadFiles/5.jpg">
+					</div>
+					<div class="inner">
+						
+						<img class="img" src="${contextPath }/resources/uploadFiles/3.jpg">
+					</div>
+				</div>
+			</div>
+			<div id="pagination" align="center">
+		<button type="button" class="버튼1" onclick="movePage(1)" style="width :25px; border-radius:10px ;background-color: gray; color:white;">1</button>
+		<button type="button" class="버튼2" onclick="movePage(2)" style="width :25px; border-radius:10px ;background-color: gray; color:white;">2</button>
+		<button type="button" class="버튼3" onclick="movePage(3)" style="width :25px; border-radius:10px ;background-color: gray; color:white;">3</button>
             </div>
+            
+            <script>
+            function movePage(num){
+    			var pageLocation=1300;
+    			var pageNo=num-1;
+    			
+    			document.querySelector(".버튼"+num).addEventListener('click',function(){
+    				document.querySelector('.slide-container').style.transform='translate('+(-pageNo*pageLocation)+'px)';
+    			})
+    		}
+            
+            </script>
     
-    
-        </div>
-        <br><br><br>
-</div> 
-    
+
 
 
 

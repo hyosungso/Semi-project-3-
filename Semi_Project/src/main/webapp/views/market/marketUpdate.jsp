@@ -73,7 +73,7 @@
 			<tr>
 				<td rowspan='6' width="480px">
 				
-
+	
 			<div class="slide">
 				<div class="slide-container" id="imgContainer">
 				<c:forEach items="${itList }" var="it" varStatus="status">
