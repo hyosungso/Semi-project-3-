@@ -19,8 +19,10 @@
 	button[name=category]:hover{
 	background-color:lightblue;
 	}
+
 	.board-area{
 	width:1200px;
+	margin:auto;
 	}
 	.board-area th{
 	text-align:center;
@@ -44,7 +46,7 @@
 	<%@ include file="/views/common/menubar.jsp" %>
 	<br>
 	<div class="board">
-	<table border="1" class="board-area" align="center">
+	<table border="1" class="board-area" style="align:center">
 	<thead>
 	<tr>
 		<th colspan="6">
