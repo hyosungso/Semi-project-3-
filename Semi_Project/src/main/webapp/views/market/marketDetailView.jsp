@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>HEALTHLIFE</title>
@@ -421,31 +422,9 @@
 	</div>
 	
 	</div>
-	
-	
-
-	<script>
-		
-		function minLimit(num){
-			
-			if(num.value<=0){
-				alert('0 이하는 입력할수 없습니다..');
-				num.value = 1;
-			}
-		}
-	
-		function movePage(num){
-			var pageLocation=450;
-			var pageNo=num-1;
-			var count=document.getElementById("count").value;
-			document.querySelector(".버튼"+num).addEventListener('click',function(){
-				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
-				
-				$('.slide-container').css("width",count*pageLocation+"px");
-			})
-		}
-	
-		function insertReview(){
+	<c:if test="${not empty loginUser}">
+	<script type="text/javascript">
+	function insertReview(){
 			
 		
 		
@@ -476,9 +455,6 @@
 			});
 		
 	
-		
-	}
-				
 			function reviewList(){
 				$.ajax({
 					url : "listR.mk",
@@ -511,7 +487,34 @@
 				//처음 게시글에 들어왔을때 댓글목록 조회후 댓글창에 표시
 				reviewList();
 				});
+		
+	}
+	
+	</script>
+	</c:if>
+	
+
+	<script>
+		
+		function minLimit(num){
 			
+			if(num.value<=0){
+				alert('0 이하는 입력할수 없습니다..');
+				num.value = 1;
+			}
+		}
+	
+		function movePage(num){
+			var pageLocation=450;
+			var pageNo=num-1;
+			var count=document.getElementById("count").value;
+			document.querySelector(".버튼"+num).addEventListener('click',function(){
+				document.querySelector('.slide-container').style.transform= 'translate('+(-pageNo*pageLocation)+'px)';
+				
+				$('.slide-container').css("width",count*pageLocation+"px");
+			})
+		}
+	
 	
 	</script>
 	<%@ include file="/views/common/footer.jsp" %>
