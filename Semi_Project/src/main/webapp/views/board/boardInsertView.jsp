@@ -41,7 +41,7 @@ width:100%;
 		</td>
 	</tr>
 	</table>
-	<div align="right" class="insert-confirm">
+	<div align="center" class="insert-confirm">
 	<button type=submit>작성하기</button>
 	</div>
 	</form>
