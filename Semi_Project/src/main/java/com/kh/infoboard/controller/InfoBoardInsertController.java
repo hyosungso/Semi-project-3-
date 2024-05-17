@@ -69,7 +69,7 @@ public class InfoBoardInsertController extends HttpServlet {
 		}else {
 			session.setAttribute("alertMsg", "작성실패.");
 		}
-		response.sendRedirect(request.getContextPath()+"/infoboard.bo?currentPage=1&category=0&sort=latest");
+		response.sendRedirect(request.getContextPath()+"/Infoboard.bo?currentPage=1&category=0&sort=latest");
 	}
 
 }
