@@ -33,7 +33,7 @@ public class InfoBoardDetailController extends HttpServlet {
 
 		int bno = Integer.parseInt(request.getParameter("bno"));
 
-		int result = new BoardService().increaseCount(bno);
+		int result = new InfoBoardService().increaseCount(bno);
 		if (result > 0) {
 			InfoBoard ib = new InfoBoardService().selectInfoBoard(bno);
 

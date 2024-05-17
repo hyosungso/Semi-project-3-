@@ -1,17 +1,14 @@
 package com.kh.infoboard.model.service;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-import com.kh.board.model.dao.BoardDao;
-import com.kh.board.model.vo.Board;
-import com.kh.board.model.vo.Reply;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.infoboard.model.vo.Category;
 import com.kh.infoboard.model.dao.InfoBoardDao;
 import com.kh.infoboard.model.vo.InfoBoard;
+import com.kh.infoboard.model.vo.InfoCategory;
+import com.kh.infoboard.model.vo.Reply;
 
 public class InfoBoardService {
 
@@ -59,15 +56,15 @@ public class InfoBoardService {
 	
 	
 	
-	public ArrayList<Category> selectCategory() {
+	public ArrayList<InfoCategory> selectCategory() {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<Category> ctList = new InfoBoardDao().selectCategory(conn);
+		ArrayList<InfoCategory> ftList = new InfoBoardDao().selectCategory(conn);
 		
 		JDBCTemplate.close(conn);
 		
-		return ctList;
+		return ftList;
 	}
 	
 	public InfoBoard selectInfoBoard(int bno) {
@@ -78,7 +75,7 @@ public class InfoBoardService {
 		
 		JDBCTemplate.close(conn);
 		
-		return null;
+		return ib;
 		
 	}
 
@@ -104,6 +101,7 @@ public class InfoBoardService {
 	public int increaseRecommend(int uno,int bno) {
 		
 		Connection conn = JDBCTemplate.getConnection();
+		
 		int result = new InfoBoardDao().increaseRecommend(conn, uno,bno);
 		
 		if(result>0) {
@@ -131,7 +129,7 @@ public class InfoBoardService {
 	public int insertReply(Reply re) {
 		
 		Connection conn=JDBCTemplate.getConnection();
-		int result=new InfoBoardDao().insertReply(conn,re);
+		int result= new InfoBoardDao().insertReply(conn,re);
 		
 		if(result>0) {
 			JDBCTemplate.commit(conn);
@@ -149,7 +147,7 @@ public class InfoBoardService {
 	public ArrayList<Reply> selectReply(int bno) {
 		
 		Connection conn=JDBCTemplate.getConnection();
-		ArrayList<Reply> rList=new InfoBoardDao().selectReply(conn,bno);
+		ArrayList<Reply> rList = new InfoBoardDao().selectReply(conn,bno);
 		
 		JDBCTemplate.close(conn);
 		return rList;

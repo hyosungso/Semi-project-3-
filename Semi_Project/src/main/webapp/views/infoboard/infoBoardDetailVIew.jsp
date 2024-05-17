@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.detail-area, .reply-area {
+.infodetail-area, .reply-area {
 	width: 80%;
 	margin: auto;
 }
 
-.detail-area table {
+.infodetail-area table {
 	width: 90%;
 }
 
@@ -32,7 +32,7 @@
 	<%@ include file="/views/common/menubar.jsp"%>
 
 	<br>
-	<div align="center" class="detail-area">
+	<div align="center" class="infodetail-area">
 		<table border="1">
 			<thead>
 				<tr>

@@ -51,6 +51,7 @@ public class InfoBoardSearchController extends HttpServlet {
 		}*/
 		
 		fList=ibs.searchInfoBoard(keyword,category);
+		
 		request.setAttribute("fList", fList);
 		request.setAttribute("keyword", keyword);
 		
