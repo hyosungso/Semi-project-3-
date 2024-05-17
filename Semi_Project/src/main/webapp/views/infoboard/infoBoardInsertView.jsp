@@ -16,6 +16,7 @@ width:100%;
 </head>
 <body>
 	<%@ include file="/views/common/menubar.jsp" %>
+	
 	<div class="outer" align="center">
 	<form action="infoinsert.bo" method="post">
 	<input type="hidden" name="userNo" value=${loginUser.userNo }>
@@ -41,7 +42,7 @@ width:100%;
 		</td>
 	</tr>
 	</table>
-	<div align="right" class="insert-confirm">
+	<div align="center" class="insert-confirm">
 	<button type=submit>작성하기</button>
 	</div>
 	</form>

@@ -1,14 +1,14 @@
 package com.kh.infoboard.model.vo;
 
-public class Category {
+public class InfoCategory {
 	private int categoryNo;
 	private String categoryName;
 	
-	public Category() {
+	public InfoCategory() {
 		super();
 	}
 	
-	public Category(int categoryNo, String categoryName) {
+	public InfoCategory(int categoryNo, String categoryName) {
 		super();
 		this.categoryNo = categoryNo;
 		this.categoryName = categoryName;
@@ -17,7 +17,7 @@ public class Category {
 	
 	@Override
 	public String toString() {
-		return "Category [categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
+		return "InfoCategory [categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
 	}
 	public int getCategoryNo() {
 		return categoryNo;

@@ -10,12 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.model.vo.Board;
-import com.kh.board.model.vo.Reply;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.infoboard.model.vo.Category;
 import com.kh.infoboard.model.vo.InfoBoard;
+import com.kh.infoboard.model.vo.InfoCategory;
+import com.kh.infoboard.model.vo.Reply;
 
 public class InfoBoardDao {
 	
@@ -25,7 +24,7 @@ public class InfoBoardDao {
 		
 			try {
 				
-				String filePath =InfoBoardDao.class.getResource("/resources/sql/board-mapper.xml").getPath();
+				String filePath =InfoBoardDao.class.getResource("/resources/sql/info-mapper.xml").getPath();
 				prop.loadFromXML(new FileInputStream(filePath));
 				
 			} catch (IOException e) {
@@ -116,16 +115,21 @@ public class InfoBoardDao {
 		ArrayList<InfoBoard> fList = new ArrayList<>();
 		
 		int startRow = (pi.getCurrentPage()-1)*pi.getBoardLimit()+1;
-		int endRow = pi.getCurrentPage()*pi.getBoardLimit();//보여줄 게시글 끝 =현재페이지 * 페이지당 글 개수 제한
+		int endRow = pi.getCurrentPage()*pi.getBoardLimit();
+		//보여줄 게시글 끝 =현재페이지 * 페이지당 글 개수 제한
 		//BOARD_NO,CATEGORY_NAME,BOARD_TITLE,USER_ID,COUNT,RECOMMEND,UPLOAD_DATE
 		
 		try {
+			
 			pstmt=conn.prepareStatement(sql);
+			
 			pstmt.setInt(1,startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(2,endRow);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
+				
 				fList.add(new InfoBoard(
 						  rset.getInt("BOARD_NO"),
 						  rset.getString("CATEGORY_NAME"),
@@ -135,16 +139,19 @@ public class InfoBoardDao {
 						  rset.getInt("RECOMMEND"),
 						  rset.getDate("UPLOAD_DATE")));
 		}
-	    for(InfoBoard ib : fList) {
-	    	pstmt=conn.prepareStatement(sql2);
-	    	pstmt.setString(1,ib.getBoardWriter());
-	    	rset=pstmt.executeQuery();
-	    	if(rset.next()) {
-	    		if(rset.getString("NICKNAME")!=null) {
-	    			ib.setBoardWriter(rset.getString("NICKNAME"));
-	    		}
-	    	}
-	    }
+//	    for(InfoBoard ib : fList) {
+//	    	
+//	    	pstmt=conn.prepareStatement(sql2);
+//	    	pstmt.setString(1,ib.getBoardWriter());
+//	    	
+//	    	rset=pstmt.executeQuery();
+//	    	
+//	    	if(rset.next()) {
+//	    		if(rset.getString("NICKNAME")!=null) {
+//	    			ib.setBoardWriter(rset.getString("NICKNAME"));
+//	    		}
+//	    	}
+//	    }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -229,13 +236,13 @@ public class InfoBoardDao {
 	
 	
 	
-	public ArrayList<Category> selectCategory(Connection conn) {
+	public ArrayList<InfoCategory> selectCategory(Connection conn) {
 		
 		ResultSet rset = null;
 		Statement stmt = null;
 		
 		String sql = prop.getProperty("selectCategory");
-		ArrayList<Category> ctList = new ArrayList<>();
+		ArrayList<InfoCategory> ftList = new ArrayList<>();
 		
 		try {
 			
@@ -243,7 +250,7 @@ public class InfoBoardDao {
 			rset=stmt.executeQuery(sql);
 			
 			while(rset.next()) {
-				ctList.add(new Category(rset.getInt("CATEGORY_NO"),
+				ftList.add(new InfoCategory(rset.getInt("CATEGORY_NO"),
 						                rset.getString("CATEGORY_NAME")));
 			}
 		} catch (SQLException e) {
@@ -253,7 +260,7 @@ public class InfoBoardDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(stmt);
 		}
-		return ctList;
+		return ftList;
 	}
 
 
@@ -265,10 +272,11 @@ public class InfoBoardDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("selectBoard");
-		String sql2 = prop.getProperty("selectNickName");
+		
 		InfoBoard ib = null;
 		
 		try {
+			
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, bno);
 			rset=pstmt.executeQuery();
@@ -283,16 +291,7 @@ public class InfoBoardDao {
 						         rset.getDate("REVISE_DATE"),
 						         rset.getString("CATEGORY_NAME"));
 			}
-			
-			pstmt=conn.prepareStatement(sql2);
-			pstmt.setString(1,ib.getBoardWriter());
-			rset=pstmt.executeQuery();
-			
-			if(rset.next()) {
-				if(rset.getString("NICKNAME")!=null) {
-					ib.setBoardWriter(rset.getString("NICKNAME"));
-				}
-			}
+						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -350,13 +349,14 @@ public class InfoBoardDao {
 			//g해당 게시글의 추천수 늘리기
 			pstmt= conn.prepareStatement(sql);
 			pstmt.setInt(1,uno);
-			result =pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 			//해당 유저가 이 게시글을 추천했다는 기록 입력
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setInt(1, uno);
 			pstmt.setInt(2, bno);
-			result=pstmt.executeUpdate();
+			result2 = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -414,6 +414,7 @@ public class InfoBoardDao {
 		PreparedStatement pstmt=null;
 		
 		String sql=prop.getProperty("insertReply");
+		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, re.getRefBno());
@@ -494,13 +495,19 @@ public class InfoBoardDao {
 		
 		String sql=prop.getProperty("insertBoard");
 		
+		//System.out.println(ib);
+		
 		try {
 			pstmt=conn.prepareStatement(sql);
+			
 			pstmt.setString(1, ib.getBoardWriter());
 			pstmt.setString(2, ib.getBoardTitle());
 			pstmt.setString(3, ib.getBoardContent());
 			pstmt.setString(4, ib.getCategory());
+			
 			result=pstmt.executeUpdate();
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -616,6 +623,10 @@ public class InfoBoardDao {
 		
 		return fList;
 	}
+
+
+
+	
 
 	
 	

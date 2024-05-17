@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.model.vo.PageInfo;
 import com.kh.infoboard.model.service.InfoBoardService;
-import com.kh.infoboard.model.vo.Category;
 import com.kh.infoboard.model.vo.InfoBoard;
+import com.kh.infoboard.model.vo.InfoCategory;
 
 
 /**
  * Servlet implementation class InfoBoardListController
  */
-@WebServlet("/Infoboard.bo")
+@WebServlet("/infoboard.bo")
 public class InfoBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,7 +51,7 @@ public class InfoBoardListController extends HttpServlet {
 		if(category.equals("0")) {
 			listCount=new InfoBoardService().listCount();
 		} else {
-			listCount=new InfoBoardService().listCount();
+			listCount=new InfoBoardService().listCount(category);
 		}
 	    //currentPage 현재페이지 정보
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -88,18 +88,16 @@ public class InfoBoardListController extends HttpServlet {
 			fList = new InfoBoardService().selectList(pi,category,sort);
 		}
 		
-
-		ArrayList<Category> ctList=new InfoBoardService().selectCategory();
-		
+		ArrayList<InfoCategory> ftList = new InfoBoardService().selectCategory();
+		// 정보게시판으로 넘기기
 		request.setAttribute("fList", fList);
-		request.setAttribute("ctList", ctList);
+		request.setAttribute("ftList", ftList);
 		request.setAttribute("category", category);
 		request.setAttribute("sort", sort);
 		request.setAttribute("pi", pi);
-		request.getRequestDispatcher("/views/infoboard/infoBoardListView.jsp").forward(request, response);
 		
-		}
-
+		request.getRequestDispatcher("/views/infoboard/infoBoardListView.jsp").forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
