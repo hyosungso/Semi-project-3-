@@ -73,7 +73,11 @@
 		   ,MODIFY_DATE = SYSDATE
 		WHERE USER_ID = ?
 	</entry>
-	
+	<entry key="checkId">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_ID = ?
+	</entry>
 	<entry key="selectMember">
 		SELECT *
 		FROM MEMBER
