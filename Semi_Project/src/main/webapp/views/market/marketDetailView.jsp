@@ -208,7 +208,7 @@
     </nav>
     
 	<br><br><br>
-		<c:if test="${not empty loginUser && loginUser.authCode eq 'admin' }">
+		<c:if test="${not empty loginUser && loginUser.authCode eq 'ADMIN' }">
 			<div align="center">
 			<c:choose>
 				<c:when test="${i.status eq 'N' }">
