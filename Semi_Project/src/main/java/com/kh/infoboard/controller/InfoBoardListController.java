@@ -19,7 +19,7 @@ import com.kh.infoboard.model.vo.InfoCategory;
 /**
  * Servlet implementation class InfoBoardListController
  */
-@WebServlet("/Infoboard.bo")
+@WebServlet("/infoboard.bo")
 public class InfoBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -36,7 +36,7 @@ public class InfoBoardDetailController extends HttpServlet {
 		int result = new InfoBoardService().increaseCount(bno);
 		if (result > 0) {
 			InfoBoard ib = new InfoBoardService().selectInfoBoard(bno);
-
+			
 			request.setAttribute("ib", ib);
 		} else {
 			request.getSession().setAttribute("alertMsg", "게시판 접근에 실패했습니다.");
