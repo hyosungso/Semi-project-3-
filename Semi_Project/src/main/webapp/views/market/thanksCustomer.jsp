@@ -43,6 +43,7 @@
 		<p> <b> 주문번호 : <% out.println(shipping_cartId); %></b></p>
 		<a href="${contextPath }/list.mk?sort=topSal"> &laquo; 쇼핑하기 </a>
 	</div>
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
 <%

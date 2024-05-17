@@ -7,6 +7,7 @@
 <title>HealthLife Market</title>
 
 <style>
+	
 	.list-area{
 		width: 770px;
 		margin : auto;
@@ -156,6 +157,6 @@
 		</div>
 		
 	</div>
-	
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

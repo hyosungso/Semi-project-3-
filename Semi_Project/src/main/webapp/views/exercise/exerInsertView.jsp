@@ -158,5 +158,6 @@ box-sizing:border-box;
 			}
 		</script>
 	</div>
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

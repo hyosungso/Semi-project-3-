@@ -60,5 +60,6 @@
             <button type="submit">운동일지 수정하기!</button>
         </form>
     </div>
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

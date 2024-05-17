@@ -223,5 +223,6 @@ width:100%;
 		});
 	});
 	</script>
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

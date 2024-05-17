@@ -99,5 +99,6 @@
 			</div>
 		</form>
 	</div>
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

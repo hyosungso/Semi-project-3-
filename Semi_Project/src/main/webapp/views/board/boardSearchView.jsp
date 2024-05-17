@@ -86,5 +86,6 @@
 	<button type="submit">검색</button>
 	</form>
 	</div>
+	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
