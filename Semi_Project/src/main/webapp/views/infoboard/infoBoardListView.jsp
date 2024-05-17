@@ -24,7 +24,7 @@ button[name=category]:hover {
 
 .infoboard-area {
 	width: 1200px;
-	
+	margin:auto;
 }
 
 .infoboard-area th {
