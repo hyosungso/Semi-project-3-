@@ -263,7 +263,7 @@
 						<ul class="board-category">
 							<li><a
 								href="${contextPath}/board.bo?currentPage=1&category=0&sort=latest">자유게시판</a></li>
-							<li><a href="${contextPath}/Infoboard.bo?currentPage=1&category=0&sort=latest">정보게시판</a></li>
+							<li><a href="${contextPath}/infoboard.bo?currentPage=1&category=0&sort=latest">정보게시판</a></li>
 						</ul></li>
 				</ul>
 

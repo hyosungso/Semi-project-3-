@@ -291,6 +291,7 @@ public class InfoBoardDao {
 						         rset.getDate("REVISE_DATE"),
 						         rset.getString("CATEGORY_NAME"));
 			}
+			
 						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

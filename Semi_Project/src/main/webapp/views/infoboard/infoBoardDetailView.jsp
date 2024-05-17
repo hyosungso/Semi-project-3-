@@ -39,14 +39,14 @@
 					<th width="10%">작성자</th>
 					<th width="15%"></th>
 					<th width="15%">최종수정일</th>
-					<th width="30%" style="text-align: center">${f.reviseDate}</th>
+					<th width="30%" style="text-align: center">${ib.reviseDate}</th>
 					<th width="10%">조회수</th>
-					<th width="5%">${f.count}</th>
+					<th width="5%">${ib.count}</th>
 					<th width="10%">추천수</th>
-					<th width="5%">${f.recommend}</th>
+					<th width="5%">${ib.recommend}</th>
 				</tr>
 				<tr>
-					<th colspan="8"><p>${f.boardContent}</p></th>
+					<th colspan="8"><p>${ib.boardContent}</p></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -55,10 +55,10 @@
 				</tr>
 				<!-- 로그인 상태 확인 and 로그인 유저 아이디 닉네임이 글 작성자와 동일 또는 권한코드가 운영자인 경우 -->
 				<c:if
-					test="${!empty loginUser and (loginUser.userId eq f.boardWriter or loginUser.nickName eq f.boardWriter or loginUser.authCode eq 'ADMIN')}">
+					test="${!empty loginUser and (loginUser.userId eq ib.boardWriter or loginUser.nickName eq ib.boardWriter or loginUser.authCode eq 'ADMIN')}">
 					<tr>
 						<td colspan="6"></td>
-						<td colspan="2" style="text-align: center" onclick="location.href='infoupdate.bo?bno=${f.boardNo}'"><button>글 수정하기</button></td>
+						<td colspan="2" style="text-align: center" onclick="location.href='infoupdate.bo?bno=${ib.boardNo}'"><button>글 수정하기</button></td>
 					</tr>
 				</c:if>
 			</tbody>
@@ -72,7 +72,7 @@
 			$.ajax({
 				url : "inforecommend.no",
 				data : {
-					bno : ${f.boardNo},
+					bno : ${ib.boardNo},
 					uno : "${loginUser.userNo}"
 				},
 				success : function (Message){
@@ -128,7 +128,7 @@
 			url : "infoinsertReply.bo".
 			type : "post",
 			date : {
-				bno : ${f.boardNo},
+				bno : ${ib.boardNo},
 				uno : userNo,
 				content : $("#replyContent").val()
 				
