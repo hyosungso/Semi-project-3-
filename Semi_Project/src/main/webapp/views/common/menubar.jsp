@@ -18,7 +18,7 @@
 	
 	//카트 번호 생신용
 	@SuppressWarnings("unchecked")
-	ArrayList<Item> list= (ArrayList<Item>)session.getAttribute("cartlist");
+	ArrayList<Item> cartList= (ArrayList<Item>)session.getAttribute("cartlist");
 	
 	
 %>
@@ -237,22 +237,32 @@
 
 		</div>
 		<div class="util">
-		<br><br> 
-		<a href="${contextPath}/myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
-		<a href="${contextPath}/views/market/cart.jsp"> 
-		<img class="image" width=40 height=40>
-		</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<br><br>
 		<%if(loginUser == null) {%>
 			<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
 			<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
 			<%}else{ %>
+				 
+			<a href="${contextPath}/myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
+			<a href="${contextPath}/views/market/cart.jsp"> 
+			<img class="image" width=40 height=40>
+			</a>
+			<c:choose>
+			<c:when test="${empty cartlist }">
+			<p id="cartCount">0</p>
+			</c:when>
+			<c:otherwise>
+			<p id="cartCount">${fn:length(cartlist) }</p>
+			</c:otherwise>
+			</c:choose>
+		
+		
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="logout.me">로그아웃</a>
 			<%} %>
-			
+		
 			</div>
 		</div>
-	
-
 
 
 	<div class="nav-area" align="center">
