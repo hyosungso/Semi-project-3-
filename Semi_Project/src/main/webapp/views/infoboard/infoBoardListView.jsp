@@ -130,7 +130,7 @@ input[name=sortBy]{
 		$("button[name=category]").click(function(){
 			var category=$(this).val();
 			var sortBy=$("input[name=sortBy]:checked").val();
-			location.href="infoboard.bo?currentPage=1&category="+category+"&sort="+sortBy;
+			location.href="Infoboard.bo?currentPage=1&category="+category+"&sort="+sortBy;
 		});
 		$(".infoboard-area>tbody tr").click(function(){
 			var bno=$(this).children().eq(0).text();
@@ -147,9 +147,9 @@ input[name=sortBy]{
 	<button disabled>이전</button>
 	</c:when>
 	<c:otherwise>
-	<button onclick="location.href='infoboard.bo?currentPage=${pi.currentPage-1}&category=${category}&sort=${sort}'">이전</button>
+	<button onclick="location.href='Infoboard.bo?currentPage=${pi.currentPage-1}&category=${category}&sort=${sort}'">이전</button>
 	<c:forEach var = "i" begin="${pi.startPage}" end="${pi.endPage}">
-	<button onclick="location.href='infoboard.bo?currentPage=${i}&category=${category}&sort=${sort}'">${i}</button>
+	<button onclick="location.href='Infoboard.bo?currentPage=${i}&category=${category}&sort=${sort}'">${i}</button>
 	
 	</c:forEach>
 	
@@ -162,13 +162,13 @@ input[name=sortBy]{
 	<button disabled>다음</button>
 	</c:when>
 	<c:otherwise>
-	<button onclick="location.href='infoboard.bo?currentPage=${pi.currentPage+1}&category=${category}&sort=${sort}'">다음</button>
+	<button onclick="location.href='Infoboard.bo?currentPage=${pi.currentPage+1}&category=${category}&sort=${sort}'">다음</button>
 	</c:otherwise>
 	</c:choose>
 	
 	<br><br>
 	
-	<form action="infosearch.bo">
+	<form action="Infosearch.bo">
 	<select name="searchCategory">
 	<option value="title">글제목</option>
 	<option value="content">글내용</option>

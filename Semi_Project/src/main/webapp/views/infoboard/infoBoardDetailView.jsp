@@ -32,7 +32,7 @@
 	<%@ include file="/views/common/menubar.jsp"%>
 
 	<br>
-	<div align="center" class="infodetail-area">
+	<div align="center" class="infodetail-area" style="margin: auto;">
 		<table border="1">
 			<thead>
 				<tr>

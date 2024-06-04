@@ -10,7 +10,7 @@
 	<%@ include file="/views/common/menubar.jsp" %>
 	<div class="jumbotron">
 	 <div class="container">
-	 	<h1>주문 취소</h1>
+	 	<h2>주문 취소</h2>
 	 </div>
 		
 	</div>
@@ -21,6 +21,7 @@
 		<p> <a href="${contextPath }" 
 		class="btn btn-secondary"> &laquo; 메인으로</a>
 	</div>
+	<br><br>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
