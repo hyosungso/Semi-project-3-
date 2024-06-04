@@ -54,7 +54,9 @@
 		<h2 align="center">운동 게시판</h2>
 		<br>
 		<div style="text-align : center">
+
 		<c:if test="${empty loginUser eq 'ADMIN'}">
+
 			<button onclick="location.href='${contextPath}/insert.ex'">새로운 글 작성</button><!-- 운영자만 작성 가능하게끔 -->
 		</c:if>
 		<br>
