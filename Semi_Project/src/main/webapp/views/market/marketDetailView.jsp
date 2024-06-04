@@ -308,17 +308,15 @@
 	 <div class="order">
 <br>
 	<c:choose>
-	<c:when test="${not empty loginUser && i.status eq 'Y' }">
+	<c:when test="${not empty loginUser && i.status eq 'Y' }"> <%-- 로그인된 상태이고 아이템 판매여부가 Y일 경우 기능 활성화 --%>
 	<a href="#" class="btn btn-info" onclick="addToCart()">상품추가&raquo;</a>
 	<a href="${contextPath }/views/market/cart.jsp" class="btn btn-warning">장바구니&raquo;</a>
 	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
 	</c:when>
-	<c:otherwise>
-		
-			<a href="${contextPath}/views/member/login.jsp" class="btn btn-secondary">상품추가&raquo;</a>
+	<c:otherwise><%-- 로그인상태가 아닐 경우 로그인 화면으로 연결  --%>
+	<a href="${contextPath}/views/member/login.jsp" class="btn btn-secondary">상품추가&raquo;</a>
 	<a href="${contextPath}/views/member/login.jsp" class="btn btn-secondary">장바구니&raquo;</a>
 	<a href="${contextPath }/list.mk" class="btn btn-secondary">상품목록&raquo;</a>
-		
 	</c:otherwise>
 	</c:choose>
 						

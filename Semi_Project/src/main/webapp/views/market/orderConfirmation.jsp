@@ -126,6 +126,7 @@
 			});
 		});
 	</script> -->
+	<br><br>
 	<%@ include file="/views/common/footer.jsp" %>
 	</body>
 </html>

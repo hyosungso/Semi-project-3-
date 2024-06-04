@@ -16,10 +16,6 @@
 	//contextPath 변수처리해서 사용하기 
 	String contextPath = request.getContextPath();
 	
-	//카트 번호 생신용
-	@SuppressWarnings("unchecked")
-	ArrayList<Item> cartList= (ArrayList<Item>)session.getAttribute("cartlist");
-	
 	
 %>
 
@@ -238,11 +234,12 @@
 		</div>
 		<div class="util">
 		<br><br>
-		<%if(loginUser == null) {%>
+		<%if(loginUser == null) {%> <!-- 로그인 되지 않았다면 로그인과 회원가입 기능링크 표시 -->
+		
 			<a href='${contextPath}/views/member/login.jsp'>로그인</a> | 
 			<a href="${contextPath}/enrollFormBefore.me">회원가입</a>
 			<%}else{ %>
-				 
+			<!-- 로그인 되었다면 cart와 myPage 기능링크 표시 -->
 			<a href="${contextPath}/myPage.me"> <img class="image2"></a>&nbsp;&nbsp;&nbsp; 
 			<a href="${contextPath}/views/market/cart.jsp"> 
 			<img class="image" width=40 height=40>
@@ -252,7 +249,7 @@
 			<p id="cartCount">0</p>
 			</c:when>
 			<c:otherwise>
-			<p id="cartCount">${fn:length(cartlist) }</p>
+			<p id="cartCount">${fn:length(cartlist) }</p><!-- 카트에 물품이 들어있다면 종류 수 표시 -->
 			</c:otherwise>
 			</c:choose>
 		
